@@ -79,6 +79,11 @@
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    background-image: url("./assets/banner-menu2.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position-y: 282px;
   }
   
   

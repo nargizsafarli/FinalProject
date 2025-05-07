@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import sliderImg1 from './assets/slideshow-v1-1.webp';
-import sliderImg2 from './assets/slideshow-v1-2.webp';
+import sliderImg2 from './assets/WhatsApp Image 2025-05-06 at 20.58.06_c560e7a4.jpg'
 import slide from './NavSlider.module.css';
 
 function NavSlider() {
@@ -30,8 +30,10 @@ function NavSlider() {
             style={{ backgroundImage: `url(${sliderImg1})` }}
           >
             <div className={slide.content}>
-              <h2>Artificial Plants</h2>
-              <p>The Bamboo Planter Pot Is Made</p>
+            <p>Hot Sale 50% Discount</p>
+              <h2>Green Indoor Plant
+              For Home Decor</h2>
+              <span>The Bamboo Planter Pot Is Made</span>
               <button>Shop now</button>
             </div>
           </div>
@@ -42,9 +44,10 @@ function NavSlider() {
             className={slide.slide}
             style={{ backgroundImage: `url(${sliderImg2})` }}
           >
-            <div className={slide.content}>
-              <h2>Another Plant</h2>
-              <p>Feel the Natural Beauty</p>
+            <div className={slide.content2}>
+            <p>Hot Sale 40% Discount</p>
+              <h2>Artificial Plant</h2>
+              <p>The Bamboo Planter Pot Is Made</p>
               <button>Shop now</button>
             </div>
           </div>
