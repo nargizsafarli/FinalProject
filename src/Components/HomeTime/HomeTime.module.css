@@ -1,0 +1,11 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 10px;
+   
+}
+.information{
+    display: flex;
+    flex-direction: column;
+    
+}

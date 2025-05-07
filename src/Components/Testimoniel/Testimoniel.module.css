@@ -1,0 +1,78 @@
+
+.container {
+    width: 100%;
+    padding: 50px 0;
+    background-image: url('./assets/bg-testimonial.webp');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    position: relative;
+  }
+  
+  .title {
+    font-size: 30px;
+    color: green;
+  }
+  
+  .card {
+    max-width: 800px;
+    border-radius: 20px;
+   padding: 29px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .message {
+    font-size: 16px;
+    color: #333;
+    padding: 30px;
+    background: white;
+  }
+  
+  .triangle {
+    width: 20px;
+    height: 20px;
+    background: white;
+    transform: rotate(45deg);
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    margin-top: -10px;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  
+  .user {
+   display: flex;
+   flex-direction: column;
+   gap: 5px;
+   align-items: center;
+  }
+  
+  .user img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+  }
+  
+  .user h4 {
+    color: green;
+  }
+  
+  .user span {
+    color: gray;
+    font-size:14px;
+  }
+  .header{
+    display: flex;
+   align-items: center;
+   justify-content: center;
+  text-align: center;
+ 
+  }
+ .navWrapper{
+    position: absolute;
+    display: flex;
+    gap: 10px;
+    right: 300px;
+ }

@@ -17,7 +17,7 @@ function NavSlider() {
         navigation={true}
         pagination={{ clickable: true }}
         autoplay={{
-          delay: 7000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         effect="fade"
@@ -27,6 +27,7 @@ function NavSlider() {
         <SwiperSlide>
           <div
             className={slide.slide}
+            
             style={{ backgroundImage: `url(${sliderImg1})` }}
           >
             <div className={slide.content}>
