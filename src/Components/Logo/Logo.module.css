@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content:space-evenly;
+    width: 100%;
+    padding: 80px 20px;
+}
+.flowerLogo{
+    padding: 40px;
+    width: 22%;
+  
+}
+.flowerLogo:hover{
+    border: 1px solid rgb(184, 209, 184);
+}

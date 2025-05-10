@@ -2,6 +2,7 @@ import React from 'react';
 import collec from "./HomeCollec.module.css";
 import img1 from "./assets/banner-v4-1.webp"
 import img2 from "./assets/banner-v4-2.webp"
+import Button from '../../Shared/components/Button/Button';
 
 function HomeCollection() {
   return (
@@ -13,7 +14,8 @@ function HomeCollection() {
         <div className={collec.content}>
           <p>New Collection</p>
           <h2>Plant Port</h2>
-          <button className={collec.button}>SHOP NOW</button>
+          {/* <button className={collec.button}>SHOP NOW</button> */}
+          <Button/>
         </div>
       </div>
 
@@ -24,7 +26,8 @@ function HomeCollection() {
         <div className={collec.content}>
           <p>Only On Our Store!</p>
           <h2>Ceramic Pot & Plant</h2>
-          <button className={collec.button}>SHOP NOW</button>
+          {/* <button className={collec.button}>SHOP NOW</button> */}
+          <Button/>
         </div>
       </div>
     </div>

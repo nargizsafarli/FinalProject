@@ -16,10 +16,10 @@ function NavSlider() {
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         navigation={true}
         pagination={{ clickable: true }}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 20000,
+        //   disableOnInteraction: false,
+        // }}
         effect="fade"
         loop={true}
         className={slide.slider}
@@ -34,8 +34,7 @@ function NavSlider() {
             <p>Hot Sale 50% Discount</p>
               <h2>Green Indoor Plant
               For Home Decor</h2>
-              <span>The Bamboo Planter Pot Is Made</span>
-              <button>Shop now</button>
+              <button className={slide.button}>Buy Now</button>
             </div>
           </div>
         </SwiperSlide>
@@ -48,8 +47,7 @@ function NavSlider() {
             <div className={slide.content2}>
             <p>Hot Sale 40% Discount</p>
               <h2>Artificial Plant</h2>
-              <p>The Bamboo Planter Pot Is Made</p>
-              <button>Shop now</button>
+              <button>Buy Now</button>
             </div>
           </div>
         </SwiperSlide>

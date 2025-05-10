@@ -5,6 +5,7 @@ import HomeCollection from '../Components/HomeCollection/HomeCollection'
 import Testimonile from '../Components/Testimoniel/Testimonile'
 import HomeTime from '../Components/HomeTime/HomeTime'
 import Footer from '../Shared/Footer/Footer'
+import Logo from '../Components/Logo/Logo'
 
 function HomePage() {
   return (
@@ -14,6 +15,7 @@ function HomePage() {
         {/* <HomeTime/> */}
         <HomeCollection/>
         <Testimonile/>
+        <Logo/>
         <Footer/>
     </div>
   )

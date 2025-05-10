@@ -5,6 +5,7 @@ function ShopPage() {
   return (
     <div>
         <Navbar/>
+       <div style={{paddingTop:"80px"}}>salam necesennn</div> 
     </div>
   )
 }

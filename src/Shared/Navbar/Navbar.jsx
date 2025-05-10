@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import nav from "./Navbar.module.css"
 import logo from "./assets/logo (1).png"
 import { FaRegUser } from "react-icons/fa6";
@@ -14,9 +14,21 @@ import { faCircleHalfStroke } from '@fortawesome/free-solid-svg-icons';
 function Navbar() {
   const [mobileOpen,setMobileOpen]=useState(false)
   const [openPage,setOpenPage]=useState(false)
+   const [isScrolled, setIsScrolled] = useState(false)
+
+    useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 30); // 30px-dən çox scroll olunubsa
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className={nav.mainContainer}>
     {mobileOpen && <div className={`${nav.overlay} ${mobileOpen ? nav.overlayOpen : ""}`} onClick={() => setMobileOpen(false)}></div>}
+      <div className={`${nav.dektopContainer} ${isScrolled ? nav.scrolledNavbar : ""}`}></div>
 
     <div className={nav.dektopContainer}>
         <div className={nav.mobileIcon} onClick={() => setMobileOpen(!mobileOpen)}><FaBars/></div>

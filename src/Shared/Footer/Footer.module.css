@@ -4,6 +4,7 @@
     flex-direction: column;
     padding: 80px 70px 10px;
     gap: 30px;
+    background-color: rgb(241, 239, 239);
 }
 .sec1{
     display: flex;
