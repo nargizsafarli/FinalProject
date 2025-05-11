@@ -6,10 +6,15 @@
     position: relative;
    overflow: hidden;
    z-index: 1;
+   color: #3d3d3d;
    transition: all 0.3s ease-in;
    font-weight: 400;
-   font-size: 19px;
+   font-size: 17px;
    font-family:sans-serif;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+  
   }
 
   .button::before{
