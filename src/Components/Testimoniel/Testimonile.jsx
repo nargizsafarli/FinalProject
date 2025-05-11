@@ -5,6 +5,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import test from "./Testimoniel.module.css";
+import imgLogo1 from "./assets/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background_662251-838.avif"
+import imgLogo2 from "./assets/download (2).jpeg"
+import imgLogo3 from "./assets/download.jpeg"
 
 function Testimonial() {
   const prevRef = useRef(null);
@@ -41,9 +44,8 @@ function Testimonial() {
             <p className={test.message}>
               Saved our business! We have no regrets! Thanks for the great service.
             </p>
-            <div className="triangle"></div>
             <div className={test.user}>
-              <img src="img1.jpg" alt="user1" />
+              <img src={imgLogo1} alt="user1" className={test.image} />
               <h4>DESTINEE</h4>
               <span>Marketing Personal</span>
             </div>
@@ -55,9 +57,8 @@ function Testimonial() {
             <p className={test.message}>
               Great platform. My work productivity has doubled!
             </p>
-            <div className="triangle"></div>
             <div className={test.user}>
-              <img src="img2.jpg" alt="user2" />
+              <img src={imgLogo2} alt="user2" className={test.image}/>
               <h4>JASON</h4>
               <span>Developer</span>
             </div>
@@ -69,9 +70,8 @@ function Testimonial() {
             <p className={test.message}>
               Amazing experience and great support. Definitely recommend it!
             </p>
-            <div className="triangle"></div>
             <div className={test.user}>
-              <img src="img3.jpg" alt="user3" />
+              <img src={imgLogo3} alt="user3" className={test.image}/>
               <h4>AMY</h4>
               <span>UI Designer</span>
             </div>
