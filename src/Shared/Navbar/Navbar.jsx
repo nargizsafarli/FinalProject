@@ -37,7 +37,7 @@ function Navbar() {
         <div className={nav.link}>
           <NavLink to="/" className={({isActive})=>isActive? nav.activeLink : ""}>Home</NavLink>
           <NavLink to="/shop" className={({isActive})=>isActive? nav.activeLink : ""}>Shop</NavLink>
-          <NavLink to="/about" className={({isActive})=>isActive? nav.activeLink : ""}>About US</NavLink>
+          <NavLink to="/about" className={({isActive})=>isActive? nav.activeLink : ""}>About Us</NavLink>
           <NavLink to="/contact" className={({isActive})=>isActive? nav.activeLink : ""}>Contact Us</NavLink>
           {/* <NavLink className={nav.openNav} onClick={() => setOpenPage(!openPage)}>Pages {openPage ? <IoIosArrowDown />:<IoIosArrowUp /> }
           {openPage &&(
@@ -48,7 +48,7 @@ function Navbar() {
            )} */}
            <div className={nav.pagesWrapper}>
           <NavLink className={nav.openNav}>
-            Pages <IoIosArrowUp className={nav.arrowIcon}/>
+            <div className={nav.opens}>Pages <IoIosArrowUp className={nav.arrowIcon}/></div>
             <div className={nav.openDesktopPage}>
               <div>FAQ</div>
               <div>Blog</div>

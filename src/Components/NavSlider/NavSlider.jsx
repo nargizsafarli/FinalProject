@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import sliderImg1 from './assets/slideshow-v1-1.webp';
-import sliderImg2 from './assets/WhatsApp Image 2025-05-06 at 20.58.06_c560e7a4.jpg'
+import sliderImg2 from './assets/slideshow-v1-2.webp'
 import slide from './NavSlider.module.css';
 
 function NavSlider() {
@@ -16,12 +16,12 @@ function NavSlider() {
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         navigation={true}
         pagination={{ clickable: true }}
-        // autoplay={{
-        //   delay: 20000,
-        //   disableOnInteraction: false,
-        // }}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+        }}
         effect="fade"
-        // loop={true}
+        loop={true}
         className={slide.slider}
       >
         <SwiperSlide>
@@ -44,10 +44,10 @@ function NavSlider() {
             className={slide.slide}
             style={{ backgroundImage: `url(${sliderImg2})` }}
           >
-            <div className={slide.content2}>
+            <div className={slide.content}>
             <p>Hot Sale 40% Discount</p>
               <h2>Artificial Plant</h2>
-              <button>Buy Now</button>
+              <button className={slide.button}>Buy Now</button>
             </div>
           </div>
         </SwiperSlide>
