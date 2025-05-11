@@ -22,8 +22,10 @@
   
   .content {
     color: #333;
-    max-width: 500px;
-    padding: 20px;
+    /* max-width: 500px; */
+    max-width: 550px;
+    /* padding: 20px; */
+    padding-left: 90px;
     border-radius: 10px;
     animation: fadeIn 1s ease-in-out;
     display: flex;
@@ -40,6 +42,7 @@
   .content h2 {
     font-size: 3rem;
     color:#518432;
+    font-weight: 500;
      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
      line-height: 0.5.cm;
   }

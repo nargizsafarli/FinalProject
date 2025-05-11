@@ -21,7 +21,7 @@ function NavSlider() {
         //   disableOnInteraction: false,
         // }}
         effect="fade"
-        loop={true}
+        // loop={true}
         className={slide.slider}
       >
         <SwiperSlide>
@@ -31,7 +31,7 @@ function NavSlider() {
             style={{ backgroundImage: `url(${sliderImg1})` }}
           >
             <div className={slide.content}>
-            <p>Hot Sale 50% Discount</p>
+            {/* <p>Hot Sale 50% Discount</p> */}
               <h2>Green Indoor Plant
               For Home Decor</h2>
               <button className={slide.button}>Buy Now</button>

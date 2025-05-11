@@ -6,12 +6,14 @@ import Testimonile from '../Components/Testimoniel/Testimonile'
 import HomeTime from '../Components/HomeTime/HomeTime'
 import Footer from '../Shared/Footer/Footer'
 import Logo from '../Components/Logo/Logo'
+import ServiceHome from '../Components/ServiceHome/ServiceHome'
 
 function HomePage() {
   return (
     <div>
         <Navbar/>
         <NavSlider/>
+        <ServiceHome/>
         {/* <HomeTime/> */}
         <HomeCollection/>
         <Testimonile/>
