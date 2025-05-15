@@ -1,0 +1,30 @@
+.scroll{
+  position: fixed;
+  bottom: 30px;
+  right: 5px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #518432;
+  color: white;
+  border-radius: 50%;
+  padding: 12px;
+  font-size: 20px;
+  z-index: 999;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  /* transform: translateX(0); 
+  transition: all 0.5s ease;
+  opacity: 0; */
+}
+.hidden {
+  transform: translateX(100px); /* görünmür */
+  opacity: 0;
+  pointer-events: none;
+}
+
+.show {
+  transform: translateX(0); /* görünür */
+  opacity: 1;
+}

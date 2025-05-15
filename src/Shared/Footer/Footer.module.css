@@ -5,6 +5,9 @@
     padding: 80px 70px 10px;
     gap: 30px;
     background-color: rgb(241, 239, 239);
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
 }
 .sec1{
     display: flex;

@@ -74,11 +74,11 @@ function Navbar() {
           <NavLink to="/shop" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Shop</NavLink>
           <NavLink to="/about" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>About US</NavLink>
           <NavLink to="/contact" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Contact Us</NavLink>
-          <NavLink onClick={() => setOpenPage(!openPage)}>Pages {openPage ? <IoIosArrowDown />:<IoIosArrowUp />}
+          <NavLink onClick={() => setOpenPage(!openPage)} className={nav.linkItem}>Pages {openPage ? <IoIosArrowDown />:<IoIosArrowUp />}
             {openPage &&(
-              <div className={nav.linkItem}>
-              <div>FAQ</div>
-              <div>Blog</div>
+              <div >
+              <div className={nav.pag}>FAQ</div>
+              <div className={nav.pag}>Blog</div>
               </div>
            )}
           </NavLink>

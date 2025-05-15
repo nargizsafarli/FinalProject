@@ -139,7 +139,7 @@
 .mobileNavLink {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 7px;
   padding-left: 20px;
 
 }
