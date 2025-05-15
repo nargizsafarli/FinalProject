@@ -35,38 +35,31 @@ function Navbar() {
         <img src={logo} className={nav.logo}/>
         <div className={nav.desktop}>
         <div className={nav.link}>
-          <NavLink to="/" className={({isActive})=>isActive? nav.activeLink : ""}>Home</NavLink>
-          <NavLink to="/shop" className={({isActive})=>isActive? nav.activeLink : ""}>Shop</NavLink>
-          <NavLink to="/about" className={({isActive})=>isActive? nav.activeLink : ""}>About Us</NavLink>
-          <NavLink to="/contact" className={({isActive})=>isActive? nav.activeLink : ""}>Contact Us</NavLink>
-          {/* <NavLink className={nav.openNav} onClick={() => setOpenPage(!openPage)}>Pages {openPage ? <IoIosArrowDown />:<IoIosArrowUp /> }
-          {openPage &&(
-              <div className={nav.openDesktopPage}>
-              <div>FAQ</div>
-              <div>Blog</div>
-              </div>
-           )} */}
+          <NavLink to="/" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Home</NavLink>
+          <NavLink to="/shop" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Shop</NavLink>
+          <NavLink to="/about" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>About Us</NavLink>
+          <NavLink to="/contact" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Contact Us</NavLink>
            <div className={nav.pagesWrapper}>
-          <NavLink className={nav.openNav}>
+          <NavLink className={nav.linkItem}>
             <div className={nav.opens}>Pages <IoIosArrowUp className={nav.arrowIcon}/></div>
             <div className={nav.openDesktopPage}>
-              <div>FAQ</div>
-              <div>Blog</div>
+              <div className={nav.pag}>FAQ</div>
+              <div className={nav.pag}>Blog</div>
              </div>
           </NavLink>
           </div>
         </div>
         </div>
         <div className={nav.icons}>
-        <FontAwesomeIcon icon={faCircleHalfStroke} />
         <div className={nav.user}> 
-        <FaRegUser  />
+        <FaRegUser/>
         <div className={nav.userOpen}>
           <p>Login</p>
         </div>
         </div>
         <FontAwesomeIcon icon={faHeart} />
         <BiBasket/>
+         <FontAwesomeIcon icon={faCircleHalfStroke} />
         </div>
     </div> 
     <div className={`${nav.mobileNav} ${mobileOpen ? nav.open : ""}`}>
@@ -77,13 +70,13 @@ function Navbar() {
           <div className={nav.closeIcon} onClick={() => setMobileOpen(false)}><FaTimes /></div>
         </div>
         <div className={nav.mobileNavLink}>
-         <NavLink to="/" className={({isActive})=>isActive? nav.activeLink : ""}>Home</NavLink>
-          <NavLink to="/shop" className={({isActive})=>isActive? nav.activeLink : ""}>Shop</NavLink>
-          <NavLink to="/about" className={({isActive})=>isActive? nav.activeLink : ""}>About US</NavLink>
-          <NavLink to="/contact" className={({isActive})=>isActive? nav.activeLink : ""}>Contact Us</NavLink>
+         <NavLink to="/" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Home</NavLink>
+          <NavLink to="/shop" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Shop</NavLink>
+          <NavLink to="/about" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>About US</NavLink>
+          <NavLink to="/contact" className={({isActive})=> `${nav.linkItem} ${isActive ? nav.activeLink : ""}`}>Contact Us</NavLink>
           <NavLink onClick={() => setOpenPage(!openPage)}>Pages {openPage ? <IoIosArrowDown />:<IoIosArrowUp />}
             {openPage &&(
-              <div>
+              <div className={nav.linkItem}>
               <div>FAQ</div>
               <div>Blog</div>
               </div>
