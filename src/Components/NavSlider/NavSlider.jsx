@@ -31,7 +31,7 @@ function NavSlider() {
             style={{ backgroundImage: `url(${sliderImg1})` }}
           >
             <div className={slide.content}>
-            {/* <p>Hot Sale 50% Discount</p> */}
+            <p>Hot Sale 50% Discount</p>
               <h2>Green Indoor Plant
               For Home Decor</h2>
               <button className={slide.button}>Buy Now</button>
@@ -45,8 +45,8 @@ function NavSlider() {
             style={{ backgroundImage: `url(${sliderImg2})` }}
           >
             <div className={slide.content}>
-            <p>Hot Sale 40% Discount</p>
-              <h2>Artificial Plant</h2>
+            <p>Make Your Dream House</p>
+              <h2>Bring The Green World to Your Home</h2>
               <button className={slide.button}>Buy Now</button>
             </div>
           </div>

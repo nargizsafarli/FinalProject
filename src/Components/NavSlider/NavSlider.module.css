@@ -1,4 +1,4 @@
-.sliderWrapper {
+/* .sliderWrapper {
     width: 100%;
     height: 110vh;
     position: relative;
@@ -22,9 +22,8 @@
   
   .content {
     color: #333;
-    /* max-width: 500px; */
+   
     max-width: 550px;
-    /* padding: 20px; */
     padding-left: 90px;
     border-radius: 10px;
     animation: fadeIn 1s ease-in-out;
@@ -79,7 +78,7 @@
     }
   }
   
-  /* Pagination dots */
+  
   :global(.swiper-pagination-bullet) {
     background: #4a773c;
     opacity: 0.7;
@@ -89,7 +88,7 @@
     opacity: 1;
   }
   
-  /* Navigation buttons */
+ 
   :global(.swiper-button-next),
   :global(.swiper-button-prev) {
     color: #000;
@@ -105,7 +104,7 @@
   }
   :global(.swiper-button-next)::after,
   :global(.swiper-button-prev)::after {
-  font-size: 18px; /* Kiçik ox ölçüsü */
+  font-size: 18px; 
   color: rgb(37, 37, 37);
 }
 
@@ -139,4 +138,136 @@
     .content h2{
       font-size: 2rem;
     }
+  } */
+.sliderWrapper {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.slider :global(.swiper) {
+  width: 100%;
+  height: 100%;
+}
+
+.slide {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 5%;
+}
+
+.content {
+  /* yarı şəffaf fon */
+  padding: 40px 50px;
+  border-radius: 16px;
+  animation: fadeIn 1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 700px;
+}
+
+.content h2 {
+  font-size: 3.5rem;
+  color: #2f6e27;
+  font-weight: 700;
+  line-height: 1.2;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.content p {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.button {
+  background-color: #4a773c;
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  width: fit-content;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #375a2a;
+  box-shadow: 0px 12px 30px rgba(74, 119, 60, 0.5);
+}
+
+/* Animasiya */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Swiper Pagination */
+:global(.swiper-pagination-bullet) {
+  background: #4a773c;
+  opacity: 0.7;
+}
+:global(.swiper-pagination-bullet-active) {
+  background: #1b4d1b;
+  opacity: 1;
+}
+
+/* Swiper Navigation Buttons */
+:global(.swiper-button-next),
+:global(.swiper-button-prev) {
+  color: #000;
+  background-color: #fff;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+:global(.swiper-button-next)::after,
+:global(.swiper-button-prev)::after {
+  font-size: 20px;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .content {
+    padding: 25px 30px;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0;
+    margin: 0;
+  }
+
+  .content h2 {
+    font-size: 2rem;
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .button {
+    font-size: 16px;
+    padding: 14px 28px;
+  }
+
+  :global(.swiper-button-next),
+  :global(.swiper-button-prev) {
+    display: none;
+  }
+}
