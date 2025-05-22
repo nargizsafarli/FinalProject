@@ -1,0 +1,15 @@
+{
+    "navbar":{
+        "home":"Ev",
+        "shop":"Mağza",
+        "about":"Haqqımızda",
+        "contact":"Əlaqə",
+        "pages":"Səhifələr"
+    },
+    "pages":{
+        "faq":"FAQ",
+        "blog":"Bloq",
+        "login":"Daxil ol",
+        "menu":"Menyu"
+    }
+}
