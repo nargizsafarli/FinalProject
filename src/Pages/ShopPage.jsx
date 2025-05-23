@@ -1,6 +1,7 @@
 import React from 'react'
 import Navbar from '../Shared/Navbar/Navbar'
 import ProductSec from '../Components/ProductSection/ProductSec'
+import Product from '../Components/Product/Product'
 
 function ShopPage() {
   return (
@@ -8,6 +9,7 @@ function ShopPage() {
         <Navbar/>
        {/* <div style={{paddingTop:"80px"}}> */}
         <ProductSec/>
+        <Product/>
        {/* </div>  */}
     </div>
   )
