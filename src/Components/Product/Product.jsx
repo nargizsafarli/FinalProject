@@ -100,13 +100,15 @@ function Product() {
         </div>
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Brand</p>
-          <div className={pro.inputItem}>
+          <div className={pro.selectItem}>
             <Select
               mode="multiple"
               placeholder="(no filter)"
               value={selectedItems}
               onChange={setSelectedItems}
-              style={{ width: "15%" }}
+              style={{ width: "95%" }}
+              className={pro.customSelect}
+              
               options={filteredOptions.map((item) => ({
                 value: item,
                 label: item,
