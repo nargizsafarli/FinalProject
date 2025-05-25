@@ -4,6 +4,20 @@ import { Select } from "antd";
 import logo from "./assets/download (4).svg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/features/auth/productSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaCaretDown } from "react-icons/fa";
+// import { faHeart, faStar, faStarHalfAlt } from "@fortawesome/free-regular-svg-icons";
+import {
+  faStar as faSolidStar,
+  faStarHalfAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faStar as faRegularStar,
+} from "@fortawesome/free-regular-svg-icons";
+
+import det from "./assets/download (5).svg";
+import basket from "./assets/download (6).svg";
 const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
 function Product() {
   const dispatch = useDispatch();
@@ -42,6 +56,42 @@ function Product() {
       discount: null,
     };
   };
+  const renderStars = (rating) => {
+    const stars = [];
+
+    for (let i = 1; i <= 5; i++) {
+      if (rating >= i) {
+        stars.push(
+          <FontAwesomeIcon
+            icon={faSolidStar}
+            color="#facc15"
+            style={{ fontSize: "12px" }}
+            key={i}
+          />
+        );
+      } else if (rating >= i - 0.5) {
+        stars.push(
+          <FontAwesomeIcon
+            icon={faStarHalfAlt}
+            color="#facc15"
+            style={{ fontSize: "12px" }}
+            key={i}
+          />
+        );
+      } else {
+        stars.push(
+          <FontAwesomeIcon
+            icon={faRegularStar}
+            color="#facc15"
+            style={{ fontSize: "12px" }}
+            key={i}
+          />
+        );
+      }
+    }
+    return stars;
+  };
+
 
   return (
     <div className={pro.container}>
@@ -60,11 +110,11 @@ function Product() {
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="Monocotyledons" />
-             <p className={pro.filElement}>Monocotyledons (20)</p> 
+              <p className={pro.filElement}>Monocotyledons (20)</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="Sugarcanes" />
-               <p className={pro.filElement}>Sugarcanes (18)</p>
+              <p className={pro.filElement}>Sugarcanes (18)</p>
             </label>
           </div>
         </div>
@@ -73,11 +123,11 @@ function Product() {
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input type="checkbox" value="Dicotyledons" />
-             <p className={pro.filElement}>Available</p>
+              <p className={pro.filElement}>Available</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="Lilies" />
-             <p className={pro.filElement}>Not available</p> 
+              <p className={pro.filElement}>Not available</p>
             </label>
           </div>
         </div>
@@ -86,15 +136,15 @@ function Product() {
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input type="checkbox" value="plastic" />
-             <p className={pro.filElement}>Plastic</p> 
+              <p className={pro.filElement}>Plastic</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="keramic" />
-             <p className={pro.filElement}>Keramik</p> 
+              <p className={pro.filElement}>Keramik</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="metal" />
-             <p className={pro.filElement}>Metal</p> 
+              <p className={pro.filElement}>Metal</p>
             </label>
           </div>
         </div>
@@ -107,8 +157,8 @@ function Product() {
               value={selectedItems}
               onChange={setSelectedItems}
               style={{ width: "95%" }}
+               suffixIcon={<FaCaretDown color="black" size={16} />}
               className={pro.customSelect}
-              
               options={filteredOptions.map((item) => ({
                 value: item,
                 label: item,
@@ -121,15 +171,15 @@ function Product() {
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input type="checkbox" value="plastic" />
-             <p className={pro.filElement}>Discounted</p> 
+              <p className={pro.filElement}>Discounted</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="keramic" />
-             <p className={pro.filElement}>New Product</p> 
+              <p className={pro.filElement}>New Product</p>
             </label>
             <label className={pro.labell}>
               <input type="checkbox" value="metal" />
-             <p className={pro.filElement}>Popular</p> 
+              <p className={pro.filElement}>Popular</p>
             </label>
           </div>
         </div>
@@ -138,15 +188,17 @@ function Product() {
         <div className={pro.inf}>
           <div className={pro.intItem}>
             <img src={logo} style={{ width: "20px" }} />
-            <p>There are 23 products.</p>
+            <p className={pro.proDet}>There are {data.length} products.</p>
           </div>
           <div className={pro.intItem}>
-            <p>Sort By:</p>
+            <p className={pro.proDet}>Sort By:</p>
             <Select
               showSearch
               style={{ width: 200 }}
               placeholder="Relevance"
+               className={pro.customSelectTwice}
               optionFilterProp="label"
+              suffixIcon={<FaCaretDown color="black" size={16} />}
               filterSort={(optionA, optionB) => {
                 var _a, _b;
                 return (
@@ -203,30 +255,41 @@ function Product() {
             const { price, discount } = getDisplayPrice(product);
             return (
               <div key={product.id} className={pro.proCard}>
+                <div className={pro.cardOverlay}>
+                  <div className={pro.overIcon}>
+                    <FontAwesomeIcon icon={faHeart} />
+                  </div>
+                  <div className={pro.overIcon}>
+                    <img src={basket} className={pro.overImg} />
+                  </div>
+                  <div className={pro.overIcon}>
+                    <img src={det} className={pro.overImg} />
+                  </div>
+                </div>
                 <div className={pro.cardImg}>
-                  <img src={product.img} alt={product.nameEn} className={pro.images}/>
+                  <img
+                    src={product.img}
+                    alt={product.nameEn}
+                    className={pro.images}
+                  />
                 </div>
                 <div className={pro.cardBody}>
                   <p className={pro.name}>{product.nameEn}</p>
-                  <span className={pro.rating}>{product.rating} ⭐</span>
+                  <div className={pro.rating}>
+                    {renderStars(product.rating)}
+                  </div>
                   <div className={pro.price}>
                     {discount ? (
-                      <div>
-                        <span
-                          style={{
-                            textDecoration: "line-through",
-                            color: "gray",
-                            marginRight: "8px",
-                          }}
-                        >
+                      <div >
+                        <span className={pro.oldPrice}>
                           ${price}
                         </span>
-                        <span style={{ color: "red", fontWeight: "bold" }}>
+                        <span className={pro.disPrice}>
                           ${discount}
                         </span>
                       </div>
                     ) : (
-                      <span style={{ fontWeight: "bold" }}>${price}</span>
+                      <span className={pro.pri}>${price}</span>
                     )}
                   </div>
                 </div>
