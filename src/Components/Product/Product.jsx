@@ -48,58 +48,58 @@ function Product() {
       <div className={pro.filterCon}>
         <div className={pro.filterBy}>Filter By</div>
         <div className={pro.filterInput}>
-          <p>Categories</p>
+          <p className={pro.catTitle}>Categories</p>
           <div className={pro.inputItem}>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Dicotyledons" />
-              Dicotyledons (18)
+              <p className={pro.filElement}> Dicotyledons (18)</p>
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Lilies" />
-              Lilies (17)
+              <p className={pro.filElement}> Lilies (18)</p>
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Monocotyledons" />
-              Monocotyledons (20)
+             <p className={pro.filElement}>Monocotyledons (20)</p> 
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Sugarcanes" />
-              Sugarcanes (18)
+               <p className={pro.filElement}>Sugarcanes (18)</p>
             </label>
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p>Availability</p>
+          <p className={pro.catTitle}>Availability</p>
           <div className={pro.inputItem}>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Dicotyledons" />
-              In stock
+             <p className={pro.filElement}>Available</p>
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="Lilies" />
-              Not available
+             <p className={pro.filElement}>Not available</p> 
             </label>
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p>Material</p>
+          <p className={pro.catTitle}>Material</p>
           <div className={pro.inputItem}>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="plastic" />
-              Plastic
+             <p className={pro.filElement}>Plastic</p> 
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="keramic" />
-              Keramik
+             <p className={pro.filElement}>Keramik</p> 
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="metal" />
-              Metal
+             <p className={pro.filElement}>Metal</p> 
             </label>
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p>Brand</p>
+          <p className={pro.catTitle}>Brand</p>
           <div className={pro.inputItem}>
             <Select
               mode="multiple"
@@ -115,19 +115,19 @@ function Product() {
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p>Condition</p>
+          <p className={pro.catTitle}>Condition</p>
           <div className={pro.inputItem}>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="plastic" />
-              Discounted
+             <p className={pro.filElement}>Discounted</p> 
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="keramic" />
-              New Product
+             <p className={pro.filElement}>New Product</p> 
             </label>
-            <label>
+            <label className={pro.labell}>
               <input type="checkbox" value="metal" />
-              Popular
+             <p className={pro.filElement}>Popular</p> 
             </label>
           </div>
         </div>
@@ -138,7 +138,7 @@ function Product() {
             <img src={logo} style={{ width: "20px" }} />
             <p>There are 23 products.</p>
           </div>
-          <div>
+          <div className={pro.intItem}>
             <p>Sort By:</p>
             <Select
               showSearch
@@ -202,12 +202,12 @@ function Product() {
             return (
               <div key={product.id} className={pro.proCard}>
                 <div className={pro.cardImg}>
-                  <img src={product.img} alt={product.nameEn} />
+                  <img src={product.img} alt={product.nameEn} className={pro.images}/>
                 </div>
                 <div className={pro.cardBody}>
-                  <p>{product.nameEn}</p>
-                  <span>{product.rating} ⭐</span>
-                  <div>
+                  <p className={pro.name}>{product.nameEn}</p>
+                  <span className={pro.rating}>{product.rating} ⭐</span>
+                  <div className={pro.price}>
                     {discount ? (
                       <div>
                         <span
