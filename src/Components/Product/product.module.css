@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .container{
     display: flex;
     padding: 40px 70px;
@@ -7,6 +12,11 @@
     flex-direction: column;
     gap: 28px;
     padding: 20px;
+    position: sticky;
+   top: 10px;
+   align-self: flex-start;
+   z-index: 999999999999999999999;
+   height: fit-content;
 }
 .filterBy{
     background-color: rgb(245, 242, 242);
@@ -112,23 +122,31 @@
     gap: 12px;
 }
 
-.productss{
+/* .productss{
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 20px;
+} */
+.productss {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
+
 .cardImg{
-  width: 280px;
-  height: 320px;
+  /* width: 280px;
+  height: 320px; */
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .images{
     width: 100%;
-    height: 100%;
-    transition: all 0.3s ease;
-    
+    height:100%;
+    object-fit: cover;
+    transition: all 0.3s ease;  
 }
 .proCard{
     display: flex;
@@ -138,6 +156,9 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
+    /* Griddd */
+    width: 100%; /* important for grid */
+    /* max-width: 100%; */
 }
 .proCard:hover .images{
     scale:1.16;
@@ -217,4 +238,113 @@
        font-weight: 600;
     font-size: 23px;
      color: #2a7d2e;
+}
+
+/* !paginationn */
+.pagination {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-top: 30px;
+  margin-right: 20px;
+  gap: 6px;
+  font-family: sans-serif;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  background-color: green;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+
+.pagination button:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+.currentPage{
+  padding: 7px 12px;
+  background-color: green;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+}
+.filterToggleBtn {
+  display: none;
+  background-color: #1f2937;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.closeBtn {
+  display: none;
+  background-color: #e11d48;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  align-self: flex-end;
+  cursor: pointer;
+}
+.activeFilter {
+  display: flex !important;
+  position: fixed;
+  top: 0px;
+  right: 0;
+  padding: 20px 50px 100px;
+  z-index: 9999;
+  background-color: white;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* 
+.filterOverlay{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+   
+    display: none;
+    
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.overlayOpen{
+    display: block;
+     z-index:99999;
+} */
+@media(max-width:970px){
+    .filterCon{
+       display: none;
+    }
+    .closeBtn {
+    display:block
+}
+    .filterToggleBtn {
+    display: block;
+  }
+}
+@media(max-width:700px){
+  .container{
+    display: flex;
+    padding: 40px 6px;
+}
+.productCon{
+    padding: 5px;
+}
+
+}
+@media (max-width: 480px) {
+  .productss {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

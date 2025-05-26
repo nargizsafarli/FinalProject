@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCaretDown } from "react-icons/fa";
 // import { faHeart, faStar, faStarHalfAlt } from "@fortawesome/free-regular-svg-icons";
 import {
+  faArrowLeft,
+  faArrowRight,
   faStar as faSolidStar,
   faStarHalfAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,15 +17,26 @@ import {
   faHeart,
   faStar as faRegularStar,
 } from "@fortawesome/free-regular-svg-icons";
-
 import det from "./assets/download (5).svg";
 import basket from "./assets/download (6).svg";
 const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
+
 function Product() {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   console.log(data);
+
+  // !pagination---------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 9;
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = data.slice(indexOfFirstProduct, indexOfLastProduct);
+  const totalPages = Math.ceil(data.length / productsPerPage);
+
+  // !Select-------------------------
   const [selectedItems, setSelectedItems] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
   const filteredOptions = OPTIONS.filter((o) => !selectedItems.includes(o));
   useEffect(() => {
     dispatch(fetchProducts());
@@ -92,10 +105,15 @@ function Product() {
     return stars;
   };
 
-
   return (
     <div className={pro.container}>
-      <div className={pro.filterCon}>
+      <div  className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
+        <button className={pro.closeBtn} onClick={() => setShowFilter(false)}>
+                    Close
+        </button>
+        {/* <div className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
+        onClick={()=>setShowFilter(false)}
+        ></div> */}
         <div className={pro.filterBy}>Filter By</div>
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Categories</p>
@@ -157,7 +175,7 @@ function Product() {
               value={selectedItems}
               onChange={setSelectedItems}
               style={{ width: "95%" }}
-               suffixIcon={<FaCaretDown color="black" size={16} />}
+              suffixIcon={<FaCaretDown color="black" size={16} />}
               className={pro.customSelect}
               options={filteredOptions.map((item) => ({
                 value: item,
@@ -184,6 +202,7 @@ function Product() {
           </div>
         </div>
       </div>
+
       <div className={pro.productCon}>
         <div className={pro.inf}>
           <div className={pro.intItem}>
@@ -196,7 +215,7 @@ function Product() {
               showSearch
               style={{ width: 200 }}
               placeholder="Relevance"
-               className={pro.customSelectTwice}
+              className={pro.customSelectTwice}
               optionFilterProp="label"
               suffixIcon={<FaCaretDown color="black" size={16} />}
               filterSort={(optionA, optionB) => {
@@ -248,10 +267,13 @@ function Product() {
               ]}
             />
           </div>
+          <button className={pro.filterToggleBtn} onClick={() => setShowFilter(true)}>
+             Filter
+          </button>
         </div>
 
         <div className={pro.productss}>
-          {data.map((product) => {
+          {currentProducts.map((product) => {
             const { price, discount } = getDisplayPrice(product);
             return (
               <div key={product.id} className={pro.proCard}>
@@ -280,13 +302,9 @@ function Product() {
                   </div>
                   <div className={pro.price}>
                     {discount ? (
-                      <div >
-                        <span className={pro.oldPrice}>
-                          ${price}
-                        </span>
-                        <span className={pro.disPrice}>
-                          ${discount}
-                        </span>
+                      <div>
+                        <span className={pro.oldPrice}>${price}</span>
+                        <span className={pro.disPrice}>${discount}</span>
                       </div>
                     ) : (
                       <span className={pro.pri}>${price}</span>
@@ -296,6 +314,27 @@ function Product() {
               </div>
             );
           })}
+        </div>
+
+        {/* Paginationnn */}
+        <div className={pro.pagination}>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+           <FontAwesomeIcon icon={faArrowLeft} style={{color:"white"}} />
+          </button>
+          <span className={pro.currentPage}>
+           {currentPage}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+           <FontAwesomeIcon icon={faArrowRight} style={{color:"white"}}/>
+          </button>
         </div>
       </div>
     </div>
