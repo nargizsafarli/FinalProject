@@ -12,6 +12,7 @@ import {
   faArrowRight,
   faStar as faSolidStar,
   faStarHalfAlt,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faHeart,
@@ -107,14 +108,18 @@ function Product() {
 
   return (
     <div className={pro.container}>
-      <div  className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
-        <button className={pro.closeBtn} onClick={() => setShowFilter(false)}>
-                    Close
-        </button>
-        {/* <div className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
-        onClick={()=>setShowFilter(false)}
-        ></div> */}
-        <div className={pro.filterBy}>Filter By</div>
+      <div
+        className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
+        onClick={() => setShowFilter(false)}
+      ></div>
+
+      <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
+        <div className={pro.filterBy}>
+          Filter By
+          <button className={pro.closeBtn} onClick={() => setShowFilter(false)}>
+            <FontAwesomeIcon icon={faXmark} />
+          </button>
+        </div>
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Categories</p>
           <div className={pro.inputItem}>
@@ -205,12 +210,13 @@ function Product() {
 
       <div className={pro.productCon}>
         <div className={pro.inf}>
+        <div className={pro.resItem}>
           <div className={pro.intItem}>
             <img src={logo} style={{ width: "20px" }} />
             <p className={pro.proDet}>There are {data.length} products.</p>
           </div>
           <div className={pro.intItem}>
-            <p className={pro.proDet}>Sort By:</p>
+            <p className={pro.proDet2}>Sort By:</p>
             <Select
               showSearch
               style={{ width: 200 }}
@@ -266,10 +272,15 @@ function Product() {
                 },
               ]}
             />
-          </div>
-          <button className={pro.filterToggleBtn} onClick={() => setShowFilter(true)}>
-             Filter
+             <button
+            className={pro.filterToggleBtn}
+            onClick={() => setShowFilter(true)}
+          >
+            FILTER
           </button>
+          </div>
+          </div>
+         
         </div>
 
         <div className={pro.productss}>
@@ -322,18 +333,16 @@ function Product() {
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
-           <FontAwesomeIcon icon={faArrowLeft} style={{color:"white"}} />
+            <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
           </button>
-          <span className={pro.currentPage}>
-           {currentPage}
-          </span>
+          <span className={pro.currentPage}>{currentPage}</span>
           <button
             onClick={() =>
               setCurrentPage((prev) => Math.min(prev + 1, totalPages))
             }
             disabled={currentPage === totalPages}
           >
-           <FontAwesomeIcon icon={faArrowRight} style={{color:"white"}}/>
+            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
           </button>
         </div>
       </div>
