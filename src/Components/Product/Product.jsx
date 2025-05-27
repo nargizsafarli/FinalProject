@@ -26,14 +26,42 @@ function Product() {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   console.log(data);
+  const [selectedCategory, setSelectedCategory] = useState([]);
+  const [availabilityFilter, setAvailablityFilter] = useState(null);
+
+  const handleCategoryChange = (e) => {
+    const { value, checked } = e.target;
+    setSelectedCategory((prev) =>
+      checked ? [...prev, value] : prev.filter((cat) => cat !== value)
+    );
+  };
+  // const filteredProducts = data.filter((product) => {
+  //   if (selectedCategory.length === 0) return true; // heç nə seçilməyibsə, hamısını göstər
+  //   return selectedCategory.includes(product.category);
+  // });
+  const filteredProducts = data.filter((product) => {
+    const categoryMatch =
+      selectedCategory.length === 0 ||
+      selectedCategory.includes(product.category);
+
+    const availabilityMatch =
+      availabilityFilter === null || // yəni istifadəçi heç bir checkbox seçməyibsə
+      (availabilityFilter === "available" && product.isStock === true) ||
+      (availabilityFilter === "not-available" && product.isStock === false);
+
+    return categoryMatch && availabilityMatch;
+  });
 
   // !pagination---------------------
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = data.slice(indexOfFirstProduct, indexOfLastProduct);
-  const totalPages = Math.ceil(data.length / productsPerPage);
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   // !Select-------------------------
   const [selectedItems, setSelectedItems] = useState([]);
@@ -124,19 +152,35 @@ function Product() {
           <p className={pro.catTitle}>Categories</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="Dicotyledons" />
+              <input
+                type="checkbox"
+                value="dicotyledons"
+                onChange={handleCategoryChange}
+              />
               <p className={pro.filElement}> Dicotyledons (18)</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="Lilies" />
+              <input
+                type="checkbox"
+                value="lilies"
+                onChange={handleCategoryChange}
+              />
               <p className={pro.filElement}> Lilies (18)</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="Monocotyledons" />
+              <input
+                type="checkbox"
+                value="monocotyledons"
+                onChange={handleCategoryChange}
+              />
               <p className={pro.filElement}>Monocotyledons (20)</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="Sugarcanes" />
+              <input
+                type="checkbox"
+                value="sugarcanes"
+                onChange={handleCategoryChange}
+              />
               <p className={pro.filElement}>Sugarcanes (18)</p>
             </label>
           </div>
@@ -145,11 +189,35 @@ function Product() {
           <p className={pro.catTitle}>Availability</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="Dicotyledons" />
+              <input
+                type="checkbox"
+                value="availablity"
+                name="availablity"
+                checked={availabilityFilter === "available"}
+                onChange={(e) => {
+                  if (availabilityFilter === "available") {
+                    setAvailablityFilter(null); // eyni checkbox ikinci dəfə seçilərsə, sıfırla
+                  } else {
+                    setAvailablityFilter("available");
+                  }
+                }}
+              />
               <p className={pro.filElement}>Available</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="Lilies" />
+              <input
+                type="checkbox"
+                name="availablity"
+                value="not-available"
+                checked={availabilityFilter === "not-available"}
+                onChange={(e) => {
+                  if (availabilityFilter === "not-available") {
+                    setAvailablityFilter(null);
+                  } else {
+                    setAvailablityFilter("not-available");
+                  }
+                }}
+              />
               <p className={pro.filElement}>Not available</p>
             </label>
           </div>
@@ -210,77 +278,76 @@ function Product() {
 
       <div className={pro.productCon}>
         <div className={pro.inf}>
-        <div className={pro.resItem}>
-          <div className={pro.intItem}>
-            <img src={logo} style={{ width: "20px" }} />
-            <p className={pro.proDet}>There are {data.length} products.</p>
-          </div>
-          <div className={pro.intItem}>
-            <p className={pro.proDet2}>Sort By:</p>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="Relevance"
-              className={pro.customSelectTwice}
-              optionFilterProp="label"
-              suffixIcon={<FaCaretDown color="black" size={16} />}
-              filterSort={(optionA, optionB) => {
-                var _a, _b;
-                return (
-                  (_a =
-                    optionA === null || optionA === void 0
-                      ? void 0
-                      : optionA.label) !== null && _a !== void 0
-                    ? _a
-                    : ""
-                )
-                  .toLowerCase()
-                  .localeCompare(
-                    ((_b =
-                      optionB === null || optionB === void 0
+          <div className={pro.resItem}>
+            <div className={pro.intItem}>
+              <img src={logo} style={{ width: "20px" }} />
+              <p className={pro.proDet}>There are {data.length} products.</p>
+            </div>
+            <div className={pro.intItem}>
+              <p className={pro.proDet2}>Sort By:</p>
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="Relevance"
+                className={pro.customSelectTwice}
+                optionFilterProp="label"
+                suffixIcon={<FaCaretDown color="black" size={16} />}
+                filterSort={(optionA, optionB) => {
+                  var _a, _b;
+                  return (
+                    (_a =
+                      optionA === null || optionA === void 0
                         ? void 0
-                        : optionB.label) !== null && _b !== void 0
-                      ? _b
+                        : optionA.label) !== null && _a !== void 0
+                      ? _a
                       : ""
-                    ).toLowerCase()
-                  );
-              }}
-              options={[
-                {
-                  value: "1",
-                  label: "Not Identified",
-                },
-                {
-                  value: "2",
-                  label: "Closed",
-                },
-                {
-                  value: "3",
-                  label: "Communicated",
-                },
-                {
-                  value: "4",
-                  label: "Identified",
-                },
-                {
-                  value: "5",
-                  label: "Resolved",
-                },
-                {
-                  value: "6",
-                  label: "Cancelled",
-                },
-              ]}
-            />
-             <button
-            className={pro.filterToggleBtn}
-            onClick={() => setShowFilter(true)}
-          >
-            FILTER
-          </button>
+                  )
+                    .toLowerCase()
+                    .localeCompare(
+                      ((_b =
+                        optionB === null || optionB === void 0
+                          ? void 0
+                          : optionB.label) !== null && _b !== void 0
+                        ? _b
+                        : ""
+                      ).toLowerCase()
+                    );
+                }}
+                options={[
+                  {
+                    value: "1",
+                    label: "Not Identified",
+                  },
+                  {
+                    value: "2",
+                    label: "Closed",
+                  },
+                  {
+                    value: "3",
+                    label: "Communicated",
+                  },
+                  {
+                    value: "4",
+                    label: "Identified",
+                  },
+                  {
+                    value: "5",
+                    label: "Resolved",
+                  },
+                  {
+                    value: "6",
+                    label: "Cancelled",
+                  },
+                ]}
+              />
+              <button
+                className={pro.filterToggleBtn}
+                onClick={() => setShowFilter(true)}
+              >
+                FILTER
+              </button>
+            </div>
           </div>
-          </div>
-         
         </div>
 
         <div className={pro.productss}>
