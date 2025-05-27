@@ -13,11 +13,12 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import ChangeLang from "../../Components/ChangeLang/ChangeLang";
+import i18n from "../../i18n/i18next";
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
   const { t } = useTranslation();
-
+  const currentLang = i18n.language;
   return (
     <div className={nav.mainContainer}>
       {mobileOpen && (
@@ -39,7 +40,9 @@ function Navbar() {
         <div className={nav.desktop}>
           <div className={nav.link}>
             <NavLink
-              to="/"
+            // to="/"
+              to={`/${currentLang}`}
+               end
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -47,7 +50,8 @@ function Navbar() {
               {t("navbar.home")}
             </NavLink>
             <NavLink
-              to="/shop"
+              // to="/shop"
+               to={`/${currentLang}/shop`}
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -55,15 +59,18 @@ function Navbar() {
               {t("navbar.shop")}
             </NavLink>
             <NavLink
-              to="/about"
+              // to="/about"
+               to={`/${currentLang}/about`}
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
             >
               {t("navbar.about")}
+               
             </NavLink>
             <NavLink
-              to="/contact"
+              // to="/contact"
+               to={`/${currentLang}/contact`}
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -112,7 +119,7 @@ function Navbar() {
             </div>
             <div className={nav.mobileNavLink}>
               <NavLink
-                to="/"
+                to={`/${currentLang}`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -120,7 +127,8 @@ function Navbar() {
                 {t("navbar.home")}
               </NavLink>
               <NavLink
-                to="/shop"
+                // to="/shop"
+                  to={`/${currentLang}/shop`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -128,7 +136,8 @@ function Navbar() {
                 {t("navbar.shop")}
               </NavLink>
               <NavLink
-                to="/about"
+                // to="/about"
+                  to={`/${currentLang}/about`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -136,7 +145,8 @@ function Navbar() {
                 {t("navbar.about")}
               </NavLink>
               <NavLink
-                to="/contact"
+                // to="/contact"
+                  to={`/${currentLang}/contact`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
