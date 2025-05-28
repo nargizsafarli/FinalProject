@@ -21,16 +21,23 @@ import {
 import det from "./assets/download (5).svg";
 import basket from "./assets/download (6).svg";
 import { useTranslation } from "react-i18next";
-const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
+import i18n from "../../i18n/i18next";
 
 function Product() {
   const {t}=useTranslation()
+  const currentLang = i18n.language;
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   console.log(data);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [availabilityFilter, setAvailablityFilter] = useState(null);
    const [selectedMaterial, setSelectedMaterial] = useState([]);
+   const [selectedCondition, setSelectedCondition] = useState([]);
+   const [selectedBrand, setSelectedBrand] = useState([]);
+   const [sortOption, setSortOption] = useState("1");
+
+  //  const [selectedBrand, setSelectedBrand] = useState([]);
+
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -44,11 +51,29 @@ function Product() {
     checked ? [...prev, value] : prev.filter((mat) => mat !== value)
   );
 };
+  const handleConditionChange = (e) => {
+  const { value, checked } = e.target;
+  setSelectedCondition((prev) =>
+    checked ? [...prev, value] : prev.filter((cond) => cond !== value)
+  );
+};
+const brandOptions = ['Cartify', 'EcomZone', 'SmartShop', 'StyleHub'];
 
-  // const filteredProducts = data.filter((product) => {
-  //   if (selectedCategory.length === 0) return true; // heç nə seçilməyibsə, hamısını göstər
-  //   return selectedCategory.includes(product.category);
-  // });
+const filteredBrandOptions = brandOptions.filter(
+  (option) => !selectedBrand.includes(option)
+);
+// const handleBrandChange = (e) => {
+//   const { value, checked } = e.target;
+//   setSelectedBrand((prev) =>
+//     checked ? [...prev, value] : prev.filter((brand) => brand !== value)
+//   );
+// };
+// const handleBrandChange = (value) => {
+//   setSelectedBrand(value);
+// };
+
+
+
   const filteredProducts = data.filter((product) => {
     const categoryMatch =
       selectedCategory.length === 0 ||
@@ -63,25 +88,65 @@ function Product() {
     selectedMaterial.length === 0 || 
     selectedMaterial.includes(product.materialKey);
 
+    const conditionMatch =
+    selectedCondition.length === 0 ||
+    selectedCondition.includes(product.conditionKey);
 
-    return categoryMatch && availabilityMatch && materialMatch;
+    const brandMatch =
+  selectedBrand.length === 0 || selectedBrand.includes(product.brand);
+
+    //  const brandMatch =
+    // selectedBrand.length === 0 ||
+    // selectedBrand.includes(product.brand);
+    return categoryMatch && availabilityMatch && materialMatch && conditionMatch && brandMatch;
   });
+
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+  const langKey = currentLang === "az" ? "nameAz" : "nameEn";
+
+  const getDisplay = (product) => {
+    if (product.small) return product.smallDisPrice || product.smallPrice;
+    if (product.medium) return product.mediumDisPrice || product.mediumPrice;
+    if (product.large) return product.largeDisPrice || product.largePrice;
+    return 0;
+  };
+
+  switch (sortOption) {
+    case "1":
+      return a[langKey].localeCompare(b[langKey]); // A to Z
+    case "2":
+      return b[langKey].localeCompare(a[langKey]); // Z to A
+    case "3":
+      return getDisplay(a) - getDisplay(b); // Price low to high
+    case "4":
+      return getDisplay(b) - getDisplay(a); // Price high to low
+    case "5":
+      return b.rating - a.rating; // Rating high to low
+    case "6":
+      return a.rating - b.rating; // Rating low to high
+    default:
+      return 0;
+  }
+});
+
 
   // !pagination---------------------
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
+  const currentProducts =  sortedProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const totalPages = Math.ceil( sortedProducts.length / productsPerPage);
 
   // !Select-------------------------
-  const [selectedItems, setSelectedItems] = useState([]);
+// const OPTIONS = ['Cartify', 'EcomZone', 'SmartShop', 'StyleHub'];
+//   const filteredOptions = OPTIONS.filter(o => !selectedBrand.includes(o));
+
+
   const [showFilter, setShowFilter] = useState(false);
-  const filteredOptions = OPTIONS.filter((o) => !selectedItems.includes(o));
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -257,11 +322,11 @@ function Product() {
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Brand</p>
           <div className={pro.selectItem}>
-            <Select
+            {/* <Select
               mode="multiple"
               placeholder="(no filter)"
-              value={selectedItems}
-              onChange={setSelectedItems}
+              value={selectedBrand}
+              onChange={handleBrandChange}
               style={{ width: "95%" }}
               suffixIcon={<FaCaretDown color="black" size={16} />}
               className={pro.customSelect}
@@ -269,22 +334,36 @@ function Product() {
                 value: item,
                 label: item,
               }))}
-            />
+            /> */}
+    
+              <Select
+  mode="multiple"
+  placeholder="(no filter)"
+  value={selectedBrand}
+  onChange={setSelectedBrand}
+  style={{ width: "95%" }}
+  suffixIcon={<FaCaretDown color="black" size={16} />}
+  className={pro.customSelect}
+  options={filteredBrandOptions.map((brand) => ({
+    value: brand,
+    label: brand,
+}))}
+/>
           </div>
         </div>
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Condition</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="plastic" />
+              <input type="checkbox" value="discounted" onChange={handleConditionChange} />
               <p className={pro.filElement}>Discounted</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="keramic" />
+              <input type="checkbox" value="new" onChange={handleConditionChange} />
               <p className={pro.filElement}>New Product</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="metal" />
+              <input type="checkbox" value="popular" onChange={handleConditionChange}/>
               <p className={pro.filElement}>Popular</p>
             </label>
           </div>
@@ -300,7 +379,7 @@ function Product() {
             </div>
             <div className={pro.intItem}>
               <p className={pro.proDet2}>Sort By:</p>
-              <Select
+              {/* <Select
                 showSearch
                 style={{ width: 200 }}
                 placeholder="Relevance"
@@ -331,30 +410,48 @@ function Product() {
                 options={[
                   {
                     value: "1",
-                    label: "Not Identified",
+                    label: "Name, A to Z",
                   },
                   {
                     value: "2",
-                    label: "Closed",
+                    label: "Name, Z to A",
                   },
                   {
                     value: "3",
-                    label: "Communicated",
+                    label: "Price, low to high",
                   },
                   {
                     value: "4",
-                    label: "Identified",
+                    label: "Price, high to low",
                   },
                   {
                     value: "5",
-                    label: "Resolved",
+                    label: "Rating, high to low",
                   },
                   {
                     value: "6",
-                    label: "Cancelled",
+                    label: "Rating, low to high",
                   },
                 ]}
-              />
+              /> */}
+              <Select
+  showSearch
+  style={{ width: 200 }}
+  placeholder="Name, A to Z"
+  className={pro.customSelectTwice}
+  optionFilterProp="label"
+  suffixIcon={<FaCaretDown color="black" size={16} />}
+  onChange={(value) => setSortOption(value)}
+  options={[
+    { value: "1", label: "Name, A to Z" },
+    { value: "2", label: "Name, Z to A" },
+    { value: "3", label: "Price, low to high" },
+    { value: "4", label: "Price, high to low" },
+    { value: "5", label: "Rating, high to low" },
+    { value: "6", label: "Rating, low to high" },
+  ]}
+/>
+
               <button
                 className={pro.filterToggleBtn}
                 onClick={() => setShowFilter(true)}
