@@ -11,5 +11,9 @@
         "blog":"Blog",
         "login":"Login",
         "menu":"Menu"
+    },
+     "filter":{
+        "avail":"Available",
+        "notAvail":"Not available"
     }
 }

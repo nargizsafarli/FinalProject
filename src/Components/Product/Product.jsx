@@ -20,14 +20,17 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import det from "./assets/download (5).svg";
 import basket from "./assets/download (6).svg";
+import { useTranslation } from "react-i18next";
 const OPTIONS = ["Apples", "Nails", "Bananas", "Helicopters"];
 
 function Product() {
+  const {t}=useTranslation()
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   console.log(data);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [availabilityFilter, setAvailablityFilter] = useState(null);
+   const [selectedMaterial, setSelectedMaterial] = useState([]);
 
   const handleCategoryChange = (e) => {
     const { value, checked } = e.target;
@@ -35,6 +38,13 @@ function Product() {
       checked ? [...prev, value] : prev.filter((cat) => cat !== value)
     );
   };
+  const handleMaterialChange = (e) => {
+  const { value, checked } = e.target;
+  setSelectedMaterial((prev) =>
+    checked ? [...prev, value] : prev.filter((mat) => mat !== value)
+  );
+};
+
   // const filteredProducts = data.filter((product) => {
   //   if (selectedCategory.length === 0) return true; // heç nə seçilməyibsə, hamısını göstər
   //   return selectedCategory.includes(product.category);
@@ -48,8 +58,13 @@ function Product() {
       availabilityFilter === null || // yəni istifadəçi heç bir checkbox seçməyibsə
       (availabilityFilter === "available" && product.isStock === true) ||
       (availabilityFilter === "not-available" && product.isStock === false);
+      
+     const materialMatch =
+    selectedMaterial.length === 0 || 
+    selectedMaterial.includes(product.materialKey);
 
-    return categoryMatch && availabilityMatch;
+
+    return categoryMatch && availabilityMatch && materialMatch;
   });
 
   // !pagination---------------------
@@ -186,7 +201,7 @@ function Product() {
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Availability</p>
+          <p className={pro.catTitle}>Availablity</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input
@@ -202,7 +217,7 @@ function Product() {
                   }
                 }}
               />
-              <p className={pro.filElement}>Available</p>
+              <p className={pro.filElement}>{t("filter.avail")}</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -218,7 +233,7 @@ function Product() {
                   }
                 }}
               />
-              <p className={pro.filElement}>Not available</p>
+              <p className={pro.filElement}>{t("filter.notAvail")}</p>
             </label>
           </div>
         </div>
@@ -226,15 +241,15 @@ function Product() {
           <p className={pro.catTitle}>Material</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="plastic" />
+              <input type="checkbox" value="plastic" onChange={handleMaterialChange}/>
               <p className={pro.filElement}>Plastic</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="keramic" />
+              <input type="checkbox" value="ceramic" onChange={handleMaterialChange} />
               <p className={pro.filElement}>Keramik</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="metal" />
+              <input type="checkbox" value="metal" onChange={handleMaterialChange} />
               <p className={pro.filElement}>Metal</p>
             </label>
           </div>

@@ -11,5 +11,10 @@
         "blog":"Bloq",
         "login":"Daxil ol",
         "menu":"Menyu"
+    },
+    "filter":{
+        "avail":"Mövcud",
+        "notAvail":"Mövcud olmayan"
     }
+    
 }
