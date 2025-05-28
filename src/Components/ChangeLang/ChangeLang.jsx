@@ -10,12 +10,14 @@ function ChangeLang() {
   const location = useLocation();
   const { lang } = useParams();
   const handleChange = (value) => {
-    if (!lang) return;
-    // Yeni path: köhnə dili (lang) dəyiş
-    const newPath = location.pathname.replace(`/${lang}`, `/${value}`);
-    navigate(newPath); // URL-i dəyiş
-    i18next.changeLanguage(value); // Dili dəyiş
-  };
+  if (!lang) return;
+
+  // DÜZGÜN: newPath dəyişənini yaradıb istifadə edirik
+  const newPath = location.pathname.replace(`/${lang}`, `/${value}`) + location.search;
+  
+  navigate(newPath); // URL-i dəyiş
+  i18next.changeLanguage(value); // Dili dəyiş
+};
   return (
     <div>
       <Select

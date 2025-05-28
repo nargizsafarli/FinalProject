@@ -22,6 +22,7 @@ import det from "./assets/download (5).svg";
 import basket from "./assets/download (6).svg";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18next";
+import { useSearchParams } from "react-router-dom";
 
 function Product() {
   const {t}=useTranslation()
@@ -35,22 +36,8 @@ function Product() {
    const [selectedCondition, setSelectedCondition] = useState([]);
    const [selectedBrand, setSelectedBrand] = useState([]);
    const [sortOption, setSortOption] = useState("1");
+   const [searchParams, setSearchParams] = useSearchParams();
 
-  //  const [selectedBrand, setSelectedBrand] = useState([]);
-
-
-  const handleCategoryChange = (e) => {
-    const { value, checked } = e.target;
-    setSelectedCategory((prev) =>
-      checked ? [...prev, value] : prev.filter((cat) => cat !== value)
-    );
-  };
-  const handleMaterialChange = (e) => {
-  const { value, checked } = e.target;
-  setSelectedMaterial((prev) =>
-    checked ? [...prev, value] : prev.filter((mat) => mat !== value)
-  );
-};
   const handleConditionChange = (e) => {
   const { value, checked } = e.target;
   setSelectedCondition((prev) =>
@@ -62,18 +49,103 @@ const brandOptions = ['Cartify', 'EcomZone', 'SmartShop', 'StyleHub'];
 const filteredBrandOptions = brandOptions.filter(
   (option) => !selectedBrand.includes(option)
 );
-// const handleBrandChange = (e) => {
+
+// !Filter and url
+// const handleFilterChange = (e, filterType) => {
 //   const { value, checked } = e.target;
-//   setSelectedBrand((prev) =>
-//     checked ? [...prev, value] : prev.filter((brand) => brand !== value)
-//   );
+
+//   if (filterType === "category") {
+//     setSelectedCategory((prev) => {
+//       const updated = checked
+//         ? [...prev, value]
+//         : prev.filter((item) => item !== value);
+
+//       setSearchParams((params) => {
+//         if (updated.length > 0) {
+//           params.set("category", updated.join("-"));
+//         } else {
+//           params.delete("category");
+//         }
+//         return params;
+//       });
+
+//       return updated;
+//     });
+//   }
+
+//   if (filterType === "material") {
+//     setSelectedMaterial((prev) => {
+//       const updated = checked
+//         ? [...prev, value]
+//         : prev.filter((item) => item !== value);
+
+//       setSearchParams((params) => {
+//         if (updated.length > 0) {
+//           params.set("material", updated.join("-"));
+//         } else {
+//           params.delete("material");
+//         }
+//         return params;
+//       });
+
+//       return updated;
+//     });
+//   }
+
+//   // Burada gələcəkdə başqa filterləri də əlavə edə bilərsən
 // };
-// const handleBrandChange = (value) => {
-//   setSelectedBrand(value);
-// };
+// ! state icinde basqa bir state cagrildi kimi problem cixdi evvelki ile muqaise et oyren ferqi
+const handleFilterChange = (e, filterType) => {
+  const { value, checked } = e.target;
+
+  let updated = [];
+
+  if (filterType === "category") {
+    updated = checked
+      ? [...selectedCategory, value]
+      : selectedCategory.filter((item) => item !== value);
+    setSelectedCategory(updated);
+  }
+
+  if (filterType === "material") {
+    updated = checked
+      ? [...selectedMaterial, value]
+      : selectedMaterial.filter((item) => item !== value);
+    setSelectedMaterial(updated);
+  }
+
+  // URL-i yuxarıdakı dəyişikliklərdən sonra güncəllə
+  setSearchParams((params) => {
+    if (filterType === "category") {
+      updated.length > 0
+        ? params.set("category", updated.join("-"))
+        : params.delete("category");
+    }
+    if (filterType === "material") {
+      updated.length > 0
+        ? params.set("material", updated.join("-"))
+        : params.delete("material");
+    }
+    return params;
+  });
+};
 
 
+useEffect(() => {
+  const categoryFromURL = searchParams.get("category");
+  const materialFromURL = searchParams.get("material");
 
+  if (categoryFromURL) {
+    setSelectedCategory(categoryFromURL.split("-"));
+  }
+
+  if (materialFromURL) {
+    setSelectedMaterial(materialFromURL.split("-"));
+  }
+}, []);
+
+
+// !filterMath------------
   const filteredProducts = data.filter((product) => {
     const categoryMatch =
       selectedCategory.length === 0 ||
@@ -111,6 +183,7 @@ const filteredBrandOptions = brandOptions.filter(
     return 0;
   };
 
+  // ! Sort---------------------
   switch (sortOption) {
     case "1":
       return a[langKey].localeCompare(b[langKey]); // A to Z
@@ -235,7 +308,8 @@ const filteredBrandOptions = brandOptions.filter(
               <input
                 type="checkbox"
                 value="dicotyledons"
-                onChange={handleCategoryChange}
+                  checked={selectedCategory.includes("dicotyledons")}
+                onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}> Dicotyledons (18)</p>
             </label>
@@ -243,7 +317,8 @@ const filteredBrandOptions = brandOptions.filter(
               <input
                 type="checkbox"
                 value="lilies"
-                onChange={handleCategoryChange}
+                   checked={selectedCategory.includes("lilies")}
+                onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}> Lilies (18)</p>
             </label>
@@ -251,7 +326,8 @@ const filteredBrandOptions = brandOptions.filter(
               <input
                 type="checkbox"
                 value="monocotyledons"
-                onChange={handleCategoryChange}
+                 checked={selectedCategory.includes("monocotyledons")}
+                onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}>Monocotyledons (20)</p>
             </label>
@@ -259,7 +335,8 @@ const filteredBrandOptions = brandOptions.filter(
               <input
                 type="checkbox"
                 value="sugarcanes"
-                onChange={handleCategoryChange}
+                onChange={(e) => handleFilterChange(e, "category")}
+                  checked={selectedCategory.includes("sugarcanes")}
               />
               <p className={pro.filElement}>Sugarcanes (18)</p>
             </label>
@@ -306,15 +383,21 @@ const filteredBrandOptions = brandOptions.filter(
           <p className={pro.catTitle}>Material</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="plastic" onChange={handleMaterialChange}/>
+              <input type="checkbox" value="plastic" 
+               checked={selectedMaterial.includes("plastic")}
+               onChange={(e) => handleFilterChange(e, "material")}/>
               <p className={pro.filElement}>Plastic</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="ceramic" onChange={handleMaterialChange} />
+              <input type="checkbox" value="ceramic" 
+               checked={selectedMaterial.includes("ceramic")}
+               onChange={(e) => handleFilterChange(e, "material")} />
               <p className={pro.filElement}>Keramik</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="metal" onChange={handleMaterialChange} />
+              <input type="checkbox" value="metal" 
+               checked={selectedMaterial.includes("metal")}
+               onChange={(e) => handleFilterChange(e, "material")} />
               <p className={pro.filElement}>Metal</p>
             </label>
           </div>
