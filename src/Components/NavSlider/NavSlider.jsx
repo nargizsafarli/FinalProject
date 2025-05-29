@@ -5,8 +5,9 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
-import sliderImg1 from './assets/slideshow-v1-1.webp';
-import sliderImg2 from './assets/slideshow-v1-2.webp'
+import sliderImg1 from './assets/slider-6.jpg';
+import sliderImg2 from './assets/slider-5.jpg'
+import sliderImg3 from './assets/slider-4.jpg'
 import slide from './NavSlider.module.css';
 
 function NavSlider() {
@@ -32,9 +33,9 @@ function NavSlider() {
           >
             <div className={slide.content}>
             <p>Hot Sale 50% Discount</p>
-              <h2>Green Indoor Plant
-              For Home Decor</h2>
-              <button className={slide.button}>Buy Now</button>
+              <h2>Bay a planter,get a grow light free
+              </h2>
+              <div className={slide.sliButton}>Buy Now</div>
             </div>
           </div>
         </SwiperSlide>
@@ -47,7 +48,19 @@ function NavSlider() {
             <div className={slide.content}>
             <p>Make Your Dream House</p>
               <h2>Bring The Green World to Your Home</h2>
-              <button className={slide.button}>Buy Now</button>
+              <div className={slide.sliButton}>Buy Now</div>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div
+            className={slide.slide}
+            style={{ backgroundImage: `url(${sliderImg3})` }}
+          >
+            <div className={slide.content}>
+            <p>Make Your Dream House</p>
+              <h2>Bring The Green World to Your Home</h2>
+              <div className={slide.sliButton}>Buy Now</div>
             </div>
           </div>
         </SwiperSlide>

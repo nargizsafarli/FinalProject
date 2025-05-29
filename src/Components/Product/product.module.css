@@ -118,9 +118,11 @@
 
 .productCon{
     display: flex;
+    /* flex: 1; */
+    width: 100%;
     flex-direction: column;
     padding: 18px;
-    gap: 10px;
+    gap: 15px;
 }
 .inf{
     display: flex;
@@ -137,31 +139,10 @@
   justify-content: space-between;
 }
 
-/* .productss{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-} */
 .productss {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-}
-
-.cardImg{
-  /* width: 280px;
-  height: 320px; */
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.images{
-    width: 100%;
-    height:100%;
-    object-fit: cover;
-    transition: all 0.3s ease;  
 }
 .proCard{
     display: flex;
@@ -171,12 +152,41 @@
     position: relative;
     overflow: hidden;
     transition: all 0.3s ease;
+    /* max-width: 290px; */
+     /* width: 100%; */
+    max-width: 290px;
     /* Griddd */
-    width: 100%; /* important for grid */
+     /* min-height: 360px;  */
+    height: 100%; /* important for grid */
     /* max-width: 100%; */
 }
+.cardImg{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  overflow: hidden;
+}
+.images{
+    width: 100%;
+    height:100%;
+    object-fit:cover;
+    transition: all 0.3s ease;  
+} 
+
+/* .cardImg{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.images{
+    width: 100%;
+    height:100%px;
+    object-fit: cover;
+    transition: all 0.3s ease;  
+} */
+
 .proCard:hover .images{
-    scale:1.16;
+    scale:1.11;
 }
 .cardOverlay {
   display: flex;
@@ -214,6 +224,7 @@
 }
 .cardBody{
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
     height: 100px;
@@ -371,6 +382,11 @@
 @media (max-width: 480px) {
   .productss {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+ 
+  .name{
+    width: 130px;
   }
 }
 @media(max-width:430px){

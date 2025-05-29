@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/features/auth/productSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaCaretDown } from "react-icons/fa";
-// import { faHeart, faStar, faStarHalfAlt } from "@fortawesome/free-regular-svg-icons";
 import {
   faArrowLeft,
   faArrowRight,
@@ -39,6 +38,65 @@ function Product() {
   const [searchParams, setSearchParams] = useSearchParams();
   const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
 
+//   const selectedFilters = [
+//   ...selectedCategory.map((item) => ({ type: "category", value: item })),
+//   ...selectedMaterial.map((item) => ({ type: "material", value: item })),
+//   ...selectedCondition.map((item) => ({ type: "condition", value: item })),
+//   ...(availabilityFilter ? [{ type: "availability", value: availabilityFilter }] : []),
+//   ...selectedBrand.map((item) => ({ type: "brand", value: item })),
+// ];
+
+// const removeFilter = (filterType, value) => {
+//   switch (filterType) {
+//     case "category":
+//       setSelectedCategory((prev) => prev.filter((item) => item !== value));
+//       break;
+//     case "material":
+//       setSelectedMaterial((prev) => prev.filter((item) => item !== value));
+//       break;
+//     case "condition":
+//       setSelectedCondition((prev) => prev.filter((item) => item !== value));
+//       break;
+//     case "availability":
+//       setAvailablityFilter(null);
+//       break;
+//     case "brand":
+//       setSelectedBrand((prev) => prev.filter((item) => item !== value));
+//       break;
+//   }
+
+//   // URL-dən də sil
+//   setSearchParams((params) => {
+//     const updated = selectedFilters.filter(
+//       (f) => !(f.type === filterType && f.value === value)
+//     );
+
+//     const grouped = updated.reduce((acc, f) => {
+//       acc[f.type] = acc[f.type] ? [...acc[f.type], f.value] : [f.value];
+//       return acc;
+//     }, {});
+
+//     // param-ları yenilə
+//     ["category", "material", "condition", "availability", "brand"].forEach((key) => {
+//       if (grouped[key]) {
+//         params.set(key, grouped[key].join("-"));
+//       } else {
+//         params.delete(key);
+//       }
+//     });
+
+//     return params;
+//   });
+// };
+
+// const clearAllFilters = () => {
+//   setSelectedCategory([]);
+//   setSelectedMaterial([]);
+//   setSelectedCondition([]);
+//   setSelectedBrand([]);
+//   setAvailablityFilter(null);
+//   setSearchParams({});
+// };
 
   // !Filter and url
   // const handleFilterChange = (e, filterType) => {
@@ -343,6 +401,26 @@ const handleSortChange = (value) => {
         className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
         onClick={() => setShowFilter(false)}
       ></div>
+      {/* {selectedFilters.length > 0 && (
+  <div className={pro.selectedTagsWrapper}>
+    {selectedFilters.map((filter, idx) => (
+      <div key={idx} className={pro.tag}>
+        {filter.value}
+          
+        <button
+          className={pro.removeBtn}
+          onClick={() => removeFilter(filter.type, filter.value)}
+        >
+          ✕
+        </button>
+      </div>
+    ))}
+    <button className={pro.clearAllBtn} onClick={clearAllFilters}>
+      Clear All
+    </button>
+  </div>
+)} */}
+
 
       <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
         <div className={pro.filterBy}>
