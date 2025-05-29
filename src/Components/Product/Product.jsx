@@ -25,127 +25,176 @@ import i18n from "../../i18n/i18next";
 import { useSearchParams } from "react-router-dom";
 
 function Product() {
-  const {t}=useTranslation()
+  const { t } = useTranslation();
   const currentLang = i18n.language;
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   console.log(data);
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [availabilityFilter, setAvailablityFilter] = useState(null);
-   const [selectedMaterial, setSelectedMaterial] = useState([]);
-   const [selectedCondition, setSelectedCondition] = useState([]);
-   const [selectedBrand, setSelectedBrand] = useState([]);
-   const [sortOption, setSortOption] = useState("1");
-   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedMaterial, setSelectedMaterial] = useState([]);
+  const [selectedCondition, setSelectedCondition] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState([]);
+  const [sortOption, setSortOption] = useState("1");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
 
-  const handleConditionChange = (e) => {
-  const { value, checked } = e.target;
-  setSelectedCondition((prev) =>
-    checked ? [...prev, value] : prev.filter((cond) => cond !== value)
-  );
-};
-const brandOptions = ['Cartify', 'EcomZone', 'SmartShop', 'StyleHub'];
 
-const filteredBrandOptions = brandOptions.filter(
-  (option) => !selectedBrand.includes(option)
-);
+  // !Filter and url
+  // const handleFilterChange = (e, filterType) => {
+  //   const { value, checked } = e.target;
 
-// !Filter and url
-// const handleFilterChange = (e, filterType) => {
-//   const { value, checked } = e.target;
+  //   if (filterType === "category") {
+  //     setSelectedCategory((prev) => {
+  //       const updated = checked
+  //         ? [...prev, value]
+  //         : prev.filter((item) => item !== value);
 
-//   if (filterType === "category") {
-//     setSelectedCategory((prev) => {
-//       const updated = checked
-//         ? [...prev, value]
-//         : prev.filter((item) => item !== value);
+  //       setSearchParams((params) => {
+  //         if (updated.length > 0) {
+  //           params.set("category", updated.join("-"));
+  //         } else {
+  //           params.delete("category");
+  //         }
+  //         return params;
+  //       });
 
-//       setSearchParams((params) => {
-//         if (updated.length > 0) {
-//           params.set("category", updated.join("-"));
-//         } else {
-//           params.delete("category");
-//         }
-//         return params;
-//       });
+  //       return updated;
+  //     });
+  //   }
 
-//       return updated;
-//     });
-//   }
+  //   if (filterType === "material") {
+  //     setSelectedMaterial((prev) => {
+  //       const updated = checked
+  //         ? [...prev, value]
+  //         : prev.filter((item) => item !== value);
 
-//   if (filterType === "material") {
-//     setSelectedMaterial((prev) => {
-//       const updated = checked
-//         ? [...prev, value]
-//         : prev.filter((item) => item !== value);
+  //       setSearchParams((params) => {
+  //         if (updated.length > 0) {
+  //           params.set("material", updated.join("-"));
+  //         } else {
+  //           params.delete("material");
+  //         }
+  //         return params;
+  //       });
 
-//       setSearchParams((params) => {
-//         if (updated.length > 0) {
-//           params.set("material", updated.join("-"));
-//         } else {
-//           params.delete("material");
-//         }
-//         return params;
-//       });
+  //       return updated;
+  //     });
+  //   }
 
-//       return updated;
-//     });
-//   }
+  //   // Burada gələcəkdə başqa filterləri də əlavə edə bilərsən
+  // };
+  // ! state icinde basqa bir state cagrildi kimi problem cixdi evvelki ile muqaise et oyren ferqi
+  const handleFilterChange = (e, filterType) => {
+    const { value, checked } = e.target;
 
-//   // Burada gələcəkdə başqa filterləri də əlavə edə bilərsən
-// };
-// ! state icinde basqa bir state cagrildi kimi problem cixdi evvelki ile muqaise et oyren ferqi
-const handleFilterChange = (e, filterType) => {
-  const { value, checked } = e.target;
+    let updated = [];
 
-  let updated = [];
-
-  if (filterType === "category") {
-    updated = checked
-      ? [...selectedCategory, value]
-      : selectedCategory.filter((item) => item !== value);
-    setSelectedCategory(updated);
-  }
-
-  if (filterType === "material") {
-    updated = checked
-      ? [...selectedMaterial, value]
-      : selectedMaterial.filter((item) => item !== value);
-    setSelectedMaterial(updated);
-  }
-
-  // URL-i yuxarıdakı dəyişikliklərdən sonra güncəllə
-  setSearchParams((params) => {
     if (filterType === "category") {
-      updated.length > 0
-        ? params.set("category", updated.join("-"))
-        : params.delete("category");
+      updated = checked
+        ? [...selectedCategory, value]
+        : selectedCategory.filter((item) => item !== value);
+      setSelectedCategory(updated);
     }
+
     if (filterType === "material") {
-      updated.length > 0
-        ? params.set("material", updated.join("-"))
-        : params.delete("material");
+      updated = checked
+        ? [...selectedMaterial, value]
+        : selectedMaterial.filter((item) => item !== value);
+      setSelectedMaterial(updated);
+    }
+    if (filterType === "condition") {
+      updated = checked
+        ? [...selectedCondition, value]
+        : selectedCondition.filter((item) => item !== value);
+      setSelectedCondition(updated);
+    }
+    if (filterType === "availability") {
+      const newValue = availabilityFilter === value ? null : value;
+      setAvailablityFilter(newValue);
+      updated = newValue ? [newValue] : [];
+    }
+    if (filterType === "brand") {
+     updated = value; // value bir array olacaq (Select-in multiple dəyərləri)
+     setSelectedBrand(updated);
+}
+
+    // URL-i yuxarıdakı dəyişikliklərdən sonra güncəllə
+    setSearchParams((params) => {
+      if (filterType === "category") {
+        updated.length > 0
+          ? params.set("category", updated.join("-"))
+          : params.delete("category");
+      }
+      if (filterType === "material") {
+        updated.length > 0
+          ? params.set("material", updated.join("-"))
+          : params.delete("material");
+      }
+      if (filterType === "condition") {
+        updated.length > 0
+          ? params.set("condition", updated.join("-"))
+          : params.delete("condition");
+      }
+      if (filterType === "availability") {
+        updated.length > 0
+          ? params.set("availability", updated[0])
+          : params.delete("availability");
+      }
+      if (filterType === "brand") {
+       updated.length > 0
+    ? params.set("brand", updated.join("-"))
+    : params.delete("brand");
+}
+      return params;
+    });
+  };
+
+  useEffect(() => {
+    const categoryFromURL = searchParams.get("category");
+    const materialFromURL = searchParams.get("material");
+    const conditionFromURL = searchParams.get("condition");
+    const availabilityFromURL = searchParams.get("availability");
+    const brandFromURL = searchParams.get("brand");
+     const sortFromURL = searchParams.get("sort");
+
+    if (categoryFromURL) {
+      setSelectedCategory(categoryFromURL.split("-"));
+    }
+
+    if (materialFromURL) {
+      setSelectedMaterial(materialFromURL.split("-"));
+    }
+    if (conditionFromURL) {
+      setSelectedCondition(conditionFromURL.split("-"));
+    }
+    if (availabilityFromURL) {
+      setAvailablityFilter(availabilityFromURL); // yeni hissə
+    }
+    if (brandFromURL) {
+    setSelectedBrand(brandFromURL.split("-"));
+}
+ if (sortFromURL) setSortOption(sortFromURL);
+  }, []);
+const handleBrandChange = (value) => {
+  handleFilterChange({ target: { value, checked: null } }, "brand");
+};
+const handleSortChange = (value) => {
+  setSortOption(value);
+
+  // URL-ə sort-u əlavə et
+  setSearchParams((params) => {
+    if (value) {
+      params.set("sort", value);
+    } else {
+      params.delete("sort");
     }
     return params;
   });
 };
 
 
-useEffect(() => {
-  const categoryFromURL = searchParams.get("category");
-  const materialFromURL = searchParams.get("material");
-
-  if (categoryFromURL) {
-    setSelectedCategory(categoryFromURL.split("-"));
-  }
-
-  if (materialFromURL) {
-    setSelectedMaterial(materialFromURL.split("-"));
-  }
-}, []);
-
-
-// !filterMath------------
+  // !filterMath------------
   const filteredProducts = data.filter((product) => {
     const categoryMatch =
       selectedCategory.length === 0 ||
@@ -155,70 +204,71 @@ useEffect(() => {
       availabilityFilter === null || // yəni istifadəçi heç bir checkbox seçməyibsə
       (availabilityFilter === "available" && product.isStock === true) ||
       (availabilityFilter === "not-available" && product.isStock === false);
-      
-     const materialMatch =
-    selectedMaterial.length === 0 || 
-    selectedMaterial.includes(product.materialKey);
+
+    const materialMatch =
+      selectedMaterial.length === 0 ||
+      selectedMaterial.includes(product.materialKey);
 
     const conditionMatch =
-    selectedCondition.length === 0 ||
-    selectedCondition.includes(product.conditionKey);
+      selectedCondition.length === 0 ||
+      selectedCondition.includes(product.conditionKey);
 
     const brandMatch =
-  selectedBrand.length === 0 || selectedBrand.includes(product.brand);
+      selectedBrand.length === 0 || selectedBrand.includes(product.brand);
 
     //  const brandMatch =
     // selectedBrand.length === 0 ||
     // selectedBrand.includes(product.brand);
-    return categoryMatch && availabilityMatch && materialMatch && conditionMatch && brandMatch;
+    return (
+      categoryMatch &&
+      availabilityMatch &&
+      materialMatch &&
+      conditionMatch &&
+      brandMatch
+    );
   });
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
-  const langKey = currentLang === "az" ? "nameAz" : "nameEn";
+    const langKey = currentLang === "az" ? "nameAz" : "nameEn";
 
-  const getDisplay = (product) => {
-    if (product.small) return product.smallDisPrice || product.smallPrice;
-    if (product.medium) return product.mediumDisPrice || product.mediumPrice;
-    if (product.large) return product.largeDisPrice || product.largePrice;
-    return 0;
-  };
-
-  // ! Sort---------------------
-  switch (sortOption) {
-    case "1":
-      return a[langKey].localeCompare(b[langKey]); // A to Z
-    case "2":
-      return b[langKey].localeCompare(a[langKey]); // Z to A
-    case "3":
-      return getDisplay(a) - getDisplay(b); // Price low to high
-    case "4":
-      return getDisplay(b) - getDisplay(a); // Price high to low
-    case "5":
-      return b.rating - a.rating; // Rating high to low
-    case "6":
-      return a.rating - b.rating; // Rating low to high
-    default:
+    const getDisplay = (product) => {
+      if (product.small) return product.smallDisPrice || product.smallPrice;
+      if (product.medium) return product.mediumDisPrice || product.mediumPrice;
+      if (product.large) return product.largeDisPrice || product.largePrice;
       return 0;
-  }
-});
+    };
 
+    // ! Sort---------------------
+    switch (sortOption) {
+      case "1":
+        return a[langKey].localeCompare(b[langKey]); // A to Z
+      case "2":
+        return b[langKey].localeCompare(a[langKey]); // Z to A
+      case "3":
+        return getDisplay(a) - getDisplay(b); // Price low to high
+      case "4":
+        return getDisplay(b) - getDisplay(a); // Price high to low
+      case "5":
+        return b.rating - a.rating; // Rating high to low
+      case "6":
+        return a.rating - b.rating; // Rating low to high
+      default:
+        return 0;
+    }
+  });
 
   // !pagination---------------------
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9;
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts =  sortedProducts.slice(
+  const currentProducts = sortedProducts.slice(
     indexOfFirstProduct,
     indexOfLastProduct
   );
-  const totalPages = Math.ceil( sortedProducts.length / productsPerPage);
+  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
   // !Select-------------------------
-// const OPTIONS = ['Cartify', 'EcomZone', 'SmartShop', 'StyleHub'];
-//   const filteredOptions = OPTIONS.filter(o => !selectedBrand.includes(o));
-
-
   const [showFilter, setShowFilter] = useState(false);
   useEffect(() => {
     dispatch(fetchProducts());
@@ -308,7 +358,7 @@ useEffect(() => {
               <input
                 type="checkbox"
                 value="dicotyledons"
-                  checked={selectedCategory.includes("dicotyledons")}
+                checked={selectedCategory.includes("dicotyledons")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}> Dicotyledons (18)</p>
@@ -317,7 +367,7 @@ useEffect(() => {
               <input
                 type="checkbox"
                 value="lilies"
-                   checked={selectedCategory.includes("lilies")}
+                checked={selectedCategory.includes("lilies")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}> Lilies (18)</p>
@@ -326,7 +376,7 @@ useEffect(() => {
               <input
                 type="checkbox"
                 value="monocotyledons"
-                 checked={selectedCategory.includes("monocotyledons")}
+                checked={selectedCategory.includes("monocotyledons")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
               <p className={pro.filElement}>Monocotyledons (20)</p>
@@ -336,7 +386,7 @@ useEffect(() => {
                 type="checkbox"
                 value="sugarcanes"
                 onChange={(e) => handleFilterChange(e, "category")}
-                  checked={selectedCategory.includes("sugarcanes")}
+                checked={selectedCategory.includes("sugarcanes")}
               />
               <p className={pro.filElement}>Sugarcanes (18)</p>
             </label>
@@ -348,16 +398,10 @@ useEffect(() => {
             <label className={pro.labell}>
               <input
                 type="checkbox"
-                value="availablity"
+                value="available"
                 name="availablity"
                 checked={availabilityFilter === "available"}
-                onChange={(e) => {
-                  if (availabilityFilter === "available") {
-                    setAvailablityFilter(null); // eyni checkbox ikinci dəfə seçilərsə, sıfırla
-                  } else {
-                    setAvailablityFilter("available");
-                  }
-                }}
+                onChange={(e) => handleFilterChange(e, "availability")}
               />
               <p className={pro.filElement}>{t("filter.avail")}</p>
             </label>
@@ -367,13 +411,7 @@ useEffect(() => {
                 name="availablity"
                 value="not-available"
                 checked={availabilityFilter === "not-available"}
-                onChange={(e) => {
-                  if (availabilityFilter === "not-available") {
-                    setAvailablityFilter(null);
-                  } else {
-                    setAvailablityFilter("not-available");
-                  }
-                }}
+                onChange={(e) => handleFilterChange(e, "availability")}
               />
               <p className={pro.filElement}>{t("filter.notAvail")}</p>
             </label>
@@ -383,21 +421,30 @@ useEffect(() => {
           <p className={pro.catTitle}>Material</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="plastic" 
-               checked={selectedMaterial.includes("plastic")}
-               onChange={(e) => handleFilterChange(e, "material")}/>
+              <input
+                type="checkbox"
+                value="plastic"
+                checked={selectedMaterial.includes("plastic")}
+                onChange={(e) => handleFilterChange(e, "material")}
+              />
               <p className={pro.filElement}>Plastic</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="ceramic" 
-               checked={selectedMaterial.includes("ceramic")}
-               onChange={(e) => handleFilterChange(e, "material")} />
+              <input
+                type="checkbox"
+                value="ceramic"
+                checked={selectedMaterial.includes("ceramic")}
+                onChange={(e) => handleFilterChange(e, "material")}
+              />
               <p className={pro.filElement}>Keramik</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="metal" 
-               checked={selectedMaterial.includes("metal")}
-               onChange={(e) => handleFilterChange(e, "material")} />
+              <input
+                type="checkbox"
+                value="metal"
+                checked={selectedMaterial.includes("metal")}
+                onChange={(e) => handleFilterChange(e, "material")}
+              />
               <p className={pro.filElement}>Metal</p>
             </label>
           </div>
@@ -405,48 +452,50 @@ useEffect(() => {
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Brand</p>
           <div className={pro.selectItem}>
-            {/* <Select
+            <Select
               mode="multiple"
               placeholder="(no filter)"
               value={selectedBrand}
-              onChange={handleBrandChange}
+               onChange={handleBrandChange}
+              // onChange={(value) => setSelectedBrand(value)}
               style={{ width: "95%" }}
               suffixIcon={<FaCaretDown color="black" size={16} />}
               className={pro.customSelect}
-              options={filteredOptions.map((item) => ({
-                value: item,
-                label: item,
+              options={brandOptions.map((brand) => ({
+                value: brand,
+                label: brand,
               }))}
-            /> */}
-    
-              <Select
-  mode="multiple"
-  placeholder="(no filter)"
-  value={selectedBrand}
-  onChange={setSelectedBrand}
-  style={{ width: "95%" }}
-  suffixIcon={<FaCaretDown color="black" size={16} />}
-  className={pro.customSelect}
-  options={filteredBrandOptions.map((brand) => ({
-    value: brand,
-    label: brand,
-}))}
-/>
+            />
           </div>
         </div>
         <div className={pro.filterInput}>
           <p className={pro.catTitle}>Condition</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
-              <input type="checkbox" value="discounted" onChange={handleConditionChange} />
+              <input
+                type="checkbox"
+                value="discounted"
+                checked={selectedCondition.includes("discounted")}
+                onChange={(e) => handleFilterChange(e, "condition")}
+              />
               <p className={pro.filElement}>Discounted</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="new" onChange={handleConditionChange} />
+              <input
+                type="checkbox"
+                value="new"
+                checked={selectedCondition.includes("new")}
+                onChange={(e) => handleFilterChange(e, "condition")}
+              />
               <p className={pro.filElement}>New Product</p>
             </label>
             <label className={pro.labell}>
-              <input type="checkbox" value="popular" onChange={handleConditionChange}/>
+              <input
+                type="checkbox"
+                value="popular"
+                checked={selectedCondition.includes("popular")}
+                onChange={(e) => handleFilterChange(e, "condition")}
+              />
               <p className={pro.filElement}>Popular</p>
             </label>
           </div>
@@ -462,78 +511,25 @@ useEffect(() => {
             </div>
             <div className={pro.intItem}>
               <p className={pro.proDet2}>Sort By:</p>
-              {/* <Select
+              <Select
                 showSearch
+                value={sortOption}
                 style={{ width: 200 }}
-                placeholder="Relevance"
+                placeholder="Name, A to Z"
                 className={pro.customSelectTwice}
                 optionFilterProp="label"
                 suffixIcon={<FaCaretDown color="black" size={16} />}
-                filterSort={(optionA, optionB) => {
-                  var _a, _b;
-                  return (
-                    (_a =
-                      optionA === null || optionA === void 0
-                        ? void 0
-                        : optionA.label) !== null && _a !== void 0
-                      ? _a
-                      : ""
-                  )
-                    .toLowerCase()
-                    .localeCompare(
-                      ((_b =
-                        optionB === null || optionB === void 0
-                          ? void 0
-                          : optionB.label) !== null && _b !== void 0
-                        ? _b
-                        : ""
-                      ).toLowerCase()
-                    );
-                }}
+                // onChange={(value) => setSortOption(value)}
+                 onChange={handleSortChange}
                 options={[
-                  {
-                    value: "1",
-                    label: "Name, A to Z",
-                  },
-                  {
-                    value: "2",
-                    label: "Name, Z to A",
-                  },
-                  {
-                    value: "3",
-                    label: "Price, low to high",
-                  },
-                  {
-                    value: "4",
-                    label: "Price, high to low",
-                  },
-                  {
-                    value: "5",
-                    label: "Rating, high to low",
-                  },
-                  {
-                    value: "6",
-                    label: "Rating, low to high",
-                  },
+                  { value: "1", label: "Name, A to Z" },
+                  { value: "2", label: "Name, Z to A" },
+                  { value: "3", label: "Price, low to high" },
+                  { value: "4", label: "Price, high to low" },
+                  { value: "5", label: "Rating, high to low" },
+                  { value: "6", label: "Rating, low to high" },
                 ]}
-              /> */}
-              <Select
-  showSearch
-  style={{ width: 200 }}
-  placeholder="Name, A to Z"
-  className={pro.customSelectTwice}
-  optionFilterProp="label"
-  suffixIcon={<FaCaretDown color="black" size={16} />}
-  onChange={(value) => setSortOption(value)}
-  options={[
-    { value: "1", label: "Name, A to Z" },
-    { value: "2", label: "Name, Z to A" },
-    { value: "3", label: "Price, low to high" },
-    { value: "4", label: "Price, high to low" },
-    { value: "5", label: "Rating, high to low" },
-    { value: "6", label: "Rating, low to high" },
-  ]}
-/>
+              />
 
               <button
                 className={pro.filterToggleBtn}
