@@ -125,6 +125,60 @@
     padding: 18px;
     gap: 15px;
 }
+
+.outOfStock {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay — sadəcə boz şəffaflıq */
+.stockOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(254, 255, 255, 0.8);
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.08s ease-in;
+}
+.proCard:hover .stockOverlay{
+ 
+  opacity: 1;
+}
+/* Coming Soon yazısı */
+.comingSoon {
+  position: absolute;
+  top: 120px;
+  left: 52%;
+  display: none;
+  transform: translateX(-50%);
+  color: rgb(87, 87, 87);
+  /* color: rgb(109, 109, 109); */
+  /* color: red; */
+  color: rgb(3, 110, 3);
+  font-size: 21px;
+  transition: all 0.05s ease;
+  opacity: 0;
+  width: 170px;
+  z-index: 2;
+  text-align: center;
+  transition: all 0.2s ease-in;
+  font-weight: 600;
+  pointer-events: none;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Hover zamanı yazı aşağı düşür */
+.outOfStock:hover .comingSoon {
+display: flex;
+  opacity: 1;
+}
+
+
+
+
 .inf{
     display: flex;
     flex-direction: column;
@@ -393,5 +447,8 @@
 @media(max-width:430px){
   .proDet2{
     display: none;
+  }
+  .comingSoon{
+    width: 150px;
   }
 }

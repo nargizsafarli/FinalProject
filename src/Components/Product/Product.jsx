@@ -38,65 +38,65 @@ function Product() {
   const [searchParams, setSearchParams] = useSearchParams();
   const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
 
-//   const selectedFilters = [
-//   ...selectedCategory.map((item) => ({ type: "category", value: item })),
-//   ...selectedMaterial.map((item) => ({ type: "material", value: item })),
-//   ...selectedCondition.map((item) => ({ type: "condition", value: item })),
-//   ...(availabilityFilter ? [{ type: "availability", value: availabilityFilter }] : []),
-//   ...selectedBrand.map((item) => ({ type: "brand", value: item })),
-// ];
+  //   const selectedFilters = [
+  //   ...selectedCategory.map((item) => ({ type: "category", value: item })),
+  //   ...selectedMaterial.map((item) => ({ type: "material", value: item })),
+  //   ...selectedCondition.map((item) => ({ type: "condition", value: item })),
+  //   ...(availabilityFilter ? [{ type: "availability", value: availabilityFilter }] : []),
+  //   ...selectedBrand.map((item) => ({ type: "brand", value: item })),
+  // ];
 
-// const removeFilter = (filterType, value) => {
-//   switch (filterType) {
-//     case "category":
-//       setSelectedCategory((prev) => prev.filter((item) => item !== value));
-//       break;
-//     case "material":
-//       setSelectedMaterial((prev) => prev.filter((item) => item !== value));
-//       break;
-//     case "condition":
-//       setSelectedCondition((prev) => prev.filter((item) => item !== value));
-//       break;
-//     case "availability":
-//       setAvailablityFilter(null);
-//       break;
-//     case "brand":
-//       setSelectedBrand((prev) => prev.filter((item) => item !== value));
-//       break;
-//   }
+  // const removeFilter = (filterType, value) => {
+  //   switch (filterType) {
+  //     case "category":
+  //       setSelectedCategory((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     case "material":
+  //       setSelectedMaterial((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     case "condition":
+  //       setSelectedCondition((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //     case "availability":
+  //       setAvailablityFilter(null);
+  //       break;
+  //     case "brand":
+  //       setSelectedBrand((prev) => prev.filter((item) => item !== value));
+  //       break;
+  //   }
 
-//   // URL-dən də sil
-//   setSearchParams((params) => {
-//     const updated = selectedFilters.filter(
-//       (f) => !(f.type === filterType && f.value === value)
-//     );
+  //   // URL-dən də sil
+  //   setSearchParams((params) => {
+  //     const updated = selectedFilters.filter(
+  //       (f) => !(f.type === filterType && f.value === value)
+  //     );
 
-//     const grouped = updated.reduce((acc, f) => {
-//       acc[f.type] = acc[f.type] ? [...acc[f.type], f.value] : [f.value];
-//       return acc;
-//     }, {});
+  //     const grouped = updated.reduce((acc, f) => {
+  //       acc[f.type] = acc[f.type] ? [...acc[f.type], f.value] : [f.value];
+  //       return acc;
+  //     }, {});
 
-//     // param-ları yenilə
-//     ["category", "material", "condition", "availability", "brand"].forEach((key) => {
-//       if (grouped[key]) {
-//         params.set(key, grouped[key].join("-"));
-//       } else {
-//         params.delete(key);
-//       }
-//     });
+  //     // param-ları yenilə
+  //     ["category", "material", "condition", "availability", "brand"].forEach((key) => {
+  //       if (grouped[key]) {
+  //         params.set(key, grouped[key].join("-"));
+  //       } else {
+  //         params.delete(key);
+  //       }
+  //     });
 
-//     return params;
-//   });
-// };
+  //     return params;
+  //   });
+  // };
 
-// const clearAllFilters = () => {
-//   setSelectedCategory([]);
-//   setSelectedMaterial([]);
-//   setSelectedCondition([]);
-//   setSelectedBrand([]);
-//   setAvailablityFilter(null);
-//   setSearchParams({});
-// };
+  // const clearAllFilters = () => {
+  //   setSelectedCategory([]);
+  //   setSelectedMaterial([]);
+  //   setSelectedCondition([]);
+  //   setSelectedBrand([]);
+  //   setAvailablityFilter(null);
+  //   setSearchParams({});
+  // };
 
   // !Filter and url
   // const handleFilterChange = (e, filterType) => {
@@ -173,9 +173,9 @@ function Product() {
       updated = newValue ? [newValue] : [];
     }
     if (filterType === "brand") {
-     updated = value; // value bir array olacaq (Select-in multiple dəyərləri)
-     setSelectedBrand(updated);
-}
+      updated = value; // value bir array olacaq (Select-in multiple dəyərləri)
+      setSelectedBrand(updated);
+    }
 
     // URL-i yuxarıdakı dəyişikliklərdən sonra güncəllə
     setSearchParams((params) => {
@@ -200,10 +200,10 @@ function Product() {
           : params.delete("availability");
       }
       if (filterType === "brand") {
-       updated.length > 0
-    ? params.set("brand", updated.join("-"))
-    : params.delete("brand");
-}
+        updated.length > 0
+          ? params.set("brand", updated.join("-"))
+          : params.delete("brand");
+      }
       return params;
     });
   };
@@ -214,7 +214,7 @@ function Product() {
     const conditionFromURL = searchParams.get("condition");
     const availabilityFromURL = searchParams.get("availability");
     const brandFromURL = searchParams.get("brand");
-     const sortFromURL = searchParams.get("sort");
+    const sortFromURL = searchParams.get("sort");
 
     if (categoryFromURL) {
       setSelectedCategory(categoryFromURL.split("-"));
@@ -230,27 +230,26 @@ function Product() {
       setAvailablityFilter(availabilityFromURL); // yeni hissə
     }
     if (brandFromURL) {
-    setSelectedBrand(brandFromURL.split("-"));
-}
- if (sortFromURL) setSortOption(sortFromURL);
-  }, []);
-const handleBrandChange = (value) => {
-  handleFilterChange({ target: { value, checked: null } }, "brand");
-};
-const handleSortChange = (value) => {
-  setSortOption(value);
-
-  // URL-ə sort-u əlavə et
-  setSearchParams((params) => {
-    if (value) {
-      params.set("sort", value);
-    } else {
-      params.delete("sort");
+      setSelectedBrand(brandFromURL.split("-"));
     }
-    return params;
-  });
-};
+    if (sortFromURL) setSortOption(sortFromURL);
+  }, []);
+  const handleBrandChange = (value) => {
+    handleFilterChange({ target: { value, checked: null } }, "brand");
+  };
+  const handleSortChange = (value) => {
+    setSortOption(value);
 
+    // URL-ə sort-u əlavə et
+    setSearchParams((params) => {
+      if (value) {
+        params.set("sort", value);
+      } else {
+        params.delete("sort");
+      }
+      return params;
+    });
+  };
 
   // !filterMath------------
   const filteredProducts = data.filter((product) => {
@@ -355,7 +354,7 @@ const handleSortChange = (value) => {
       };
     }
     return {
-      price: null,
+      price: "not avail",
       discount: null,
     };
   };
@@ -420,7 +419,6 @@ const handleSortChange = (value) => {
     </button>
   </div>
 )} */}
-
 
       <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
         <div className={pro.filterBy}>
@@ -534,7 +532,7 @@ const handleSortChange = (value) => {
               mode="multiple"
               placeholder="(no filter)"
               value={selectedBrand}
-               onChange={handleBrandChange}
+              onChange={handleBrandChange}
               // onChange={(value) => setSelectedBrand(value)}
               style={{ width: "95%" }}
               suffixIcon={<FaCaretDown color="black" size={16} />}
@@ -598,7 +596,7 @@ const handleSortChange = (value) => {
                 optionFilterProp="label"
                 suffixIcon={<FaCaretDown color="black" size={16} />}
                 // onChange={(value) => setSortOption(value)}
-                 onChange={handleSortChange}
+                onChange={handleSortChange}
                 options={[
                   { value: "1", label: "Name, A to Z" },
                   { value: "2", label: "Name, Z to A" },
@@ -623,18 +621,32 @@ const handleSortChange = (value) => {
           {currentProducts.map((product) => {
             const { price, discount } = getDisplayPrice(product);
             return (
-              <div key={product.id} className={pro.proCard}>
-                <div className={pro.cardOverlay}>
-                  <div className={pro.overIcon}>
-                    <FontAwesomeIcon icon={faHeart} />
+              <div
+                key={product.id}
+                className={`${pro.proCard} ${
+                  !product.isStock ? pro.outOfStock : ""
+                }`}
+              >
+                {!product.isStock && (
+                  <>
+                    <div className={pro.stockOverlay}></div>
+                    <div className={pro.comingSoon}>Coming Soon...</div>
+                  </>
+                )}
+
+                {product.isStock && (
+                  <div className={pro.cardOverlay}>
+                    <div className={pro.overIcon}>
+                      <FontAwesomeIcon icon={faHeart} />
+                    </div>
+                    <div className={pro.overIcon}>
+                      <img src={basket} className={pro.overImg} />
+                    </div>
+                    <div className={pro.overIcon}>
+                      <img src={det} className={pro.overImg} />
+                    </div>
                   </div>
-                  <div className={pro.overIcon}>
-                    <img src={basket} className={pro.overImg} />
-                  </div>
-                  <div className={pro.overIcon}>
-                    <img src={det} className={pro.overImg} />
-                  </div>
-                </div>
+                )}
                 <div className={pro.cardImg}>
                   <img
                     src={product.img}
