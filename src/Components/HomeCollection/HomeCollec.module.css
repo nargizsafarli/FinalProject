@@ -43,13 +43,16 @@
     z-index: 1;
   }
   .content h2{
-    font-weight: 700;
-    font-size: 35px;
+    font-weight: 500;
+    font-size: 30px;
      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
      
   }
   .content p{
-    font-size: 20px;
+    font-size: 15px;
+    color: rgb(2, 56, 2);
+      font-family: 'Libre Baskerville', serif;
+
   }
   
   /* .button {
