@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../Shared/Navbar/Navbar'
 import DetailSec from '../Components/Detail/DetailSec'
 
-function AboutPage() {
+function DetailPage() {
   return (
     <div>
         <Navbar/>
@@ -11,4 +11,4 @@ function AboutPage() {
   )
 }
 
-export default AboutPage
+export default DetailPage

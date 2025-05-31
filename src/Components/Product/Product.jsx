@@ -21,7 +21,8 @@ import det from "./assets/download (5).svg";
 import basket from "./assets/download (6).svg";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18next";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import i18next from "i18next";
 
 function Product() {
   const { t } = useTranslation();
@@ -37,6 +38,7 @@ function Product() {
   const [sortOption, setSortOption] = useState("1");
   const [searchParams, setSearchParams] = useSearchParams();
   const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
+  const navigate=useNavigate()
 
   //   const selectedFilters = [
   //   ...selectedCategory.map((item) => ({ type: "category", value: item })),
@@ -639,7 +641,9 @@ function Product() {
                     <div className={pro.overIcon}>
                       <FontAwesomeIcon icon={faHeart} />
                     </div>
-                    <div className={pro.overIcon}>
+                    <div className={pro.overIcon}
+                     onClick={() => navigate(`/${currentLang}/shop/${product.id}`)}
+                    >
                       <img src={basket} className={pro.overImg} />
                     </div>
                     <div className={pro.overIcon}>
@@ -651,7 +655,12 @@ function Product() {
                   <img
                     src={product.img}
                     alt={product.nameEn}
-                    className={pro.images}
+                    className={`${pro.images} ${pro.mainImg}`}
+                  />
+                  <img
+                    src={product.thumnailImg}
+                    alt={product.nameEn}
+                    className={`${pro.images} ${pro.hoverImg}`}
                   />
                 </div>
                 <div className={pro.cardBody}>

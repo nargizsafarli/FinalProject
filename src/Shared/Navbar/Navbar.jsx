@@ -52,6 +52,7 @@ function Navbar() {
             <NavLink
               // to="/shop"
                to={`/${currentLang}/shop`}
+                end
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -61,6 +62,7 @@ function Navbar() {
             <NavLink
               // to="/about"
                to={`/${currentLang}/about`}
+              
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -80,7 +82,7 @@ function Navbar() {
             <div className={nav.pagesWrapper}>
               <NavLink className={nav.linkItem}>
                 <div className={nav.opens}>
-                  {t("navbar.about")} <IoIosArrowUp className={nav.arrowIcon} />
+                  {t("navbar.pages")} <IoIosArrowUp className={nav.arrowIcon} />
                 </div>
                 <div className={nav.openDesktopPage}>
                   <div className={nav.pag}>{t("pages.faq")}</div>

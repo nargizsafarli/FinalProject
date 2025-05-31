@@ -7,6 +7,7 @@
  import ScrollTop from './Shared/components/ScrollTop/ScrollTop'
 import i18n from './i18n/i18next'
 import Navbar from './Shared/Navbar/Navbar'
+import DetailPage from './Pages/DetailPage'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/:lang/shop" element={<ShopPage />} />
           <Route path="/:lang/about" element={<AboutPage />} />
           <Route path="/:lang/contact" element={<ContactPage />} />
+          <Route path="/:lang/shop/:id" element={<DetailPage/>}/>
           {/* Əgər uyğun route tapılmasa, savedLang-a yönləndir */}
           <Route path="*" element={<Navigate to={`/${savedLang}`} replace />} />
         </Routes>
