@@ -251,10 +251,10 @@
   position: absolute;
   top: 50%;
   left: 5%;
-  width: 90%;
+  width: 95%;
   height: 1px;
   background-color: #999;
-  transform: rotate(-10deg);
+  transform: rotate(-50deg);
 }
 .priceBox {
   font-size: 25px;
