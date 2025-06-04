@@ -10,10 +10,13 @@ import { LuChartNoAxesColumn } from "react-icons/lu";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPinterestP } from "react-icons/fa";
-import paymentCard from "./assets/trust_badge.png"
-import det from "./Detail.module.css"
+import paymentCard from "./assets/trust_badge.png";
+import det from "./Detail.module.css";
+import { useTranslation } from "react-i18next";
 function DetailSec() {
   const { id } = useParams();
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language === "az" ? "Az" : "En";
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
   // useEffect ilə data-nı refresh olanda da gətir
@@ -23,93 +26,158 @@ function DetailSec() {
     }
   }, [dispatch, data.length]);
 
-const product = data.find((item) => item.id === Number(id));
+  const product = data.find((item) => item.id === Number(id));
 
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageGallery, setImageGallery] = useState([]);
+  const [selectedSize, setSelectedSize] = useState("");
+  useEffect(() => {
+    if (product) {
+      setSelectedImage(product.img);
+      setImageGallery([product.thumnailImg, product.img]);
+    }
+  }, [product]);
 
+  useEffect(() => {
+    if (product) {
+      if (product.small) {
+        setSelectedSize("small");
+      } else if (product.medium) {
+        setSelectedSize("medium");
+      } else if (product.large) {
+        setSelectedSize("large");
+      }
+    }
+  }, [product]);
 
-const [selectedImage, setSelectedImage] = useState("");
-const [imageGallery, setImageGallery] = useState([]);
-useEffect(() => {
-  if (product) {
-    setSelectedImage(product.img);
-    setImageGallery([product.thumnailImg, product.img]); // "thumbnail" yazılıbsa Supabase-də
-  }
-}, [product]);
+  const getPrice = () => {
+    switch (selectedSize) {
+      case "small":
+        return { price: product.smallPrice, discount: product.smallDisPrice };
+      case "medium":
+        return { price: product.mediumPrice, discount: product.mediumDisPrice };
+      case "large":
+        return { price: product.largePrice, discount: product.largeDisPrice };
+      default:
+        return { price: null, discount: null };
+    }
+  };
 
-if (loading) return <p>Yüklənir...</p>;
-if (error) return <p>Xəta baş verdi</p>;
-if (!product) return <p>Məhsul tapılmadı</p>; // HOOK-lardan qabaq çıx!
+  if (loading) return <p>Yüklənir...</p>;
+  if (error) return <p>Xəta baş verdi</p>;
+  if (!product) return <p>Məhsul tapılmadı</p>;
 
   return (
     <div className={det.container}>
-      {/* <div className={det.img}>
-        <img src={product.img}/>
-      </div> */}
-      {/* <div className={det.gallery}>
-  {imageGallery.map((img, index) => (
-    <img
-      key={index}
-      src={img}
-      alt={`img-${index}`}
-      onClick={() => setSelectedImage(img)}
-      className={`${det.thumb} ${selectedImage === img ? det.active : ""}`}
-    />
-  ))}
-</div> */}
-<div className={det.imageSection}>
-  <div className={det.gallery}>
-    {imageGallery.map((img, index) => (
-      <img
-        key={index}
-        src={img}
-        alt={`img-${index}`}
-        onClick={() => setSelectedImage(img)}
-        className={`${det.thumb} ${selectedImage === img ? det.active : ""}`}
-      />
-    ))}
-  </div>
-  <div className={det.img}>
-    {selectedImage && (
-      <Zoom>
-        <img src={selectedImage} alt="Selected" />
-      </Zoom>
-    )}
-  </div>
-</div>
-
-<div className={det.img}>
-{selectedImage && (
-  <Zoom>
-    <img src={selectedImage} alt="Selected" />
-  </Zoom>
-)}
-</div>
-      <div className={det.DetailCon}>
-        <h2>Name:{product.nameEn}</h2>
-        <p>Description:{product.descriptionEn}</p> 
-        <hr />
-        <div className={det.info}>
-        <p>Rating:{product.rating}</p>
-        <p>Material:{product.materialEn}</p>
-        <p>Condition:{product.conditionEn}</p>
-         <p>Size:</p>
-         <p>Est. Delivery Time 2-3 Days</p>
+      <div className={det.leftSide}>
+        <div className={det.gallery}>
+          {imageGallery.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`img-${index}`}
+              onClick={() => setSelectedImage(img)}
+              className={`${det.thumb} ${
+                selectedImage === img ? det.active : ""
+              }`}
+            />
+          ))}
         </div>
-         <button className={det.button}>ADD TO CARD</button>
-        <div className={det.infItem}>
-         <div className={det.icon}>
-          <div><FontAwesomeIcon icon={faHeart} />Add To Wishlist</div>
-          <div><LuChartNoAxesColumn />Add to Compare List</div>
-          </div> 
-          <div>In Stock</div>
-          <div className={det.social}>
-            <div><FaFacebookF /></div>
-            <div><FaXTwitter /></div>
-            <div><FaPinterestP /></div>
+        <div className={det.mainImage}>
+          {selectedImage && (
+            <Zoom>
+              <img src={selectedImage} alt="Selected" />
+            </Zoom>
+          )}
+        </div>
+      </div>
+
+      <div className={det.DetailCon}>
+        <h2 className={det.name}>{product[`name${lang}`]}</h2>
+        <p  className={det.des}>{product[`description${lang}`]}</p>
+        <hr className={det.customHr}/>
+        <div className={det.info}>
+          <p className={det.inf}>Rating: <span className={det.iftIt}>{product.rating}</span></p>
+          <p className={det.inf}>Material: <span className={det.iftIt}>{product[`material${lang}`]}</span></p>
+          <p className={det.inf}>Condition: <span className={det.iftIt}>{product[`condition${lang}`]}</span></p>
+
+          <div className={det.sizeBox}>
+            <span className={det.inf}>Size:</span>
+
+            <div
+              className={`
+      ${det.sizeOption} 
+      ${selectedSize === "small" ? det.activeSize : ""} 
+      ${!product.small ? det.disabled : ""}
+    `}
+              onClick={() => product.small && setSelectedSize("small")}
+            >
+              S
+            </div>
+
+            <div
+              className={`
+      ${det.sizeOption} 
+      ${selectedSize === "medium" ? det.activeSize : ""} 
+      ${!product.medium ? det.disabled : ""}
+    `}
+              onClick={() => product.medium && setSelectedSize("medium")}
+            >
+              M
+            </div>
+
+            <div
+              className={`
+      ${det.sizeOption} 
+      ${selectedSize === "large" ? det.activeSize : ""} 
+      ${!product.large ? det.disabled : ""}
+    `}
+              onClick={() => product.large && setSelectedSize("large")}
+            >
+              L
+            </div>
           </div>
-          <div>
+
+          {/* priceee */}
+          <div className={det.priceBox}>
+            {getPrice().discount ? (
+              <>
+                <span className={det.oldPrice}>${getPrice().price}</span>
+                <span className={det.newPrice}>${getPrice().discount}</span>
+              </>
+            ) : (
+              <span className={det.newPrice}>${getPrice().price}</span>
+            )}
+          </div>
+          <p className={det.delivery}>Est. Delivery Time 2-3 Days</p>
+        </div>
+        <button className={det.button}>ADD TO CARD</button>
+        <div className={det.infItem}>
+          <div className={det.icon}>
+            <div className={det.ic}>
+              <FontAwesomeIcon icon={faHeart} />
+              Add To Wishlist
+            </div>
+            <div className={det.ic}>
+              <LuChartNoAxesColumn />
+              Add to Compare List
+            </div>
+          </div>
+          <div className={det.instock}>In Stock</div>
+          <div className={det.social}>
+            <div className={`${det.socIcon} ${det.hoverSoc}`}>
+              <FaFacebookF />
+            </div>
+            <div className={`${det.socIcon} ${det.hoverSocTwo}`}>
+              <FaXTwitter />
+            </div>
+            <div className={`${det.socIcon} ${det.hoverSocSec}`}>
+              <FaPinterestP />
+            </div>
+          </div>
+          <div className={det.card}>
             <p>Guarantee Safe Checkout</p>
-            <img src={paymentCard}/>
+            <img src={paymentCard} />
           </div>
         </div>
       </div>

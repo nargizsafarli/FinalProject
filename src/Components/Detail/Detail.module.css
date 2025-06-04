@@ -1,30 +1,278 @@
-.imageSection {
+ .container {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 30px;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.leftSide {
+  display: flex;
+  gap: 15px;
+  align-self: self-start;
 }
 
 .gallery {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 10px;
 }
 
 .thumb {
-  width: 70px;
-  height: 70px;
+  width: 105px;
+  height: 120px;
   object-fit: cover;
-  cursor: pointer;
   border: 2px solid transparent;
-  transition: border 0.2s ease;
+  cursor: pointer;
+  transition: border 0.3s ease;
 }
 
-.active {
-  border: 2px solid #007bff;
+.thumb.active {
+  border: 1px solid green;
 }
 
-.img img {
-  width: 400px;
-  height: auto;
+.mainImage img {
+  width: 440px;
+  height: 520px;
   object-fit: cover;
-  border-radius: 8px;
+}
+
+.DetailCon {
+  flex: 1;
+  max-width: 500px;
+}
+.name{
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 500;
+  font-size: 28px;
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.des{
+     font-size: 16px;
+     font-weight: 500;
+     color: rgb(158, 158, 158);
+}
+.inf{
+   font-size: 16px;
+    font-weight: 500;
+     color: rgb(95, 95, 95);
+}
+.iftIt{
+   color: rgb(158, 158, 158);
+}
+.DetailCon{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.price {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.price del {
+  color: grey;
+  margin-right: 10px;
+}
+
+.price span {
+  font-weight: bold;
+  color: green;
+}
+
+.discount {
+  color: red;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.button {
+  width: 230px;
+  padding:17px;
+  font-weight: bold;
+  background-color: green;
+  color: rgb(252, 250, 250);
+  border: none;
+  cursor: pointer;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+   transition: all 0.3s ease-in;
+}
+.button:hover{
+  background-color: black;
+}
+.infItem{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+.ic{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 16px;
+  font-weight: 500;
+   color: rgb(56, 55, 55);
+}
+.icon {
+  display: flex;
+  gap: 15px;
+}
+
+.stock {
+  font-weight: bold;
+  color: green;
+}
+.instock{
+  width: 100px;
+  display: flex;
+  padding: 3px;
+  font-weight: 500;
+  color: #4cbb6c;
+  /* background-color: #4cbb6c; */
+  background-color: rgb(229, 248, 229);
+  align-items: center;
+  justify-content: center;
+  border: solid 1px rgb(42, 158, 42);
+}
+
+.social {
+  display: flex;
+  gap: 10px;
+}
+.socIcon{
+  width: 60px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px black;
+  transition: all 0.3s ease;
+}
+.hoverSoc:hover{
+ background-color: rgb(82, 82, 192);
+ color: white;
+}
+.hoverSocTwo:hover{
+ background-color: black;
+ color: white;
+}
+.hoverSocSec:hover{
+ background-color: rgb(206, 8, 8);
+ color: white;
+}
+.checkout img {
+  margin-top: 10px;
+  width: 180px;
+}
+
+ /* price Chat */
+.sizeBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 10px;
+  gap: 13px;  
+}
+.card p{
+  font-family:'Libre Baskerville', serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: rgb(41, 41, 41);
+  position: relative;
+}
+.card p::before{
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: -147px;
+  width: 60%;
+  height: 1px;
+  background-color: rgb(228, 226, 226);
+}
+.card p::after{
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: -147px;
+  width: 60%;
+  height: 1px;
+  background-color: rgb(228, 226, 226);
+}
+.customHr{
+  background-color: rgb(228, 226, 226);
+  height: 1px;
+   border: none;
+}
+.sizeOption {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  background-color: white;
+  position: relative;
+}
+
+.activeSize {
+  border: 2px solid green;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+  position: relative;
+}
+
+.disabled::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  width: 90%;
+  height: 1px;
+  background-color: #999;
+  transform: rotate(-10deg);
+}
+.priceBox {
+  font-size: 25px;
+}
+.delivery{
+  margin-top: -9px;
+  font-size: 16px;
+  font-weight: 500;
+   color: rgb(139, 139, 139);
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: gray;
+  margin-right: 10px;
+}
+
+.newPrice {
+  font-weight: 500;
+  color:#2a7d2e
 }
