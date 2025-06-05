@@ -1,0 +1,41 @@
+.wishlistWrapper {
+  padding: 30px;
+  margin-top: 80px;
+}
+
+.productsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  padding: 10px;
+}
+
+.imgWrapper {
+  position: relative;
+}
+
+.imgWrapper img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.deleteIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: red;
+  cursor: pointer;
+}
+
+.productInfo {
+  margin-top: 10px;
+  text-align: center;
+}

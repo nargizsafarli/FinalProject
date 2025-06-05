@@ -103,7 +103,9 @@ function Navbar() {
               <p>{t("pages.login")}</p>
             </div>
           </div>
-          <FontAwesomeIcon icon={faHeart} />
+          <FontAwesomeIcon icon={faHeart} 
+            onClick={()=>navigate(`/${currentLang}/wishlist`)}
+          />
           <BiBasket
             //  onClick={()=>navigate(`/${currentLang}/basket`)}
             onClick={() => setIsBasketOpen(true)}

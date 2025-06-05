@@ -9,6 +9,7 @@ import i18n from './i18n/i18next'
 import Navbar from './Shared/Navbar/Navbar'
 import DetailPage from './Pages/DetailPage'
 import BasketPage from './Pages/BasketPage'
+import WishlistPage from './Pages/WishlistPage'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -42,6 +43,7 @@ const App = () => {
           <Route path="/:lang/contact" element={<ContactPage />} />
           <Route path="/:lang/shop/:id" element={<DetailPage/>}/>
           <Route path='/:lang/basket' element={<BasketPage/>}/>
+          <Route path='/:lang/wishlist' element={<WishlistPage/>}/>
           {/* Əgər uyğun route tapılmasa, savedLang-a yönləndir */}
           <Route path="*" element={<Navigate to={`/${savedLang}`} replace />} />
         </Routes>

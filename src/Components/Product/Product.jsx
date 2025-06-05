@@ -24,6 +24,7 @@ import i18n from "../../i18n/i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import i18next from "i18next";
 import ModalProduct from "../ModalProduct/ModalProduct";
+import { addToWishlist} from "../../redux/features/auth/wishlistSlice";
 
 function Product() {
   const { t } = useTranslation();
@@ -622,7 +623,9 @@ function Product() {
 
                 {product.isStock && (
                   <div className={pro.cardOverlay}>
-                    <div className={pro.overIcon}>
+                    <div className={pro.overIcon}
+                     onClick={() => dispatch(addToWishlist(product))}
+                    >
                       <FontAwesomeIcon icon={faHeart} />
                     </div>
                     <div
