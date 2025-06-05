@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import nav from "./Navbar.module.css";
 import logo from "./assets/logo (1).png";
 import { FaRegUser } from "react-icons/fa6";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { BiBasket } from "react-icons/bi";
 import { FaTimes } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
@@ -14,10 +14,13 @@ import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import ChangeLang from "../../Components/ChangeLang/ChangeLang";
 import i18n from "../../i18n/i18next";
+import BasketOverlay from "../../Components/BasketOverlay/BasketOverlay";
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
+  const [isBasketOpen, setIsBasketOpen] = useState(false);
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const currentLang = i18n.language;
   return (
     <div className={nav.mainContainer}>
@@ -40,9 +43,9 @@ function Navbar() {
         <div className={nav.desktop}>
           <div className={nav.link}>
             <NavLink
-            // to="/"
+              // to="/"
               to={`/${currentLang}`}
-               end
+              end
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -51,8 +54,8 @@ function Navbar() {
             </NavLink>
             <NavLink
               // to="/shop"
-               to={`/${currentLang}/shop`}
-                end
+              to={`/${currentLang}/shop`}
+              end
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -61,18 +64,16 @@ function Navbar() {
             </NavLink>
             <NavLink
               // to="/about"
-               to={`/${currentLang}/about`}
-              
+              to={`/${currentLang}/about`}
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
             >
               {t("navbar.about")}
-               
             </NavLink>
             <NavLink
               // to="/contact"
-               to={`/${currentLang}/contact`}
+              to={`/${currentLang}/contact`}
               className={({ isActive }) =>
                 `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
               }
@@ -103,7 +104,15 @@ function Navbar() {
             </div>
           </div>
           <FontAwesomeIcon icon={faHeart} />
-          <BiBasket />
+          <BiBasket
+            //  onClick={()=>navigate(`/${currentLang}/basket`)}
+            onClick={() => setIsBasketOpen(true)}
+          />
+          <BasketOverlay
+            isOpen={isBasketOpen}
+            onClose={() => setIsBasketOpen(false)}
+            currentLang={currentLang}
+          />
           <FontAwesomeIcon icon={faCircleHalfStroke} />
         </div>
       </div>
@@ -130,7 +139,7 @@ function Navbar() {
               </NavLink>
               <NavLink
                 // to="/shop"
-                  to={`/${currentLang}/shop`}
+                to={`/${currentLang}/shop`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -139,7 +148,7 @@ function Navbar() {
               </NavLink>
               <NavLink
                 // to="/about"
-                  to={`/${currentLang}/about`}
+                to={`/${currentLang}/about`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -148,7 +157,7 @@ function Navbar() {
               </NavLink>
               <NavLink
                 // to="/contact"
-                  to={`/${currentLang}/contact`}
+                to={`/${currentLang}/contact`}
                 className={({ isActive }) =>
                   `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
                 }
@@ -168,9 +177,8 @@ function Navbar() {
                   </div>
                 )}
               </NavLink>
-              <ChangeLang/>
+              <ChangeLang />
             </div>
-            
           </div>
         )}
       </div>

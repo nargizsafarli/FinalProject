@@ -23,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import i18next from "i18next";
+import ModalProduct from "../ModalProduct/ModalProduct";
 
 function Product() {
   const { t } = useTranslation();
@@ -38,7 +39,9 @@ function Product() {
   const [sortOption, setSortOption] = useState("1");
   const [searchParams, setSearchParams] = useSearchParams();
   const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
-  const navigate=useNavigate()
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   //   const selectedFilters = [
   //   ...selectedCategory.map((item) => ({ type: "category", value: item })),
@@ -402,25 +405,6 @@ function Product() {
         className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
         onClick={() => setShowFilter(false)}
       ></div>
-      {/* {selectedFilters.length > 0 && (
-  <div className={pro.selectedTagsWrapper}>
-    {selectedFilters.map((filter, idx) => (
-      <div key={idx} className={pro.tag}>
-        {filter.value}
-          
-        <button
-          className={pro.removeBtn}
-          onClick={() => removeFilter(filter.type, filter.value)}
-        >
-          ✕
-        </button>
-      </div>
-    ))}
-    <button className={pro.clearAllBtn} onClick={clearAllFilters}>
-      Clear All
-    </button>
-  </div>
-)} */}
 
       <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
         <div className={pro.filterBy}>
@@ -641,16 +625,31 @@ function Product() {
                     <div className={pro.overIcon}>
                       <FontAwesomeIcon icon={faHeart} />
                     </div>
-                    <div className={pro.overIcon}
-                     onClick={() => navigate(`/${currentLang}/shop/${product.id}`)}
+                    <div
+                      className={pro.overIcon}
+                      onClick={() =>
+                        navigate(`/${currentLang}/shop/${product.id}`)
+                      }
                     >
                       <img src={basket} className={pro.overImg} />
                     </div>
-                    <div className={pro.overIcon}>
+                    <div
+                      className={pro.overIcon}
+                      onClick={() => {
+                        setSelectedProduct(product);
+                        setIsModalOpen(true);
+                      }}
+                    >
                       <img src={det} className={pro.overImg} />
                     </div>
                   </div>
                 )}
+                <ModalProduct
+                  isOpen={isModalOpen}
+                  onClose={() => setIsModalOpen(false)}
+                  // product={product}
+                  product={selectedProduct}
+                />
                 <div className={pro.cardImg}>
                   <img
                     src={product.img}
