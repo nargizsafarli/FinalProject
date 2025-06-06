@@ -14,13 +14,16 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
     dispatch(calculateTotal());
   }, [basketItems, dispatch]);
 
-  if (!isOpen) return null;
+
 
   return (
     <>
-      <div className={basket.overlay} onClick={onClose}></div>
-      <div className={basket.basketSidebar}>
-        <h2>Səbət</h2>
+      <div   className={`${basket.overlay} ${isOpen ? basket.overlayOpen : ""}`} onClick={onClose}></div>
+      <div  className={`${basket.basketSidebar} ${
+    isOpen ? basket.basketSidebarOpen : ""
+  }`}>
+        <h2 className={basket.text}>Shopping Cart</h2>
+        <hr className={basket.hrr}/>
 
         <div className={basket.basketItemsWrapper}>
           {basketItems.length === 0 ? (
@@ -38,36 +41,42 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
               }
 
               return (
-                <div key={item.id + item.size} className={basket.basketItem}>
+                <div key={item.id} className={basket.basketItem}>
+                <div className={basket.card}>
                   <img src={item.product.img} alt={item.product.name} />
-                  <div>
-                    <p>{item.product.name}</p>
-                    <p>Ölçü: {item.size}</p>
-                    <p>Miqdar: {item.quantity}</p>
-                    <p>
-                      Qiymət: {price} $ × {item.quantity} ={" "}
-                      <strong>{price * item.quantity} $</strong>
+                  <div className={basket.cardBody}>
+                    <p className={basket.name}>{item.product.nameEn}</p>
+                    <p className={basket.size} >{item.size}</p>
+                    <p className={basket.price}>
+                     {item.quantity}× <span className={basket.pric}>{price}$ </span>
                     </p>
-                  </div>
+                  </div> 
+                   </div>
+                  <hr className={basket.hrr}/>
                 </div>
+               
               );
             })
           )}
         </div>
-
+ <hr className={basket.hrr}/>
         <div className={basket.basketFooter}>
-          <p>
-            <strong>Cəmi:</strong> {total} $
+          <p className={basket.total}>
+           <span>Total:</span>
+           <span className={basket.totalPrice}>${total}</span>
           </p>
-          <button
+         {/* <hr className={basket.hrr}/> */}
+         <div className={basket.buttonKom}>
+          <div className={basket.cardButton}
             onClick={() => {
               navigate(`/${currentLang}/basket`);
               onClose();
             }}
           >
             View Cart
-          </button>
-          <button>Checkout</button>
+          </div>
+          <div className={basket.cardButtonTwo}>Checkout</div>
+          </div>
         </div>
       </div>
     </>

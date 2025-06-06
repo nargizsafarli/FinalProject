@@ -98,7 +98,7 @@ function Navbar() {
             <ChangeLang />
           </div>
           <div className={nav.user}
-          onClick={()=>navigate(`/${currentLang}/login`)}
+          onClick={()=>navigate(`/${currentLang}/register`)}
           >
             <FaRegUser />
             {/* <div className={nav.userOpen}>
