@@ -10,6 +10,8 @@ import Navbar from './Shared/Navbar/Navbar'
 import DetailPage from './Pages/DetailPage'
 import BasketPage from './Pages/BasketPage'
 import WishlistPage from './Pages/WishlistPage'
+import LoginPage from './Pages/LoginPage'
+import RegisterPage from './Pages/RegisterPage'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -44,6 +46,8 @@ const App = () => {
           <Route path="/:lang/shop/:id" element={<DetailPage/>}/>
           <Route path='/:lang/basket' element={<BasketPage/>}/>
           <Route path='/:lang/wishlist' element={<WishlistPage/>}/>
+          <Route path='/:lang/login' element={<LoginPage/>}/>
+          <Route path='/:lang/register' element={<RegisterPage/>}/>
           {/* Əgər uyğun route tapılmasa, savedLang-a yönləndir */}
           <Route path="*" element={<Navigate to={`/${savedLang}`} replace />} />
         </Routes>

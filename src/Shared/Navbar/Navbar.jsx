@@ -97,11 +97,13 @@ function Navbar() {
           <div className={`${nav.changeLang}`}>
             <ChangeLang />
           </div>
-          <div className={nav.user}>
+          <div className={nav.user}
+          onClick={()=>navigate(`/${currentLang}/login`)}
+          >
             <FaRegUser />
-            <div className={nav.userOpen}>
+            {/* <div className={nav.userOpen}>
               <p>{t("pages.login")}</p>
-            </div>
+            </div> */}
           </div>
           <FontAwesomeIcon icon={faHeart} 
             onClick={()=>navigate(`/${currentLang}/wishlist`)}
