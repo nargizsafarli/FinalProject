@@ -15,12 +15,16 @@ import { useTranslation } from "react-i18next";
 import ChangeLang from "../../Components/ChangeLang/ChangeLang";
 import i18n from "../../i18n/i18next";
 import BasketOverlay from "../../Components/BasketOverlay/BasketOverlay";
+import { useSelector } from "react-redux";
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const wishlistCount = useSelector((state) => state.wishlist.items.length);
+const basketCount = useSelector((state) => state.basket.items.reduce((sum, item) => sum + item.quantity, 0));
+
   const currentLang = i18n.language;
   return (
     <div className={nav.mainContainer}>
@@ -105,13 +109,19 @@ function Navbar() {
               <p>{t("pages.login")}</p>
             </div> */}
           </div>
+          <div  className={nav.navWrap}>
           <FontAwesomeIcon icon={faHeart} 
             onClick={()=>navigate(`/${currentLang}/wishlist`)}
           />
+           <span className={nav.badge}>{wishlistCount}</span>
+          </div>
+          <div className={nav.navWrap}>
           <BiBasket
             //  onClick={()=>navigate(`/${currentLang}/basket`)}
             onClick={() => setIsBasketOpen(true)}
           />
+           <span className={nav.badge}>{basketCount}</span>
+          </div>
           <BasketOverlay
             isOpen={isBasketOpen}
             onClose={() => setIsBasketOpen(false)}

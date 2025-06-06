@@ -1,5 +1,5 @@
 .wishlistWrapper {
-  padding: 30px;
+  padding:30px;
   width: 100%;
 }
 
@@ -17,19 +17,21 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
+  gap: 13px;
 }
 
 .imgWrapper {
-  position: relative;
+ position: relative;
   width: 100%;
   height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ 
 }
 
 .imgWrapper img {
-  width: 100%;
+   width: 100%;
   height: 100%;
 }
 
@@ -48,6 +50,7 @@
   color: white;
   padding:10px 20px;
   border: none;
+  font-size: 17px;
   transition: all 0.3s ease;
 }
 .button:hover{
@@ -56,8 +59,19 @@
 .productInfo {
   margin-top: 10px;
   text-align: center;
+  height: 79px;
 }
 .name{
    font-family: 'Libre Baskerville', serif;
    color: rgb(46, 45, 45);
+   font-weight: 500;
+}
+.prevPrice{
+  text-decoration: line-through;
+  font-size: 20px;
+}
+.orPrice{
+  color: green;
+  font-weight: 600;
+  font-size: 23px;
 }
