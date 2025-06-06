@@ -1,0 +1,149 @@
+.container{
+    display: flex;
+    padding: 40px 50px;
+    gap: 30px;
+    justify-content: center;
+}
+.left{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: solid 1px rgb(218, 216, 216);
+    padding: 30px;
+}
+.containerItem{
+    display: flex;
+    gap: 25px;
+}
+.inf{
+    display: flex;
+    gap: 19px;
+    position: relative;
+}
+
+.img{
+    width: 130px;
+    height: 150px;
+}
+.infItem{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 3px;
+}
+.hrInf{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+.hr{
+    background-color: gainsboro;
+    height: 1px;
+    margin-top: 18px;
+    border: none;
+}
+.name{
+    width: 180px;
+}
+.quantity{
+    display: flex;
+    margin-top: 3px;
+}
+.quanItem{
+    border: solid 1px gainsboro;
+    padding: 10px 15px;
+}
+.quanBtn{
+    display: flex;
+    flex-direction: column;
+}
+.btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px gainsboro;
+    padding: 0px 5px;
+    cursor: pointer;
+}
+.price{
+    color: green;
+    margin-top: 12px;
+    font-weight: 500;
+}
+.icon{
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.icon:hover{
+    color: green;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    align-items: center;
+}
+.rightCard{
+  border: solid 1px gainsboro;
+ padding: 30px;
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+}
+.tot{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.promo{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    align-items: center;
+    justify-content: center;
+}
+.prom{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.promoItem{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    gap: 20px;
+    align-items: center;
+}
+.input{
+   width: 100%;
+   padding: 10px;
+   border:solid 1px gainsboro;
+}
+.add{
+    background-color: green;
+    padding: 9px 15px;
+    color: white;
+}
+.checkBtn{
+    background-color: rgb(14, 129, 14);
+    color: white;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+}
+.hrr{
+    background-color: gainsboro;
+    height: 1px;
+    border: none;
+    margin-top: 10px;
+}
