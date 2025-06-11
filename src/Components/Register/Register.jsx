@@ -12,8 +12,7 @@ function Register() {
   const [formErrors, setFormErrors] = useState({});
   const [generalError, setGeneralError] = useState("");
   const navigate = useNavigate();
-  const dispatch = useDispatch(); // Səhv: `dispacth` yox, `dispatch`
-
+  const dispatch = useDispatch(); 
   const validateForm = () => {
     let errors = {};
     if (!name) errors.name = "Ad daxil edilməlidir.";
@@ -36,7 +35,7 @@ function Register() {
       alert("Qeydiyyat uğurla başa çatdı.");
       navigate("/login");
     } catch (err) {
-      setGeneralError(err); // thunkAPI.rejectWithValue(err.message) olduğu üçün string olur
+      setGeneralError(err); //thunkAPI.rejectWithValue(err.message) olduğu üçün string olur
     }
   };
 

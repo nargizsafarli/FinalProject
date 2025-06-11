@@ -24,7 +24,8 @@ function Navbar() {
   const navigate = useNavigate();
   const wishlistCount = useSelector((state) => state.wishlist.items.length);
 const basketCount = useSelector((state) => state.basket.items.reduce((sum, item) => sum + item.quantity, 0));
-
+const user=useSelector((state)=>state.auth.user)
+console.log(user);
   const currentLang = i18n.language;
   return (
     <div className={nav.mainContainer}>
