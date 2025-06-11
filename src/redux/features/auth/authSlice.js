@@ -22,6 +22,7 @@ export const registerUser = createAsyncThunk(
       // 2. Əlavə məlumatları "profils" cədvəlinə yaz
       const { error: dbError } = await supabase.from("profils").insert([
         {
+          id:user.id,
           name,
           surname,
         },
@@ -38,6 +39,22 @@ export const registerUser = createAsyncThunk(
 
 
 // 🔸 Login thunk
+// export const loginUser = createAsyncThunk(
+//   "auth/loginUser",
+//   async ({ email, password }, thunkAPI) => {
+//     try {
+//       const { data, error } = await supabase.auth.signInWithPassword({
+//         email,
+//         password,
+//       });
+
+//       if (error) throw new Error(error.message);
+//       return data.user;
+//     } catch (err) {
+//       return thunkAPI.rejectWithValue(err.message);
+//     }
+//   }
+// );
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async ({ email, password }, thunkAPI) => {
@@ -48,12 +65,30 @@ export const loginUser = createAsyncThunk(
       });
 
       if (error) throw new Error(error.message);
-      return data.user;
+
+      const user = data.user;
+
+      if (!user) throw new Error("İstifadəçi tapılmadı");
+
+      // `profils` cədvəlindən əlavə məlumatları çək
+      const { data: profileData, error: profileError } = await supabase
+        .from("profils")
+        .select("*")
+        .single(); // yalnız bir nəticə gözləyirik
+
+      if (profileError) throw new Error(profileError.message);
+
+      return {
+        id: user.id,
+        name: profileData.name,
+        surname: profileData.surname,
+      };
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
   }
 );
+
 
 // 🔸 Logout thunk
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {

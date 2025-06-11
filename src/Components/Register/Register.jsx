@@ -32,7 +32,7 @@ function Register() {
     if (!validateForm()) return;
 
     try {
-     const userData= await dispatch(registerUser({ name, surname, email, password })).unwrap();
+      await dispatch(registerUser({ name, surname, email, password })).unwrap();
       alert("Qeydiyyat uğurla başa çatdı.");
       navigate("/login");
     } catch (err) {
