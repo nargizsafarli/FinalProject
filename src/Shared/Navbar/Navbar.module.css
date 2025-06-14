@@ -144,7 +144,7 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 10px 0;
+  padding: 35px 0;
  
 }
 .exit {
@@ -179,7 +179,7 @@
 
 .openDesktopPage {
   position: absolute;
-  top: 40px;
+  top: 86px;
   left: 0;
   width: 200px;
   height: 100px;
@@ -196,6 +196,9 @@
 .pag:hover{
   color: #518432;
 }
+.userIcon:hover{
+  color: green;
+}
 .pagesWrapper:hover .openDesktopPage {
   display: flex;
 }
@@ -210,11 +213,12 @@
 .user {
   position: relative;
   display: flex;
-  padding: 8px 0;
+  padding: 35px 0;
 }
 .userOpen {
   position: absolute;
   display: none;
+  flex-direction: column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: 18px;
   font-weight: 500;
@@ -222,13 +226,18 @@
     "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol", "Noto Color Emoji";
   background-color: white;
-  width: 160px;
-  align-items: center;
-  height: 60px;
-  top: 41px;
+  width: 170px;
+  align-items: left;
+  height: 90px;
+  top: 86px;
+  gap: 14px;
   font-size: 18px;
-  right: 0px;
+  right: -80px;
   padding: 10px 15px;
+}
+.openuserbtn:hover{
+  cursor: pointer;
+  color: #518432;
 }
 .user:hover .userOpen {
   display: flex;

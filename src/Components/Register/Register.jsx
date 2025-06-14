@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import reg from "./Register.module.css";
 import { registerUser } from "../../redux/features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import i18n from "../../i18n/i18next";
 
 function Register() {
@@ -12,6 +12,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [generalError, setGeneralError] = useState("");
+    const { loading } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch(); 
    const currentLang =i18n.language
@@ -37,80 +38,10 @@ function Register() {
       alert("Qeydiyyat uğurla başa çatdı.");
       navigate(`/${currentLang}/login`);
     } catch (err) {
-      setGeneralError(err); //thunkAPI.rejectWithValue(err.message) olduğu üçün string olur
+      setGeneralError(err);
     }
   };
 
-  // return (
-  //   <div className={reg.container}>
-  //     <h1>Register form</h1>
-  //     <div className={reg.con}>
-  //       <form className={reg.auth} onSubmit={handleSubmit}>
-  //         {generalError && <p className={reg.important}>{generalError}</p>}
-  //         <div className={reg.form}>
-  //           <label htmlFor="name">
-  //             Ad <span className={reg.important}>*</span>
-  //           </label>
-  //           <input
-  //             type="text"
-  //             id="name"
-  //             placeholder="Name"
-  //             value={name}
-  //             onChange={(e) => setName(e.target.value)}
-  //           />
-  //           {formErrors.name && <p className={reg.important}>{formErrors.name}</p>}
-  //         </div>
-  //         <div className={reg.form}>
-  //           <label htmlFor="surname">
-  //             Soyad <span className={reg.important}>*</span>
-  //           </label>
-  //           <input
-  //             type="text"
-  //             id="surname"
-  //             placeholder="Surname"
-  //             value={surname}
-  //             onChange={(e) => setSurname(e.target.value)}
-  //           />
-  //           {formErrors.surname && <p className={reg.important}>{formErrors.surname}</p>}
-  //         </div>
-  //         <div className={reg.form}>
-  //           <label htmlFor="email">
-  //             E-poçt <span className={reg.important}>*</span>
-  //           </label>
-  //           <input
-  //             type="email"
-  //             id="email"
-  //             placeholder="Email"
-  //             value={email}
-  //             onChange={(e) => setEmail(e.target.value)}
-  //           />
-  //           {formErrors.email && <p className={reg.important}>{formErrors.email}</p>}
-  //         </div>
-  //         <div className={reg.form}>
-  //           <label htmlFor="password">
-  //             Şifrə <span className={reg.important}>*</span>
-  //           </label>
-  //           <input
-  //             type="password"
-  //             id="password"
-  //             placeholder="Password"
-  //             value={password}
-  //             onChange={(e) => setPassword(e.target.value)}
-  //           />
-  //           {formErrors.password && <p className={reg.important}>{formErrors.password}</p>}
-  //         </div>
-
-  //         <button type="submit" className={reg.button}>
-  //           Register
-  //         </button>
-
-  //         <p className={reg.red}>
-  //           Artıq hesabınız var? <Link to="/login">Giriş</Link>
-  //         </p>
-  //       </form>
-  //     </div>
-  //   </div>
-  // );
   return (
   <div className={reg.container}>
   
@@ -175,7 +106,7 @@ function Register() {
           </div>
         </div>
 
-        <button type="submit" className={reg.button}>Register</button>
+        <button type="submit" className={reg.button}> {loading ? "Registering..." : "Register"}</button>
 
         <p className={reg.redirect}>
           Artıq hesabınız var? <Link to={`/${currentLang}/login`}>Giriş</Link>
