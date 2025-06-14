@@ -29,7 +29,6 @@ function Navbar() {
     state.basket.items.reduce((sum, item) => sum + item.quantity, 0)
   );
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
   const logOut=()=>{
     dispatch(logoutUser());
     navigate(`/${currentLang}`)
@@ -94,15 +93,15 @@ function Navbar() {
               {t("navbar.contact")}
             </NavLink>
             <div className={nav.pagesWrapper}>
-              <NavLink className={nav.linkItem}>
+              <div className={nav.linkItem}>
                 <div className={nav.opens}>
                   {t("navbar.pages")} <IoIosArrowUp className={nav.arrowIcon} />
                 </div>
                 <div className={nav.openDesktopPage}>
-                  <div className={nav.pag}>{t("pages.faq")}</div>
-                  <div className={nav.pag}>{t("pages.blog")}</div>
+                  <NavLink to={`/${currentLang}/faq`} className={nav.pag}>{t("pages.faq")}</NavLink>
+                  <NavLink to={`/${currentLang}/blog`} className={nav.pag}>{t("pages.blog")}</NavLink>
                 </div>
-              </NavLink>
+              </div>
             </div>
           </div>
         </div>
