@@ -13,6 +13,7 @@ import { FaPinterestP } from "react-icons/fa";
 import paymentCard from "./assets/trust_badge.png";
 import det from "./Detail.module.css";
 import { useTranslation } from "react-i18next";
+import { addToBasket } from "../../redux/features/auth/basketSlice";
 function DetailSec() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -94,12 +95,20 @@ function DetailSec() {
 
       <div className={det.DetailCon}>
         <h2 className={det.name}>{product[`name${lang}`]}</h2>
-        <p  className={det.des}>{product[`description${lang}`]}</p>
-        <hr className={det.customHr}/>
+        <p className={det.des}>{product[`description${lang}`]}</p>
+        <hr className={det.customHr} />
         <div className={det.info}>
-          <p className={det.inf}>Rating: <span className={det.iftIt}>{product.rating}</span></p>
-          <p className={det.inf}>Material: <span className={det.iftIt}>{product[`material${lang}`]}</span></p>
-          <p className={det.inf}>Condition: <span className={det.iftIt}>{product[`condition${lang}`]}</span></p>
+          <p className={det.inf}>
+            Rating: <span className={det.iftIt}>{product.rating}</span>
+          </p>
+          <p className={det.inf}>
+            Material:{" "}
+            <span className={det.iftIt}>{product[`material${lang}`]}</span>
+          </p>
+          <p className={det.inf}>
+            Condition:{" "}
+            <span className={det.iftIt}>{product[`condition${lang}`]}</span>
+          </p>
 
           <div className={det.sizeBox}>
             <span className={det.inf}>Size:</span>
@@ -151,7 +160,14 @@ function DetailSec() {
           </div>
           <p className={det.delivery}>Est. Delivery Time 2-3 Days</p>
         </div>
-        <button className={det.button}>ADD TO CARD</button>
+        <button
+          className={det.button}
+          onClick={() => {
+            dispatch(addToBasket({ product, size: selectedSize }));
+          }}
+        >
+          ADD TO CARD
+        </button>
         <div className={det.infItem}>
           <div className={det.icon}>
             <div className={det.ic}>

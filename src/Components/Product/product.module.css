@@ -301,6 +301,16 @@ display: flex;
 .overIcon:hover img {
   filter:invert(1);
 }
+.overIcon.active {
+  background-color: #2a7d2e;
+  color: white;
+  border-color: #2a7d2e;
+}
+
+.overIcon.active img {
+  filter: invert(1);
+}
+
 
 .overImg{
     width: 19px;

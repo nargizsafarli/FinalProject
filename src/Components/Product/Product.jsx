@@ -17,14 +17,14 @@ import {
   faHeart,
   faStar as faRegularStar,
 } from "@fortawesome/free-regular-svg-icons";
-import det from "./assets/download (5).svg";
-import basket from "./assets/download (6).svg";
+import det from "./assets/download (6).svg";
+import basket from "./assets/download (5).svg";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import i18next from "i18next";
 import ModalProduct from "../ModalProduct/ModalProduct";
-import { addToWishlist} from "../../redux/features/auth/wishlistSlice";
+import { addToWishlist } from "../../redux/features/auth/wishlistSlice";
 
 function Product() {
   const { t } = useTranslation();
@@ -256,6 +256,9 @@ function Product() {
       return params;
     });
   };
+
+  const wishlist = useSelector((state) => state.wishlist.items);
+  const bask = useSelector((state) => state.basket.items);
 
   // !filterMath------------
   const filteredProducts = data.filter((product) => {
@@ -623,18 +626,15 @@ function Product() {
 
                 {product.isStock && (
                   <div className={pro.cardOverlay}>
-                    <div className={pro.overIcon}
-                     onClick={() => dispatch(addToWishlist(product))}
+                    <div
+                      className={`${pro.overIcon} ${
+                        wishlist.some((item) => item.id === product.id)
+                          ? pro.active
+                          : ""
+                      }`}
+                      onClick={() => dispatch(addToWishlist(product))}
                     >
                       <FontAwesomeIcon icon={faHeart} />
-                    </div>
-                    <div
-                      className={pro.overIcon}
-                      onClick={() =>
-                        navigate(`/${currentLang}/shop/${product.id}`)
-                      }
-                    >
-                      <img src={basket} className={pro.overImg} />
                     </div>
                     <div
                       className={pro.overIcon}
@@ -643,7 +643,15 @@ function Product() {
                         setIsModalOpen(true);
                       }}
                     >
-                      <img src={det} className={pro.overImg} />
+                      <img src={basket} className={pro.overImg} alt="Basket" />
+                    </div>
+                    <div
+                      className={pro.overIcon}
+                      onClick={() =>
+                        navigate(`/${currentLang}/shop/${product.id}`)
+                      }
+                    >
+                      <img src={det} className={pro.overImg} alt="Detail" />
                     </div>
                   </div>
                 )}
