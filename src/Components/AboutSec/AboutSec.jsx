@@ -18,7 +18,7 @@ function AboutSec() {
             </div>
             <span className={abSec.spantext}>
               Anventore veritatis et quasi architecto beatae dicta sun
-              explicabo. Nemo enim. dduis abs no matter what
+              explicabo. Nemo enim. dduis abs no matter what about this section veritatis et quasi architecto beatae dicta sun. Nemo enim. 
             </span>
           </div>
           <div className={abSec.btn}>Shop Now</div>
@@ -29,11 +29,11 @@ function AboutSec() {
           <div className={abSec.rightTextItem}>
             <div className={abSec.item}>
               <h3>gold to interest</h3>
-              <p>new collection</p>
+              <p>NEW COLLECTION</p>
             </div>
             <span className={abSec.spantextTwo}>
               Anventore veritatis et quasi architecto beatae dicta sun
-              explicabo. Nemo enim. dduis abs no matter what about thiss
+              explicabo. Nemo enim. dduis abs no matter what about this. veritatis et quasi architecto beatae dicta beatae dicta sun
             </span>
            
           </div>

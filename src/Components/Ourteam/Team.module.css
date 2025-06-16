@@ -1,0 +1,117 @@
+.container {
+  /* background-image: url("./assets/products-bg.jpg"); */
+  padding: 90px 60px;
+  gap: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.cardCon {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border: solid 2px rgb(247, 244, 244);
+  transition: all 0.3s ease;
+  border-radius: 20px;
+}
+.overLay {
+  position: absolute;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  bottom: 0px;
+  left: 50px;
+  padding: 12px 20px;
+  background-color: rgba(102, 102, 102, 0.5);
+  transition: transform 0.4s ease-in-out;
+  border-radius: 10px;
+  transform: translateY(100%);
+  color: white;
+  backdrop-filter:blur(2px);
+}
+.icon{
+    transition: all 0.2s ease-in;
+    font-size: 19px;
+    cursor: pointer;
+}
+.icon:hover{
+    color: green;
+}
+.card:hover .overLay {
+  transform: translateY(-20px);
+}
+
+.card:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px,
+    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+}
+.personimg {
+  width: 284px;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+.personimg img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+.teamTitle {
+  font-size: 37px;
+  font-weight: 600;
+  color: #6ea820;
+}
+.infor {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
+  align-items: center;
+
+}
+.titleDet {
+  color: rgb(112, 112, 112);
+}
+.contact {
+  display: flex;
+  gap: 10px;
+}
+.contactItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(223, 219, 219);
+  border-radius: 50%;
+  color: gray;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.name {
+  font-size: 23px;
+  font-weight: 500;
+}
+.inf {
+  color: rgb(99, 97, 97);
+}
+.card:hover .contactItem {
+  background-color: #6ea820;
+  color: white;
+}

@@ -13,6 +13,7 @@ import WishlistPage from './Pages/WishlistPage'
 import LoginPage from './Pages/LoginPage'
 import RegisterPage from './Pages/RegisterPage'
 import FaqPage from './Pages/FaqPage'
+import NotFound from './Components/NotFound/NotFound'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -51,7 +52,7 @@ const App = () => {
           <Route path='/:lang/register' element={<RegisterPage/>}/>
           <Route path='/:lang/faq' element={<FaqPage/>}/>
           {/* Əgər uyğun route tapılmasa, savedLang-a yönləndir */}
-          <Route path="*" element={<Navigate to={`/${savedLang}`} replace />} />
+          <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>
     </div>
