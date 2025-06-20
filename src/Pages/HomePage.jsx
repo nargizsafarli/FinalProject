@@ -7,6 +7,7 @@ import HomeTime from '../Components/HomeTime/HomeTime'
 import Footer from '../Shared/Footer/Footer'
 import Logo from '../Components/Logo/Logo'
 import ServiceHome from '../Components/ServiceHome/ServiceHome'
+import HomeProduct from '../Components/HomeProduct/HomeProduct'
 
 function HomePage() {
   return (
@@ -16,6 +17,7 @@ function HomePage() {
         <ServiceHome/>
         {/* <HomeTime/> */}
         <HomeCollection/>
+        {/* <HomeProduct/> */}
         <Testimonile/>
         <Logo/>
         <Footer/>

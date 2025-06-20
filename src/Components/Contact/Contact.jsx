@@ -7,20 +7,19 @@ import { AiOutlineMail } from "react-icons/ai";
 function Contact() {
   return (
     <div className={contact.container}>
-      {/* Left Side - Store Info */}
       <div className={contact.infoBox}>
         <h3>Store information</h3>
-        <p><strong className={contact.icon}><CiLocationOn /></strong> Bloomis Demo Store<br />507-Union Trade Center<br />France</p>
+        <div className={contact.infLeft}><p className={contact.icon}><CiLocationOn /></p> Bloomis Demo Store<br />507-Union Trade Center<br />France</div>
         <hr />
-        <p><strong className={contact.icon}><IoCallOutline /></strong> Call us: <br /> (+91) 9876-543-210</p>
+        <div className={contact.infLeft}><p className={contact.icon}><IoCallOutline /></p> Call us: <br /> (+91) 9876-543-210</div>
         <hr />
-        <p><strong className={contact.icon}><AiOutlineMail /></strong> Email us: <br /> demo@example.com</p>
+        <div className={contact.infLeft}><p className={contact.icon}><AiOutlineMail /></p> Email us: <br /> demo@example.com</div>
       </div>
 
       {/* Right Side - Contact Form */}
       <form className={contact.formBox}>
         <div className={contact.formGroup}>
-          <label>Subject</label>
+          <label className={contact.labels}>Subject</label>
           <select>
             <option>Customer service</option>
             <option>Technical support</option>
@@ -29,12 +28,12 @@ function Contact() {
         </div>
 
         <div className={contact.formGroup}>
-          <label>Email address</label>
+          <label className={contact.labels}>Email address</label>
           <input type="email" placeholder="your@email.com" />
         </div>
 
         <div className={contact.formGroup}>
-          <label>Attachment</label>
+          <label className={contact.labels}>Attachment</label>
           <div className={contact.fileInputWrapper}>
             <input type="file" />
             <span>optional</span>
@@ -42,13 +41,13 @@ function Contact() {
         </div>
 
         <div className={contact.formGroup}>
-          <label>Message</label>
+          <label className={contact.labels}>Message</label>
           <textarea rows="4" placeholder="How can we help?" />
         </div>
 
         <div className={contact.checkboxWrapper}>
           <input type="checkbox" />
-          <label>I agree to the terms and conditions and the privacy policy</label>
+          <label className={contact.labelAgree}>I agree to the terms and conditions and the privacy policy</label>
         </div>
 
         <button type="submit" className={contact.sendBtn}>SEND</button>

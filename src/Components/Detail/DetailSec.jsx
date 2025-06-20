@@ -14,6 +14,7 @@ import paymentCard from "./assets/trust_badge.png";
 import det from "./Detail.module.css";
 import { useTranslation } from "react-i18next";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
+import { notification } from "antd";
 function DetailSec() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -28,6 +29,7 @@ function DetailSec() {
   }, [dispatch, data.length]);
 
   const product = data.find((item) => item.id === Number(id));
+  const user = useSelector((state) => state.auth.user);
 
   const [selectedImage, setSelectedImage] = useState("");
   const [imageGallery, setImageGallery] = useState([]);
@@ -38,6 +40,27 @@ function DetailSec() {
       setImageGallery([product.thumnailImg, product.img]);
     }
   }, [product]);
+ const [api, contextHolder] = notification.useNotification();
+  const handleAddToBasket = (product) => {
+    if (user) {
+      dispatch(addToBasket({ product, size: selectedSize }));
+      api.success({
+        message: "Added to Basket",
+        placement: "topRight",
+        showProgress: true,
+        duration: 2,
+        zIndex: 10000,
+      });
+    } else {
+      api.warning({
+        message: "Zəhmət olmasa daxil olun",
+        description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
+        showProgress: true,
+        duration: 3,
+        zIndex: 9999,
+      });
+    }
+  };
 
   useEffect(() => {
     if (product) {
@@ -92,7 +115,7 @@ function DetailSec() {
           )}
         </div>
       </div>
-
+  {contextHolder}
       <div className={det.DetailCon}>
         <h2 className={det.name}>{product[`name${lang}`]}</h2>
         <p className={det.des}>{product[`description${lang}`]}</p>
@@ -160,12 +183,7 @@ function DetailSec() {
           </div>
           <p className={det.delivery}>Est. Delivery Time 2-3 Days</p>
         </div>
-        <button
-          className={det.button}
-          onClick={() => {
-            dispatch(addToBasket({ product, size: selectedSize }));
-          }}
-        >
+        <button className={det.button} onClick={() => handleAddToBasket(product)}>
           ADD TO CARD
         </button>
         <div className={det.infItem}>

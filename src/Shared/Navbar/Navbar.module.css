@@ -57,13 +57,13 @@
 .link {
   display: flex;
   gap: 30px;
-  font-size: 20px;
+  font-size: 19px;
   align-items: center;
 }
 .linkItem {
   text-decoration: none;
   color: black;
-  padding: 10px 0;
+  padding: 5px 0;
   font-size: 18px;
   font-weight: 500;
   transition: all 0.3s ease-in;
@@ -188,9 +188,8 @@
   flex-direction: column;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  padding: 16px;
+  padding: 10px;
   justify-content: center;
-  gap: 10px;
   color: black;
 }
 .pag:hover{

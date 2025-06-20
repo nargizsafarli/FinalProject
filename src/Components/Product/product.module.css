@@ -361,7 +361,7 @@ display: flex;
 }
 
 /* !paginationn */
-.pagination {
+/* .pagination {
   display: flex;
   justify-content: right;
   align-items: center;
@@ -383,15 +383,75 @@ display: flex;
 .pagination button:disabled {
   background-color: #ddd;
   cursor: not-allowed;
-}
-.currentPage{
+} */
+/* .currentPage{
   padding: 7px 12px;
   background-color: green;
   border: none;
   cursor: pointer;
   font-weight: bold;
   color: white;
+} */
+ /* .activePage {
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: green;
+  color: white;
+} */
+ .pagination {
+  display: flex;
+  justify-content: center; /* ortalayırıq */
+  align-items: center;
+  margin-top: 30px;
+  gap: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* mobil üçün sıralana bilsin */
 }
+
+.pagination button {
+  padding: 8px 14px;
+  background-color: #44aa49; /* yaşıl */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #1b5e20; /* hover effekti üçün daha tünd yaşıl */
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.pageButton {
+  padding: 8px 12px;
+  background-color: #4caf50; /* yaşıl */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white;
+  font-weight: 500;
+  transition: 0.2s ease;
+}
+
+.pageButton:hover {
+   background-color: #164e1a
+}
+
+.activePage {
+  background-color: #164e1a !important;
+  color: #fff;
+  font-weight: 700;
+  border: 2px solid white;
+  text-decoration: underline;
+}
+
 .filterToggleBtn {
   display: none;
   background-color: green;
@@ -433,6 +493,10 @@ display: flex;
   background-color: rgba(37, 37, 37, 0.8);
   display: none;
 }
+
+
+
+
 
 .overlayOpen {
   display: block;

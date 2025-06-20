@@ -13,8 +13,14 @@
   flex: 1;
   min-width: 250px;
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  font-size: 18px;
   border-right: 1px solid #ddd;
   padding-right: 30px;
+  color: rgb(65, 64, 64);
+  font-weight: 500;
 }
 .icon{
     color: green;
@@ -24,16 +30,15 @@
 .infoBox h3 {
   font-size: 18px;
   background: #f5f5f5;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 20px;
-  border-left: 4px solid #ccc;
+  border-left: 4px solid #2c7c0c;
+}
+.infLeft{
+  display: flex;
+  gap: 12px;
 }
 
-.infoBox p {
-  margin-bottom: 15px;
-  font-size: 15px;
-  line-height: 1.5;
-}
 
 .formBox {
   flex: 2;
@@ -41,26 +46,48 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+    border: 1px solid #ececec;
+  /* box-shadow: rgba(190, 190, 190, 0.1) 0px 10px 50px; */
+  border: solid 1px gainsboro;
+  padding: 50px 70px;
 }
 
 .formGroup {
   display: flex;
-  flex-direction: column;
+  gap: 20px;
 }
 
-.formGroup label {
+
+.labels{
+  display: flex;
+  align-items: center;
+  width: 120px;
   font-weight: 500;
-  margin-bottom: 5px;
+  color: rgb(53, 52, 52);
+}
+.labelAgree{
+  font-weight: 500;
+  color: rgb(58, 57, 57);
 }
 
 .formGroup input,
 .formGroup select,
 .formGroup textarea {
   padding: 10px;
+  width: 70%;
   border: 1px solid #ccc;
   border-radius: 2px;
   font-size: 14px;
 }
+.formGroup input::placeholder,
+.formGroup textarea::placeholder,
+.formGroup select::placeholder {
+  color: #bebebe;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
 
 .fileInputWrapper {
   display: flex;
@@ -77,7 +104,7 @@
 
 .sendBtn {
   width: 120px;
-  background: #72a776;
+  background: #098113;
   color: white;
   padding: 10px;
   font-weight: bold;

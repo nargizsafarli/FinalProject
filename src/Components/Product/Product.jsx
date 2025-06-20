@@ -215,6 +215,10 @@ function Product() {
       return params;
     });
   };
+  // !filterpage
+  useEffect(() => {
+  setCurrentPage(1);
+}, [selectedCategory, availabilityFilter, selectedMaterial, selectedCondition, selectedBrand]);
 
   useEffect(() => {
     const categoryFromURL = searchParams.get("category");
@@ -740,7 +744,7 @@ const handleAddToWishlist=(product)=>{
         </div>
 
         {/* Paginationnn */}
-        <div className={pro.pagination}>
+        {/* <div className={pro.pagination}>
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -756,7 +760,36 @@ const handleAddToWishlist=(product)=>{
           >
             <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
           </button>
-        </div>
+        </div> */}
+        <div className={pro.pagination}>
+  <button
+    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+    disabled={currentPage === 1}
+  >
+    <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
+  </button>
+
+  {/* Page Numbers */}
+  {Array.from({ length: totalPages }, (_, index) => (
+    <button
+      key={index + 1}
+      onClick={() => setCurrentPage(index + 1)}
+      className={`${pro.pageButton} ${currentPage === index + 1 ? pro.activePage : ""}`}
+    >
+      {index + 1}
+    </button>
+  ))}
+
+  <button
+    onClick={() =>
+      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+    }
+    disabled={currentPage === totalPages}
+  >
+    <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
+  </button>
+</div>
+
       </div>
     </div>
   );

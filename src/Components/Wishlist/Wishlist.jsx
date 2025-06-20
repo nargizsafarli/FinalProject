@@ -4,13 +4,30 @@ import { removeFromWishlist } from "../../redux/features/auth/wishlistSlice";
 import wish from "./Wishlist.module.css";
 import ModalProduct from "../ModalProduct/ModalProduct";
 import { FaTrash } from "react-icons/fa6";
+import { notification } from "antd";
 
 
 const Wishlist = () => {
   const wishlistItems = useSelector((state) => state.wishlist.items);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+   const [api, contextHolder] = notification.useNotification();
   const [selectedProduct, setSelectedProduct] = useState(null);
+   const handleAddToBasket = (product) => {
+  if (user) {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  } else {
+     api.warning({
+      message: 'Zəhmət olmasa daxil olun',
+      description: 'Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.',
+       showProgress: true,
+      duration: 2,
+      zIndex:9999
+    });
+  }
+};
 
   const getBestPrice = (product) => {
     if (product.smallDisPrice || product.smallPrice) {
@@ -36,6 +53,7 @@ const Wishlist = () => {
 
   return (
     <div className={wish.wishlistWrapper}>
+      {contextHolder}
       {wishlistItems.length === 0 ? (
         <p>Wishlist boşdur</p>
       ) : (
@@ -67,10 +85,7 @@ const Wishlist = () => {
                 </div>
                 <button
                   className={wish.button}
-                  onClick={() => {
-                    setSelectedProduct(product);
-                    setIsModalOpen(true);
-                  }}
+                  onClick={() => handleAddToBasket(product)}
                 >
                   Add to Basket
                 </button>

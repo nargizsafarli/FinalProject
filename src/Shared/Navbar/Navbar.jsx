@@ -98,8 +98,12 @@ function Navbar() {
                   {t("navbar.pages")} <IoIosArrowUp className={nav.arrowIcon} />
                 </div>
                 <div className={nav.openDesktopPage}>
-                  <NavLink to={`/${currentLang}/faq`} className={nav.pag}>{t("pages.faq")}</NavLink>
-                  <NavLink to={`/${currentLang}/blog`} className={nav.pag}>{t("pages.blog")}</NavLink>
+                  <NavLink to={`/${currentLang}/faq`}  className={({ isActive }) =>
+                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+              }>{t("pages.faq")}</NavLink>
+                  <NavLink to={`/${currentLang}/blog`}  className={({ isActive }) =>
+                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+              }>{t("pages.blog")}</NavLink>
                 </div>
               </div>
             </div>
@@ -205,8 +209,12 @@ function Navbar() {
                 {openPage ? <IoIosArrowDown /> : <IoIosArrowUp />}
                 {openPage && (
                   <div>
-                    <div className={nav.pag}>{t("pages.faq")}</div>
-                    <div className={nav.pag}>{t("pages.blog")}</div>
+                    <NavLink  className={({ isActive }) =>
+                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                }>{t("pages.faq")}</NavLink>
+                    <NavLink  className={({ isActive }) =>
+                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                }>{t("pages.blog")}</NavLink>
                   </div>
                 )}
               </NavLink>
