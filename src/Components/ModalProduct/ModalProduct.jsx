@@ -1,11 +1,12 @@
 // components/ModalProduct.jsx
 import React, { useState, useEffect } from "react";
-import { Modal, Button } from "antd";
+import { Modal, Button, notification } from "antd";
 import { useDispatch } from "react-redux";
 import mod from "./ModalProduct.module.css";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
 
 function ModalProduct({ isOpen, onClose, product }) {
+  const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState(null);
   const [currentPrice, setCurrentPrice] = useState(0);
@@ -32,15 +33,27 @@ function ModalProduct({ isOpen, onClose, product }) {
     setCurrentPrice(price);
   }, [selectedSize, product]);
 
-  const handleAddToBasket = () => {
-    if (!selectedSize) {
-      alert("Please select a size");
-      return;
-    }
 
-    dispatch(addToBasket({ product, size: selectedSize }));
-    onClose();
-  };
+  const handleAddToBasket = () => {
+  if (!selectedSize) {
+    alert("Please select a size");
+    return;
+  }
+
+  dispatch(addToBasket({ product, size: selectedSize }));
+  onClose();
+
+  setTimeout(() => {
+    api.success({
+      message: "Added to Basket",
+      placement: "topRight",
+      duration: 2,
+       showProgress: true,
+      zIndex: 10000,
+    });
+  }, 400);
+};
+
 
   if (!product) return null;
 
@@ -56,6 +69,7 @@ function ModalProduct({ isOpen, onClose, product }) {
       }}
     >
       <div className={mod.modalContainer}>
+       {contextHolder}
         <div className={mod.left}>
           <img src={product.img} alt={product.name} className={mod.image} />
         </div>

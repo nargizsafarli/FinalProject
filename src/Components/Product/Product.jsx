@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import pro from "./product.module.css";
-import { Select } from "antd";
+import { notification, Select } from "antd";
 import logo from "./assets/download (4).svg";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/features/auth/productSlice";
@@ -38,6 +38,8 @@ function Product() {
   const [selectedCondition, setSelectedCondition] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [sortOption, setSortOption] = useState("1");
+  const [api, contextHolder] = notification.useNotification();
+  const user = useSelector((state) => state.auth.user);
   const [searchParams, setSearchParams] = useSearchParams();
   const brandOptions = ["Cartify", "EcomZone", "SmartShop", "StyleHub"];
   const navigate = useNavigate();
@@ -334,6 +336,50 @@ function Product() {
   );
   const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
 
+  // !handleAddBasket
+  const handleAddToBasket = (product) => {
+  if (user) {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+      api.success({
+      message: 'Added to Basket',
+      placement: 'topRight',
+       showProgress: true,
+      duration: 2,
+      zIndex: 10000,
+    });
+  } else {
+     api.warning({
+      message: 'Zəhmət olmasa daxil olun',
+      description: 'Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.',
+       showProgress: true,
+      duration: 3,
+      zIndex:9999
+    });
+  }
+};
+const handleAddToWishlist=(product)=>{
+    if (user) {
+    dispatch(addToWishlist(product));
+      api.success({
+      message: 'Added to Wishlist',
+      placement: 'topRight',
+      showProgress: true,
+      duration: 2,
+      zIndex: 10000,
+    });
+  } else {
+     api.warning({
+      message: 'Please Log In',
+      description: 'Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.',
+       showProgress: true,
+      duration: 3,
+      zIndex:9999
+    });
+  }
+}
+
+
   // !Select-------------------------
   const [showFilter, setShowFilter] = useState(false);
   useEffect(() => {
@@ -404,7 +450,9 @@ function Product() {
   };
 
   return (
+    
     <div className={pro.container}>
+    {contextHolder}
       <div
         className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
         onClick={() => setShowFilter(false)}
@@ -632,16 +680,13 @@ function Product() {
                           ? pro.active
                           : ""
                       }`}
-                      onClick={() => dispatch(addToWishlist(product))}
+                      onClick={() => handleAddToWishlist(product)}
                     >
                       <FontAwesomeIcon icon={faHeart} />
                     </div>
                     <div
                       className={pro.overIcon}
-                      onClick={() => {
-                        setSelectedProduct(product);
-                        setIsModalOpen(true);
-                      }}
+                      onClick={() => handleAddToBasket(product)}
                     >
                       <img src={basket} className={pro.overImg} alt="Basket" />
                     </div>

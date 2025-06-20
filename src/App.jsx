@@ -55,6 +55,7 @@ const App = () => {
           <Route path='/:lang/faq' element={<FaqPage/>}/>
           <Route path='/:lang/blog' element={<BlogPage/>}/>
           <Route path='/:lang/blog/:id' element={<DetBlog/>}/>
+          <Route path="/" element={<Navigate to={`/${savedLang}`} replace />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>
       </BrowserRouter>

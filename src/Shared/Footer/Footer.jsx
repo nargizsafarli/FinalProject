@@ -4,7 +4,9 @@ import fLogo from "./assets/logo (1).png"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebookF, faPinterestP, faXTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import paymentImg from "./assets/payment-logo.png"
+
 function Footer() {
+const currentYear = new Date().getFullYear();
   return (
     <div className={foot.container}>
     <div className={foot.sec1}>
@@ -42,7 +44,7 @@ function Footer() {
        </ul>
       </div>
       <div className={foot.sec3}>
-        <p>-Ecoomerce software by PrestaShop</p>
+        <p>@{currentYear}-Ecoomerce software by me</p>
       </div>
     </div>
   );

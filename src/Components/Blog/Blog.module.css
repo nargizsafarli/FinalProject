@@ -4,6 +4,7 @@
   gap: 2rem;
   padding: 2rem;
   margin-top: 100px;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .card {
@@ -44,7 +45,7 @@
 
 .category {
   font-weight: bold;
-  color: #007acc;
+  color: #049e26;
 }
 
 .short {
@@ -56,7 +57,7 @@
   margin-top: auto;
   width: fit-content;
   padding: 0.5rem 1rem;
-  background-color: #007acc;
+  background-color:rgb(4, 155, 4);
   color: white;
   border: none;
   border-radius: 8px;
@@ -65,5 +66,5 @@
 }
 
 .button:hover {
-  background-color: #005fa3;
+  background-color: #0d0d0e;
 }

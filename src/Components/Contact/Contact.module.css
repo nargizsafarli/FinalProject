@@ -1,0 +1,92 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 80px 120px;
+  border: 1px solid #eee;
+  background: #fff;
+  justify-content: center;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.infoBox {
+  flex: 1;
+  min-width: 250px;
+  max-width: 300px;
+  border-right: 1px solid #ddd;
+  padding-right: 30px;
+}
+.icon{
+    color: green;
+    font-weight: bold;
+    font-size: 28px;
+}
+.infoBox h3 {
+  font-size: 18px;
+  background: #f5f5f5;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-left: 4px solid #ccc;
+}
+
+.infoBox p {
+  margin-bottom: 15px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.formBox {
+  flex: 2;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.formGroup label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 14px;
+}
+
+.fileInputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkboxWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.sendBtn {
+  width: 120px;
+  background: #72a776;
+  color: white;
+  padding: 10px;
+  font-weight: bold;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sendBtn:hover {
+  background: #5f935f;
+}
