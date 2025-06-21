@@ -107,6 +107,17 @@ function Navbar() {
                 </div>
               </div>
             </div>
+            {/* !DAshboarddd */}
+           {user?.name === "Admin" && user?.email === "admin@gmail.com" && (
+  <NavLink
+    to={`/${currentLang}/dashboard`}
+    className={({ isActive }) =>
+      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+    }
+  >
+    Dashboard
+  </NavLink>
+)}
           </div>
         </div>
         <div className={nav.icons}>

@@ -17,6 +17,7 @@ import NotFound from './Components/NotFound/NotFound'
 import BlogPage from './Pages/BlogPage'
 import DetBlog from './Pages/DetBlog'
 import CheckOutPage from './Pages/CheckOutPage'
+import DashboardPage from './Pages/DashboardPage'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -57,6 +58,7 @@ const App = () => {
           <Route path='/:lang/blog' element={<BlogPage/>}/>
           <Route path='/:lang/blog/:id' element={<DetBlog/>}/>
           <Route path=':lang/check' element={<CheckOutPage/>}/>
+          <Route path=':lang/dashboard' element={<DashboardPage/>}/>
           <Route path="/" element={<Navigate to={`/${savedLang}`} replace />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>

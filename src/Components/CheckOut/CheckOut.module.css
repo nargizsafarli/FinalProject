@@ -143,8 +143,12 @@ h2 {
   justify-content: space-between;
   font-size: 16px;
   color: #555;
+  align-items: center;
+  margin-top: 12px;
 }
-
+.pay{
+  font-weight: bold;
+}
 .totalRow {
   display: flex;
   justify-content: space-between;

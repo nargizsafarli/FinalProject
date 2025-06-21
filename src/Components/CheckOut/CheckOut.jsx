@@ -3,6 +3,7 @@ import check from "./CheckOut.module.css";
 import { FaRegCalendarMinus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { getPrices } from "../../Utils/getprice";
+import PaymentModal from "../PaymentModal/PaymentModel";
 
 function CheckOut() {
   const basketItems = useSelector((state) => state.basket.items);
@@ -41,11 +42,12 @@ const finalTotal = totalPrice - discountAmount;
     setErrors(errs);
     return Object.keys(errs).length === 0;
   };
+    const [showModal, setShowModal] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      alert("Məlumatlar uğurla göndərildi ✅");
+        setShowModal(true);
     }
   };
 
@@ -105,21 +107,25 @@ const finalTotal = totalPrice - discountAmount;
       <input type="text" name="phone" value={form.phone} onChange={handleChange} />
       {errors.phone && <span className={check.error}>{errors.phone}</span>}
     </div>
+    <div>
     <button type="submit" className={check.submitBtn}>Place Order</button>
+        <PaymentModal open={showModal} onClose={() => setShowModal(false)} />
+    </div>
   </form>
 </div>
 
 
       <div className={check.rightCon}>
-        <h2>YEKUN</h2>
+        <h2 className={check.yek}>YEKUN</h2>
+        <hr className={check.divider}/>
         <div className={check.summary}>
           <div className={check.row}>
-            <span>Əsas qiymət:</span>
+            <span className={check.pay} >Əsas qiymət:</span>
              <span>₼{totalPrice.toFixed(2)}</span>
           </div>
            {promoCode && (
       <div className={check.row}>
-        <span>Endirim ({promoCode}):</span>
+        <span className={check.pay}>Endirim ({promoCode}):</span>
         <span>-₼{discountAmount.toFixed(2)}</span>
       </div>
     )}
@@ -129,7 +135,7 @@ const finalTotal = totalPrice - discountAmount;
             <span>Ümumi:</span>
              <span>₼{finalTotal.toFixed(2)}</span>
           </div>
-          <button className={check.payBtn}>Ödənişi tamamla</button>
+          <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account</p>
         </div>
       </div>
       </div>
