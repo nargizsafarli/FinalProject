@@ -1,42 +1,44 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import basket from "./Basket.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   calculateTotal,
+  clearPromoCode,
   decreaseQuantity,
   increaseQuantity,
   removeFromBasket,
+  setPromoCode,
 } from "../../redux/features/auth/basketSlice";
 import { FaTrash } from "react-icons/fa6";
 import { getPrices } from "../../Utils/getprice";
+import { useNavigate } from "react-router-dom";
+import i18n from "../../i18n/i18next";
 
-// Qiymətləri qaytaran funksiya
-// function getPrices(product, size) {
-//   if (size === "small") {
-//     return {
-//       original: product.smallPrice,
-//       discount: product.smallDisPrice,
-//     };
-//   } else if (size === "medium") {
-//     return {
-//       original: product.mediumPrice,
-//       discount: product.mediumDisPrice,
-//     };
-//   } else {
-//     return {
-//       original: product.largePrice,
-//       discount: product.largeDisPrice,
-//     };
-//   }
-// }
+
 
 function Basket() {
+    const currentLang = i18n.language;
+   const navigate=useNavigate()
   const dispatch = useDispatch();
-  const { items, total } = useSelector((state) => state.basket);
+  const { items, total,discountPercent } = useSelector((state) => state.basket);
+  const discountedTotal = total - (total * discountPercent) / 100;
+  const [promoInput, setPromoInput] = useState("");
 
   useEffect(() => {
     dispatch(calculateTotal());
   }, [items, dispatch]);
+
+  const handleApplyPromo = () => {
+  if (promoInput.trim().toUpperCase() === "SUMMER15") {
+    dispatch(setPromoCode({ code: "SUMMER15", percent: 15 }));
+  } else {
+    dispatch(clearPromoCode());
+    alert("Invalid promo code");
+  }
+};
+
+
+
 
   return (
     <div className={basket.container}>
@@ -61,14 +63,22 @@ function Basket() {
                       />
                       <div className={basket.infItem}>
                         <h4 className={basket.name}>{product.nameEn}</h4>
-                        <p>Size: <span className={basket.sizeSpan}>{size}</span></p>
+                        <p>
+                          Size: <span className={basket.sizeSpan}>{size}</span>
+                        </p>
                         {discount ? (
                           <p>
-                            <span className={basket.pPrice}>{original.toFixed(2)}$</span>
-                            <span className={basket.oPrice}>{discount.toFixed(2)}$</span>
+                            <span className={basket.pPrice}>
+                              {original.toFixed(2)}$
+                            </span>
+                            <span className={basket.oPrice}>
+                              {discount.toFixed(2)}$
+                            </span>
                           </p>
                         ) : (
-                          <p className={basket.oPrice}>{original.toFixed(2)}$</p>
+                          <p className={basket.oPrice}>
+                            {original.toFixed(2)}$
+                          </p>
                         )}
                       </div>
                     </div>
@@ -81,17 +91,13 @@ function Basket() {
                     <div className={basket.quanBtn}>
                       <div
                         className={basket.btn}
-                        onClick={() =>
-                          dispatch(decreaseQuantity({ id, size }))
-                        }
+                        onClick={() => dispatch(decreaseQuantity({ id, size }))}
                       >
                         -
                       </div>
                       <div
                         className={basket.btn}
-                        onClick={() =>
-                          dispatch(increaseQuantity({ id, size }))
-                        }
+                        onClick={() => dispatch(increaseQuantity({ id, size }))}
                       >
                         +
                       </div>
@@ -118,9 +124,62 @@ function Basket() {
         <div className={basket.rightCard}>
           {items.length > 0 && (
             <div className={basket.tot}>
+              <div className={basket.summary}>
+                <div className={basket.summaryRow}>
+                  <p>
+                    {items.reduce((acc, item) => acc + item.quantity, 0)} items
+                  </p>
+                  <p>
+                    $
+                    {items
+                      .reduce((acc, item) => {
+                        const { original } = getPrices(item.product, item.size);
+                        return acc + original * item.quantity;
+                      }, 0)
+                      .toFixed(2)}
+                  </p>
+                </div>
+
+                <div className={basket.summaryRow}>
+                  <p>You saved</p>
+                  <p>
+                    -$
+                    {items
+                      .reduce((acc, item) => {
+                        const { original, discount } = getPrices(
+                          item.product,
+                          item.size
+                        );
+                        if (!discount) return acc;
+                        return acc + (original - discount) * item.quantity;
+                      }, 0)
+                      .toFixed(2)}
+                  </p>
+                </div>
+              </div>
+              <hr className={basket.hrr} />
               <div className={basket.total}>
                 <p>Total:</p>
-                <p>${total.toFixed(2)}</p>
+                <p>
+                  {discountPercent > 0 ? (
+                    <>
+                      <span
+                        style={{
+                          textDecoration: "line-through",
+                          marginRight: "8px",
+                          color: "gray",
+                        }}
+                      >
+                        ${total.toFixed(2)}
+                      </span>
+                      <span style={{ color: "green", fontWeight: "bold" }}>
+                        ${discountedTotal.toFixed(2)}
+                      </span>
+                    </>
+                  ) : (
+                    <>${total.toFixed(2)}</>
+                  )}
+                </p>
               </div>
               <span>Have a promocod?</span>
               <hr className={basket.hrr} />
@@ -134,14 +193,16 @@ function Basket() {
                   type="text"
                   placeholder="Promo code"
                   className={basket.input}
+                  value={promoInput}
+                  onChange={(e) => setPromoInput(e.target.value)}
                 />
-                <div className={basket.add}>Add</div>
+                <div className={basket.add} onClick={handleApplyPromo}>Add</div>
               </div>
               <div className={basket.texting}>
                 Take our exclusive promo code
               </div>
             </div>
-            <div className={basket.checkBtn}>Proceed to checkout</div>
+            <div className={basket.checkBtn} onClick={()=>{navigate(`/${currentLang}/check`)}}>Proceed to checkout</div>
           </div>
         </div>
 

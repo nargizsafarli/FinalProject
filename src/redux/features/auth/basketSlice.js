@@ -1,12 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
-  items:JSON.parse(localStorage.getItem("basketItems")) || [],
+  items: JSON.parse(localStorage.getItem("basketItems")) || [],
   total: 0,
+  promoCode: localStorage.getItem("promoCode") || null,
+  discountPercent: parseFloat(localStorage.getItem("discountPercent")) || 0,
 };
 const saveBasketToLocalStorage = (items) => {
   localStorage.setItem("basketItems", JSON.stringify(items));
+};
+const savePromoToLocalStorage = (code, percent) => {
+  localStorage.setItem("promoCode", code);
+  localStorage.setItem("discountPercent", percent.toString());
+};
+
+const clearPromoFromLocalStorage = () => {
+  localStorage.removeItem("promoCode");
+  localStorage.removeItem("discountPercent");
 };
 
 const basketSlice = createSlice({
@@ -29,7 +39,7 @@ const basketSlice = createSlice({
           product,
         });
       }
-       saveBasketToLocalStorage(state.items);
+      saveBasketToLocalStorage(state.items);
     },
 
     increaseQuantity: (state, action) => {
@@ -50,7 +60,7 @@ const basketSlice = createSlice({
       if (item && item.quantity > 1) {
         item.quantity -= 1;
       }
-       saveBasketToLocalStorage(state.items); 
+      saveBasketToLocalStorage(state.items);
     },
 
     removeFromBasket: (state, action) => {
@@ -58,7 +68,20 @@ const basketSlice = createSlice({
       state.items = state.items.filter(
         (item) => !(item.id === id && item.size === size)
       );
-       saveBasketToLocalStorage(state.items); 
+      saveBasketToLocalStorage(state.items);
+    },
+
+    setPromoCode: (state, action) => {
+      const { code, percent } = action.payload;
+      state.promoCode = code;
+      state.discountPercent = percent;
+      savePromoToLocalStorage(code, percent);
+    },
+
+    clearPromoCode: (state) => {
+      state.promoCode = null;
+      state.discountPercent = 0;
+      clearPromoFromLocalStorage();
     },
 
     calculateTotal: (state) => {
@@ -75,10 +98,9 @@ const basketSlice = createSlice({
 
         return acc + price * item.quantity;
       }, 0);
-        saveBasketToLocalStorage(state.items); 
+      saveBasketToLocalStorage(state.items);
     },
   },
-
 });
 
 export const {
@@ -87,6 +109,8 @@ export const {
   decreaseQuantity,
   removeFromBasket,
   calculateTotal,
+  setPromoCode,
+  clearPromoCode,
 } = basketSlice.actions;
 
 export default basketSlice.reducer;

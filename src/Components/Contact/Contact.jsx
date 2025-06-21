@@ -19,17 +19,13 @@ function Contact() {
       {/* Right Side - Contact Form */}
       <form className={contact.formBox}>
         <div className={contact.formGroup}>
-          <label className={contact.labels}>Subject</label>
-          <select>
-            <option>Customer service</option>
-            <option>Technical support</option>
-            <option>Other</option>
-          </select>
+          <label className={contact.labels}>Name</label>
+          <input type='text' ></input>
         </div>
 
         <div className={contact.formGroup}>
           <label className={contact.labels}>Email address</label>
-          <input type="email" placeholder="your@email.com" />
+          <input type="email"  />
         </div>
 
         <div className={contact.formGroup}>
@@ -42,7 +38,10 @@ function Contact() {
 
         <div className={contact.formGroup}>
           <label className={contact.labels}>Message</label>
-          <textarea rows="4" placeholder="How can we help?" />
+          <textarea rows="4"
+          //  placeholder="How can we help?" 
+
+           />
         </div>
 
         <div className={contact.checkboxWrapper}>
