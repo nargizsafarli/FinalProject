@@ -29,6 +29,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 .rightContainer{
     width: 79%;

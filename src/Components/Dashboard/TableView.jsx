@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Modal, Input } from "antd";
 import { supabase } from "../../client";
 import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin2Fill } from "react-icons/ri";
+import { RiDeleteBin2Fill, RiEditFill } from "react-icons/ri";
 import dash from "./Dashboard.module.css";
-import { RiEditFill } from "react-icons/ri";
 
 const TableView = ({ activeTab }) => {
   const [data, setData] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [editedRow, setEditedRow] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newRowData, setNewRowData] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,66 +34,53 @@ const TableView = ({ activeTab }) => {
     setEditedRow({ ...editedRow, [key]: e.target.value });
   };
 
-  
   const handleSave = async () => {
-  const cleanedRow = { ...editedRow };
-
-  Object.entries(cleanedRow).forEach(([key, value]) => {
-    if (typeof data[0]?.[key] === "number") {
-      // Əgər boş stringdirsə və orijinal data number idisə
-      cleanedRow[key] = value === "" ? null : parseFloat(value);
-    }
-  });
-
-  
-  if (editingId === "new") {
-  const { data: newData, error } = await supabase
-    .from(activeTab)
-    .insert([cleanedRow])
-    .select();
-
-  if (!error && newData.length > 0) {
-    // emptyRow-u silirik (id-siz olan)
-    setData((prev) => {
-      const filtered = prev.filter(item => item.id); // yalnız id-si olanları saxla
-      return [newData[0], ...filtered]; // yeni row-u əlavə et
+    const cleanedRow = { ...editedRow };
+    Object.entries(cleanedRow).forEach(([key, value]) => {
+      if (typeof data[0]?.[key] === "number") {
+        cleanedRow[key] = value === "" ? null : parseFloat(value);
+      }
     });
-  }
-}
 
-  else {
     await supabase.from(activeTab).update(cleanedRow).eq("id", editingId);
     setData((prev) =>
       prev.map((item) => (item.id === editingId ? cleanedRow : item))
     );
-  }
+    setEditingId(null);
+    setEditedRow({});
+  };
 
-  setEditingId(null);
-  setEditedRow({});
-};
+  const handleAdd = () => {
+    const exampleRow = data[0] || {};
+    const initialRow = {};
 
+    Object.entries(exampleRow).forEach(([key, value]) => {
+      if (key === "id" || key === "created_at") return;
+      if (typeof value === "boolean") {
+        initialRow[key] = false;
+      } else if (typeof value === "number") {
+        initialRow[key] = null;
+      } else {
+        initialRow[key] = "";
+      }
+    });
 
+    setNewRowData(initialRow);
+    setIsModalOpen(true);
+  };
 
+  const handleModalSave = async () => {
+    const { error, data: inserted } = await supabase
+      .from(activeTab)
+      .insert([newRowData])
+      .select();
 
-const handleAdd = () => {
-  const emptyRow = {};
-  const exampleRow = data[0] || {};
-
-  Object.entries(exampleRow).forEach(([key, value]) => {
-    if (typeof value === "boolean") {
-      emptyRow[key] = false; // boolean sahələrə default olaraq false
-    } else if (typeof value === "number") {
-      emptyRow[key] = null; // number sahələrə default olaraq null
-    } else {
-      emptyRow[key] = ""; // string və ya digərlərinə ""
+    if (!error && inserted?.length > 0) {
+      setData((prev) => [inserted[0], ...prev]);
+      setIsModalOpen(false);
+      setNewRowData({});
     }
-  });
-
-  setEditingId("new");
-  setEditedRow(emptyRow);
-  setData((prev) => [emptyRow, ...prev]);
-};
-
+  };
 
   const columns = [
     {
@@ -107,10 +95,8 @@ const handleAdd = () => {
       dataIndex: key,
       key,
       render: (text, record) => {
-        const isNewRow = editingId === "new" && !record.id;
         const isEditing = editingId === record.id;
-
-        if (isNewRow || isEditing) {
+        if (isEditing) {
           return (
             <input
               value={editedRow[key] || ""}
@@ -120,7 +106,6 @@ const handleAdd = () => {
             />
           );
         }
-
         return text;
       },
     })),
@@ -130,14 +115,12 @@ const handleAdd = () => {
       fixed: "right",
       width: 100,
       render: (text, record) => {
-        const isNewRow = editingId === "new" && !record.id;
         const isEditing = editingId === record.id;
-
         return (
           <div style={{ display: "flex", gap: "6px" }}>
-            {(isEditing || isNewRow) ? (
+            {isEditing ? (
               <Button type="link" onClick={handleSave}>
-                <RiEditFill style={{fontSize:"20px"}} />
+                <RiEditFill style={{ fontSize: "20px" }} />
               </Button>
             ) : (
               <Button type="link" onClick={() => handleEditClick(record)}>
@@ -155,11 +138,12 @@ const handleAdd = () => {
 
   return (
     <div style={{ overflowX: "auto", padding: "27px 35px" }}>
-     {activeTab !== "profils" && (
-  <button onClick={handleAdd} className={dash.addBtn}>
-    Add
-  </button>
-)}
+      {activeTab !== "profils" && (
+        <button onClick={handleAdd} className={dash.addBtn}>
+          Add
+        </button>
+      )}
+
       <Table
         dataSource={data}
         columns={columns}
@@ -168,8 +152,34 @@ const handleAdd = () => {
         bordered={false}
         className={dash.whiteTable}
       />
+
+      {/* Modal for Add */}
+      <Modal
+        title="Add New Item"
+        open={isModalOpen}
+        onCancel={() => setIsModalOpen(false)}
+        onOk={handleModalSave}
+        okText="Add"
+         bodyStyle={{
+    maxHeight: "400px", // maksimum hündürlük
+    overflowY: "auto",  // scroll aktiv olsun
+  }}
+      >
+        {Object.keys(newRowData).map((key) => (
+          <div key={key} style={{ marginBottom: "10px" }}>
+            <label style={{ display: "block", fontWeight: 500 }}>{key}</label>
+            <Input
+              value={newRowData[key]}
+              onChange={(e) =>
+                setNewRowData((prev) => ({ ...prev, [key]: e.target.value }))
+              }
+            />
+          </div>
+        ))}
+      </Modal>
     </div>
   );
 };
 
 export default TableView;
+
