@@ -672,7 +672,7 @@ const handleAddToWishlist=(product)=>{
                 {!product.isStock && (
                   <>
                     <div className={pro.stockOverlay}></div>
-                    <div className={pro.comingSoon}>Coming Soon...</div>
+                    <div className={pro.comingSoon}>Aut of stock</div>
                   </>
                 )}
 

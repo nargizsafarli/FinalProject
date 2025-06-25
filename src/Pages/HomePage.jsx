@@ -17,7 +17,7 @@ function HomePage() {
         <ServiceHome/>
         {/* <HomeTime/> */}
         <HomeCollection/>
-        {/* <HomeProduct/> */}
+        <HomeProduct/>
         <Testimonile/>
         <Logo/>
         <Footer/>

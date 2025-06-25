@@ -1,20 +1,46 @@
 {
-    "navbar":{
-        "home":"Ev",
-        "shop":"Mağaza",
-        "about":"Haqqımızda",
-        "contact":"Əlaqə",
-        "pages":"Səhifələr"
-    },
-    "pages":{
-        "faq":"FAQ",
-        "blog":"Bloq",
-        "login":"Daxil ol",
-        "menu":"Menyu"
-    },
-    "filter":{
-        "avail":"Mövcud",
-        "notAvail":"Mövcud olmayan"
-    }
-    
+  "navbar": {
+    "home": "Ev",
+    "shop": "Mağaza",
+    "about": "Haqqımızda",
+    "contact": "Əlaqə",
+    "pages": "Səhifələr"
+  },
+  "pages": {
+    "faq": "FAQ",
+    "blog": "Bloq",
+    "login": "Daxil ol",
+    "menu": "Menyu"
+  },
+  "filter": {
+    "avail": "Mövcud",
+    "notAvail": "Mövcud olmayan"
+  },
+  "nav-slider": {
+    "firstH": "Bir ədəd bitki al, hədiyyə qazan",
+    "firstP": "Modern Sprouts-un ağıllı böyütmə dəstlərindən tutmuş Laila Solomonun əl işi keramik qablarına qədər, istedadlı sənətkarların yaratdığı və bizim tərəfindən seçilən məhsulları payız Kolleksiyamızda kəşf et",
+    "Btn": "İndi Al",
+    "secondH": "Yaşıl Dünyanı Evində Yaşat",
+    "thirdH": "Böyük Endirim – Yeni Gələnlər Səni Gözləyir"
+  },
+  "service": {
+  "serviceP": "Biz nə edirik",
+  "serviceH": "XİDMƏTLƏRİMİZ",
+  "titleOne": "BİTKİNİ SEÇ",
+  "infOne": "Burada hər zövqə uyğun bitkilərimiz var",
+  "titleTwice": "ENDİRİM QAZAN",
+  "infTwice": "Seçilmiş məhsullarda endirimlərimiz var",
+  "titleThird": "PROMO KODUMUZ VAR",
+  "infThird": "Endirim kodumuzdan yararlan",
+  "titleFour": "ƏTRAFLI MƏLUMAT AL",
+  "infFour": "Məhsulların ətraflı səhifəsi mövcuddur"
+},
+"collec": {
+  "titleO": "Yeni Kolleksiya",
+  "infO": "Bitki Limanı",
+  "titleT": "Yalnız Bizim Mağazada!",
+  "infT": "Keramika Dibçək və Bitki"
+}
+
+
 }

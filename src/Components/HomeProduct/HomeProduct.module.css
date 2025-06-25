@@ -1,5 +1,5 @@
 .container {
-  padding: 2rem;
+  padding: 150px 19px;
   background-color: #fff;
 }
 
@@ -16,22 +16,61 @@
 
 .card {
   border: 1px solid #eee;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: #fff;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   position: relative;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  /* transform: translateY(-5px); */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.name{
+    font-size: 18px;
+    margin-bottom: 5px;
+    line-height: 22px;
+    font-weight: 500;
+    width: 240px;
+    color: rgb(80, 79, 79);
+    text-align: center;
+    transition: all 0.3s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.proCard:hover .name{
+    color: #2a7d2e;;
+}
+.price{
+    display: flex;
+    gap: 10px;
+}
+.oldPrice{
+    color: #7c7c7c;
+    font-weight: 400;
+    font-size: 23px;
+    text-decoration: line-through;
+}
+.disPrice{
+    color: #2a7d2e;
+    margin-left: 7px;
+      font-size: 23px;
+    line-height: 20px;
+    font-weight: 600;
+}
+.pri{
+       font-weight: 600;
+    font-size: 23px;
+     color: #2a7d2e;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 340px;
   overflow: hidden;
 }
 
@@ -95,13 +134,12 @@
 .cardInfo {
   padding: 1rem;
   text-align: center;
+  gap: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.name {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
-}
 
 .rating {
   margin-bottom: 0.5rem;
@@ -111,24 +149,45 @@
 .price {
   font-size: 1rem;
   font-weight: bold;
+  display: flex;
+  align-items: center;
   color: #16a34a; /* green-600 */
-}
-
-.oldPrice {
-  text-decoration: line-through;
-  color: #888;
-  margin-right: 0.5rem;
-}
-
-.newPrice {
-  color: #dc2626; /* red-600 */
 }
 
 .moreBtnWrapper {
   text-align: center;
   margin-top: 2rem;
 }
-
+.price{
+    display: flex;
+    gap: 10px;
+}
+.oldPrice{
+    color: #7c7c7c;
+    font-weight: 400;
+    font-size: 23px;
+    text-decoration: line-through;
+}
+.disPrice{
+    color: #2a7d2e;
+    margin-left: 7px;
+      font-size: 23px;
+    line-height: 20px;
+    font-weight: 600;
+}
+.newPrice{
+       font-weight: 600;
+    font-size: 23px;
+     color: #2a7d2e;
+}
+.pri{
+       font-weight: 600;
+    font-size: 23px;
+     color: #2a7d2e;
+}
+.rating{
+  font-size: 13px;
+}
 .moreBtn {
   background-color: #1e40af; /* blue-800 */
   color: white;
@@ -142,4 +201,111 @@
 
 .moreBtn:hover {
   background-color: #1d4ed8; /* blue-700 */
+}
+.cardOverlay {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 0;
+  right: 13px;
+  transform: translateY(-70%);
+  opacity: 0;
+  z-index: 99;
+  transition: all 0.4s ease;
+  
+}
+
+.card:hover .cardOverlay {
+  transform: translateY(15%);
+  opacity: 1;
+}
+.overIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 39px;
+    height: 39px;
+    background-color: white;
+    border: solid 1px rgb(214, 214, 214);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.overIcon:hover{
+  background-color: #2a7d2e;;
+  color: white;
+  border-color:#2a7d2e;
+}
+
+.overIcon:hover img {
+  filter:invert(1);
+}
+.overIcon.active {
+  background-color: #2a7d2e;
+  color: white;
+  border-color: #2a7d2e;
+}
+
+.overIcon.active img {
+  filter: invert(1);
+}
+
+
+.overImg{
+    width: 19px;
+    height: 19px;
+}
+.outOfStock {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Overlay — sadəcə boz şəffaflıq */
+.stockOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(254, 255, 255, 0.8);
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.08s ease-in;
+}
+.card:hover .stockOverlay{
+ 
+  opacity: 1;
+}
+/* Coming Soon yazısı */
+.comingSoon {
+  position: absolute;
+  top: 120px;
+  left: 52%;
+  display: none;
+  transform: translateX(-50%);
+  color: rgb(87, 87, 87);
+  /* color: rgb(109, 109, 109); */
+  /* color: red; */
+  color: rgb(3, 110, 3);
+  font-size: 21px;
+  transition: all 0.05s ease;
+  opacity: 0;
+  width: 170px;
+  z-index: 2;
+  text-align: center;
+  transition: all 0.2s ease-in;
+  font-weight: 600;
+  pointer-events: none;
+   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Hover zamanı yazı aşağı düşür */
+.outOfStock:hover .comingSoon {
+display: flex;
+  opacity: 1;
+}
+@media(max-width:540px){
+  .container{
+     padding: 150px 40px;
+  }
 }

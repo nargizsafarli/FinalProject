@@ -15,5 +15,30 @@
      "filter":{
         "avail":"Available",
         "notAvail":"Not available"
+    },
+    "nav-slider":{
+        "firstH":"Bay a planter,get a grow light free",
+        "firstP": "From Modern Sprouts clever grow kits to Laila Solomons handmade ceramic planters discover the products created by talented artisans and curated by us in our Fall Collection",
+        "Btn":"Buy Now",
+        "secondH":"Bring The Green World to Your Home",
+        "thirdH":"Big Sale New Arrivals For Your"
+    },
+    "service":{
+        "serviceP":"What We Do",
+        "serviceH":"OUR SERVISES",
+        "titleOne":"PICK YOUR PLANT",
+        "infOne":"Here we have plants for every taste",
+        "titleTwice":"GET A DISCOUNT",
+         "infTwice":"We have discounts on selected products",
+         "titleThird":"WE HAVE PROMO CODE",
+         "infThird":"Take advantage of our discount code",
+         "titleFour":"GET DETAILED INFORMATION",
+         "infFour":"Our products detail page is available"
+    },
+    "collec":{
+        "titleO":"New Collection",
+        "infO":"Plant Port",
+         "titleT":"Only On Our Store!",
+        "infT":"Ceramic Pot & Plant"
     }
 }
