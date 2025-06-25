@@ -26,7 +26,7 @@ import det from "./assets/download (6).svg";
 import { notification } from "antd";
 
 function HomeProduct() {
-   const [api, contextHolder] = notification.useNotification();
+  const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTransition();
@@ -34,14 +34,14 @@ function HomeProduct() {
   const { data, loading, error } = useSelector((state) => state.product);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
- 
+
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
- const wishlist = useSelector((state) => state.wishlist);
+  const wishlist = useSelector((state) => state.wishlist);
   const handleAddToBasket = (product) => {
     if (user) {
       setSelectedProduct(product);
@@ -122,20 +122,20 @@ function HomeProduct() {
   return (
     <div className={homepro.container}>
       {contextHolder}
-      <h2 className={homepro.title}>Ən çox baxılan məhsullar</h2>
+      <h2 className={homepro.title}>Our Products</h2>
 
       <Swiper
         modules={[Navigation]}
         navigation
-         loop     
+        loop
         spaceBetween={20}
         slidesPerView={4}
-          breakpoints={{
-          0:   { slidesPerView: 1 },
+        breakpoints={{
+          0: { slidesPerView: 1 },
           375: { slidesPerView: 1 },
           540: { slidesPerView: 2 },
           768: { slidesPerView: 3 },
-          1024:{ slidesPerView: 4 },
+          1024: { slidesPerView: 4 },
         }}
         className={homepro.swiper}
       >
@@ -143,7 +143,11 @@ function HomeProduct() {
           const { price, discount } = getDisplayPrice(product);
           return (
             <SwiperSlide key={product.id}>
-              {/* <div className={homepro.card}>
+              <div
+                className={`${homepro.card} ${
+                  !product.isStock ? homepro.outOfStock : ""
+                }`}
+              >
                 <div className={homepro.imageWrapper}>
                   <img
                     src={product.img}
@@ -155,18 +159,21 @@ function HomeProduct() {
                     alt="Hover"
                     className={homepro.hoverImg}
                   />
-                   {!product.isStock && (
-                                    <>
-                                      <div className={homepro.stockOverlay}></div>
-                                      <div className={homepro.comingSoon}>Aut of stock</div>
-                                    </>
-                                  )}
+
+                  {/* OUT OF STOCK OVERLAY */}
+                  {!product.isStock && (
+                    <>
+                      <div className={homepro.stockOverlay}></div>
+                      <div className={homepro.comingSoon}>Out of stock...</div>
+                    </>
+                  )}
+
+                  {/* OVERLAY İCONS – ANCAQ STOKDADIRSA */}
                   {product.isStock && (
                     <div className={homepro.cardOverlay}>
                       <div
                         className={`${homepro.overIcon} ${
-                         wishlist.items?.some((item) => item.id === product.id)
-
+                          wishlist.items?.some((item) => item.id === product.id)
                             ? homepro.active
                             : ""
                         }`}
@@ -198,15 +205,23 @@ function HomeProduct() {
                       </div>
                     </div>
                   )}
+
+                  {/* MODAL */}
                   <ModalProduct
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
-                    // product={product}
                     product={selectedProduct}
                   />
                 </div>
+
+                {/* CARD INFO */}
                 <div className={homepro.cardInfo}>
-                  <p className={homepro.name}>{product.nameEn}</p>
+                  <p className={homepro.name}>
+                    {
+                      // əgər i18n dili "az" isə nameAz, yoxsa nameEn
+                      currentLang === "az" ? product.nameAz : product.nameEn
+                    }
+                  </p>
                   <div className={homepro.rating}>
                     {renderStars(product.rating)}
                   </div>
@@ -221,103 +236,7 @@ function HomeProduct() {
                     )}
                   </div>
                 </div>
-              </div> */}
-              <div
-                              className={`${homepro.card} ${
-                                !product.isStock ? homepro.outOfStock : ""
-                              }`}>
-  <div className={homepro.imageWrapper}>
-    <img
-      src={product.img}
-      alt={product.nameEn}
-      className={homepro.mainImg}
-    />
-    <img
-      src={product.thumnailImg}
-      alt="Hover"
-      className={homepro.hoverImg}
-    />
-
-    {/* OUT OF STOCK OVERLAY */}
-    {!product.isStock && (
-      <>
-        <div className={homepro.stockOverlay}></div>
-        <div className={homepro.comingSoon}>Out of stock...</div>
-      </>
-    )}
-
-    {/* OVERLAY İCONS – ANCAQ STOKDADIRSA */}
-    {product.isStock && (
-      <div className={homepro.cardOverlay}>
-        <div
-          className={`${homepro.overIcon} ${
-            wishlist.items?.some((item) => item.id === product.id)
-              ? homepro.active
-              : ""
-          }`}
-          onClick={() => handleAddToWishlist(product)}
-        >
-          <FontAwesomeIcon icon={faHeart} />
-        </div>
-        <div
-          className={homepro.overIcon}
-          onClick={() => handleAddToBasket(product)}
-        >
-          <img
-            src={basket}
-            className={homepro.overImg}
-            alt="Basket"
-          />
-        </div>
-        <div
-          className={homepro.overIcon}
-          onClick={() =>
-            navigate(`/${currentLang}/shop/${product.id}`)
-          }
-        >
-          <img
-            src={det}
-            className={homepro.overImg}
-            alt="Detail"
-          />
-        </div>
-      </div>
-    )}
-
-    {/* MODAL */}
-    <ModalProduct
-      isOpen={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
-      product={selectedProduct}
-    />
-  </div>
-
-  {/* CARD INFO */}
-  <div className={homepro.cardInfo}>
-    <p className={homepro.name}>
-       {
-    // əgər i18n dili "az" isə nameAz, yoxsa nameEn
-    currentLang === "az" 
-      ? product.nameAz 
-      : product.nameEn
-  }
-    </p>
-    <div className={homepro.rating}>
-      {renderStars(product.rating)}
-    </div>
-    <div className={homepro.price}>
-      {discount ? (
-        <>
-          <span className={homepro.oldPrice}>${price}</span>
-          <span className={homepro.newPrice}>${discount}</span>
-        </>
-      ) : (
-        <span className={homepro.pri}>${price}</span>
-      )}
-    </div>
-  </div>
-</div>
-
+              </div>
             </SwiperSlide>
           );
         })}

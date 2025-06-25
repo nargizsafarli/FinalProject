@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import dash from "./Dashboard.module.css";
 import TableView from "./TableView";
-import adminImg from "./assets/images (1).png"
+import adminImg from "./assets/images (1).png";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n/i18next";
@@ -11,57 +11,68 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa6";
 import { RiBloggerLine } from "react-icons/ri";
 import { FaRegFileAlt } from "react-icons/fa";
+import ChartView from "./ChartView";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("product");
-  const dispatch=useDispatch()
-  const navigate=useNavigate()
-  const currentLang=i18n.language
-  const logoutHandle=()=>{
-    dispatch((logoutUser()))
-    navigate(`/${currentLang}/login`)
-  }
- 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currentLang = i18n.language;
+  const logoutHandle = () => {
+    dispatch(logoutUser());
+    navigate(`/${currentLang}/login`);
+  };
+
   return (
     <div className={dash.container}>
       <div className={dash.leftContainer}>
-      <div className={dash.admin}>
-        <img src={adminImg} className={dash.adminImg}/>
-        <p className={dash.adminName}>Admin</p>
-         {/* <div className={dash.openuserbtn} onClick={() =>{logoutHandle()}}><CiLogout />Logout</div> */}
-         <p className={dash.adminGmail}>admin@gmail.com</p>
-        
-      </div>
-       {/* <hr className={dash.hrr} */}
-       {/* /> */}
+        <div className={dash.admin}>
+          <img src={adminImg} className={dash.adminImg} />
+          <p className={dash.adminName}>Admin</p>
+          {/* <div className={dash.openuserbtn} onClick={() =>{logoutHandle()}}><CiLogout />Logout</div> */}
+          <p className={dash.adminGmail}>admin@gmail.com</p>
+        </div>
+        {/* <hr className={dash.hrr} */}
+        {/* /> */}
+        <p
+          className={activeTab === "chart" ? dash.active : dash.prof}
+          onClick={() => setActiveTab("chart")}
+        >
+          📊 Chart
+        </p>
         <p
           className={activeTab === "product" ? dash.active : dash.prof}
           onClick={() => setActiveTab("product")}
         >
-        <AiOutlineProduct />  Products
+          <AiOutlineProduct /> Products
         </p>
         <p
           className={activeTab === "profils" ? dash.active : dash.prof}
           onClick={() => setActiveTab("profils")}
         >
-         <FaRegUser /> Users
+          <FaRegUser /> Users
         </p>
         <p
           className={activeTab === "Blog" ? dash.active : dash.prof}
           onClick={() => setActiveTab("Blog")}
         >
-         <RiBloggerLine /> Blogs
+          <RiBloggerLine /> Blogs
         </p>
         <p
           className={activeTab === "faq" ? dash.active : dash.prof}
           onClick={() => setActiveTab("faq")}
         >
-        <FaRegFileAlt />  FAQ
+          <FaRegFileAlt /> FAQ
         </p>
       </div>
       <div className={dash.rightContainer}>
-        <TableView activeTab={activeTab} />
-      </div>
+  {activeTab === "chart" ? (
+    <ChartView/>
+  ) : (
+    <TableView activeTab={activeTab} />
+  )}
+</div>
+
     </div>
   );
 }
