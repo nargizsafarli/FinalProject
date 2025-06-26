@@ -3,6 +3,8 @@ import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 import { Modal, Input, Button } from "antd";
 import styles from "./PaymentModal.module.css";
+import { useNavigate } from "react-router-dom";
+import i18n from "../../i18n/i18next";
 
 const PaymentModal = ({ open, onClose }) => {
   const [cardData, setCardData] = useState({
@@ -12,7 +14,8 @@ const PaymentModal = ({ open, onClose }) => {
     cvc: "",
     focus: "",
   });
-
+  const navigate=useNavigate()
+const currentLang=i18n.language
   const handleInputChange = (e) => {
     setCardData({ ...cardData, [e.target.name]: e.target.value });
   };
@@ -22,7 +25,7 @@ const PaymentModal = ({ open, onClose }) => {
   };
 
   const handlePay = () => {
-    alert("Ödəniş uğurla tamamlandı ✅");
+   navigate(`/${currentLang}/thank`)
     onClose();
   };
 

@@ -40,7 +40,23 @@
   "infO": "Bitki Limanı",
   "titleT": "Yalnız Bizim Mağazada!",
   "infT": "Keramika Dibçək və Bitki"
+},
+"thank": {
+    "leftP": "Sifarişiniz üçün təşəkkür edirik!",
+    "leftSp": "Sifarişiniz uğurla qəbul edildi və hazırlanır",
+    "trackId": "İzləmə ID-si:",
+    "orderRec": "Sifariş təsdiqləndi",
+    "orderShip": "Sifariş göndərildi",
+    "outofdel": "Çatdırılmaya çıxarıldı",
+    "orderdel": "Sifariş çatdırıldı",
+    "btn": "Alış-verişə davam et",
+    "shouhd": "Niyə bizi seçməlisiniz?",
+    "free": "Pulsuz çatdırılma",
+    "goback": "Pulsuz qaytarma",
+    "zem": "Məhsul zəmanəti",
+    "safe": "Təhlükəsiz ödəniş"
 }
+
 
 
 }

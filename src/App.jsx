@@ -18,6 +18,7 @@ import BlogPage from './Pages/BlogPage'
 import DetBlog from './Pages/DetBlog'
 import CheckOutPage from './Pages/CheckOutPage'
 import DashboardPage from './Pages/DashboardPage'
+import ThanksPage from './Pages/ThanksPage'
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
   
@@ -59,6 +60,7 @@ const App = () => {
           <Route path='/:lang/blog/:id' element={<DetBlog/>}/>
           <Route path=':lang/check' element={<CheckOutPage/>}/>
           <Route path=':lang/dashboard' element={<DashboardPage/>}/>
+          <Route path='/:lang/thank' element={<ThanksPage/>}/>
           <Route path="/" element={<Navigate to={`/${savedLang}`} replace />} />
           <Route path="*" element={<NotFound/>} />
         </Routes>

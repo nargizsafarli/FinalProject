@@ -40,5 +40,20 @@
         "infO":"Plant Port",
          "titleT":"Only On Our Store!",
         "infT":"Ceramic Pot & Plant"
+    },
+    "thank":{
+        "leftP":"Thanks For Your Order !",
+        "leftSp":"Your order has been successfully received and is being prepared",
+        "trackId":"Track ID:",
+        "orderRec":"Order Received",
+        "orderShip":"Order Shipped",
+        "outofdel":"Out of delivery",
+        "orderdel":"Order delivery",
+        "btn":"Go to shop",
+        "shouhd":"Why should you choose us?",
+        "free":"Free Upgrade",
+        "goback":"free Return",
+        "zem":"Product Safety",
+        "safe":"Safe and sound"
     }
 }
