@@ -1,73 +1,93 @@
 {
-    "navbar":{
-        "home":"Home",
-        "shop":"Shop",
-        "about":"About Us",
-        "contact":"Contact Us",
-        "pages":"Pages"
-    },
-    "pages":{
-        "faq":"FAQ",
-        "blog":"Blog",
-        "login":"Login",
-        "menu":"Menu"
-    },
-     "filter":{
-        "avail":"Available",
-        "notAvail":"Not available"
-    },
-    "nav-slider":{
-        "firstH":"Bay a planter,get a grow light free",
-        "firstP": "From Modern Sprouts clever grow kits to Laila Solomons handmade ceramic planters discover the products created by talented artisans and curated by us in our Fall Collection",
-        "Btn":"Buy Now",
-        "secondH":"Bring The Green World to Your Home",
-        "thirdH":"Big Sale New Arrivals For Your"
-    },
-    "service":{
-        "serviceP":"What We Do",
-        "serviceH":"OUR SERVISES",
-        "titleOne":"PICK YOUR PLANT",
-        "infOne":"Here we have plants for every taste",
-        "titleTwice":"GET A DISCOUNT",
-         "infTwice":"We have discounts on selected products",
-         "titleThird":"WE HAVE PROMO CODE",
-         "infThird":"Take advantage of our discount code",
-         "titleFour":"GET DETAILED INFORMATION",
-         "infFour":"Our products detail page is available"
-    },
-    "collec":{
-        "titleO":"New Collection",
-        "infO":"Plant Port",
-         "titleT":"Only On Our Store!",
-        "infT":"Ceramic Pot & Plant"
-    },
-    "thank":{
-        "leftP":"Thanks For Your Order !",
-        "leftSp":"Your order has been successfully received and is being prepared",
-        "trackId":"Track ID:",
-        "orderRec":"Order Received",
-        "orderShip":"Order Shipped",
-        "outofdel":"Out of delivery",
-        "orderdel":"Order delivery",
-        "btn":"Go to shop",
-        "shouhd":"Why should you choose us?",
-        "free":"Free Upgrade",
-        "goback":"free Return",
-        "zem":"Product Safety",
-        "safe":"Safe and sound"
-    },
-    "product":{
-        "item":"items",
-        "saved":"Your saved",
-        "total":"Total:",
-        "promo":"Have a promo code?",
-        "add":"Add",
-        "remove":"Remove",
-        "text":"We have",
-        "text2":"SUMMER15",
-        "text3":"promo code",
-        "proces":" Proceed to checkout",
-        "size":"Size:",
-        "empty":"Your basket is empty"
-    }
+  "navbar": {
+    "home": "Home",
+    "shop": "Shop",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "pages": "Pages"
+  },
+  "pages": {
+    "faq": "FAQ",
+    "blog": "Blog",
+    "login": "Login",
+    "menu": "Menu"
+  },
+  "filter": {
+    "avail": "Available",
+    "notAvail": "Not available"
+  },
+  "nav-slider": {
+    "firstH": "Bay a planter,get a grow light free",
+    "firstP": "From Modern Sprouts clever grow kits to Laila Solomons handmade ceramic planters discover the products created by talented artisans and curated by us in our Fall Collection",
+    "Btn": "Buy Now",
+    "secondH": "Bring The Green World to Your Home",
+    "thirdH": "Big Sale New Arrivals For Your"
+  },
+  "service": {
+    "serviceP": "What We Do",
+    "serviceH": "OUR SERVISES",
+    "titleOne": "PICK YOUR PLANT",
+    "infOne": "Here we have plants for every taste",
+    "titleTwice": "GET A DISCOUNT",
+    "infTwice": "We have discounts on selected products",
+    "titleThird": "WE HAVE PROMO CODE",
+    "infThird": "Take advantage of our discount code",
+    "titleFour": "GET DETAILED INFORMATION",
+    "infFour": "Our products detail page is available"
+  },
+  "collec": {
+    "titleO": "New Collection",
+    "infO": "Plant Port",
+    "titleT": "Only On Our Store!",
+    "infT": "Ceramic Pot & Plant"
+  },
+  "thank": {
+    "leftP": "Thanks For Your Order !",
+    "leftSp": "Your order has been successfully received and is being prepared",
+    "trackId": "Track ID:",
+    "orderRec": "Order Received",
+    "orderShip": "Order Shipped",
+    "outofdel": "Out of delivery",
+    "orderdel": "Order delivery",
+    "btn": "Go to shop",
+    "shouhd": "Why should you choose us?",
+    "free": "Free Upgrade",
+    "goback": "free Return",
+    "zem": "Product Safety",
+    "safe": "Safe and sound"
+  },
+  "product": {
+    "item": "items",
+    "saved": "Your saved",
+    "total": "Total:",
+    "promo": "Have a promo code?",
+    "add": "Add",
+    "remove": "Remove",
+    "text": "We have",
+    "text2": "SUMMER15",
+    "text3": "promo code",
+    "proces": " Proceed to checkout",
+    "size": "Size:",
+    "empty": "Your basket is empty"
+  },
+  "wish": {
+    "add": "Add to Basket",
+    "empty": "Wishlist is empty"
+  },
+  "contact": {
+    "inf": "Store information",
+    "inf1": "Bloomis Demo Store",
+    "inf2": "507-Union Trade Center",
+    "inf3": "France",
+    "inf4": "Call us:",
+    "inf5": "Email us:",
+    "name":"Name",
+    "email":"Email address",
+    "adres":"Address",
+    "optional":"optional",
+    "message":"Message",
+    "agree":"I agree to the terms and conditions and the privacy policy",
+    "send":"SEND"
+
+  }
 }

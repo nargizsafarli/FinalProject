@@ -5,6 +5,9 @@ import wish from "./Wishlist.module.css";
 import ModalProduct from "../ModalProduct/ModalProduct";
 import { FaTrash } from "react-icons/fa6";
 import { notification } from "antd";
+import { useNavigate } from "react-router-dom";
+import i18n from "../../i18n/i18next";
+import { useTranslation } from "react-i18next";
 
 
 const Wishlist = () => {
@@ -14,6 +17,8 @@ const Wishlist = () => {
   const user = useSelector((state) => state.auth.user);
    const [api, contextHolder] = notification.useNotification();
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const navigate=useNavigate();
+  const currentLang=i18n.language
    const handleAddToBasket = (product) => {
   if (user) {
     setSelectedProduct(product);
@@ -28,6 +33,7 @@ const Wishlist = () => {
     });
   }
 };
+const {t}=useTranslation()
 
   const getBestPrice = (product) => {
     if (product.smallDisPrice || product.smallPrice) {
@@ -55,7 +61,7 @@ const Wishlist = () => {
     <div className={wish.wishlistWrapper}>
       {contextHolder}
       {wishlistItems.length === 0 ? (
-        <p>Wishlist boşdur</p>
+        <p className={wish.empty}>{t("wish.empty")}</p>
       ) : (
         <div className={wish.productsGrid}>
           {wishlistItems.map((product) => {
@@ -71,7 +77,9 @@ const Wishlist = () => {
                   />
                 </div>
                 <div className={wish.productInfo}>
-                  <p className={wish.name}>{product.nameEn}</p>
+                  <p className={wish.name} onClick={()=> navigate(`/${currentLang}/shop/${product.id}`)}> {
+                      currentLang === "az" ? product.nameAz : product.nameEn
+                    }</p>
                   {discount ? (
                     <p>
                       <span className={wish.prevPrice}>
@@ -87,7 +95,7 @@ const Wishlist = () => {
                   className={wish.button}
                   onClick={() => handleAddToBasket(product)}
                 >
-                  Add to Basket
+                 {t("wish.add")}
                 </button>
                 <ModalProduct
                   isOpen={isModalOpen}

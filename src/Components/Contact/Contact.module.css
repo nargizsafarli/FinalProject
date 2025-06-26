@@ -15,7 +15,7 @@
   max-width: 300px;
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 20px;
   font-size: 18px;
   border-right: 1px solid #ddd;
   padding-right: 30px;
@@ -30,7 +30,7 @@
 .infoBox h3 {
   font-size: 18px;
   background: #f5f5f5;
-  padding: 12px;
+  padding: 15px;
   margin-bottom: 20px;
   border-left: 4px solid #2c7c0c;
 }
@@ -51,7 +51,10 @@
   border: solid 1px gainsboro;
   padding: 50px 70px;
 }
-
+.formGr{
+  display: flex;
+  flex-direction: column;
+}
 .formGroup {
   display: flex;
   gap: 20px;
@@ -78,6 +81,19 @@
   border: none;
   font-size: 14px;
     background-color:rgb(243, 243, 243);
+}
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border: 1px solid #2c7c0c;
+  
+}
+
+.error {
+  font-size: 14px;
+  color: rgb(240, 23, 23);
+  margin-left: 142px;
 }
 .formGroup input::placeholder,
 .formGroup textarea::placeholder,
@@ -117,3 +133,65 @@
 .sendBtn:hover {
   background: #5f935f;
 }
+/* Əlavə et: */
+@media (max-width:1100px) {
+  .container {
+    padding: 40px 30px;
+  }
+}
+@media (max-width:970px) {
+  .container {
+    padding: 40px 10px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 853px) {
+  .container {
+    flex-direction: column;
+    padding: 40px 90px;
+    gap: 20px;
+  }
+
+  .infoBox {
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding-right: 0;
+    padding-bottom: 20px;
+    max-width: 100%;
+  }
+.error {
+  margin-left: 8px;
+}
+  .formBox {
+    padding: 30px 20px;
+  }
+
+  .formGroup {
+    flex-direction: column;
+  }
+
+  .labels {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    width: 100%;
+  }
+
+  .sendBtn {
+    width: 100%;
+  }
+}
+@media (max-width: 510px) {
+  .container {
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 20px;
+  }}
+
+/* Xəta mesajları üçün stil */
+

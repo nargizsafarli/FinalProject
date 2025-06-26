@@ -24,24 +24,24 @@
     "thirdH": "Böyük Endirim – Yeni Gələnlər Səni Gözləyir"
   },
   "service": {
-  "serviceP": "Biz nə edirik",
-  "serviceH": "XİDMƏTLƏRİMİZ",
-  "titleOne": "BİTKİNİ SEÇ",
-  "infOne": "Burada hər zövqə uyğun bitkilərimiz var",
-  "titleTwice": "ENDİRİM QAZAN",
-  "infTwice": "Seçilmiş məhsullarda endirimlərimiz var",
-  "titleThird": "PROMO KODUMUZ VAR",
-  "infThird": "Endirim kodumuzdan yararlan",
-  "titleFour": "ƏTRAFLI MƏLUMAT AL",
-  "infFour": "Məhsulların ətraflı səhifəsi mövcuddur"
-},
-"collec": {
-  "titleO": "Yeni Kolleksiya",
-  "infO": "Bitki Limanı",
-  "titleT": "Yalnız Bizim Mağazada!",
-  "infT": "Keramika Dibçək və Bitki"
-},
-"thank": {
+    "serviceP": "Biz nə edirik",
+    "serviceH": "XİDMƏTLƏRİMİZ",
+    "titleOne": "BİTKİNİ SEÇ",
+    "infOne": "Burada hər zövqə uyğun bitkilərimiz var",
+    "titleTwice": "ENDİRİM QAZAN",
+    "infTwice": "Seçilmiş məhsullarda endirimlərimiz var",
+    "titleThird": "PROMO KODUMUZ VAR",
+    "infThird": "Endirim kodumuzdan yararlan",
+    "titleFour": "ƏTRAFLI MƏLUMAT AL",
+    "infFour": "Məhsulların ətraflı səhifəsi mövcuddur"
+  },
+  "collec": {
+    "titleO": "Yeni Kolleksiya",
+    "infO": "Bitki Limanı",
+    "titleT": "Yalnız Bizim Mağazada!",
+    "infT": "Keramika Dibçək və Bitki"
+  },
+  "thank": {
     "leftP": "Sifarişiniz üçün təşəkkür edirik!",
     "leftSp": "Sifarişiniz uğurla qəbul edildi və hazırlanır",
     "trackId": "İzləmə ID-si:",
@@ -55,8 +55,8 @@
     "goback": "Pulsuz qaytarma",
     "zem": "Məhsul zəmanəti",
     "safe": "Təhlükəsiz ödəniş"
-},
-"product": {
+  },
+  "product": {
     "item": "Məhsul:",
     "saved": "Qənaət:",
     "total": "Cəmi:",
@@ -67,11 +67,26 @@
     "text2": "SUMMER15",
     "text3": "promo kodu var",
     "proces": "Sifarişi tamamla",
-     "size":"Ölçü:",
-      "empty":"Səbətiniz boşdur"
-}
-
-
-
-
+    "size": "Ölçü:",
+    "empty": "Səbətiniz boşdur"
+  },
+  "wish": {
+    "add": "Səbətə əlavə et",
+    "empty": "İstək siyasısı boşdur"
+  },
+  "contact": {
+    "inf": "Mağaza məlumatları",
+    "inf1": "Bloomis Demo Mağazası",
+    "inf2": "507-Union Ticarət Mərkəzi",
+    "inf3": "Fransa",
+    "inf4": "Bizə zəng edin:",
+    "inf5": "Bizə e-poçt göndərin:",
+    "name": "Ad",
+    "email": "E-poçt ünvanı",
+    "adres": "Ünvan",
+    "optional": "ixtiyari",
+    "message": "Mesaj",
+    "agree": "Mən şərtlərlə və məxfilik siyasəti ilə razıyam",
+    "send": "GÖNDƏR"
+  }
 }
