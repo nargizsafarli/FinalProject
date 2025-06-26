@@ -55,5 +55,19 @@
         "goback":"free Return",
         "zem":"Product Safety",
         "safe":"Safe and sound"
+    },
+    "product":{
+        "item":"items",
+        "saved":"Your saved",
+        "total":"Total:",
+        "promo":"Have a promo code?",
+        "add":"Add",
+        "remove":"Remove",
+        "text":"We have",
+        "text2":"SUMMER15",
+        "text3":"promo code",
+        "proces":" Proceed to checkout",
+        "size":"Size:",
+        "empty":"Your basket is empty"
     }
 }

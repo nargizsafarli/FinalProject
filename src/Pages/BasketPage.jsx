@@ -7,7 +7,7 @@ function BasketPage() {
   return (
     <div>
         <Navbar/>
-        <Commom title={"Basket"}/>
+        <Commom title={"Basket"} subtitle={"basket"}/>
         <Basket/>
     </div>
   )

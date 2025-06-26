@@ -55,7 +55,22 @@
     "goback": "Pulsuz qaytarma",
     "zem": "Məhsul zəmanəti",
     "safe": "Təhlükəsiz ödəniş"
+},
+"product": {
+    "item": "Məhsul:",
+    "saved": "Qənaət:",
+    "total": "Cəmi:",
+    "promo": "Promo kodunuz var?",
+    "add": "Əlavə",
+    "remove": "Sil",
+    "text": "Bizdə",
+    "text2": "SUMMER15",
+    "text3": "promo kodu var",
+    "proces": "Sifarişi tamamla",
+     "size":"Ölçü:",
+      "empty":"Səbətiniz boşdur"
 }
+
 
 
 

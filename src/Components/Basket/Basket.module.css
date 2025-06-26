@@ -4,6 +4,7 @@
     gap: 30px;
     justify-content: center;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      flex-wrap: wrap;
 }
 .left{
     display: flex;
@@ -15,6 +16,11 @@
 .containerItem{
     display: flex;
     gap: 25px;
+}
+.empty{
+    font-weight: bold;
+    color: gray;
+    font-size: 18px;
 }
 .inf{
     display: flex;
@@ -98,8 +104,8 @@
   /* border: solid 1px gainsboro; */
  padding: 30px;
   background-color:rgb(243, 243, 243);
- 
  display: flex;
+ gap: 10px;
  flex-direction: column;
  width: 100%;
 }
@@ -107,6 +113,28 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+.items{
+    font-weight:500;
+    font-size: 18px;
+    color: rgb(82, 81, 81);
+}
+.Tott{
+    font-weight: bold;
+    font-size: 20px;
+    color: green;
+}
+.lineTh{
+    text-decoration:line-through;
+     margin-right:8px;
+     color: rgb(71, 71, 71);
+}
+.promHave{
+    color: gray;
+}
+.yekpri{
+    color: "green";
+   font-weight: bold;
 }
 .total{
     display: flex;
@@ -130,18 +158,36 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    gap: 20px;
+    gap: 5px;
     align-items: center;
 }
 .input{
    width: 100%;
-   padding: 10px;
+   padding: 13px;
    border:solid 1px gainsboro;
+}
+.input:focus{
+    border: none;
 }
 .add{
     background-color: green;
-    padding: 9px 15px;
+    padding: 10px 15px;
     color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.add:hover{
+    background-color: black;
+}
+.texting{
+    font-weight: 500;
+    color: gray;
+    font-size: 14px;
+    margin-left: 3px;
+}
+.sumfif{
+    color: green;
 }
 .checkBtn{
     background-color: rgb(14, 129, 14);
@@ -151,6 +197,12 @@
     align-items: center;
     justify-content: center;
     padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.checkBtn:hover{
+    background-color: black;
 }
 .hrr{
     background-color: gainsboro;
@@ -175,9 +227,58 @@
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
-
+.sizeDiv{
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
 .totalSummary {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
+}
+@media (max-width: 1046px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .left {
+    padding: 20px;
+    width: 360px;
+  }
+
+  .right {
+    width: 360px;
+  }
+
+  .containerItem {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+  }
+  .icon{
+    position: absolute;
+    right: 6px;
+    top: -5px;
+  }
+
+  .inf {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .img {
+    width: 100px;
+    height: auto;
+  }
+
+  .name {
+    width: auto;
+  }
+
+  .quantity {
+    justify-content: center;
+  }
 }

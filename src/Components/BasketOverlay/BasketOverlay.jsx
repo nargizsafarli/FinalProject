@@ -82,7 +82,12 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
             >
               View Cart
             </div>
-            <div className={basket.cardButtonTwo}>Checkout</div>
+            <div className={basket.cardButtonTwo}
+             onClick={() => {
+                navigate(`/${currentLang}/check`);
+                onClose();
+              }}
+            >Checkout</div>
           </div>
         </div>
       </div>
