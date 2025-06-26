@@ -18,15 +18,15 @@ function Blog() {
   if (error) return <p>Xəta baş verdi: {error}</p>;
 
   return (
+    <div className={blog.mainCon}>
     <div className={blog.container}>
       {data.map((item) => (
         <div key={item.id} className={blog.card}>
-          <img src={item.img} alt={item.title} className={blog.image} />
+          <div className={blog.imgMain}><img src={item.img} alt={item.title} className={blog.image} /></div>
           <div className={blog.content}>
             <h3 className={blog.title}>{item.nameEn}</h3>
             <div className={blog.meta}>
-              <span>By Admin</span> /
-              <span> {new Date(item.date).toLocaleDateString()}</span> /
+              <span className={blog.admin}>By Admin</span> /
               <span className={blog.category}>{item.catagoryEn}</span>
             </div>
             <p className={blog.short}>{item.shortInfEn}</p>
@@ -36,6 +36,7 @@ function Blog() {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }

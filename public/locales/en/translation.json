@@ -89,5 +89,26 @@
     "agree":"I agree to the terms and conditions and the privacy policy",
     "send":"SEND"
 
+  },
+  "register":{
+    "form":"Register form",
+     "name":"First Name",
+     "sur":"Last Name",
+     "email":"Email",
+     "password":"Password",
+     "art":"Have an account?",
+     "login":"Login",
+     "registering":"Registering....",
+     "regis":"Register"
+  },
+  "login":{
+    "form":"Login form",
+     "email":"Email",
+     "password":"Password",
+     "art":"Don't have an account?",
+     "login":"Register",
+     "logining":"Loginig....",
+     "log":"Login"
+
   }
 }

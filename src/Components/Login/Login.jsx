@@ -5,14 +5,20 @@ import log from "./Login.module.css";
 import { loginUser } from "../../redux/features/auth/authSlice";
 import i18n from "../../i18n/i18next";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { IoEyeOffOutline } from "react-icons/io5";
+import { IoEyeOutline } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 function Login() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const currentLang = i18n.language;
   const { loading, error } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,21 +32,27 @@ function Login() {
       await dispatch(loginUser({ email, password })).unwrap();
       setEmail("");
       setPassword("");
-      alert("login succesful");
+      Swal.fire({
+      icon: 'success',
+      title: 'Uğurlu giriş',
+      text: 'Sistəmə daxil oldunuz!',
+    });
     } catch (err) {
       console.log("Login error:", err);
     }
   };
 
   return (
+     <div className={log.mainCon}>
     <div className={log.container}>
       <form className={log.auth} onSubmit={handleSubmit}>
-        <h1 className={log.title}>Login form</h1>
+        <h1 className={log.title}>{t("login.form")}</h1>
         {error && <p className={log.error}>{error}</p>}
 
         <div className={log.formRow}>
           <label htmlFor="email">
-            Email <span className={log.important}>*</span>
+            {t("login.email")}
+            <span className={log.important}>*</span>
           </label>
           <input
             className={log.input}
@@ -54,28 +66,43 @@ function Login() {
 
         <div className={log.formRow}>
           <label htmlFor="password">
-            Password <span className={log.important}>*</span>
+            {t("login.password")}
+            <span className={log.important}>*</span>
           </label>
           <input
             className={log.input}
-            type="password"
+            type={showPassword ? "text" : "password"}
             id="password"
             value={password}
             // placeholder="Password"
             onChange={(e) => setPassword(e.target.value)}
           />
+          <div
+            className={log.passwordToggle}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <IoEyeOutline /> : <IoEyeOffOutline />}
+          </div>
         </div>
 
         <div className={log.actions}>
-          <button type="submit" className={log.button}>
-            {loading ? "Loading..." : "Login"}
-          </button>
+          <div className={log.formRow}>
+            <label htmlFor="password"></label>
+            <button type="submit" className={log.button}>
+              {" "}
+              {loading ? t("login.logining") : t("login.log")}
+            </button>
+          </div>
           <p className={log.redirect}>
-            Hesabın yoxdur?
-            <Link to={`/${currentLang}/register`}>Register</Link>
+            {t("login.art")}
+            <Link className={log.link} to={`/${currentLang}/register`}>
+              {" "}
+              {t("login.login")}
+            </Link>
           </p>
         </div>
       </form>
+    </div>
     </div>
   );
 }

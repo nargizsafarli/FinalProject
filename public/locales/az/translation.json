@@ -88,5 +88,26 @@
     "message": "Mesaj",
     "agree": "Mən şərtlərlə və məxfilik siyasəti ilə razıyam",
     "send": "GÖNDƏR"
+  },
+   "register":{
+    "form":"Qeydiyyat Form",
+     "name":"Ad",
+     "sur":"Soyad",
+     "email":"Email",
+     "password":"Şifrə",
+     "art":" Artıq hesabınız var?",
+     "login":"Daxil ol",
+      "registering":"Təsdiqlənir...",
+     "regis":"Təsdiqləndi"
+  },
+   "login":{
+    "form":"Qeydiyyat formu",
+     "email":"Email",
+     "password":"Şifrə",
+     "art":"Hesabınız yoxdur?",
+     "login":"Qeydiyyat",
+     "logining":"Daxil olunur....",
+     "log":"Daxil ol"
+
   }
 }

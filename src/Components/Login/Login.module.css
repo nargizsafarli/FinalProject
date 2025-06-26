@@ -1,6 +1,11 @@
+.mainCon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .container {
-  max-width: 700px;
-  margin: 0 auto;
+  width: 700px;
+  margin: 0 30px;
   padding: 100px 0;
    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -33,6 +38,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  position: relative;
 }
 
 .formRow label {
@@ -41,16 +47,54 @@
   text-align: end;
 }
 
+.passwordToggle{
+  position: absolute;
+  right: 0;
+  top: 1px;
+  background-color: #2c7c0c;
+  width: 55px;
+  font-size: 20px;
+  height: 43px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 .input {
   flex: 1;
-  padding: 10px 12px;
+  padding: 13px 12px;
   font-size: 16px;
-  border: 1px solid #eeeded;
+  background-color: rgb(247, 246, 246);
+  /* border: 1px solid #eeeded; */
+  border: none;
+}
+.input:focus{
+   outline: none;
+  border: 1px solid #2c7c0c;
+}
+.redirect {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(107, 107, 107);
+}
+.link{
+  text-decoration: none;
+  color: green;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.link:hover{
+  color: rgb(153, 152, 152);
 }
 
 .button {
-  padding: 13px 200px;
-  margin-left: 100px;
+  /* padding: 13px 200px;
+  margin-left: 100px; */
+  width: 84%;
+  padding: 15px;
   font-size: 16px;
   background-color: green;
   color: white;
@@ -72,10 +116,23 @@
   color: red;
 }
 
-.redirect {
-  margin-top: 1rem;
-  text-align: center;
-}
 .important{
      color: red;
+}
+@media(max-width:660px){
+  .auth{
+    padding: 50px 20px;
+  }
+}
+@media(max-width:450px){
+  .container{
+    margin: 0 10px;
+  }
+  .button{
+    width: 72%;
+  }
+  .redirect{
+    margin-top: 20px;
+    font-size: 14px;
+  }
 }

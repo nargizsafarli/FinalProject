@@ -1,24 +1,12 @@
-/* .container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 90px 0;
-}
-.auth{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.form{
-    display: flex;
-    gap: 20px;
-    flex-direction: column;
-} */
 
+.mainCon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .container {
-  max-width: 900px;
-  margin: 0 auto;
+  width: 830px;
+  margin: 0 30px;
   padding: 100px 0;
    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -44,7 +32,22 @@
 .formRow {
   display: flex;
   align-items: flex-start;
-  gap:30px
+  gap:30px;
+  position: relative;
+}
+.passwordToggle{
+  position: absolute;
+  right: 0;
+  top: 1px;
+  background-color: #2c7c0c;
+  width: 57px;
+  font-size: 22px;
+  height: 44px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .formRow label {
@@ -62,11 +65,17 @@
 }
 
 .inputGroup input {
-  padding: 10px 12px;
+  padding: 13px 12px;
   font-size: 16px;
-  border: 1px solid #eeeded;
+  /* border: 1px solid #eeeded; */
   /* border-radius: 4px; */
+  background-color: rgb(247, 246, 246);
+  border: none;
   
+}
+.inputGroup input:focus{
+   outline: none;
+  border: 1px solid #2c7c0c;
 }
 
 .error {
@@ -92,12 +101,13 @@ input::placeholder {
 }
 
 .button {
-  padding: 13px 278px;
-  margin-left: 120px;
-  font-size: 16px;
+  width: 85%;
+  padding: 13px 0;
   background-color: green;
   color: white;
   border: none;
+  font-weight: 500;
+  font-size: 16px;
   cursor: pointer;
   /* width: fit-content; */
   align-self: center;
@@ -109,5 +119,41 @@ input::placeholder {
 
 .redirect {
   text-align: center;
-  margin-top: 1rem;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(107, 107, 107);
+}
+.link{
+  text-decoration: none;
+  color: green;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.link:hover{
+  color: rgb(153, 152, 152);
+}
+/* @media(max-width:920px){
+  .button{
+    width: 77%;
+  }
+} */
+@media(max-width:770px){
+  .con{
+    padding: 100px 30px;
+  }
+}
+
+@media(max-width:660px){
+ 
+  .con{
+    padding: 100px 14px;
+  }
+}
+@media(max-width:450px){
+   .container{
+    margin: 0 5px;
+  }
+  .button{
+    width: 69%;
+  }
 }
