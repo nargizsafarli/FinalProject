@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useTransition } from 'react'
 import team from "./Team.module.css"
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
@@ -10,14 +10,16 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
+import { useTranslation } from 'react-i18next';
 
 
 function OutTeam() {
+    const {t}=useTranslation()
   return (
     <div className={team.container}>
     <div className={team.text}>
-        <p className={team.teamTitle}>OUR TEAMS</p>
-        <span className={team.titleDet}>Meet Our Agents</span>
+        <p className={team.teamTitle}>{t("about.team")}</p>
+        <span className={team.titleDet}>{t("about.meet")}</span>
     </div>
     <div className={team.cardCon}>
         <div className={team.card}>
@@ -34,7 +36,7 @@ function OutTeam() {
            
                 <div>
                     <p className={team.name}>Chris Patt</p>
-                    <span className={team.inf}>Administrative Staff</span>
+                    <span className={team.inf}>{t("about.ad1")}</span>
                 </div>
                 <div className={team.contact}>
                     <div className={team.contactItem}><FaPhone /></div>
@@ -56,7 +58,7 @@ function OutTeam() {
            
                 <div>
                     <p className={team.name}>Chris Patt</p>
-                    <span className={team.inf}>Administrative Staff</span>
+                    <span className={team.inf}>{t("about.add2")}</span>
                 </div>
                 <div className={team.contact}>
                     <div className={team.contactItem}><FaPhone /></div>
@@ -78,7 +80,7 @@ function OutTeam() {
            
                 <div>
                     <p className={team.name}>Chris Patt</p>
-                    <span className={team.inf}>Administrative Staff</span>
+                    <span className={team.inf}>{t("about.add3")}</span>
                 </div>
                 <div className={team.contact}>
                     <div className={team.contactItem}><FaPhone /></div>
@@ -100,7 +102,7 @@ function OutTeam() {
            
                 <div>
                     <p className={team.name}>Chris Patt</p>
-                    <span className={team.inf}>Administrative Staff</span>
+                    <span className={team.inf}>{t("about.add2")}</span>
                 </div>
                 <div className={team.contact}>
                     <div className={team.contactItem}><FaPhone /></div>

@@ -25,6 +25,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import i18next from "i18next";
 import ModalProduct from "../ModalProduct/ModalProduct";
 import { addToWishlist } from "../../redux/features/auth/wishlistSlice";
+import { SpinnerDotted } from "spinners-react";
 
 function Product() {
   const { t } = useTranslation();
@@ -383,7 +384,13 @@ const handleAddToWishlist=(product)=>{
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  if (loading) return <p>Yüklənir...</p>;
+  if (loading) {
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+      <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
+    </div>
+  );
+}
   if (error) return <p>Xəta baş verdi: {error}</p>;
 
   const getDisplayPrice = (product) => {

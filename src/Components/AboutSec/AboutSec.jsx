@@ -2,8 +2,10 @@ import React from "react";
 import abSec from "./AboutSec.module.css";
 import leftImg from "./assets/cms-01.png";
 import img2 from "./assets/cms-02.jpg"
+import { useTranslation } from "react-i18next";
 
 function AboutSec() {
+  const {t}=useTranslation()
   return (
     <div className={abSec.container}>
       <div className={abSec.left}>
@@ -13,31 +15,29 @@ function AboutSec() {
         <div className={abSec.leftText}>
           <div className={abSec.textItem}>
             <div className={abSec.item}>
-              <h3>About Us</h3>
-              <p>OURS PLANT HOUSE</p>
+              <h3>{t("about.us")}</h3>
+              <p>{t("about.us")}</p>
             </div>
             <span className={abSec.spantext}>
-              Anventore veritatis et quasi architecto beatae dicta sun
-              explicabo. Nemo enim. dduis abs no matter what about this section veritatis et quasi architecto beatae dicta sun. Nemo enim. 
+             {t("about.text1")}
             </span>
           </div>
-          <div className={abSec.btn}>Shop Now</div>
+          <div className={abSec.btn}> {t("about.shop")}</div>
         </div>
       </div>
       <div className={abSec.right}>
         <div className={abSec.rightText}>
           <div className={abSec.rightTextItem}>
             <div className={abSec.item}>
-              <h3>gold to interest</h3>
-              <p>NEW COLLECTION</p>
+              <h3>{t("about.meet2")}</h3>
+              <p>{t("about.col")}</p>
             </div>
             <span className={abSec.spantextTwo}>
-              Anventore veritatis et quasi architecto beatae dicta sun
-              explicabo. Nemo enim. dduis abs no matter what about this. veritatis et quasi architecto beatae dicta beatae dicta sun
+             {t("about.text2")}
             </span>
            
           </div>
-            <div className={`${abSec.btn} ${abSec.BtnTwo}`}>Shop Now</div>
+            <div className={`${abSec.btn} ${abSec.BtnTwo}`}> {t("about.shop")}</div>
         </div>
         <div className={abSec.imgConTwo}>
             <img src={img2} className={abSec.ImgTwo}/>

@@ -115,3 +115,8 @@
   background-color: #6ea820;
   color: white;
 }
+@media(max-width:1028px){
+  .cardCon{
+    justify-content: center;
+  }
+}
