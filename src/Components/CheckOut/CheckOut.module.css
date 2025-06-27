@@ -107,8 +107,15 @@ h2 {
 .inputGroup input {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 6px;
   font-size: 14px;
+}
+.inputGroup input:focus{
+   outline: none;
+  border: 1px solid #2c7c0c;
+}
+.fullWidth input:focus{
+     outline: none;
+  border: 1px solid #2c7c0c;
 }
 
 .error {
@@ -177,4 +184,27 @@ h2 {
 
 .payBtn:hover {
   background-color: #0a730a;
+}
+.txt{
+  margin-top: 20px;
+
+}
+.img{
+  width: 100%;
+  margin-top: 25px;
+}
+@media(max-width:842px){
+  .leftCon{
+    margin-top: 20px;
+  }
+  .down{
+    display: flex;
+    gap: 10px;
+   flex-wrap: wrap-reverse;
+  }
+}
+@media(max-width:610px){
+  .container{
+    padding: 40px 20px;
+  }
 }

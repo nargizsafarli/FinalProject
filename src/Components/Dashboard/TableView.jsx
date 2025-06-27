@@ -69,64 +69,65 @@ const TableView = ({ activeTab }) => {
     setIsModalOpen(true);
   };
 
-// const handleModalSave = async () => {
-//   const cleanedRow = { ...newRowData };
+  // const handleModalSave = async () => {
+  //   const cleanedRow = { ...newRowData };
 
-//   Object.entries(cleanedRow).forEach(([key, value]) => {
-//     if (value === "") {
-//       cleanedRow[key] = null;
-//     } else if (typeof data[0]?.[key] === "number") {
-//       cleanedRow[key] = parseFloat(value);
-//     } else if (typeof data[0]?.[key] === "boolean") {
-//       cleanedRow[key] = value === "true" || value === true;
-//     }
-//   });
+  //   Object.entries(cleanedRow).forEach(([key, value]) => {
+  //     if (value === "") {
+  //       cleanedRow[key] = null;
+  //     } else if (typeof data[0]?.[key] === "number") {
+  //       cleanedRow[key] = parseFloat(value);
+  //     } else if (typeof data[0]?.[key] === "boolean") {
+  //       cleanedRow[key] = value === "true" || value === true;
+  //     }
+  //   });
 
-//   const { error, data: inserted } = await supabase
-//     .from(activeTab)
-//     .insert([cleanedRow])
-//     .select();
+  //   const { error, data: inserted } = await supabase
+  //     .from(activeTab)
+  //     .insert([cleanedRow])
+  //     .select();
 
-//   if (!error && inserted?.length > 0) {
-//     setData((prev) => [inserted[0], ...prev]);
-//     setIsModalOpen(false);
-//     setNewRowData({});
-//   } else {
-//     console.error(error);
-//   }
-// };
+  //   if (!error && inserted?.length > 0) {
+  //     setData((prev) => [inserted[0], ...prev]);
+  //     setIsModalOpen(false);
+  //     setNewRowData({});
+  //   } else {
+  //     console.error(error);
+  //   }
+  // };
 
-const handleModalSave = async () => {
-  const cleanedRow = { ...newRowData };
+  const handleModalSave = async () => {
+    const cleanedRow = { ...newRowData };
 
-  Object.entries(cleanedRow).forEach(([key, value]) => {
-    if (value === "") {
-      cleanedRow[key] = null;
+    Object.entries(cleanedRow).forEach(([key, value]) => {
+      if (value === "") {
+        cleanedRow[key] = null;
+      }
+
+      if (typeof data[0]?.[key] === "number") {
+        cleanedRow[key] = value === "" ? null : parseFloat(value);
+      }
+
+      if (typeof data[0]?.[key] === "boolean") {
+        // istifadəçi boolean inputu görmür, ona görə undefined olsa belə false ver
+        cleanedRow[key] =
+          value === undefined ? false : value === "true" || value === true;
+      }
+    });
+
+    const { error, data: inserted } = await supabase
+      .from(activeTab)
+      .insert([cleanedRow])
+      .select();
+
+    if (!error && inserted?.length > 0) {
+      setData((prev) => [inserted[0], ...prev]);
+      setIsModalOpen(false);
+      setNewRowData({});
+    } else {
+      console.error(error);
     }
-
-    if (typeof data[0]?.[key] === "number") {
-      cleanedRow[key] = value === "" ? null : parseFloat(value);
-    }
-
-    if (typeof data[0]?.[key] === "boolean") {
-      // istifadəçi boolean inputu görmür, ona görə undefined olsa belə false ver
-      cleanedRow[key] = value === undefined ? false : value === "true" || value === true;
-    }
-  });
-
-  const { error, data: inserted } = await supabase
-    .from(activeTab)
-    .insert([cleanedRow])
-    .select();
-
-  if (!error && inserted?.length > 0) {
-    setData((prev) => [inserted[0], ...prev]);
-    setIsModalOpen(false);
-    setNewRowData({});
-  } else {
-    console.error(error);
-  }
-};
+  };
 
   const columns = [
     {
@@ -137,58 +138,78 @@ const handleModalSave = async () => {
       width: 60,
     },
     ...Object.keys(data[0] || {}).map((key) => ({
-       title: (
-    <span style={{ fontSize: "16px", fontWeight: "bold",color:" rgb(79, 126, 79)" }}>
-      {key}
-    </span>
-  ),
+      title: (
+        <span
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: " rgb(79, 126, 79)",
+          }}
+        >
+          {key}
+        </span>
+      ),
       dataIndex: key,
       key,
-      
-    render: (text, record) => {
-  const isEditing = editingId === record.id;
-   const longKeys = ["descriptionAz", "descriptionEn", "img", "thumnailImg","detailAz","detailEn","answerAz","answerEn"];
- if (isEditing) {
-  if (key === "id" || key === "created_at") {
-    return record[key]; // Edit mümkün deyil
-  }
-  return (
-    <input
-      value={editedRow[key] ?? ""}
-      className={dash.inputCell}
-      onChange={(e) => handleInputChange(e, key)}
-      style={{ width: "100%" }}
-    />
-  );
-}
 
-  if(text === null || text === "" || text === undefined)return "NULL"
-  if (typeof text === "boolean") return text ? "true" : "false";
-    if (longKeys.includes(key)) {
-    return (
-      <div
-        style={{
-          width: 300,
-          height: 50,
-          overflow: "auto",
-          whiteSpace: "pre-wrap",
-          wordBreak: "break-word",
-        }}
-      >
-        {text}
-      </div>
-    );
-  }
-   return text;
-}
+      render: (text, record) => {
+        const isEditing = editingId === record.id;
+        const longKeys = [
+          "descriptionAz",
+          "descriptionEn",
+          "img",
+          "thumnailImg",
+          "detailAz",
+          "detailEn",
+          "answerAz",
+          "answerEn",
+        ];
+        if (isEditing) {
+          if (key === "id" || key === "created_at") {
+            return record[key]; // Edit mümkün deyil
+          }
+          return (
+            <input
+              value={editedRow[key] ?? ""}
+              className={dash.inputCell}
+              onChange={(e) => handleInputChange(e, key)}
+              style={{ width: "100%" }}
+            />
+          );
+        }
 
+        if (text === null || text === "" || text === undefined) return "NULL";
+        if (typeof text === "boolean") return text ? "true" : "false";
+        if (longKeys.includes(key)) {
+          return (
+            <div
+              style={{
+                width: 300,
+                height: 50,
+                overflow: "auto",
+                whiteSpace: "pre-wrap",
+                wordBreak: "break-word",
+              }}
+            >
+              {text}
+            </div>
+          );
+        }
+        return text;
+      },
     })),
     {
       title: (
-    <span style={{ fontSize: "16px", fontWeight: "bold" ,color:" rgb(79, 126, 79)"}}>
-      Actions
-    </span>
-  ),
+        <span
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: " rgb(79, 126, 79)",
+          }}
+        >
+          Actions
+        </span>
+      ),
       key: "actions",
       fixed: "right",
       width: 100,
@@ -233,39 +254,46 @@ const handleModalSave = async () => {
 
       {/* Modal for Add */}
       <Modal
-        title="Add New Item"
+        title={
+          <span
+            style={{ fontSize: "20px", fontWeight: "bold", color: "#4f7e4f" }}
+          >
+            Add New Item
+          </span>
+        }
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         onOk={handleModalSave}
         okText="Add"
-         bodyStyle={{
-    maxHeight: "400px", // maksimum hündürlük
-    overflowY: "auto",  // scroll aktiv olsun
+         okButtonProps={{
+    className: dash.customOkBtn
   }}
+        bodyStyle={{
+          maxHeight: "400px", // maksimum hündürlük
+          overflowY: "auto", // scroll aktiv olsun
+        }}
       >
-     {Object.keys(newRowData).map((key) => {
-  // boolean field-ləri inputda göstərmirik
-  if (typeof newRowData[key] === "boolean") {
-    return null;
-  }
+        {Object.keys(newRowData).map((key) => {
+          // boolean field-ləri inputda göstərmirik
+          if (typeof newRowData[key] === "boolean") {
+            return null;
+          }
 
-  return (
-    <div key={key} style={{ marginBottom: "10px" }}>
-      <label style={{ display: "block", fontWeight: 500 }}>{key}</label>
-      <Input
-        value={newRowData[key]}
-        onChange={(e) =>
-          setNewRowData((prev) => ({ ...prev, [key]: e.target.value }))
-        }
-      />
-    </div>
-  );
-})}
-
+          return (
+            <div key={key} style={{ marginBottom: "10px" }}>
+              <label style={{ display: "block", fontWeight: 500 }}>{key}</label>
+              <Input
+                value={newRowData[key]}
+                onChange={(e) =>
+                  setNewRowData((prev) => ({ ...prev, [key]: e.target.value }))
+                }
+              />
+            </div>
+          );
+        })}
       </Modal>
     </div>
   );
 };
 
 export default TableView;
-

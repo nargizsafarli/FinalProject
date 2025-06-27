@@ -110,5 +110,20 @@
      "logining":"Loginig....",
      "log":"Login"
 
+  },
+   "test":{
+    "p1":" Add more beauty to the beauty of your home with our plants. We have plants for every taste",
+    "about":"Marketing Personal",
+    "p2":" Great platform. My work productivity has doubled! Here you can find plants for everyone's taste. Trust our experience and start shopping with confidence right now. Hurry!!",
+    "about2":"Developer",
+    "p3":" Great experience and great support. Definitely recommend. We have products that serve both your taste and your budget. according to every taste and every design",
+    "about3":"UI Designer"
+  },
+  "modPro":{
+    "price":"Price:",
+    "size":"Size:",
+    "bask":"Add to Basket",
+    "sel":"Select a size",
+    "sel2":"Please select a size!"
   }
 }

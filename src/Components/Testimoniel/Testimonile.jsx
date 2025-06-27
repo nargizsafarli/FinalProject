@@ -8,18 +8,20 @@ import test from "./Testimoniel.module.css";
 import imgLogo1 from "./assets/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background_662251-838.avif"
 import imgLogo2 from "./assets/download (2).jpeg"
 import imgLogo3 from "./assets/download.jpeg"
-
+import { MdNavigateNext } from "react-icons/md";
+import { GrFormPrevious } from "react-icons/gr";
+import { useTranslation } from "react-i18next";
 function Testimonial() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
+  const {t}=useTranslation()
 
   return (
     <div className={test.container}>
       <div className={test.header}>
-        <h2 className={test.title}>Testimonial</h2>
         <div className={test.navWrapper}>
-          <div ref={prevRef} className={test.prev}>‹</div>
-          <div ref={nextRef} className={test.next}>›</div>
+          <div ref={prevRef} className={test.prev}><GrFormPrevious /></div>
+          <div ref={nextRef} className={test.next}><MdNavigateNext /></div>
         </div>
       </div>
 
@@ -42,12 +44,12 @@ function Testimonial() {
         <SwiperSlide>
           <div className={test.card}>
             <p className={test.message}>
-              Saved our business! We have no regrets! Thanks for the great service.
+             {t("test.p1")}
             </p>
             <div className={test.user}>
               <img src={imgLogo1} alt="user1" className={test.image} />
-              <h4>DESTINEE</h4>
-              <span>Marketing Personal</span>
+              <h4>Joe Toy</h4>
+              <span>{t("test.about")}</span>
             </div>
           </div>
         </SwiperSlide>
@@ -55,12 +57,13 @@ function Testimonial() {
         <SwiperSlide>
           <div className={test.card}>
             <p className={test.message}>
-              Great platform. My work productivity has doubled!
+             {t("test.p1")}
+          
             </p>
             <div className={test.user}>
               <img src={imgLogo2} alt="user2" className={test.image}/>
-              <h4>JASON</h4>
-              <span>Developer</span>
+              <h4>Jason Mack</h4>
+              <span>{t("test.about2")}</span>
             </div>
           </div>
         </SwiperSlide>
@@ -68,12 +71,12 @@ function Testimonial() {
         <SwiperSlide>
           <div className={test.card}>
             <p className={test.message}>
-              Amazing experience and great support. Definitely recommend it!
+             {t("test.p3")}
             </p>
             <div className={test.user}>
               <img src={imgLogo3} alt="user3" className={test.image}/>
-              <h4>AMY</h4>
-              <span>UI Designer</span>
+              <h4>Amy Blane</h4>
+              <span>{t("test.about2")}</span>
             </div>
           </div>
         </SwiperSlide>

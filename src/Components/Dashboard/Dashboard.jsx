@@ -34,12 +34,12 @@ function Dashboard() {
         </div>
         {/* <hr className={dash.hrr} */}
         {/* /> */}
-        <p
+        {/* <p
           className={activeTab === "chart" ? dash.active : dash.prof}
           onClick={() => setActiveTab("chart")}
         >
           📊 Chart
-        </p>
+        </p> */}
         <p
           className={activeTab === "product" ? dash.active : dash.prof}
           onClick={() => setActiveTab("product")}
@@ -65,12 +65,15 @@ function Dashboard() {
           <FaRegFileAlt /> FAQ
         </p>
       </div>
-      <div className={dash.rightContainer}>
+      {/* <div className={dash.rightContainer}>
   {activeTab === "chart" ? (
     <ChartView/>
   ) : (
     <TableView activeTab={activeTab} />
   )}
+</div> */}
+<div className={dash.rightContainer}>
+ <TableView activeTab={activeTab} />
 </div>
 
     </div>

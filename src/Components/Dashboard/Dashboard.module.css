@@ -199,3 +199,14 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.customOkBtn {
+  background-color: #4f7e4f;
+  color: white;
+  border: none;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.customOkBtn:hover{
+  background-color: black !important;
+}

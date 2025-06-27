@@ -1,16 +1,18 @@
 
 .container {
     width: 100%;
-    padding: 50px 0;
-    margin-top: 50px;
+    min-height: 500px;
+    padding: 80px 0;
+    /* margin-top: 50px; */
     background-image: url('./assets/bg-testimonial.webp');
     background-position: center;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     text-align: center;
     position: relative;
-  
+    
   }
+  
   
   .title {
     font-size: 30px;
@@ -63,6 +65,7 @@
     width: 100px;
     height: 90px;
     border-radius: 50%;
+    object-fit: cover;
   }
   
   .user h4 {
@@ -82,8 +85,16 @@
  .navWrapper{
     position: absolute;
     display: flex;
-    gap: 10px;
+    font-size: 25px;
+    cursor: pointer;
+    gap: 7px;
     right: 300px;
-    top: 65px;
-    right: 19%;
+    color: green;
+    top: 66px;
+    right: 15%;
+ }
+ @media(max-width:1286px){
+  .container{
+    background-size: cover;
+  }
  }

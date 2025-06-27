@@ -5,6 +5,8 @@ import { Modal, Input, Button } from "antd";
 import styles from "./PaymentModal.module.css";
 import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n/i18next";
+import { useDispatch } from "react-redux";
+import { clearBasket } from "../../redux/features/auth/basketSlice";
 
 const PaymentModal = ({ open, onClose }) => {
   const [cardData, setCardData] = useState({
@@ -23,9 +25,11 @@ const currentLang=i18n.language
   const handleFocus = (e) => {
     setCardData({ ...cardData, focus: e.target.name });
   };
+  const dispatch=useDispatch();
 
   const handlePay = () => {
    navigate(`/${currentLang}/thank`)
+    dispatch(clearBasket())
     onClose();
   };
 
@@ -35,7 +39,13 @@ const currentLang=i18n.language
       onCancel={onClose}
       footer={null}
       width={800}
-      title="Kart Məlumatları"
+      title={
+          <span
+            style={{ fontSize: "20px", fontWeight: "bold", color: "green" }}
+          >
+            Add New Item
+          </span>
+        }
       centered
     >
       <div className={styles.wrapper}>
@@ -55,6 +65,7 @@ const currentLang=i18n.language
             placeholder="Card Number"
             value={cardData.number}
             onChange={handleInputChange}
+            required
             onFocus={handleFocus}
             className={styles.input}
           />
@@ -64,11 +75,14 @@ const currentLang=i18n.language
             value={cardData.name}
             onChange={handleInputChange}
             onFocus={handleFocus}
+            required
             className={styles.input}
           />
+          <div className={styles.inputDiv}>
           <Input
             name="expiry"
             placeholder="MM/YY"
+            required
             value={cardData.expiry}
             onChange={handleInputChange}
             onFocus={handleFocus}
@@ -78,13 +92,15 @@ const currentLang=i18n.language
             name="cvc"
             placeholder="CVC"
             value={cardData.cvc}
+            required
             onChange={handleInputChange}
             onFocus={handleFocus}
             className={styles.input}
           />
-          <Button type="primary" block onClick={handlePay}>
+          </div>
+          <button type="primary" className={styles.bbtn} block onClick={handlePay}>
             Təsdiqlə
-          </Button>
+          </button>
         </div>
       </div>
     </Modal>

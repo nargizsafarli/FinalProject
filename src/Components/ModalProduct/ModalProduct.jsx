@@ -4,12 +4,15 @@ import { Modal, Button, notification } from "antd";
 import { useDispatch } from "react-redux";
 import mod from "./ModalProduct.module.css";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
+import i18n from "../../i18n/i18next";
+import { useTranslation } from "react-i18next";
 
 function ModalProduct({ isOpen, onClose, product }) {
   const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
   const [selectedSize, setSelectedSize] = useState(null);
   const [currentPrice, setCurrentPrice] = useState(0);
+  const [sizeError, setSizeError] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
@@ -18,6 +21,8 @@ function ModalProduct({ isOpen, onClose, product }) {
     }
   }, [isOpen]);
 
+  const currentLang = i18n.language;
+  const {t}=useTranslation()
   useEffect(() => {
     if (!product || !selectedSize) return;
 
@@ -33,27 +38,30 @@ function ModalProduct({ isOpen, onClose, product }) {
     setCurrentPrice(price);
   }, [selectedSize, product]);
 
-
   const handleAddToBasket = () => {
-  if (!selectedSize) {
-    alert("Please select a size");
-    return;
-  }
+    if (!selectedSize) {
+      setSizeError(true);
 
-  dispatch(addToBasket({ product, size: selectedSize }));
-  onClose();
+      setTimeout(() => {
+        setSizeError(false);
+      }, 2000);
 
-  setTimeout(() => {
-    api.success({
-      message: "Added to Basket",
-      placement: "topRight",
-      duration: 2,
-       showProgress: true,
-      zIndex: 10000,
-    });
-  }, 400);
-};
+      return;
+    }
 
+    dispatch(addToBasket({ product, size: selectedSize }));
+    onClose();
+
+    setTimeout(() => {
+      api.success({
+        message: "Added to Basket",
+        placement: "topRight",
+        duration: 2,
+        showProgress: true,
+        zIndex: 10000,
+      });
+    }, 400);
+  };
 
   if (!product) return null;
 
@@ -67,56 +75,70 @@ function ModalProduct({ isOpen, onClose, product }) {
       styles={{
         mask: { backgroundColor: "rgba(37, 37, 37, 0.2)" },
       }}
+      
     >
       <div className={mod.modalContainer}>
-       {contextHolder}
+        {contextHolder}
         <div className={mod.left}>
           <img src={product.img} alt={product.name} className={mod.image} />
         </div>
 
         <div className={mod.right}>
-          <h2>{product.nameEn}</h2>
-          <p>{product.descriptionEn}</p>
+          <h2 className={mod.name}>
+            {currentLang === "az" ? product.nameAz : product.nameEn}
+          </h2>
+          <p className={mod.des}>  {
+                    
+                      currentLang === "az" ? product.descriptionAz : product.descriptionEn
+                    }</p>
 
           <div className={mod.priceBlock}>
-            <span className={mod.priceLabel}>Price:</span>
-            <span className={mod.priceValue}>
-              {currentPrice > 0 ? `${currentPrice}$` : "Select a size"}
+            <span className={mod.inf}> {t("modPro.price")}</span>
+            <span
+              className={`${mod.priceValue} ${sizeError ? mod.errorText : ""}`}
+            >
+              {sizeError
+                ? t("modPro.sel2")
+                : currentPrice > 0
+                ? `${currentPrice}$`
+                : t("modPro.sel")}
             </span>
           </div>
 
           {/* Size Options like DetailSec */}
           <div className={mod.sizeBox}>
-            <span className={mod.sizeLabel}>Size:</span>
+            <span className={mod.inf}> {t("modPro.size")}</span>
 
             <div
-              className={`${mod.sizeOption} ${selectedSize === "small" ? mod.activeSize : ""} ${!product.small ? mod.disabled : ""}`}
+              className={`${mod.sizeOption} ${
+                selectedSize === "small" ? mod.activeSize : ""
+              } ${!product.small ? mod.disabled : ""}`}
               onClick={() => product.small && setSelectedSize("small")}
             >
               S
             </div>
 
             <div
-              className={`${mod.sizeOption} ${selectedSize === "medium" ? mod.activeSize : ""} ${!product.medium ? mod.disabled : ""}`}
+              className={`${mod.sizeOption} ${
+                selectedSize === "medium" ? mod.activeSize : ""
+              } ${!product.medium ? mod.disabled : ""}`}
               onClick={() => product.medium && setSelectedSize("medium")}
             >
               M
             </div>
 
             <div
-              className={`${mod.sizeOption} ${selectedSize === "large" ? mod.activeSize : ""} ${!product.large ? mod.disabled : ""}`}
+              className={`${mod.sizeOption} ${
+                selectedSize === "large" ? mod.activeSize : ""
+              } ${!product.large ? mod.disabled : ""}`}
               onClick={() => product.large && setSelectedSize("large")}
             >
               L
             </div>
           </div>
 
-          <Button
-          
-             className={mod.customAddBtn}
-            onClick={handleAddToBasket}
-          >
-            Add to Basket
+          <Button className={mod.customAddBtn} onClick={handleAddToBasket}>
+           {t("modPro.bask")}
           </Button>
         </div>
       </div>

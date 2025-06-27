@@ -4,6 +4,7 @@ import { FaRegCalendarMinus } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { getPrices } from "../../Utils/getprice";
 import PaymentModal from "../PaymentModal/PaymentModel";
+import img from "./assets/trust_badge.png"
 
 function CheckOut() {
   const basketItems = useSelector((state) => state.basket.items);
@@ -135,7 +136,8 @@ const finalTotal = totalPrice - discountAmount;
             <span>Ümumi:</span>
              <span>₼{finalTotal.toFixed(2)}</span>
           </div>
-          <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account</p>
+          <p className={check.txt}>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account</p>
+          <img src={img} className={check.img}/>
         </div>
       </div>
       </div>

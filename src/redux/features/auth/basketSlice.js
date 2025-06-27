@@ -62,7 +62,11 @@ const basketSlice = createSlice({
       }
       saveBasketToLocalStorage(state.items);
     },
-
+    clearBasket: (state) => {
+      state.items = [];
+      state.total = 0;
+      localStorage.removeItem("basketItems");
+    },
     removeFromBasket: (state, action) => {
       const { id, size } = action.payload;
       state.items = state.items.filter(
@@ -111,6 +115,7 @@ export const {
   calculateTotal,
   setPromoCode,
   clearPromoCode,
+  clearBasket
 } = basketSlice.actions;
 
 export default basketSlice.reducer;

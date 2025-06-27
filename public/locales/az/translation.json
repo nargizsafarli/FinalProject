@@ -108,6 +108,21 @@
      "login":"Qeydiyyat",
      "logining":"Daxil olunur....",
      "log":"Daxil ol"
-
+  },
+ "test": {
+  "p1": "Evinizin gözəlliyinə bitkilərimizlə daha çox gözəllik qatın. Hər zövqə uyğun bitkilər bizdə var.",
+  "about": "Marketinq üzrə mütəxəssis",
+  "p2": "Möhtəşəm platformadır. İş məhsuldarlığım ikiqat artdı! Burada hər kəsin zövqünə uyğun bitkilər tapa bilərsiniz. Təcrübəmizə güvənin və indi alış-verişə inamla başlayın. Tələsin!!",
+  "about2": "Proqramçı",
+  "p3": "Əla təcrübə və əla dəstək. Mütləq tövsiyə edirəm. Həm zövqünüzə, həm də büdcənizə uyğun məhsullarımız var. Hər zövqə və dizayna uyğun.",
+  "about3": "UI Dizayner"
+},
+ "modPro":{
+    "price":"Qiymət:",
+    "size":"Ölçü:",
+    "bask":"Səbətə əlavə et",
+    "sel":"Ölçü seç",
+    "sel2":"Bir ölçü seçin!"
   }
+
 }

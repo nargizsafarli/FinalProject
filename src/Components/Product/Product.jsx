@@ -345,13 +345,6 @@ function Product() {
   if (user) {
     setSelectedProduct(product);
     setIsModalOpen(true);
-      api.success({
-      message: 'Added to Basket',
-      placement: 'topRight',
-       showProgress: true,
-      duration: 2,
-      zIndex: 10000,
-    });
   } else {
      api.warning({
       message: 'Zəhmət olmasa daxil olun',

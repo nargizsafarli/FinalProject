@@ -1,5 +1,6 @@
 .modalContainer{
     display: flex;
+    /* flex-wrap: wrap; */
     gap: 20px;
 }
 .image{
@@ -10,23 +11,26 @@
      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
      display: flex;
      flex-direction: column;
-     gap: 10px;
+     gap: 12px;
 }
 .customAddBtn {
   width: 230px;
-  padding:17px;
+  padding:22px;
   font-weight: bold;
   background-color: green;
   color: rgb(252, 250, 250) !important;
   border: none !important;
   border-radius: none !important;
   cursor: pointer;
+  font-size: 17px;
+  margin-top: 20px;
  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
    transition: all 0.3s ease-in;
 }
 .customAddBtn:hover{
   background-color: black !important;
 }
+
 /* copyyyyyyyyyyyy */
 .sizeBox {
   display: flex;
@@ -122,8 +126,66 @@
   color: gray;
   margin-right: 10px;
 }
-
+.priceLabel{
+  font-size: 18px;
+  font-weight: 600;
+  /* color: #838383; */
+}
+.priceValue{
+  font-size: 16px;
+  margin-left: 5px;
+  font-weight: 500;
+  color: #9c9c9c;
+  color: green;
+}
+.sizeLabel{
+   font-size: 18px;
+  font-weight: 600;
+}
 .newPrice {
   font-weight: 500;
   color:#2a7d2e
+}
+.name{
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+.name{
+  font-family: 'Libre Baskerville', serif;
+  font-weight: 500;
+  font-size: 24px;
+}
+.des{
+   font-size: 16px;
+     font-weight: 500;
+     color: rgb(158, 158, 158);
+}
+.inf{
+   font-size: 16px;
+    font-weight: 500;
+     color: rgb(95, 95, 95);
+}
+.iftIt{
+   color: rgb(158, 158, 158);
+}
+.errorText {
+  color: red;
+  font-weight: 600;
+  animation-name: shake;
+  /* animation: shake 0.4s ease; */
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+@media(max-width:660px){
+  .modalContainer{
+    flex-wrap: wrap;
+    margin: 0 10px;
+    justify-content: center;
+  }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import thank from "./Thanks.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +14,9 @@ import { MdSecurity } from "react-icons/md";
 import i18n from '../../i18n/i18next';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Confetti from 'react-confetti'
+import { useWindowSize } from 'react-use';
+// import { useWindowSize } from 'react-use'
 
 function Thanks() {
     const trackId = Math.floor(100000 + Math.random() * 900000);
@@ -31,6 +34,12 @@ const dates = [
 ];
 const currentLang=i18n.language
 const navigate=useNavigate()
+ const { width, height } = useWindowSize()
+ const [showConfetti, setShowConfetti] = useState(true);
+ useEffect(() => {
+    const timer = setTimeout(() => setShowConfetti(false), 6000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <div className={thank.mainCon}>
     <div className={thank.container}>
@@ -42,6 +51,7 @@ const navigate=useNavigate()
             <p>{t("thank.trackId")}</p>
             <span>#{trackId}</span>
         </div>
+         {showConfetti && <Confetti width={width} height={height} />}
         <div className={thank.track}>
            <div className={thank.trackItem}>
              <div className={thank.trackItemIcon}><GiConfirmed /></div>
