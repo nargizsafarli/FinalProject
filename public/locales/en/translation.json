@@ -125,5 +125,25 @@
     "bask":"Add to Basket",
     "sel":"Select a size",
     "sel2":"Please select a size!"
+  },
+  "check":{
+    "inf1":"Returning customer? He are here with you",
+    "inf2":" Have a coupon? Then enter your code",
+    "bill":"Billing Details",
+    "coun":"Country",
+    "coun1":"Russia",
+    "coun2":"Azerbaijan",
+    "coun3":"Turkey",
+    "name":"First Name",
+    "last":"Last Name",
+    "stret":"Street Address",
+    "town":"Town / City",
+    "phone":"Phone",
+    "order":"Continue paying",
+    "yek":"Relust",
+    "esas":"Base price:",
+    "en":"Discount",
+    "tot":"Total:",
+    "p":"Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account"
   }
 }

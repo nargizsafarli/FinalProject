@@ -28,6 +28,7 @@ const currentLang=i18n.language
   const dispatch=useDispatch();
 
   const handlePay = () => {
+     localStorage.setItem("thankAccess", "true");
    navigate(`/${currentLang}/thank`)
     dispatch(clearBasket())
     onClose();

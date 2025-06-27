@@ -36,10 +36,21 @@ const currentLang=i18n.language
 const navigate=useNavigate()
  const { width, height } = useWindowSize()
  const [showConfetti, setShowConfetti] = useState(true);
+
  useEffect(() => {
     const timer = setTimeout(() => setShowConfetti(false), 6000);
     return () => clearTimeout(timer);
   }, []);
+    useEffect(() => {
+    const allowed = localStorage.getItem("thankAccess");
+    if (allowed !== "true") {
+      navigate(`/${currentLang}`);
+    } else {
+      // Açmağa icazə verildi, icazəni bir dəfəlik sil
+      localStorage.removeItem("thankAccess");
+    }
+  }, [navigate, currentLang]);
+
   return (
     <div className={thank.mainCon}>
     <div className={thank.container}>

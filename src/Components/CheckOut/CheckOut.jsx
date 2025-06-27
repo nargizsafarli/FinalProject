@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { getPrices } from "../../Utils/getprice";
 import PaymentModal from "../PaymentModal/PaymentModel";
 import img from "./assets/trust_badge.png"
+import { useTranslation } from "react-i18next";
 
 function CheckOut() {
   const basketItems = useSelector((state) => state.basket.items);
@@ -55,42 +56,42 @@ const finalTotal = totalPrice - discountAmount;
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+const {t}=useTranslation()
   return (
     <div className={check.container}>
     <div className={check.conInf}>
-        <div className={check.infItem}><FaRegCalendarMinus className={check.kalicon} /> Returning customer? Click here to login</div>
-        <div className={check.infItem}><FaRegCalendarMinus className={check.kalicon}/> Have a coupon? Click here to enter your code</div>
+        <div className={check.infItem}><FaRegCalendarMinus className={check.kalicon} /> {t("check.inf1")}</div>
+        <div className={check.infItem}><FaRegCalendarMinus className={check.kalicon}/> {t("check.inf2")}</div>
     </div>
     <div className={check.down}>
     <div className={check.leftCon}>
-  <h2>Billing Details</h2>
+  <h2> {t("check.bill")}</h2>
   <form onSubmit={handleSubmit} className={check.form}>
     <div className={check.fullWidth}>
-      <label>Country <span className={check.star}>*</span></label>
+      <label> {t("check.coun")} <span className={check.star}>*</span></label>
       <select name="country" className={check.selectInput}>
-        <option value="bangladesh">Bangladesh</option>
-        <option value="azerbaijan">Azerbaijan</option>
-        <option value="turkey">Turkey</option>
+        <option value="bangladesh">{t("check.coun1")}</option>
+        <option value="azerbaijan">{t("check.coun2")}</option>
+        <option value="turkey">{t("check.coun3")}</option>
       </select>
     </div>
 
     <div className={check.rowTwo}>
       <div className={check.inputGroup}>
-        <label>First Name <span className={check.star}>*</span></label>
+        <label>{t("check.name")}<span className={check.star}>*</span></label>
         <input type="text" name="name" value={form.name} onChange={handleChange} />
         {errors.name && <span className={check.error}>{errors.name}</span>}
       </div>
 
       <div className={check.inputGroup}>
-        <label>Last Name <span className={check.star}>*</span></label>
+        <label>{t("check.last")}<span className={check.star}>*</span></label>
         <input type="text" name="surname" value={form.surname} onChange={handleChange} />
         {errors.surname && <span className={check.error}>{errors.surname}</span>}
       </div>
     </div>
 
     <div className={check.fullWidth}>
-      <label>Street Address <span className={check.star}>*</span></label>
+      <label>{t("check.stret")}<span className={check.star}>*</span></label>
       <input type="text" name="address" value={form.address} placeholder="Street address" onChange={handleChange} />
        {errors.address && <span className={check.error}>{errors.address}</span>}
         <input type="text" name="apt" placeholder="Apartment, suite, unit etc. (optional)" style={{marginTop:"30px"}} />
@@ -98,18 +99,18 @@ const finalTotal = totalPrice - discountAmount;
     </div>
 
     <div className={check.fullWidth}>
-      <label>Town / City <span className={check.star}>*</span></label>
+      <label>{t("check.town")}<span className={check.star}>*</span></label>
       <input type="text" name="city" value={form.city} onChange={handleChange} />
       {errors.city && <span className={check.error}>{errors.city}</span>}
     </div>
 
     <div className={check.fullWidth}>
-      <label>Phone <span className={check.star}>*</span></label>
+      <label>{t("check.phone")}<span className={check.star}>*</span></label>
       <input type="text" name="phone" value={form.phone} onChange={handleChange} />
       {errors.phone && <span className={check.error}>{errors.phone}</span>}
     </div>
     <div>
-    <button type="submit" className={check.submitBtn}>Place Order</button>
+    <button type="submit" className={check.submitBtn}>{t("check.order")}</button>
         <PaymentModal open={showModal} onClose={() => setShowModal(false)} />
     </div>
   </form>
@@ -117,26 +118,26 @@ const finalTotal = totalPrice - discountAmount;
 
 
       <div className={check.rightCon}>
-        <h2 className={check.yek}>YEKUN</h2>
+        <h2 className={check.yek}>{t("check.yek")}</h2>
         <hr className={check.divider}/>
         <div className={check.summary}>
           <div className={check.row}>
-            <span className={check.pay} >Əsas qiymət:</span>
+            <span className={check.pay} >{t("check.esas")}</span>
              <span>₼{totalPrice.toFixed(2)}</span>
           </div>
            {promoCode && (
       <div className={check.row}>
-        <span className={check.pay}>Endirim ({promoCode}):</span>
+        <span className={check.pay}>{t("check.en")}({promoCode}):</span>
         <span>-₼{discountAmount.toFixed(2)}</span>
       </div>
     )}
 
           <hr className={check.divider} />
           <div className={check.totalRow}>
-            <span>Ümumi:</span>
+            <span>{t("check.tot")}</span>
              <span>₼{finalTotal.toFixed(2)}</span>
           </div>
-          <p className={check.txt}>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account</p>
+          <p className={check.txt}>{t("check.p")}</p>
           <img src={img} className={check.img}/>
         </div>
       </div>

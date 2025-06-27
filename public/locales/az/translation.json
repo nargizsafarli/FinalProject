@@ -123,6 +123,27 @@
     "bask":"Səbətə əlavə et",
     "sel":"Ölçü seç",
     "sel2":"Bir ölçü seçin!"
-  }
+  },
+  "check": {
+  "inf1": "Qayıdan müştəri? Biz buradayıq səninləyik",
+  "inf2": "Kuponun var? O zaman kodunu daxil et",
+  "bill": "Faktura Məlumatları",
+  "coun": "Ölkə",
+  "coun1": "Rusiya",
+  "coun2": "Azərbaycan",
+  "coun3": "Türkiyə",
+  "name": "Ad",
+  "last": "Soyad",
+  "stret": "Küçə ünvanı",
+  "town": "Şəhər / Qəsəbə",
+  "phone": "Telefon",
+  "order": "Ödəməyə davam et",
+  "yek": "Nəticə",
+  "esas": "Əsas qiymət:",
+  "en": "Endirim",
+  "tot": "Cəmi:",
+  "p": "Ödənişinizi birbaşa bank hesabımıza köçürün. Zəhmət olmasa sifariş nömrənizi ödəniş təyinatı kimi istifadə edin. Ödəniş hesabımıza keçmədən sifarişiniz göndərilməyəcək."
+}
+
 
 }
