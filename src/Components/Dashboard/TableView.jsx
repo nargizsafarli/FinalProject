@@ -69,33 +69,6 @@ const TableView = ({ activeTab }) => {
     setIsModalOpen(true);
   };
 
-  // const handleModalSave = async () => {
-  //   const cleanedRow = { ...newRowData };
-
-  //   Object.entries(cleanedRow).forEach(([key, value]) => {
-  //     if (value === "") {
-  //       cleanedRow[key] = null;
-  //     } else if (typeof data[0]?.[key] === "number") {
-  //       cleanedRow[key] = parseFloat(value);
-  //     } else if (typeof data[0]?.[key] === "boolean") {
-  //       cleanedRow[key] = value === "true" || value === true;
-  //     }
-  //   });
-
-  //   const { error, data: inserted } = await supabase
-  //     .from(activeTab)
-  //     .insert([cleanedRow])
-  //     .select();
-
-  //   if (!error && inserted?.length > 0) {
-  //     setData((prev) => [inserted[0], ...prev]);
-  //     setIsModalOpen(false);
-  //     setNewRowData({});
-  //   } else {
-  //     console.error(error);
-  //   }
-  // };
-
   const handleModalSave = async () => {
     const cleanedRow = { ...newRowData };
 
@@ -128,6 +101,61 @@ const TableView = ({ activeTab }) => {
       console.error(error);
     }
   };
+  const columnNames = {
+    id: "Id",
+    img: "Image",
+    materialAz: "Material(AZ)",
+    materialEn: "Material(EN)",
+    created_at: "Creation date",
+    isDiscount: "Discount",
+    isStock: "Stock",
+    brand: "Brand",
+    titleAz: "Title (AZ)",
+    nameEn: "Name(EN)",
+    nameAz: "Name(AZ)",
+    titleEn: "Title (EN)",
+    descriptionAz: "Description (AZ)",
+    descriptionEn: "Description (EN)",
+    detailAz: "Details (AZ)",
+    detailEn: "Details (EN)",
+  };
+
+  const imageKeys = ["img", "thumnailImg"];
+  const keysInData = data[0] ? Object.keys(data[0]) : [];
+
+  const imageColumns = imageKeys
+    .filter((key) => keysInData.includes(key)) // yalnız mövcud sütunlar üçün
+    .map((key) => ({
+      title: (
+        <span
+          style={{
+            fontSize: "16px",
+            fontWeight: "bold",
+            color: " rgb(79, 126, 79)",
+          }}
+        >
+          {columnNames[key] || key}
+        </span>
+      ),
+      dataIndex: key,
+      key,
+      width: 100,
+      render: (text) => {
+        if (!text) return "-";
+        return (
+          <img
+            src={text}
+            alt="img"
+            style={{
+              width: 60,
+              height: 60,
+              objectFit: "cover",
+              borderRadius: 6,
+            }}
+          />
+        );
+      },
+    }));
 
   const columns = [
     {
@@ -137,67 +165,81 @@ const TableView = ({ activeTab }) => {
       fixed: "left",
       width: 60,
     },
-    ...Object.keys(data[0] || {}).map((key) => ({
-      title: (
-        <span
-          style={{
-            fontSize: "16px",
-            fontWeight: "bold",
-            color: " rgb(79, 126, 79)",
-          }}
-        >
-          {key}
-        </span>
-      ),
-      dataIndex: key,
-      key,
+    ...imageColumns,
+    ...Object.keys(data[0] || {})
+      .filter((key) => !["img", "thumnailImg"].includes(key))
+      .map((key) => ({
+        title: (
+          <span
+            style={{
+              fontSize: "16px",
+              fontWeight: "bold",
+              color: " rgb(79, 126, 79)",
+            }}
+          >
+            {/* {key} */}
+            {columnNames[key] || key}
+          </span>
+        ),
+        dataIndex: key,
+        key,
 
-      render: (text, record) => {
-        const isEditing = editingId === record.id;
-        const longKeys = [
-          "descriptionAz",
-          "descriptionEn",
-          "img",
-          "thumnailImg",
-          "detailAz",
-          "detailEn",
-          "answerAz",
-          "answerEn",
-        ];
-        if (isEditing) {
-          if (key === "id" || key === "created_at") {
-            return record[key]; // Edit mümkün deyil
+        render: (text, record) => {
+          const isEditing = editingId === record.id;
+          const longKeys = [
+            "descriptionAz",
+            "descriptionEn",
+            "detailAz",
+            "detailEn",
+            "answerAz",
+            "answerEn",
+          ];
+
+          if (isEditing) {
+            if (key === "id") {
+              return record[key]; // Edit mümkün deyil
+            }
+
+            if (isEditing) {
+              if (key === "created_at") {
+                // Edit mümkün deyil, sadəcə göstər
+                return new Date(record[key]).toLocaleDateString("az-AZ");
+              }
+            }
+            return (
+              <input
+                value={editedRow[key] ?? ""}
+                className={dash.inputCell}
+                onChange={(e) => handleInputChange(e, key)}
+                style={{ width: "100%" }}
+              />
+            );
           }
-          return (
-            <input
-              value={editedRow[key] ?? ""}
-              className={dash.inputCell}
-              onChange={(e) => handleInputChange(e, key)}
-              style={{ width: "100%" }}
-            />
-          );
-        }
+          if (key === "created_at") {
+            const date = new Date(text);
+            return date.toLocaleDateString("az-AZ"); // məsələn: 30.06.2025
+          }
 
-        if (text === null || text === "" || text === undefined) return "NULL";
-        if (typeof text === "boolean") return text ? "true" : "false";
-        if (longKeys.includes(key)) {
-          return (
-            <div
-              style={{
-                width: 300,
-                height: 50,
-                overflow: "auto",
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-              }}
-            >
-              {text}
-            </div>
-          );
-        }
-        return text;
-      },
-    })),
+          if (text === null || text === "" || text === undefined) return "-";
+          if (typeof text === "boolean") return text ? "true" : "-";
+          if (longKeys.includes(key)) {
+            return (
+              <div
+                style={{
+                  width: 300,
+                  height: 50,
+                  overflow: "auto",
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                }}
+              >
+                {text}
+              </div>
+            );
+          }
+          return text;
+        },
+      })),
     {
       title: (
         <span
@@ -228,6 +270,7 @@ const TableView = ({ activeTab }) => {
             )}
             <Button type="link" danger onClick={() => handleDelete(record.id)}>
               <RiDeleteBin2Fill className={dash.actionBtn} />
+              {/* <p className={dash.actionBtn}>delete</p>  */}
             </Button>
           </div>
         );
@@ -265,9 +308,9 @@ const TableView = ({ activeTab }) => {
         onCancel={() => setIsModalOpen(false)}
         onOk={handleModalSave}
         okText="Add"
-         okButtonProps={{
-    className: dash.customOkBtn
-  }}
+        okButtonProps={{
+          className: dash.customOkBtn,
+        }}
         bodyStyle={{
           maxHeight: "400px", // maksimum hündürlük
           overflowY: "auto", // scroll aktiv olsun
@@ -295,5 +338,4 @@ const TableView = ({ activeTab }) => {
     </div>
   );
 };
-
 export default TableView;

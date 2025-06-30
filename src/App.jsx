@@ -6,7 +6,7 @@ import AboutPage from "./Pages/AboutPage";
 import ContactPage from "./Pages/ContactPage";
 import ScrollTop from "./Shared/components/ScrollTop/ScrollTop";
 import i18n from "./i18n/i18next";
-import Navbar from "./Shared/Navbar/Navbar";
+// import Navbar from "./Shared/Navbar/Navbar";
 import DetailPage from "./Pages/DetailPage";
 import BasketPage from "./Pages/BasketPage";
 import WishlistPage from "./Pages/WishlistPage";
@@ -43,7 +43,7 @@ const App = () => {
     <div>
       <BrowserRouter>
         <ScrollTop />
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes>
           <Route path="/:lang" element={<HomePage />} />
           <Route path="/:lang/shop" element={<ShopPage />} />

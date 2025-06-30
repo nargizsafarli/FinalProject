@@ -15,13 +15,7 @@ import ChartView from "./ChartView";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("product");
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const currentLang = i18n.language;
-  const logoutHandle = () => {
-    dispatch(logoutUser());
-    navigate(`/${currentLang}/login`);
-  };
+ 
 
   return (
     <div className={dash.container}>
@@ -29,7 +23,7 @@ function Dashboard() {
         <div className={dash.admin}>
           <img src={adminImg} className={dash.adminImg} />
           <p className={dash.adminName}>Admin</p>
-          {/* <div className={dash.openuserbtn} onClick={() =>{logoutHandle()}}><CiLogout />Logout</div> */}
+         
           <p className={dash.adminGmail}>admin@gmail.com</p>
         </div>
         {/* <hr className={dash.hrr} */}
