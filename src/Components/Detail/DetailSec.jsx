@@ -15,6 +15,7 @@ import det from "./Detail.module.css";
 import { useTranslation } from "react-i18next";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
 import { notification } from "antd";
+import Review from "../Review/Review";
 function DetailSec() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
@@ -114,6 +115,7 @@ function DetailSec() {
             </Zoom>
           )}
         </div>
+        {/* <Review/> */}
       </div>
   {contextHolder}
       <div className={det.DetailCon}>
