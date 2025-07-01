@@ -129,7 +129,7 @@ function Navbar() {
             <div className={nav.user}>
               <FaRegUser />
               <div className={nav.userOpen}>
-                <p>{user.name}</p>
+                <p onClick={()=>{navigate(`/${currentLang}/account`)}} >{user.name}</p>
                 <div className={nav.openuserbtn} onClick={() =>{logOut()}}>Logout</div>
               </div>
             </div>

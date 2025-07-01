@@ -20,6 +20,7 @@ import CheckOutPage from "./Pages/CheckOutPage";
 import DashboardPage from "./Pages/DashboardPage";
 import ThanksPage from "./Pages/ThanksPage";
 import PrivateRouter from "./Components/Private/PrivateRouter";
+import AccountPage from "./Pages/AccountPage";
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
 
@@ -88,6 +89,7 @@ const App = () => {
             }
           />
           <Route path="/:lang/thank" element={<ThanksPage />} />
+          <Route path="/:lang/account" element={<AccountPage/>}/>
           <Route path="/" element={<Navigate to={`/${savedLang}`} replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
