@@ -6,6 +6,7 @@ import authReducer from "./features/auth/authSlice"
 import blogReducer from "./features/auth/blogSlice"
 import faqReducer from "./features/auth/faqSlice"
 import reviewReducer from "./features/auth/reviewSlice"
+import themeReducer from "./features/auth/themeSlice"
 
 export const store=configureStore({
     reducer:{
@@ -15,6 +16,7 @@ export const store=configureStore({
         auth:authReducer,
         blog:blogReducer,
         faq:faqReducer,
-        review:reviewReducer
+        review:reviewReducer,
+        theme:themeReducer
     }
 })

@@ -17,6 +17,7 @@ import i18n from "../../i18n/i18next";
 import BasketOverlay from "../../Components/BasketOverlay/BasketOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/features/auth/authSlice";
+import { toggleTheme } from "../../redux/features/auth/themeSlice";
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
@@ -28,6 +29,8 @@ function Navbar() {
   const basketCount = useSelector((state) =>
     state.basket.items.reduce((sum, item) => sum + item.quantity, 0)
   );
+  // !tehemememmemmmmmmmmmmm
+  const theme = useSelector((state) => state.theme.theme);
   const user = useSelector((state) => state.auth.user);
   const logOut=()=>{
     dispatch(logoutUser());
@@ -161,7 +164,10 @@ function Navbar() {
             onClose={() => setIsBasketOpen(false)}
             currentLang={currentLang}
           />
-          <FontAwesomeIcon icon={faCircleHalfStroke} />
+          {/* <FontAwesomeIcon icon={faCircleHalfStroke} /> */}
+           <button onClick={() => dispatch(toggleTheme())}>
+      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+    </button>
         </div>
       </div>
       <div className={`${nav.mobileNav} ${mobileOpen ? nav.open : ""}`}>

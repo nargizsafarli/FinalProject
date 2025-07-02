@@ -113,7 +113,7 @@ function Review({ productId, userId }) {
 
       <div className={rev.conBot}>
         <button
-          className={rev.addBtn}
+           className={`${rev.addBtn} ${hasReviewed ? rev.disabledBtn : ""}`}
           onClick={() => setModalOpen(true)}
           disabled={hasReviewed}
         >

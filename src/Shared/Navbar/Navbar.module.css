@@ -22,7 +22,7 @@
   transition: background-color 0.3s ease;
   font-family: sans-serif;
   /* sefeghdh */
-  background-color: white;
+  background-color: var(--bg-color);
   /* background-color: rgb(240, 239, 239); */
   /* background-color: rgb(233, 232, 232); */
   /* background-color: #3f6b24; */

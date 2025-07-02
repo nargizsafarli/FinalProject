@@ -1,0 +1,128 @@
+.container {
+  padding: 2rem;
+  max-height: 500px;
+  overflow-y: auto;
+}
+.wishCon{
+     max-height: 500px;
+  overflow-y: auto;
+}
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d2123;
+  margin-bottom: 25px;
+}
+.titleWish{
+     font-size: 24px;
+  font-weight: 600;
+  color: #1d2123;
+  margin: 25px 30px 0 30px;
+}
+
+.cardUl {
+  list-style-type: none;
+  padding: 0;
+  overflow-y: hidden
+}
+
+.list {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 1.5rem;
+}
+.starIcon {
+  color: gold;
+  font-size: 20px;
+  margin-right: 2px;
+}
+.val{
+     color: gold;
+  font-size: 20px;
+}
+
+.card {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.cardContent {
+  flex: 1;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardRating {
+  font-weight: bold;
+}
+
+.cardDate {
+  color: #777;
+}
+
+textarea {
+  width: 100%;
+  height: 60px;
+  margin-bottom: 0.5rem;
+}
+
+select {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.buttonGroup {
+  margin-top: 0.5rem;
+}
+
+.button {
+  margin-right: 0.5rem;
+  margin-top: 10px;
+  color:white;
+  background-color: red;
+  border: none;
+  border-radius: 3px;
+  font-weight: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  padding: 7px 20px;
+  transition: all 0.3s ease;
+}
+.button:hover{
+    background-color: rgb(240, 120, 120);
+}
+
+.btnEd{
+ background-color: green;
+}
+.btnEd:hover{
+    background-color: rgb(86, 184, 86);
+}
+.name{
+    font-size: 18px;
+    font-weight: 500;
+    color: #272727;
+}
+.txtArea{
+    margin-top: 5px;
+    font-size: 16px;
+    color: rgb(41, 41, 41);
+    padding: 5px;
+}
+.txtArea:focus{
+    border-color: green;
+}

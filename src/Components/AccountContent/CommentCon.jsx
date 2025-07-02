@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { supabase } from "../../client";
+import comment from "./Comment.module.css";
+import { LiaStarSolid } from "react-icons/lia";
 
 function CommentCon() {
   const userId = useSelector((state) => state.auth.user?.id);
@@ -12,7 +14,8 @@ function CommentCon() {
   const fetchMyReviews = async () => {
     const { data, error } = await supabase
       .from("review")
-      .select(`
+      .select(
+        `
         id,
         comment,
         rating,
@@ -22,7 +25,8 @@ function CommentCon() {
           nameEn,
           img
         )
-      `)
+      `
+      )
       .eq("user_id", userId)
       .order("created_at", { ascending: false });
 
@@ -57,52 +61,42 @@ function CommentCon() {
   };
 
   return (
-    <div style={{ padding: "2rem"}}>
-      <h2 style={{ marginBottom: "1.5rem" }}>Mənim Yorumlarım</h2>
+    <div className={comment.container}>
+      <h2 className={comment.title}>Mənim Yorumlarım</h2>
       {myReviews.length === 0 && <p>Hələ heç bir şərh yazmamısınız.</p>}
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul className={comment.cardUl}>
         {myReviews.map((r) => (
-          <li
-            key={r.id}
-            style={{
-              border: "1px solid #ddd",
-              padding: "1rem",
-              borderRadius: "8px",
-              background: "#fff",
-              marginBottom: "1.5rem",
-            }}
-          >
-            <div style={{ display: "flex", gap: "1rem", alignItems: "flex-start" }}>
+          <li key={r.id} className={comment.list}>
+            <div className={comment.card}>
               <img
                 src={r.product?.img}
                 alt={r.product?.nameEn}
-                style={{
-                  width: "100px",
-                  height: "100px",
-                  objectFit: "cover",
-                  borderRadius: "6px",
-                }}
+                className={comment.image}
               />
-              <div style={{ flex: 1 }}>
-                <h4>{r.product?.nameEn}</h4>
-                <strong>{r.rating} ⭐</strong>
-                <br />
-                <small style={{ color: "#777" }}>
+              <div className={comment.cardContent}>
+                <div className={comment.cardHeader}>
+                  <h4 className={comment.name}>{r.product?.nameEn}</h4>
+                  <div className={comment.cardRating}>
+                    {Array.from({ length: r.rating }).map((_, i) => (
+                      <LiaStarSolid key={i} className={comment.starIcon} />
+                    ))}
+                  </div>
+                </div>
+                <small className={comment.cardDate}>
                   {new Date(r.created_at).toLocaleString()}
                 </small>
 
                 {editId === r.id ? (
-                  <div style={{ marginTop: "0.5rem" }}>
+                  <div className={comment.buttonGroup}>
                     <textarea
                       value={editedComment}
                       onChange={(e) => setEditedComment(e.target.value)}
-                      style={{ width: "100%", height: "60px", marginBottom: "0.5rem" }}
+                      className={comment.txtArea}
                     />
                     <select
                       value={editedRating}
                       onChange={(e) => setEditedRating(Number(e.target.value))}
-                      style={{ marginBottom: "0.5rem", width: "100%" }}
                     >
                       {[5, 4, 3, 2, 1].map((val) => (
                         <option key={val} value={val}>
@@ -110,29 +104,38 @@ function CommentCon() {
                         </option>
                       ))}
                     </select>
-                    <br />
                     <button
                       onClick={() => handleUpdate(r.id)}
-                      style={{ marginRight: "0.5rem" }}
+                      className={comment.button}
                     >
                       Yadda saxla
                     </button>
-                    <button onClick={() => setEditId(null)}>Ləğv et</button>
+                    <button
+                      onClick={() => setEditId(null)}
+                      className={`${comment.button} ${comment.btnEd}`}
+                    >
+                      Ləğv et
+                    </button>
                   </div>
                 ) : (
                   <>
-                    <p style={{ margin: "0.5rem 0" }}>{r.comment}</p>
+                    <p>{r.comment}</p>
                     <button
                       onClick={() => {
                         setEditId(r.id);
                         setEditedComment(r.comment);
                         setEditedRating(r.rating);
                       }}
-                      style={{ marginRight: "0.5rem" }}
+                      className={`${comment.button} ${comment.btnEd}`}
                     >
                       Edit
                     </button>
-                    <button onClick={() => handleDelete(r.id)}>Sil</button>
+                    <button
+                      onClick={() => handleDelete(r.id)}
+                      className={comment.button}
+                    >
+                      Sil
+                    </button>
                   </>
                 )}
               </div>
@@ -144,4 +147,4 @@ function CommentCon() {
   );
 }
 
-export default CommentCon;
+export default CommentCon;

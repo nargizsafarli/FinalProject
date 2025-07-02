@@ -107,6 +107,9 @@
     color: #838282;
     font-weight: 500;
 }
+.disabledBtn{
+   background-color: rgb(55, 80, 55);
+}
 .addBtn{
     margin-top: 20px;
     padding:15px 26px;
@@ -123,4 +126,11 @@
 }
 .addBtn:hover{
     background-color: black;
+}
+.disabledBtn {
+  background-color: #5e8863;
+  cursor: not-allowed;
+}
+.disabledBtn:hover{
+  background-color: none;
 }
