@@ -21,8 +21,20 @@ import DashboardPage from "./Pages/DashboardPage";
 import ThanksPage from "./Pages/ThanksPage";
 import PrivateRouter from "./Components/Private/PrivateRouter";
 import AccountPage from "./Pages/AccountPage";
+import { useSelector } from "react-redux";
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
+    const theme = useSelector((state) => state.theme.theme);
+
+  useEffect(() => {
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.classList.add("dark-mode");
+    } else {
+      root.classList.remove("dark-mode");
+    }
+  }, [theme]);
 
   useEffect(() => {
     const lang = localStorage.getItem("i18nextLng") || "en";

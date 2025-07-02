@@ -1,4 +1,4 @@
-:root {
+/* :root {
   --bg-color: #ffffff;
   --text-color: #000000;
   --card-bg: #f2f2f2;
@@ -6,9 +6,24 @@
 }
 
 /* DARK MODE üçün */
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --card-bg: #f2f2f2;
+  /* --navbar-bg: #e4e4e4; */
+  --navbar-bg: #ffffff;
+  --footer-bg: rgb(247, 245, 245);
+}
+
 .dark-mode {
-  --bg-color: #121212;
-  --text-color: #ffffff;
-  --card-bg: #1e1e1e;
-  --navbar-bg: #2a2a2a;
+  --navbar-bg: #ecebeb;
+  --bg-color: rgb(233, 232, 232);
+  --footer-bg: rgb(219, 216, 216);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

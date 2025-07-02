@@ -5,7 +5,8 @@
     gap: 20px;
     justify-content: center;
     padding: 30px 20px;
-     background-color: rgb(233, 232, 232);
+     background-color: var( --bg-color);
+    
   }
   
 .item {

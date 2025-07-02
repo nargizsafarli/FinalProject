@@ -46,6 +46,12 @@ function Dashboard() {
         >
           <FaRegUser /> Users
         </p>
+         <p
+          className={activeTab === "review" ? dash.active : dash.prof}
+          onClick={() => setActiveTab("review")}
+        >
+          <AiOutlineProduct /> Comment
+        </p>
         <p
           className={activeTab === "Blog" ? dash.active : dash.prof}
           onClick={() => setActiveTab("Blog")}

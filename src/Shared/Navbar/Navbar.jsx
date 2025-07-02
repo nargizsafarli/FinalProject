@@ -18,7 +18,11 @@ import BasketOverlay from "../../Components/BasketOverlay/BasketOverlay";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../redux/features/auth/authSlice";
 import { toggleTheme } from "../../redux/features/auth/themeSlice";
+import { MdOutlineDarkMode } from "react-icons/md";
+import { MdOutlineLightMode } from "react-icons/md";
+import "..//../index.css"
 function Navbar() {
+  
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
   const [isBasketOpen, setIsBasketOpen] = useState(false);
@@ -30,12 +34,26 @@ function Navbar() {
     state.basket.items.reduce((sum, item) => sum + item.quantity, 0)
   );
   // !tehemememmemmmmmmmmmmm
-  const theme = useSelector((state) => state.theme.theme);
-  const user = useSelector((state) => state.auth.user);
-  const logOut=()=>{
+  //   const theme = useSelector((state) => state.theme.theme);
+  //   useEffect(() => {
+  //   const root = document.documentElement;
+
+  //   if (theme === "dark") {
+  //     root.classList.add("dark-mode");
+  //   } else {
+  //     root.classList.remove("dark-mode");
+  //   }
+  // }, [theme]);
+  //  const user = useSelector((state) => state.auth.user);
+   const theme = useSelector((state) => state.theme.theme);
+const user = useSelector((state) => state.auth.user);
+ 
+  const logOut = () => {
     dispatch(logoutUser());
-    navigate(`/${currentLang}`)
-  }
+    navigate(`/${currentLang}`);
+  };
+
+
   const currentLang = i18n.language;
   return (
     <div className={nav.mainContainer}>
@@ -101,26 +119,36 @@ function Navbar() {
                   {t("navbar.pages")} <IoIosArrowUp className={nav.arrowIcon} />
                 </div>
                 <div className={nav.openDesktopPage}>
-                  <NavLink to={`/${currentLang}/faq`}  className={({ isActive }) =>
-                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-              }>{t("pages.faq")}</NavLink>
-                  <NavLink to={`/${currentLang}/blog`}  className={({ isActive }) =>
-                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-              }>{t("pages.blog")}</NavLink>
+                  <NavLink
+                    to={`/${currentLang}/faq`}
+                    className={({ isActive }) =>
+                      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                    }
+                  >
+                    {t("pages.faq")}
+                  </NavLink>
+                  <NavLink
+                    to={`/${currentLang}/blog`}
+                    className={({ isActive }) =>
+                      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                    }
+                  >
+                    {t("pages.blog")}
+                  </NavLink>
                 </div>
               </div>
             </div>
             {/* !DAshboarddd */}
-           {user?.name === "Admin" && user?.email === "admin@gmail.com" && (
-  <NavLink
-    to={`/${currentLang}/dashboard`}
-    className={({ isActive }) =>
-      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-    }
-  >
-    Dashboard
-  </NavLink>
-)}
+            {user?.name === "Admin" && user?.email === "admin@gmail.com" && (
+              <NavLink
+                to={`/${currentLang}/dashboard`}
+                className={({ isActive }) =>
+                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                }
+              >
+                Dashboard
+              </NavLink>
+            )}
           </div>
         </div>
         <div className={nav.icons}>
@@ -132,8 +160,21 @@ function Navbar() {
             <div className={nav.user}>
               <FaRegUser />
               <div className={nav.userOpen}>
-                <p onClick={()=>{navigate(`/${currentLang}/account`)}} >{user.name}</p>
-                <div className={nav.openuserbtn} onClick={() =>{logOut()}}>Logout</div>
+                <p
+                  onClick={() => {
+                    navigate(`/${currentLang}/account`);
+                  }}
+                >
+                  {user.name}
+                </p>
+                <div
+                  className={nav.openuserbtn}
+                  onClick={() => {
+                    logOut();
+                  }}
+                >
+                  Logout
+                </div>
               </div>
             </div>
           ) : (
@@ -141,7 +182,7 @@ function Navbar() {
               className={nav.user}
               onClick={() => navigate(`/${currentLang}/register`)}
             >
-              <FaRegUser className={nav.userIcon}/>
+              <FaRegUser className={nav.userIcon} />
             </div>
           )}
 
@@ -164,10 +205,9 @@ function Navbar() {
             onClose={() => setIsBasketOpen(false)}
             currentLang={currentLang}
           />
-          {/* <FontAwesomeIcon icon={faCircleHalfStroke} /> */}
-           <button onClick={() => dispatch(toggleTheme())}>
-      {theme === "light" ? "🌙 Dark" : "☀️ Light"}
-    </button>
+          <div onClick={() => dispatch(toggleTheme())}>
+            {theme === "light" ? <MdOutlineDarkMode /> : <MdOutlineLightMode />}
+          </div>
         </div>
       </div>
       <div className={`${nav.mobileNav} ${mobileOpen ? nav.open : ""}`}>
@@ -226,12 +266,20 @@ function Navbar() {
                 {openPage ? <IoIosArrowDown /> : <IoIosArrowUp />}
                 {openPage && (
                   <div>
-                    <NavLink  className={({ isActive }) =>
-                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                }>{t("pages.faq")}</NavLink>
-                    <NavLink  className={({ isActive }) =>
-                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                }>{t("pages.blog")}</NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                      }
+                    >
+                      {t("pages.faq")}
+                    </NavLink>
+                    <NavLink
+                      className={({ isActive }) =>
+                        `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                      }
+                    >
+                      {t("pages.blog")}
+                    </NavLink>
                   </div>
                 )}
               </NavLink>

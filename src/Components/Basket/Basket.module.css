@@ -12,6 +12,7 @@
     gap: 20px;
     border: solid 1px rgb(218, 216, 216);
     padding: 30px;
+    background-color: rgb(255, 255, 254);
 }
 .containerItem{
     display: flex;
