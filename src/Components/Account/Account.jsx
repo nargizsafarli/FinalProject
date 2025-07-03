@@ -7,10 +7,12 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "../../redux/features/auth/authSlice";
 import i18n from "../../i18n/i18next";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 function Account() {
   const [activeTab, setActiveTab] = useState("account");
+  const {t}=useTranslation()
   const currentLang=i18n.language
   const navigate=useNavigate()
   const dispatch=useDispatch()
@@ -26,24 +28,24 @@ const logOut = () => {
             className={activeTab === "account" ? acc.active : ""}
             onClick={() => setActiveTab("account")}
           >
-            Account
+            {t("acc.account")}
           </li>
           <hr  className={acc.hr}/>
           <li
             className={activeTab === "wishlist" ? acc.active : ""}
             onClick={() => setActiveTab("wishlist")}
           >
-            Wishlist
+             {t("acc.wish")}
           </li>
           <hr className={acc.hr}/>
           <li
             className={activeTab === "comments" ? acc.active : ""}
             onClick={() => setActiveTab("comments")}
           >
-            Comments
+            {t("acc.comm")}
           </li>
           <hr  className={acc.hr}/>
-          <li  className={activeTab === "logout" ? acc.active : ""} onClick={() => logOut()}>Logout</li>
+          <li  className={activeTab === "logout" ? acc.active : ""} onClick={() => logOut()}> {t("acc.log")}</li>
         </ul>
       </div>
 

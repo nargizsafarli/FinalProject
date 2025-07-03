@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { supabase } from "../../client";
 import acc from "./Account.module.css";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 function AccountCon() {
   const user = useSelector((state) => state.auth.user);
@@ -49,14 +50,15 @@ function AccountCon() {
 
     setLoading(false);
   };
+  const {t}=useTranslation()
 
   return (
     <div className={acc.container}>
-      <h2 className={acc.title}>Hesab Məlumatları</h2>
+      <h2 className={acc.title}>{t("acc.hes")}</h2>
 
       <div className={acc.nameInf}>
         <div className={acc.inputGroup}>
-          <label>Ad:</label>
+          <label>{t("acc.name")}</label>
           <input
             type="text"
             value={name}
@@ -65,7 +67,7 @@ function AccountCon() {
           />
         </div>
         <div className={acc.inputGroup}>
-          <label>Soyad:</label>
+          <label>{t("acc.sur")}</label>
           <input
             type="text"
             value={surname}
@@ -76,7 +78,7 @@ function AccountCon() {
       </div>
 
       <div className={acc.inputGroup}>
-        <label>Email:</label>
+        <label>{t("acc.email")}</label>
         <input
           type="email"
           value={email}
@@ -86,7 +88,7 @@ function AccountCon() {
       </div>
 
       <button onClick={handleUpdate} disabled={loading} className={acc.button}>
-        {loading ? "Yenilənir..." : "Yadda saxla"}
+        {loading ? t("acc.new") : t("acc.new2")}
       </button>
     </div>
   );

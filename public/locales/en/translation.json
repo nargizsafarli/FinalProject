@@ -237,6 +237,24 @@
      "faq":"FAQ",
      "read":"Read More",
      "admin":"By Admin"
+  },
+  "acc":{
+    "account":" Account",
+    "wish":"Wishlist",
+    "comm":"Comments",
+    "log":"Logout",
+    "hes":"Hesab Məlumatları",
+    "name":"Name:",
+    "sur":"Surname:",
+    "email":"Email:",
+    "new":"Is updated...",
+    "new2":"Save",
+    "comme":"My Comment",
+    "noSer":"You haven't written any comments yet.",
+    "save":"Save",
+    "cancel":"Cancel",
+    "edit":"Edit",
+    "del":"Sil"
   }
   
 }

@@ -236,7 +236,26 @@
     "faq":"Tez-tez verilən suallar",
      "read":"Daha Çox",
      "admin":"Admin tərəfindən"
+},
+"acc": {
+  "account": "Hesab",
+  "wish": "İstək Siyahısı",
+  "comm": "Şərhlər",
+  "log": "Çıxış",
+  "hes": "Hesab Məlumatları",
+  "name": "Ad:",
+  "sur": "Soyad:",
+  "email": "Email:",
+  "new": "Yeniləndi...",
+  "new2": "Yadda saxla",
+  "comme": "Şərhlərim",
+  "noSer": "Hələ heç bir şərh yazmamısınız.",
+  "save": "Yadda saxla",
+  "cancel": "Ləğv et",
+  "edit": "Redaktə et",
+  "del": "Sil"
 }
+
 
 
 

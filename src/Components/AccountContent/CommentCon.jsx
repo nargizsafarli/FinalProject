@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { supabase } from "../../client";
 import comment from "./Comment.module.css";
 import { LiaStarSolid } from "react-icons/lia";
+import { useTranslation } from "react-i18next";
+import i18n from "../../i18n/i18next";
 
 function CommentCon() {
   const userId = useSelector((state) => state.auth.user?.id);
@@ -10,7 +12,7 @@ function CommentCon() {
   const [editId, setEditId] = useState(null);
   const [editedComment, setEditedComment] = useState("");
   const [editedRating, setEditedRating] = useState(5);
-
+const {t}=useTranslation()
   const fetchMyReviews = async () => {
     const { data, error } = await supabase
       .from("review")
@@ -23,6 +25,7 @@ function CommentCon() {
         product (
           id,
           nameEn,
+           nameAz,
           img
         )
       `
@@ -38,7 +41,7 @@ function CommentCon() {
   useEffect(() => {
     if (userId) fetchMyReviews();
   }, [userId]);
-
+const currenLang=i18n.language
   const handleUpdate = async (id) => {
     const { error } = await supabase
       .from("review")
@@ -62,8 +65,8 @@ function CommentCon() {
 
   return (
     <div className={comment.container}>
-      <h2 className={comment.title}>Mənim Yorumlarım</h2>
-      {myReviews.length === 0 && <p>Hələ heç bir şərh yazmamısınız.</p>}
+      <h2 className={comment.title}>{t("acc.comme")}</h2>
+      {myReviews.length === 0 && <p>{t("acc.noSer")}</p>}
 
       <ul className={comment.cardUl}>
         {myReviews.map((r) => (
@@ -76,7 +79,10 @@ function CommentCon() {
               />
               <div className={comment.cardContent}>
                 <div className={comment.cardHeader}>
-                  <h4 className={comment.name}>{r.product?.nameEn}</h4>
+                  <h4 className={comment.name}>
+                  {/* {r.product?.nameEn} */}
+                  {currenLang==="en"? r.product.nameEn : r.product.nameAz}
+                  </h4>
                   <div className={comment.cardRating}>
                     {Array.from({ length: r.rating }).map((_, i) => (
                       <LiaStarSolid key={i} className={comment.starIcon} />
@@ -108,13 +114,13 @@ function CommentCon() {
                       onClick={() => handleUpdate(r.id)}
                       className={comment.button}
                     >
-                      Yadda saxla
+                     {t("acc.save")}
                     </button>
                     <button
                       onClick={() => setEditId(null)}
                       className={`${comment.button} ${comment.btnEd}`}
                     >
-                      Ləğv et
+                      {t("acc.cancel")}
                     </button>
                   </div>
                 ) : (
@@ -128,13 +134,13 @@ function CommentCon() {
                       }}
                       className={`${comment.button} ${comment.btnEd}`}
                     >
-                      Edit
+                      {t("acc.edit")}
                     </button>
                     <button
                       onClick={() => handleDelete(r.id)}
                       className={comment.button}
                     >
-                      Sil
+                      {t("acc.del")}
                     </button>
                   </>
                 )}
