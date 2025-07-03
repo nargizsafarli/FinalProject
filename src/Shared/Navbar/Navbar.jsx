@@ -20,9 +20,8 @@ import { logoutUser } from "../../redux/features/auth/authSlice";
 import { toggleTheme } from "../../redux/features/auth/themeSlice";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { MdOutlineLightMode } from "react-icons/md";
-import "..//../index.css"
+import "..//../index.css";
 function Navbar() {
-  
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openPage, setOpenPage] = useState(false);
   const [isBasketOpen, setIsBasketOpen] = useState(false);
@@ -33,26 +32,13 @@ function Navbar() {
   const basketCount = useSelector((state) =>
     state.basket.items.reduce((sum, item) => sum + item.quantity, 0)
   );
-  // !tehemememmemmmmmmmmmmm
-  //   const theme = useSelector((state) => state.theme.theme);
-  //   useEffect(() => {
-  //   const root = document.documentElement;
+  const theme = useSelector((state) => state.theme.theme);
+  const user = useSelector((state) => state.auth.user);
 
-  //   if (theme === "dark") {
-  //     root.classList.add("dark-mode");
-  //   } else {
-  //     root.classList.remove("dark-mode");
-  //   }
-  // }, [theme]);
-  //  const user = useSelector((state) => state.auth.user);
-   const theme = useSelector((state) => state.theme.theme);
-const user = useSelector((state) => state.auth.user);
- 
   const logOut = () => {
     dispatch(logoutUser());
     navigate(`/${currentLang}`);
   };
-
 
   const currentLang = i18n.language;
   return (
@@ -197,6 +183,7 @@ const user = useSelector((state) => state.auth.user);
             <BiBasket
               //  onClick={()=>navigate(`/${currentLang}/basket`)}
               onClick={() => setIsBasketOpen(true)}
+              className={nav.baskk}
             />
             <span className={nav.badge}>{basketCount}</span>
           </div>
@@ -206,7 +193,7 @@ const user = useSelector((state) => state.auth.user);
             currentLang={currentLang}
           />
           <div onClick={() => dispatch(toggleTheme())}>
-            {theme === "light" ? <MdOutlineDarkMode /> : <MdOutlineLightMode />}
+            {theme === "light" ? <MdOutlineDarkMode className={nav.baskk}/> : <MdOutlineLightMode className={nav.baskk}/>}
           </div>
         </div>
       </div>

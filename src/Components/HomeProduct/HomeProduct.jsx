@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
@@ -24,12 +24,13 @@ import ModalProduct from "../ModalProduct/ModalProduct";
 import basket from "./assets/download (5).svg";
 import det from "./assets/download (6).svg";
 import { notification } from "antd";
+import { useTranslation } from "react-i18next";
 
 function HomeProduct() {
   const [api, contextHolder] = notification.useNotification();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { t } = useTransition();
+  const { t } = useTranslation();
   const currentLang = i18n.language;
   const { data, loading, error } = useSelector((state) => state.product);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -115,7 +116,7 @@ function HomeProduct() {
   return (
     <div className={homepro.container}>
       {contextHolder}
-      <h2 className={homepro.title}>Our Products</h2>
+      <h2 className={homepro.title}>{t("pro.proName")}</h2>
 
       <Swiper
         modules={[Navigation]}
@@ -157,7 +158,7 @@ function HomeProduct() {
                   {!product.isStock && (
                     <>
                       <div className={homepro.stockOverlay}></div>
-                      <div className={homepro.comingSoon}>Out of stock...</div>
+                      <div className={homepro.comingSoon}>{t("pro.stock")}</div>
                     </>
                   )}
 
@@ -211,7 +212,6 @@ function HomeProduct() {
                 <div className={homepro.cardInfo}>
                   <p className={homepro.name}>
                     {
-                      // əgər i18n dili "az" isə nameAz, yoxsa nameEn
                       currentLang === "az" ? product.nameAz : product.nameEn
                     }
                   </p>
@@ -240,7 +240,7 @@ function HomeProduct() {
           className={homepro.moreBtn}
           onClick={() => navigate(`/${currentLang}/shop`)}
         >
-          Daha çox məhsul
+          {t("pro.morePro")}
         </button>
       </div>
     </div>

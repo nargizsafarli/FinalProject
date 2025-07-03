@@ -165,7 +165,15 @@
   "pot": "QABI BİTKİLƏRİ",
   "quan": "KEYFİYYƏTLİ MƏHSULLAR",
   "grow": "BİTKİLƏR BÖYÜDÜLÜR"
-}
+},
+ "btn":{
+    "shop":"İndi Al"
+  },
+  "pro":{
+    "proName":"Məhsullarımız",
+     "stock":"Stokda deyil...",
+      "morePro":"Daha çox"
+  }
 
 
 

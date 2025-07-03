@@ -45,6 +45,7 @@
     margin-bottom: 5px;
     line-height: 22px;
     font-weight: 500;
+    height: 50px;
     width: 240px;
     color: rgb(80, 79, 79);
     text-align: center;
@@ -113,7 +114,7 @@
 .overlay {
   position: absolute;
   bottom: 10px;
-  left: 10px;
+  left: 15px;
   display: flex;
   gap: 0.5rem;
   opacity: 0;
@@ -291,7 +292,7 @@
 .comingSoon {
   position: absolute;
   top: 120px;
-  left: 52%;
+  left: 56%;
   display: none;
   transform: translateX(-50%);
   color: rgb(87, 87, 87);

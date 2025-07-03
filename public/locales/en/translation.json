@@ -166,5 +166,13 @@
 "pot":"POT PLANTS",
 "quan":"QUALITY PRODUCTS",
 "grow":"PLAN PRODUCTS GROWN"
+  },
+  "btn":{
+    "shop":"Shop Now"
+  },
+   "pro":{
+    "proName":"Our Products",
+    "stock":"Out of stock...",
+    "morePro":"More product"
   }
 }
