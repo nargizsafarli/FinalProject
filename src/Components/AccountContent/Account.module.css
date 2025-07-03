@@ -1,32 +1,7 @@
-/* .container{
-    display: flex;
-    flex-direction: column;
-    padding:30px 40px;
-}
-.title{
-        display: block;
-    font-weight: 500;
-    color: #1d2123;
-}
-.nameInf{
-    display: flex;
-    gap: 30px;
-}
-.inputGroup{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-.input{
-    padding: 10px 30px;
-}
-.nameInf{
-    margin-bottom: 30px;
-} */
  .container {
   max-width: 700px;
-  padding: 40px 30px;
-  background-color: #fff;
+  padding: 30px 30px 40px 30px;
+  /* background-color: #fff; */
   border-radius: 12px;
   /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); */
   display: flex;
@@ -35,7 +10,7 @@
 }
 
 .title {
-  font-size: 24px;
+  font-size: 25px;
   font-weight: 600;
   color: #1d2123;
   margin-bottom: 10px;
@@ -62,27 +37,26 @@
 }
 
 .input {
-  padding: 10px 16px;
+  padding: 13px 16px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   font-size: 14px;
   outline: none;
   transition: border 0.2s ease;
 }
 
 .input:focus {
-  border-color: #49a078;
+  border-color: #081f14;
 }
 
 .button {
-  background-color: #49a078;
   background-color: green;
   margin-top: 12px;
   color: white;
-  padding: 12px;
+  padding: 13px 12px;
   border: none;
   font-size: 16px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -94,5 +68,5 @@
 }
 
 .button:hover:not(:disabled) {
-  background-color: #3b8f6b;
+  background-color: rgb(80, 79, 79);
 }

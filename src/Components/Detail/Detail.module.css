@@ -120,10 +120,18 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
-  font-size: 16px;
+  font-size: 17px;
+  cursor: pointer;
   font-weight: 500;
    color: rgb(56, 55, 55);
 }
+
+.heartIcon {
+  color: rgb(54, 54, 54);
+  margin-right: 6px;
+  font-size: 18px;
+}
+
 .icon {
   display: flex;
   gap: 15px;

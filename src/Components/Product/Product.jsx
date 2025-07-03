@@ -464,13 +464,13 @@ const handleAddToWishlist=(product)=>{
 
       <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
         <div className={pro.filterBy}>
-          Filter By
+         {t("pro.filter")}
           <button className={pro.closeBtn} onClick={() => setShowFilter(false)}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Categories</p>
+          <p className={pro.catTitle}> {t("pro.cato")}</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input
@@ -479,7 +479,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCategory.includes("dicotyledons")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
-              <p className={pro.filElement}> Dicotyledons (18)</p>
+              <p className={pro.filElement}> {t("pro.dico")} (18)</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -488,7 +488,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCategory.includes("lilies")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
-              <p className={pro.filElement}> Lilies (18)</p>
+              <p className={pro.filElement}> {t("pro.lili")} (18)</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -497,7 +497,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCategory.includes("monocotyledons")}
                 onChange={(e) => handleFilterChange(e, "category")}
               />
-              <p className={pro.filElement}>Monocotyledons (20)</p>
+              <p className={pro.filElement}>{t("pro.mono")} (20)</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -506,12 +506,12 @@ const handleAddToWishlist=(product)=>{
                 onChange={(e) => handleFilterChange(e, "category")}
                 checked={selectedCategory.includes("sugarcanes")}
               />
-              <p className={pro.filElement}>Sugarcanes (18)</p>
+              <p className={pro.filElement}>{t("pro.sugar")} (18)</p>
             </label>
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Availablity</p>
+          <p className={pro.catTitle}>{t("pro.avail")}</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input
@@ -536,7 +536,7 @@ const handleAddToWishlist=(product)=>{
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Material</p>
+          <p className={pro.catTitle}>{t("pro.material")}</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input
@@ -545,7 +545,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedMaterial.includes("plastic")}
                 onChange={(e) => handleFilterChange(e, "material")}
               />
-              <p className={pro.filElement}>Plastic</p>
+              <p className={pro.filElement}>{t("pro.plas")}</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -554,7 +554,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedMaterial.includes("ceramic")}
                 onChange={(e) => handleFilterChange(e, "material")}
               />
-              <p className={pro.filElement}>Keramik</p>
+              <p className={pro.filElement}>{t("pro.keramik")}</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -563,12 +563,12 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedMaterial.includes("metal")}
                 onChange={(e) => handleFilterChange(e, "material")}
               />
-              <p className={pro.filElement}>Metal</p>
+              <p className={pro.filElement}>{t("pro.metal")}</p>
             </label>
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Brand</p>
+          <p className={pro.catTitle}>{t("pro.brand")}</p>
           <div className={pro.selectItem}>
             <Select
               mode="multiple"
@@ -587,7 +587,7 @@ const handleAddToWishlist=(product)=>{
           </div>
         </div>
         <div className={pro.filterInput}>
-          <p className={pro.catTitle}>Condition</p>
+          <p className={pro.catTitle}>{t("pro.cond")}</p>
           <div className={pro.inputItem}>
             <label className={pro.labell}>
               <input
@@ -596,7 +596,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCondition.includes("discounted")}
                 onChange={(e) => handleFilterChange(e, "condition")}
               />
-              <p className={pro.filElement}>Discounted</p>
+              <p className={pro.filElement}>{t("pro.dis")}</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -605,7 +605,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCondition.includes("new")}
                 onChange={(e) => handleFilterChange(e, "condition")}
               />
-              <p className={pro.filElement}>New Product</p>
+              <p className={pro.filElement}>{t("pro.new")}</p>
             </label>
             <label className={pro.labell}>
               <input
@@ -614,7 +614,7 @@ const handleAddToWishlist=(product)=>{
                 checked={selectedCondition.includes("popular")}
                 onChange={(e) => handleFilterChange(e, "condition")}
               />
-              <p className={pro.filElement}>Popular</p>
+              <p className={pro.filElement}>{t("pro.pop")}</p>
             </label>
           </div>
         </div>
@@ -625,10 +625,10 @@ const handleAddToWishlist=(product)=>{
           <div className={pro.resItem}>
             <div className={pro.intItem}>
               <img src={logo} style={{ width: "20px" }} />
-              <p className={pro.proDet}>There are {data.length} products.</p>
+              <p className={pro.proDet}>{t("pro.the")} {data.length} {t("pro.ps")}.</p>
             </div>
             <div className={pro.intItem}>
-              <p className={pro.proDet2}>Sort By:</p>
+              <p className={pro.proDet2}>{t("pro.sort")}</p>
               <Select
                 showSearch
                 value={sortOption}
@@ -640,12 +640,12 @@ const handleAddToWishlist=(product)=>{
                 // onChange={(value) => setSortOption(value)}
                 onChange={handleSortChange}
                 options={[
-                  { value: "1", label: "Name, A to Z" },
-                  { value: "2", label: "Name, Z to A" },
-                  { value: "3", label: "Price, low to high" },
-                  { value: "4", label: "Price, high to low" },
-                  { value: "5", label: "Rating, high to low" },
-                  { value: "6", label: "Rating, low to high" },
+                  { value: "1", label:t("pro.name") },
+                  { value: "2", label:t("pro.name2") },
+                  { value: "3", label: t("pro.price") },
+                  { value: "4", label: t("pro.price2") },
+                  { value: "5", label: t("pro.rat") },
+                  { value: "6", label: t("pro.rat2") },
                 ]}
               />
 
@@ -653,7 +653,7 @@ const handleAddToWishlist=(product)=>{
                 className={pro.filterToggleBtn}
                 onClick={() => setShowFilter(true)}
               >
-                FILTER
+                {t("pro.filetrr")}
               </button>
             </div>
           </div>
@@ -672,7 +672,7 @@ const handleAddToWishlist=(product)=>{
                 {!product.isStock && (
                   <>
                     <div className={pro.stockOverlay}></div>
-                    <div className={pro.comingSoon}>Aut of stock</div>
+                    <div className={pro.comingSoon}>{t("pro.outStock")}</div>
                   </>
                 )}
 
@@ -723,7 +723,9 @@ const handleAddToWishlist=(product)=>{
                   />
                 </div>
                 <div className={pro.cardBody}>
-                  <p className={pro.name}>{product.nameEn}</p>
+                  <p className={pro.name}>{
+                      currentLang === "az" ? product.nameAz : product.nameEn
+                    }</p>
                   <div className={pro.rating}>
                     {renderStars(product.rating)}
                   </div>
@@ -743,24 +745,6 @@ const handleAddToWishlist=(product)=>{
           })}
         </div>
 
-        {/* Paginationnn */}
-        {/* <div className={pro.pagination}>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
-          </button>
-          <span className={pro.currentPage}>{currentPage}</span>
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-          >
-            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
-          </button>
-        </div> */}
         <div className={pro.pagination}>
   <button
     onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

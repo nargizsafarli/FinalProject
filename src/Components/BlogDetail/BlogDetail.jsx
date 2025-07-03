@@ -1,42 +1,63 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import bdet from './Blogdetail.module.css';
-import { fetchBlogs } from '../../redux/features/auth/blogSlice';
-
+import React, { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import bdet from "./Blogdetail.module.css";
+import { fetchBlogs } from "../../redux/features/auth/blogSlice";
+import i18n from "../../i18n/i18next";
+import { useTranslation } from "react-i18next";
+import { SpinnerDotted } from "spinners-react";
 
 function BlogDetail() {
   const { id } = useParams();
-   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const currentLang = i18n.language;
+  const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.blog);
-    useEffect(() => {
+  useEffect(() => {
     if (data.length === 0) {
       dispatch(fetchBlogs());
     }
   }, [dispatch, data]);
 
-  if (loading) return <p>Yüklənir...</p>;
+   if (loading) {
+      return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+          <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
+        </div>
+      );
+    }
   if (error) return <p>Xəta baş verdi: {error}</p>;
-    
 
   const blog = data.find((item) => item.id === Number(id));
 
   if (!blog) return <p>Blog tapılmadı</p>;
 
-   return (
+  return (
     <div className={bdet.container}>
-      <h1 className={bdet.title}>{blog.nameEn}</h1>
+      <h1 className={bdet.title}>
+        {currentLang === "en" ? blog.nameEn : blog.nameAz}
+      </h1>
       <div className={bdet.meta}>
-        <span>By Admin</span> /
+        <span>{t("det.admin")}</span> /
         <span>{new Date(blog.date).toLocaleDateString()}</span> /
-        <span className={bdet.category}>{blog.catagoryEn}</span>
+        <span className={bdet.category}>
+          {currentLang === "en" ? blog.catagoryEn : blog.catagoryAz}
+        </span>
       </div>
       <img src={blog.img} alt={blog.nameEn} className={bdet.image} />
-      <p className={bdet.short}>{blog.shortInfEn}</p>
+      <p className={bdet.short}>
+        {currentLang === "en" ? blog.shortInfEn : blog.shortInfAz}
+      </p>
       <blockquote className={bdet.quote}>
-        “{blog.detailEn.split('.')[0]}.”
+        “
+        {currentLang === "en"
+          ? blog.detailEn.split(".")[0]
+          : blog.detailAz.split(".")[0]}
+        .”
       </blockquote>
-      <p className={bdet.detail}>{blog.detailEn}</p>
+      <p className={bdet.detail}>
+        {currentLang === "en" ? blog.detailEn : blog.detailAz}
+      </p>
     </div>
   );
 }

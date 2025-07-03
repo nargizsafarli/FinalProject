@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import thank from "./Thanks.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
@@ -19,7 +19,8 @@ import { useWindowSize } from 'react-use';
 // import { useWindowSize } from 'react-use'
 
 function Thanks() {
-    const trackId = Math.floor(100000 + Math.random() * 900000);
+   const trackIdRef = useRef(Math.floor(100000 + Math.random() * 900000));
+const trackId = trackIdRef.current;
 
 const now = new Date();
 const formatDate = (date) =>
@@ -41,15 +42,18 @@ const navigate=useNavigate()
     const timer = setTimeout(() => setShowConfetti(false), 6000);
     return () => clearTimeout(timer);
   }, []);
-    useEffect(() => {
-    const allowed = localStorage.getItem("thankAccess");
-    if (allowed !== "true") {
-      navigate(`/${currentLang}`);
-    } else {
-      // Açmağa icazə verildi, icazəni bir dəfəlik sil
-      localStorage.removeItem("thankAccess");
-    }
-  }, [navigate, currentLang]);
+  
+useEffect(() => {
+  const allowed = localStorage.getItem("thankAccess");
+
+  if (allowed !== "true") {
+    navigate("/" + i18n.language); 
+  } else {
+    localStorage.removeItem("thankAccess");
+  }
+}, []);
+
+
 
   return (
     <div className={thank.mainCon}>
@@ -62,7 +66,21 @@ const navigate=useNavigate()
             <p>{t("thank.trackId")}</p>
             <span>#{trackId}</span>
         </div>
-         {showConfetti && <Confetti width={width} height={height} />}
+        {showConfetti && (
+  <div style={{
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100vh",
+    zIndex: 9999,
+    overflow: "hidden",
+    pointerEvents: "none",
+  }}>
+    <Confetti width={width} height={height} />
+  </div>
+)}
+
         <div className={thank.track}>
            <div className={thank.trackItem}>
              <div className={thank.trackItemIcon}><GiConfirmed /></div>

@@ -19,16 +19,17 @@
     width: 100%;
     background-color:rgb(243, 243, 243);
     padding: 13px 18px;
-    border-top: solid 3px #1e85be;
+    border-top: solid 3px rgb(13, 160, 13);
     align-items: center;
     color: rgb(85, 85, 85);
 }
 .kalicon{
     margin-right: 5px;
-    color: #1e85be;
+    color: rgb(9, 167, 9);
 }
 .down{
     display: flex;
+    gap: 25px;
     justify-content: space-between;
     margin: 40px 0;
 }
@@ -37,7 +38,7 @@
   font-size: 20px;
 }
 .leftCon, .rightCon {
-  padding: 0 30px 30px 30px;
+  padding: 30px 30px 30px 30px;
   background: #fff;
   min-width: 320px;
   width: 100%;
@@ -125,7 +126,8 @@ h2 {
 }
 
 .submitBtn {
-  background-color: #434343;
+  
+  background-color: darkgreen;
   color: white;
   padding: 15px;
   border: none;
@@ -136,7 +138,7 @@ h2 {
 }
 
 .submitBtn:hover {
-  background-color: darkgreen;
+  background-color: #434343;
 }
 
 .summary {

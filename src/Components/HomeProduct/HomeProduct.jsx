@@ -25,6 +25,7 @@ import basket from "./assets/download (5).svg";
 import det from "./assets/download (6).svg";
 import { notification } from "antd";
 import { useTranslation } from "react-i18next";
+import { SpinnerDotted } from "spinners-react";
 
 function HomeProduct() {
   const [api, contextHolder] = notification.useNotification();
@@ -108,7 +109,13 @@ function HomeProduct() {
     return stars;
   };
 
-  if (loading) return <p>Yüklənir...</p>;
+   if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
+      </div>
+    );
+  }
   if (error) return <p>Xəta baş verdi: {error}</p>;
 
   const first12 = data.slice(0, 6);

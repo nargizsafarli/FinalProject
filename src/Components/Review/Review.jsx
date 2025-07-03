@@ -7,10 +7,13 @@ import { submitReview } from "../../redux/features/auth/reviewSlice";
 import { supabase } from "../../client";
 import rev from "./Review.module.css";
 import { FaRegCommentAlt } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const { TextArea } = Input;
 
+
 function Review({ productId, userId }) {
+  const {t}=useTranslation()
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -80,8 +83,8 @@ function Review({ productId, userId }) {
   return (
     <div className={rev.mainCon}>
       <div className={rev.container}>
-        <h4 className={rev.comCon}>Şərhlər:</h4>
-        {reviews.length === 0 && <p className={rev.ser}>Hələ şərh yoxdur...</p>}
+        <h4 className={rev.comCon}>{t("det.comment")}</h4>
+        {reviews.length === 0 && <p className={rev.ser}>{t("det.noCom")}</p>}
         <ul className={rev.reviewList}>
           {reviews.map((r, i) => (
             <li key={i} className={rev.reviewCard}>
@@ -118,7 +121,7 @@ function Review({ productId, userId }) {
           disabled={hasReviewed}
         >
         <FaRegCommentAlt />
-          Şərh əlavə et
+         {t("det.serh")}
         </button>
       </div>
 

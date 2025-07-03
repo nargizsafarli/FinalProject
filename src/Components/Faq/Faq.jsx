@@ -5,9 +5,11 @@ import styles from './Faq.module.css';
 import { fetchFaqs } from '../../redux/features/auth/faqSlice';
 import { SpinnerDotted } from 'spinners-react';
 import i18n from '../../i18n/i18next';
+import { useTranslation } from 'react-i18next';
 
 function Faq() {
   const dispatch = useDispatch();
+  const {t}=useTranslation()
   const { data: faqData, loading, error } = useSelector((state) => state.faq);
   const [activeIndices, setActiveIndices] = useState([]);
   const currentLang=i18n.language
@@ -34,7 +36,7 @@ function Faq() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Tez-tez verilən suallar</h2>
+      <h2 className={styles.title}>{t("det.faq")}</h2>
       {faqData.map((item, index) => (
         <div key={item.id} className={styles.faqItem}>
           <button

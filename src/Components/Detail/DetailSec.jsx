@@ -4,9 +4,9 @@ import "react-medium-image-zoom/dist/styles.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { fetchProducts } from "../../redux/features/auth/productSlice";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LuChartNoAxesColumn } from "react-icons/lu";
 import { FaFacebookF } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPinterestP } from "react-icons/fa";
@@ -15,14 +15,23 @@ import det from "./Detail.module.css";
 import { useTranslation } from "react-i18next";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
 import { notification } from "antd";
-import Review from "../Review/Review";
+import { addToWishlist, removeFromWishlist } from "../../redux/features/auth/wishlistSlice";
+import { SpinnerDotted } from "spinners-react";
+
 function DetailSec() {
   const { id } = useParams();
   const { t, i18n } = useTranslation();
   const lang = i18n.language === "az" ? "Az" : "En";
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.product);
-  // useEffect ilə data-nı refresh olanda da gətir
+  const wishlist = useSelector((state) => state.wishlist.items);
+  const user = useSelector((state) => state.auth.user);
+  const [api, contextHolder] = notification.useNotification();
+
+  const [selectedImage, setSelectedImage] = useState("");
+  const [imageGallery, setImageGallery] = useState([]);
+  const [selectedSize, setSelectedSize] = useState("");
+
   useEffect(() => {
     if (data.length === 0) {
       dispatch(fetchProducts());
@@ -30,50 +39,77 @@ function DetailSec() {
   }, [dispatch, data.length]);
 
   const product = data.find((item) => item.id === Number(id));
-  const user = useSelector((state) => state.auth.user);
 
-  const [selectedImage, setSelectedImage] = useState("");
-  const [imageGallery, setImageGallery] = useState([]);
-  const [selectedSize, setSelectedSize] = useState("");
   useEffect(() => {
     if (product) {
       setSelectedImage(product.img);
       setImageGallery([product.thumnailImg, product.img]);
     }
   }, [product]);
- const [api, contextHolder] = notification.useNotification();
+
+  useEffect(() => {
+    if (product) {
+      if (product.small) setSelectedSize("small");
+      else if (product.medium) setSelectedSize("medium");
+      else if (product.large) setSelectedSize("large");
+    }
+  }, [product]);
+
   const handleAddToBasket = (product) => {
     if (user) {
       dispatch(addToBasket({ product, size: selectedSize }));
       api.success({
         message: "Added to Basket",
         placement: "topRight",
-        showProgress: true,
-        duration: 2,
+         showProgress: true,
+      duration: 2,
         zIndex: 10000,
       });
     } else {
       api.warning({
         message: "Zəhmət olmasa daxil olun",
         description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
-        showProgress: true,
         duration: 3,
+         showProgress: true,
         zIndex: 9999,
       });
     }
   };
 
-  useEffect(() => {
-    if (product) {
-      if (product.small) {
-        setSelectedSize("small");
-      } else if (product.medium) {
-        setSelectedSize("medium");
-      } else if (product.large) {
-        setSelectedSize("large");
+  const isInWishlist = wishlist.some((item) => item.id === product?.id);
+
+  const handleAddToWishlist = (product) => {
+    if (user) {
+      if (isInWishlist) {
+        dispatch(removeFromWishlist(product.id));
+        api.info({
+          message: "Removed from Wishlist",
+          placement: "topRight",
+            showProgress: true,
+      duration: 2,
+          
+          zIndex: 10000,
+        });
+      } else {
+        dispatch(addToWishlist(product));
+        api.success({
+          message: "Added to Wishlist",
+          placement: "topRight",
+          duration: 2,
+            showProgress: true,
+          zIndex: 10000,
+        });
       }
+    } else {
+      api.warning({
+        message: "Zəhmət olmasa daxil olun",
+        description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
+          showProgress: true,
+      duration: 2,
+        zIndex: 9999,
+      });
     }
-  }, [product]);
+  };
 
   const getPrice = () => {
     switch (selectedSize) {
@@ -88,7 +124,13 @@ function DetailSec() {
     }
   };
 
-  if (loading) return <p>Yüklənir...</p>;
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+        <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
+      </div>
+    );
+  }
   if (error) return <p>Xəta baş verdi</p>;
   if (!product) return <p>Məhsul tapılmadı</p>;
 
@@ -102,9 +144,7 @@ function DetailSec() {
               src={img}
               alt={`img-${index}`}
               onClick={() => setSelectedImage(img)}
-              className={`${det.thumb} ${
-                selectedImage === img ? det.active : ""
-              }`}
+              className={`${det.thumb} ${selectedImage === img ? det.active : ""}`}
             />
           ))}
         </div>
@@ -115,64 +155,46 @@ function DetailSec() {
             </Zoom>
           )}
         </div>
-        {/* <Review/> */}
       </div>
-  {contextHolder}
+
+      {contextHolder}
+
       <div className={det.DetailCon}>
         <h2 className={det.name}>{product[`name${lang}`]}</h2>
         <p className={det.des}>{product[`description${lang}`]}</p>
         <hr className={det.customHr} />
+
         <div className={det.info}>
           <p className={det.inf}>
-            Rating: <span className={det.iftIt}>{product.rating}</span>
+            {t("det.mat")} <span className={det.iftIt}>{product.rating}</span>
           </p>
           <p className={det.inf}>
-            Material:{" "}
+            {t("det.mat")}{" "}
             <span className={det.iftIt}>{product[`material${lang}`]}</span>
           </p>
           <p className={det.inf}>
-            Condition:{" "}
+            {t("det.con")}{" "}
             <span className={det.iftIt}>{product[`condition${lang}`]}</span>
           </p>
 
           <div className={det.sizeBox}>
-            <span className={det.inf}>Size:</span>
+            <span className={det.inf}>{t("det.size")}</span>
 
-            <div
-              className={`
-      ${det.sizeOption} 
-      ${selectedSize === "small" ? det.activeSize : ""} 
-      ${!product.small ? det.disabled : ""}
-    `}
-              onClick={() => product.small && setSelectedSize("small")}
-            >
-              S
-            </div>
-
-            <div
-              className={`
-      ${det.sizeOption} 
-      ${selectedSize === "medium" ? det.activeSize : ""} 
-      ${!product.medium ? det.disabled : ""}
-    `}
-              onClick={() => product.medium && setSelectedSize("medium")}
-            >
-              M
-            </div>
-
-            <div
-              className={`
-      ${det.sizeOption} 
-      ${selectedSize === "large" ? det.activeSize : ""} 
-      ${!product.large ? det.disabled : ""}
-    `}
-              onClick={() => product.large && setSelectedSize("large")}
-            >
-              L
-            </div>
+            {["small", "medium", "large"].map((size) => (
+              <div
+                key={size}
+                className={`
+                  ${det.sizeOption}
+                  ${selectedSize === size ? det.activeSize : ""}
+                  ${!product[size] ? det.disabled : ""}
+                `}
+                onClick={() => product[size] && setSelectedSize(size)}
+              >
+                {size[0].toUpperCase()}
+              </div>
+            ))}
           </div>
 
-          {/* priceee */}
           <div className={det.priceBox}>
             {getPrice().discount ? (
               <>
@@ -183,23 +205,27 @@ function DetailSec() {
               <span className={det.newPrice}>${getPrice().price}</span>
             )}
           </div>
-          <p className={det.delivery}>Est. Delivery Time 2-3 Days</p>
+
+          <p className={det.delivery}>{t("det.del")}</p>
         </div>
+
         <button className={det.button} onClick={() => handleAddToBasket(product)}>
-          ADD TO CARD
+          {t("det.add")}
         </button>
+
         <div className={det.infItem}>
           <div className={det.icon}>
-            <div className={det.ic}>
-              <FontAwesomeIcon icon={faHeart} />
-              Add To Wishlist
-            </div>
-            <div className={det.ic}>
-              <LuChartNoAxesColumn />
-              Add to Compare List
+            <div className={det.ic} onClick={() => handleAddToWishlist(product)}>
+              <FontAwesomeIcon
+                icon={isInWishlist ? faHeartSolid : faHeartRegular}
+                className={det.heartIcon}
+              />
+              {isInWishlist? t("det.addedWish"):t("det.addWish")}
             </div>
           </div>
-          <div className={det.instock}>In Stock</div>
+
+          <div className={det.instock}> {t("det.sto")}</div>
+
           <div className={det.social}>
             <div className={`${det.socIcon} ${det.hoverSoc}`}>
               <FaFacebookF />
@@ -211,9 +237,10 @@ function DetailSec() {
               <FaPinterestP />
             </div>
           </div>
+
           <div className={det.card}>
-            <p>Guarantee Safe Checkout</p>
-            <img src={paymentCard} />
+            <p>{t("det.check")}</p>
+            <img src={paymentCard} alt="trust" />
           </div>
         </div>
       </div>
@@ -222,3 +249,4 @@ function DetailSec() {
 }
 
 export default DetailSec;
+

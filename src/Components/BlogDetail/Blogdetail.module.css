@@ -6,6 +6,7 @@
   color: #333;
   line-height: 1.7;
   margin-top: 100px;
+ 
 }
 
 .title {
@@ -13,6 +14,7 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: #222;
+  
 }
 
 .meta {
@@ -40,6 +42,7 @@
   font-size: 16px;
   color: #555;
   margin-bottom: 25px;
+  
 }
 
 .quote {

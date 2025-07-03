@@ -1,12 +1,9 @@
 .container {
-  padding: 2rem;
-  max-height: 500px;
-  overflow-y: auto;
+  padding:20px 10px;
+  /* max-height: 500px; */
+  /* overflow-y: auto; */
 }
-.wishCon{
-     max-height: 500px;
-  overflow-y: auto;
-}
+
 .title {
   font-size: 24px;
   font-weight: 600;
@@ -17,7 +14,7 @@
      font-size: 24px;
   font-weight: 600;
   color: #1d2123;
-  margin: 25px 30px 0 30px;
+  margin: 20px 30px 0 30px;
 }
 
 .cardUl {
@@ -27,11 +24,15 @@
 }
 
 .list {
+  /* display: flex; */
+  /* gap: 10px; */
   border: 1px solid #ddd;
   padding: 1rem;
   border-radius: 8px;
   background-color: #fff;
   margin-bottom: 1.5rem;
+  width: 85%;
+  /* min-width: 535px; */
 }
 .starIcon {
   color: gold;
@@ -51,8 +52,8 @@
 
 .image {
   width: 100px;
-  height: 100px;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   border-radius: 6px;
 }
 
@@ -60,11 +61,7 @@
   flex: 1;
 }
 
-.cardHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .cardRating {
   font-weight: bold;
@@ -125,4 +122,26 @@ select {
 }
 .txtArea:focus{
     border-color: green;
+}
+.cardHeader{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+@media(max-width:740px){
+  .card{
+    flex-direction: column;
+    /* text-align: center; */
+    justify-content: center;
+    align-items: center;
+  }
+  .cardContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+  .cardHeader{
+    text-align: center;
+  }
 }

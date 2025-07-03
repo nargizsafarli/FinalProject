@@ -5,9 +5,11 @@ import { fetchBlogs } from '../../redux/features/auth/blogSlice';
 import { useNavigate } from 'react-router-dom';
 import i18n from '../../i18n/i18next';
 import { SpinnerDotted } from 'spinners-react';
+import { useTranslation } from 'react-i18next';
 
 function Blog() {
   const dispatch = useDispatch();
+  const {t}=useTranslation()
   const { data, loading, error } = useSelector((state) => state.blog);
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,13 +35,13 @@ function Blog() {
           <div className={blog.content}>
             <h3 className={blog.title}>{currentLang==="en"? item.nameEn : item.nameAz}</h3>
             <div className={blog.meta}>
-              <span className={blog.admin}>By Admin</span> /
+              <span className={blog.admin}>{t("det.admin")}</span> /
               <span className={blog.category}>{currentLang==="en"? item.catagoryEn : item.catagoryAz}</span>
             </div>
             <p className={blog.short}>{currentLang==="en"? item.shortInfEn : item.shortInfAz}</p>
             <button className={blog.button}
               onClick={() => navigate(`/${currentLang}/blog/${item.id}`)}
-            >Read More</button>
+            >{t("det.read")}</button>
           </div>
         </div>
       ))}

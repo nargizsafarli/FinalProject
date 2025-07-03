@@ -36,8 +36,7 @@ function AccountCon() {
         localStorage.setItem("user", JSON.stringify(updatedUser));
         Swal.fire({
           icon: "success",
-          title: "Uğurla yeniləndi ✅",
-          text: "Məlumatlar uğurla yadda saxlanıldı!",
+          title: "Uğurla yeniləndi ",
         });
       }
     } catch (err) {

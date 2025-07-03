@@ -1,50 +1,88 @@
 import React from "react";
 import foot from "./Footer.module.css";
-import fLogo from "./assets/logo (1).png"
+import fLogo from "./assets/logo (1).png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFacebookF, faPinterestP, faXTwitter, faYoutube } from "@fortawesome/free-brands-svg-icons";
-import paymentImg from "./assets/payment-logo.png"
+import {
+  faFacebookF,
+  faPinterestP,
+  faXTwitter,
+  faYoutube,
+} from "@fortawesome/free-brands-svg-icons";
+import paymentImg from "./assets/payment-logo.png";
+import { useTranslation } from "react-i18next";
 
 function Footer() {
-const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
+  const currentYear = new Date().getFullYear();
   return (
     <div className={foot.container}>
-    <div className={foot.sec1}>
-      <div className={foot.item}>
-        <h4 className={foot.header}>Contact us</h4>
-        <div className={foot.contactItem}>
-          <p>Bloomis Demo Store 507-Union Trade Center France</p>
-          <span>Email:demo@example.com</span>
-          <span>Call: (+91) 9876-543-210</span>
+      <div className={foot.sec1}>
+        <div className={foot.item}>
+          <h4 className={foot.header}>{t("footer.contact")}</h4>
+          <div className={foot.contactItem}>
+            <p>{t("footer.area")}</p>
+            <span>{t("footer.email")}</span>
+            <span>{t("footer.call")}</span>
+          </div>
+        </div>
+        <div className={foot.item}>
+          <img src={fLogo} className={foot.logo} />
+          <p>{t("footer.welcome")}</p>
+          <div className={foot.icons}>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={foot.iconsItem}
+            >
+              <FontAwesomeIcon icon={faFacebookF} />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={foot.iconsItem}
+            >
+              <FontAwesomeIcon icon={faXTwitter} />
+            </a>
+            <a
+              href="https://www.youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={foot.iconsItem}
+            >
+              <FontAwesomeIcon icon={faYoutube} />
+            </a>
+            <a
+              href="https://www.pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={foot.iconsItem}
+            >
+              <FontAwesomeIcon icon={faPinterestP} />
+            </a>
+          </div>
+        </div>
+        <div className={foot.item}>
+          <h4 className={foot.header}>{t("footer.seller")}</h4>
+          <p>{t("footer.sub")}</p>
+          <img src={paymentImg} className={foot.img}/>
         </div>
       </div>
-      <div className={foot.item}>
-      <img src={fLogo} className={foot.logo}/>
-       <p>Welcome to our store, where we pride ourselves on providing exceptional products and unparalleled customer service.</p>
-       <div className={foot.icons}>
-        <div className={foot.iconsItem}><FontAwesomeIcon icon={faFacebookF} /></div>
-        <div className={foot.iconsItem}><FontAwesomeIcon icon={faXTwitter} /></div>
-        <div className={foot.iconsItem}><FontAwesomeIcon icon={faYoutube} /></div>
-        <div className={foot.iconsItem}><FontAwesomeIcon icon={faPinterestP} /></div>
-       </div>
-      </div>
-      <div className={foot.item}>
-       <h4  className={foot.header}>Our Newsletter</h4>
-       <p>Subscribe to our latest newsletter to get news about special discounts.</p>
-       <img src={paymentImg}/>
-      </div>
-      </div>
-      <div className={foot.sec2}>
+      {/* <div className={foot.sec2}>
        <ul className={foot.nav}>
-        <li>About</li>
-        <li>Contact</li>
-        <li>Shop</li>
-        <li>FA'Q</li>
-        <li>Blog</li>
+        <li>{t("footer.li1")}</li>
+        <li>{t("footer.li2")}</li>
+        <li>{t("footer.li3")}</li>
+        <li>{t("footer.li4")}</li>
+        <li>{t("footer.li5")}</li>
        </ul>
-      </div>
+      </div> */}
       <div className={foot.sec3}>
-        <p>@{currentYear}-Ecoomerce software by me</p>
+        <p>
+          @{currentYear}
+          {t("footer.ecom")}
+        </p>
       </div>
     </div>
   );

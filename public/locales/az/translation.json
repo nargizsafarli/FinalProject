@@ -172,8 +172,73 @@
   "pro":{
     "proName":"Məhsullarımız",
      "stock":"Stokda deyil...",
-      "morePro":"Daha çox"
-  }
+      "morePro":"Daha çox",
+      "home":"Ev",
+      "pro":"Məhsullar",
+      "filter": "Filter",
+"cato": "Kateqoriyalar",
+"dico": "İkiyarpaqlılar",
+"lili": "Zanbaqlar",
+"mono": "Biryarpaqlılar",
+"sugar": "Qamış bitkiləri",
+"avail": "Əlçatanlıq",
+"material": "Material",
+"plas": "Plastik",
+"keramik": "Keramika",
+"metal": "Metal",
+"brand": "Brend",
+"cond": "Vəziyyət",
+"dis": "Endirimli",
+"new": "Yeni məhsul",
+"pop": "Populyar",
+"the": "Mövcuddur",
+"ps": "məhsul",
+"sort": "Sırala:",
+"name": "Ad, A-dan Z-yə",
+"name2": "Ad, Z-dən A-ya",
+"price": "Qiymət, aşağıdan yuxarıya",
+"price2": "Qiymət, yuxarıdan aşağıya",
+"rat": "Reytinq, yüksəkdən aşağıya",
+"rat2": "Reytinq, aşağıdan yuxarıya",
+"filetrr": "SÜZGƏCDƏN KEÇİR",
+"outStock": "Stokda deyil"
+
+  },
+  "footer": {
+  "contact": "Bizimlə əlaqə",
+  "area": "Bloomis Demo Mağazası 507 - Union Ticarət Mərkəzi, Fransa",
+  "email": "Email: demo@example.com",
+  "call": "Zəng: (+91) 9876-543-210",
+  "welcome": "Mağazamıza xoş gəlmisiniz. Biz keyfiyyətli məhsullar və mükəmməl müştəri xidməti ilə fəxr edirik.",
+  "seller": "Bülletenimiz",
+  "sub": "Xüsusi endirimlər haqqında xəbərlər almaq üçün bülletenimizə abunə olun.",
+  "li1": "Haqqımızda",
+  "li2": "Əlaqə",
+  "li3": "Mağaza",
+  "li4": "Faq",
+  "li5": "Bloq",
+  "ecom": "-Elektron ticarət proqramı mənim tərəfimdən hazırlanıb"
+},
+"det": {
+  "mat": "Material:",
+  "rating": "Reytinq:",
+  "con": "Vəziyyət:",
+  "size": "Ölçü:",
+  "del": "Təxmini çatdırılma vaxtı 2-3 gün",
+  "add": "SƏBƏTƏ ƏLAVƏ ET",
+  "addWish": "İstək siyahısına əlavə et",
+  "addedWish":"Istək listə əlavə edildi",
+  "sto": "Stokdadır",
+  "check": "Təhlükəsiz ödəniş",
+   "serh":"Şərh əlavə et",
+    "comment":"Şərhlər:",
+    "noCom":"Hələ ki şərh yoxdur",
+    "faq":"Tez-tez verilən suallar",
+     "read":"Daha Çox",
+     "admin":"Admin tərəfindən"
+}
+
+
 
 
 

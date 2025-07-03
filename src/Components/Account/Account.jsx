@@ -3,10 +3,21 @@ import acc from "./Account.module.css";
 import AccountCon from "../AccountContent/AccountCon";
 import WishListCon from "../AccountContent/WishListCon";
 import CommentCon from "../AccountContent/CommentCon";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../../redux/features/auth/authSlice";
+import i18n from "../../i18n/i18next";
+import { useNavigate } from "react-router-dom";
+
 
 function Account() {
   const [activeTab, setActiveTab] = useState("account");
-
+  const currentLang=i18n.language
+  const navigate=useNavigate()
+  const dispatch=useDispatch()
+const logOut = () => {
+    dispatch(logoutUser());
+    navigate(`/${currentLang}/login`);
+  };
   return (
     <div className={acc.container}>
       <div className={acc.left}>
@@ -17,19 +28,22 @@ function Account() {
           >
             Account
           </li>
+          <hr  className={acc.hr}/>
           <li
             className={activeTab === "wishlist" ? acc.active : ""}
             onClick={() => setActiveTab("wishlist")}
           >
             Wishlist
           </li>
+          <hr className={acc.hr}/>
           <li
             className={activeTab === "comments" ? acc.active : ""}
             onClick={() => setActiveTab("comments")}
           >
             Comments
           </li>
-          <li onClick={() => console.log("Çıxış edildi")}>Logout</li>
+          <hr  className={acc.hr}/>
+          <li  className={activeTab === "logout" ? acc.active : ""} onClick={() => logOut()}>Logout</li>
         </ul>
       </div>
 
