@@ -4,8 +4,17 @@
     "shop": "Mağaza",
     "about": "Haqqımızda",
     "contact": "Əlaqə",
-    "pages": "Səhifələr"
+    "pages": "Səhifələr",
+    "logout":"Çıxış"
   },
+  "notif": {
+  "login": "Zəhmət olmasa daxil olun",
+  "wish": "İstək siyahısına əlavə edildi",
+  "remWish": "İstək siyahısından çıxarıldı",
+  "bask": "Səbətə əlavə edildi",
+  "remBask": "Səbətdən çıxarıldı"
+}
+,
   "pages": {
     "faq": "FAQ",
     "blog": "Bloq",

@@ -150,8 +150,8 @@
 /* Coming Soon yazısı */
 .comingSoon {
   position: absolute;
-  top: 120px;
-  left: 52%;
+  top: 130px;
+  left: 56%;
   display: none;
   transform: translateX(-50%);
   color: rgb(87, 87, 87);

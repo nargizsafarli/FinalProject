@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 .container {
   width: 700px;
@@ -19,7 +20,7 @@
   border: 1px solid #ececec;
   display: flex;
   /* justify-content: center; */
- 
+ background-color: var(--auth-bg);
    border: 1px solid #ececec;
   box-shadow: rgba(158, 157, 157, 0.1) 0px 10px 50px;
   /* align-items: center;

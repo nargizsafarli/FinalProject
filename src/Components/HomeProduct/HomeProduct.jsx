@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
@@ -18,7 +18,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import homepro from "./HomeProduct.module.css";
 import { fetchProducts } from "../../redux/features/auth/productSlice";
-import { addToWishlist } from "../../redux/features/auth/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/features/auth/wishlistSlice";
 import i18n from "../../i18n/i18next";
 import ModalProduct from "../ModalProduct/ModalProduct";
 import basket from "./assets/download (5).svg";
@@ -50,31 +53,48 @@ function HomeProduct() {
       setIsModalOpen(true);
     } else {
       api.warning({
-        message: "Zəhmət olmasa daxil olun",
-        description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
+        message: t("notif.login"),
         showProgress: true,
+        pauseOnHover: false,
         duration: 3,
         zIndex: 9999,
       });
     }
   };
+
   const handleAddToWishlist = (product) => {
-    if (user) {
-      dispatch(addToWishlist(product));
-      api.success({
-        message: "Added to Wishlist",
+    if (!user) {
+      api.warning({
+        message: t("notif.login"),
+        showProgress: true,
+        pauseOnHover: false,
+        duration: 3,
+        zIndex: 9999,
+      });
+      return;
+    }
+
+    const isInWishlist = wishlist.items?.some((item) => item.id === product.id);
+
+    if (isInWishlist) {
+      dispatch(removeFromWishlist(product.id)); // eyni action həm əlavə, həm çıxarma üçün işləyir
+      api.info({
+        message: t("notif.remWish"),
         placement: "topRight",
         showProgress: true,
         duration: 2,
+        pauseOnHover: false,
         zIndex: 10000,
       });
     } else {
-      api.warning({
-        message: "Please Log In",
-        description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
+      dispatch(addToWishlist(product));
+      api.success({
+        message: t("notif.wish"),
+        placement: "topRight",
+        pauseOnHover: false,
         showProgress: true,
-        duration: 3,
-        zIndex: 9999,
+        duration: 2,
+        zIndex: 10000,
       });
     }
   };
@@ -109,9 +129,16 @@ function HomeProduct() {
     return stars;
   };
 
-   if (loading) {
+  if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
         <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
       </div>
     );
@@ -182,6 +209,7 @@ function HomeProduct() {
                       >
                         <FontAwesomeIcon icon={faHeart} />
                       </div>
+
                       <div
                         className={homepro.overIcon}
                         onClick={() => handleAddToBasket(product)}
@@ -218,9 +246,7 @@ function HomeProduct() {
                 {/* CARD INFO */}
                 <div className={homepro.cardInfo}>
                   <p className={homepro.name}>
-                    {
-                      currentLang === "az" ? product.nameAz : product.nameEn
-                    }
+                    {currentLang === "az" ? product.nameAz : product.nameEn}
                   </p>
                   <div className={homepro.rating}>
                     {renderStars(product.rating)}

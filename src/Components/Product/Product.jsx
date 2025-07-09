@@ -24,7 +24,10 @@ import i18n from "../../i18n/i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import i18next from "i18next";
 import ModalProduct from "../ModalProduct/ModalProduct";
-import { addToWishlist } from "../../redux/features/auth/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/features/auth/wishlistSlice";
 import { SpinnerDotted } from "spinners-react";
 
 function Product() {
@@ -218,8 +221,14 @@ function Product() {
   };
   // !filterpage
   useEffect(() => {
-  setCurrentPage(1);
-}, [selectedCategory, availabilityFilter, selectedMaterial, selectedCondition, selectedBrand]);
+    setCurrentPage(1);
+  }, [
+    selectedCategory,
+    availabilityFilter,
+    selectedMaterial,
+    selectedCondition,
+    selectedBrand,
+  ]);
 
   useEffect(() => {
     const categoryFromURL = searchParams.get("category");
@@ -343,40 +352,54 @@ function Product() {
 
   // !handleAddBasket
   const handleAddToBasket = (product) => {
-  if (user) {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  } else {
-     api.warning({
-      message: 'Zəhmət olmasa daxil olun',
-      description: 'Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.',
-       showProgress: true,
-      duration: 3,
-      zIndex:9999
-    });
-  }
-};
-const handleAddToWishlist=(product)=>{
     if (user) {
-    dispatch(addToWishlist(product));
-      api.success({
-      message: 'Added to Wishlist',
-      placement: 'topRight',
-      showProgress: true,
-      duration: 2,
-      zIndex: 10000,
-    });
-  } else {
-     api.warning({
-      message: 'Please Log In',
-      description: 'Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.',
-       showProgress: true,
-      duration: 3,
-      zIndex:9999
-    });
-  }
-}
+      setSelectedProduct(product);
+      setIsModalOpen(true);
+    } else {
+      api.warning({
+        message: t("notif.login"),
+        showProgress: true,
+        duration: 3,
+        pauseOnHover: false,
+        zIndex: 9999,
+      });
+    }
+  };
+  const handleAddToWishlist = (product) => {
+    if (user) {
+      const isInWishlist = wishlist.some((item) => item.id === product.id);
 
+      if (isInWishlist) {
+        dispatch(removeFromWishlist(product.id));
+        api.info({
+          message: t("notif.remWish"),
+          placement: "topRight",
+          showProgress: true,
+          duration: 2,
+          pauseOnHover: false,
+          zIndex: 10000,
+        });
+      } else {
+        dispatch(addToWishlist(product));
+        api.success({
+          message: t("notif.wish"),
+          placement: "topRight",
+          duration: 2,
+          pauseOnHover: false,
+          zIndex: 10000,
+          showProgress: true,
+        });
+      }
+    } else {
+      api.warning({
+        pauseOnHover: false,
+        message: t("notif.login"),
+        showProgress: true,
+        duration: 3,
+        zIndex: 9999,
+      });
+    }
+  };
 
   // !Select-------------------------
   const [showFilter, setShowFilter] = useState(false);
@@ -385,12 +408,19 @@ const handleAddToWishlist=(product)=>{
   }, [dispatch]);
 
   if (loading) {
-  return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-      <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
-    </div>
-  );
-}
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
+        <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
+      </div>
+    );
+  }
   if (error) return <p>Xəta baş verdi: {error}</p>;
 
   const getDisplayPrice = (product) => {
@@ -454,9 +484,8 @@ const handleAddToWishlist=(product)=>{
   };
 
   return (
-    
     <div className={pro.container}>
-    {contextHolder}
+      {contextHolder}
       <div
         className={`${pro.filterOverlay} ${showFilter ? pro.overlayOpen : ""}`}
         onClick={() => setShowFilter(false)}
@@ -464,7 +493,7 @@ const handleAddToWishlist=(product)=>{
 
       <div className={`${pro.filterCon} ${showFilter ? pro.activeFilter : ""}`}>
         <div className={pro.filterBy}>
-         {t("pro.filter")}
+          {t("pro.filter")}
           <button className={pro.closeBtn} onClick={() => setShowFilter(false)}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
@@ -625,7 +654,9 @@ const handleAddToWishlist=(product)=>{
           <div className={pro.resItem}>
             <div className={pro.intItem}>
               <img src={logo} style={{ width: "20px" }} />
-              <p className={pro.proDet}>{t("pro.the")} {data.length} {t("pro.ps")}.</p>
+              <p className={pro.proDet}>
+                {t("pro.the")} {data.length} {t("pro.ps")}.
+              </p>
             </div>
             <div className={pro.intItem}>
               <p className={pro.proDet2}>{t("pro.sort")}</p>
@@ -640,8 +671,8 @@ const handleAddToWishlist=(product)=>{
                 // onChange={(value) => setSortOption(value)}
                 onChange={handleSortChange}
                 options={[
-                  { value: "1", label:t("pro.name") },
-                  { value: "2", label:t("pro.name2") },
+                  { value: "1", label: t("pro.name") },
+                  { value: "2", label: t("pro.name2") },
                   { value: "3", label: t("pro.price") },
                   { value: "4", label: t("pro.price2") },
                   { value: "5", label: t("pro.rat") },
@@ -669,12 +700,12 @@ const handleAddToWishlist=(product)=>{
                   !product.isStock ? pro.outOfStock : ""
                 }`}
               >
-                {!product.isStock && (
+                {/* {!product.isStock && (
                   <>
                     <div className={pro.stockOverlay}></div>
                     <div className={pro.comingSoon}>{t("pro.outStock")}</div>
                   </>
-                )}
+                )} */}
 
                 {product.isStock && (
                   <div className={pro.cardOverlay}>
@@ -721,11 +752,17 @@ const handleAddToWishlist=(product)=>{
                     alt={product.nameEn}
                     className={`${pro.images} ${pro.hoverImg}`}
                   />
+                  {!product.isStock && (
+                    <>
+                      <div className={pro.stockOverlay}></div>
+                      <div className={pro.comingSoon}>{t("pro.stock")}</div>
+                    </>
+                  )}
                 </div>
                 <div className={pro.cardBody}>
-                  <p className={pro.name}>{
-                      currentLang === "az" ? product.nameAz : product.nameEn
-                    }</p>
+                  <p className={pro.name}>
+                    {currentLang === "az" ? product.nameAz : product.nameEn}
+                  </p>
                   <div className={pro.rating}>
                     {renderStars(product.rating)}
                   </div>
@@ -746,34 +783,35 @@ const handleAddToWishlist=(product)=>{
         </div>
 
         <div className={pro.pagination}>
-  <button
-    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-    disabled={currentPage === 1}
-  >
-    <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
-  </button>
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
+          </button>
 
-  {/* Page Numbers */}
-  {Array.from({ length: totalPages }, (_, index) => (
-    <button
-      key={index + 1}
-      onClick={() => setCurrentPage(index + 1)}
-      className={`${pro.pageButton} ${currentPage === index + 1 ? pro.activePage : ""}`}
-    >
-      {index + 1}
-    </button>
-  ))}
+          {/* Page Numbers */}
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index + 1}
+              onClick={() => setCurrentPage(index + 1)}
+              className={`${pro.pageButton} ${
+                currentPage === index + 1 ? pro.activePage : ""
+              }`}
+            >
+              {index + 1}
+            </button>
+          ))}
 
-  <button
-    onClick={() =>
-      setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-    }
-    disabled={currentPage === totalPages}
-  >
-    <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
-  </button>
-</div>
-
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -4,8 +4,17 @@
     "shop": "Shop",
     "about": "About Us",
     "contact": "Contact Us",
-    "pages": "Pages"
+    "pages": "Pages",
+    "logout":"Logout"
   },
+  "notif":{
+    "login":"Please login",
+    "wish":"Added to wishlist",
+    "remWish":"Remove from wishlist",
+    "bask":"Added to basket",
+    "remBask":"Remove from basket"
+  },
+
   "pages": {
     "faq": "FAQ",
     "blog": "Blog",

@@ -13,11 +13,13 @@
   --card-bg: #f2f2f2;
   /* --navbar-bg: #e4e4e4; */
   --navbar-bg: #ffffff;
+  --auth-bg: #ffffff;
   --footer-bg: rgb(247, 245, 245);
 }
 
 .dark-mode {
   --navbar-bg: #ecebeb;
+  --auth-bg: rgb(219, 216, 216);
   --bg-color: rgb(233, 232, 232);
   --footer-bg: rgb(219, 216, 216);
 }

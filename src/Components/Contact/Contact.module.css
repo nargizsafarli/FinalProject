@@ -50,6 +50,8 @@
   /* box-shadow: rgba(190, 190, 190, 0.1) 0px 10px 50px; */
   border: solid 1px gainsboro;
   background-color: white;
+  background-color: var(--auth-bg);
+
   padding: 50px 70px;
 }
 .formGr{

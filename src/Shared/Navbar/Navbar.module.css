@@ -249,9 +249,16 @@
 .user:hover .userOpen {
   display: flex;
 }
+.namee{
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.namee:hover{
+  color: #518432;
+}
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   .desktop {
     display: none;
   }
@@ -266,7 +273,7 @@
 
 @media (max-width:530px){
   .logo{
-    width: 130px;
+    width: 125px;
   }
   .dektopContainer{
     padding:0 8px;

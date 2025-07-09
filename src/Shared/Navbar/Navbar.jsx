@@ -6,11 +6,10 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { BiBasket } from "react-icons/bi";
 import { FaTimes } from "react-icons/fa";
 import { FaBars } from "react-icons/fa6";
-import { IoIosArrowDown } from "react-icons/io";
-import { IoIosArrowUp } from "react-icons/io";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
+
 import { useTranslation } from "react-i18next";
 import ChangeLang from "../../Components/ChangeLang/ChangeLang";
 import i18n from "../../i18n/i18next";
@@ -23,7 +22,6 @@ import { MdOutlineLightMode } from "react-icons/md";
 import "..//../index.css";
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openPage, setOpenPage] = useState(false);
   const [isBasketOpen, setIsBasketOpen] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -99,31 +97,22 @@ function Navbar() {
             >
               {t("navbar.contact")}
             </NavLink>
-            <div className={nav.pagesWrapper}>
-              <div className={nav.linkItem}>
-                <div className={nav.opens}>
-                  {t("navbar.pages")} <IoIosArrowUp className={nav.arrowIcon} />
-                </div>
-                <div className={nav.openDesktopPage}>
-                  <NavLink
-                    to={`/${currentLang}/faq`}
-                    className={({ isActive }) =>
-                      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                    }
-                  >
-                    {t("pages.faq")}
-                  </NavLink>
-                  <NavLink
-                    to={`/${currentLang}/blog`}
-                    className={({ isActive }) =>
-                      `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                    }
-                  >
-                    {t("pages.blog")}
-                  </NavLink>
-                </div>
-              </div>
-            </div>
+            <NavLink
+              to={`/${currentLang}/blog`}
+              className={({ isActive }) =>
+                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+              }
+            >
+              {t("pages.blog")}
+            </NavLink>
+            <NavLink
+              to={`/${currentLang}/faq`}
+              className={({ isActive }) =>
+                `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+              }
+            >
+              {t("pages.faq")}
+            </NavLink>
             {/* !DAshboarddd */}
             {user?.name === "Admin" && user?.email === "admin@gmail.com" && (
               <NavLink
@@ -146,7 +135,7 @@ function Navbar() {
             <div className={nav.user}>
               <FaRegUser />
               <div className={nav.userOpen}>
-                <p
+                <p className={nav.namee}
                   onClick={() => {
                     navigate(`/${currentLang}/account`);
                   }}
@@ -159,7 +148,7 @@ function Navbar() {
                     logOut();
                   }}
                 >
-                  Logout
+                  {t("navbar.logout")}
                 </div>
               </div>
             </div>
@@ -193,7 +182,11 @@ function Navbar() {
             currentLang={currentLang}
           />
           <div onClick={() => dispatch(toggleTheme())}>
-            {theme === "light" ? <MdOutlineDarkMode className={nav.baskk}/> : <MdOutlineLightMode className={nav.baskk}/>}
+            {theme === "light" ? (
+              <MdOutlineDarkMode className={nav.baskk} />
+            ) : (
+              <MdOutlineLightMode className={nav.baskk} />
+            )}
           </div>
         </div>
       </div>
@@ -246,29 +239,18 @@ function Navbar() {
                 {t("navbar.contact")}
               </NavLink>
               <NavLink
-                onClick={() => setOpenPage(!openPage)}
-                className={nav.linkItem}
+                className={({ isActive }) =>
+                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                }
               >
-                {t("navbar.pages")}{" "}
-                {openPage ? <IoIosArrowDown /> : <IoIosArrowUp />}
-                {openPage && (
-                  <div>
-                    <NavLink
-                      className={({ isActive }) =>
-                        `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                      }
-                    >
-                      {t("pages.faq")}
-                    </NavLink>
-                    <NavLink
-                      className={({ isActive }) =>
-                        `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
-                      }
-                    >
-                      {t("pages.blog")}
-                    </NavLink>
-                  </div>
-                )}
+                {t("pages.faq")}
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  `${nav.linkItem} ${isActive ? nav.activeLink : ""}`
+                }
+              >
+                {t("pages.blog")}
               </NavLink>
               <ChangeLang />
             </div>

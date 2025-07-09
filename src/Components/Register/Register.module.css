@@ -17,7 +17,8 @@
 }
 
 .con {
-  background-color: #fff;
+  /* background-color: #fff; */
+  background-color: var(--auth-bg);
   padding: 50px 80px;
   border: 1px solid #ececec;
   box-shadow: rgba(158, 157, 157, 0.1) 0px 10px 50px;
