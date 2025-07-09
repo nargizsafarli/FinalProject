@@ -23,6 +23,9 @@
   position: sticky;
   top: 80px;
 }
+.ic{
+  font-size: 18px;
+}
 .prof {
   display: flex;
   align-items: center;

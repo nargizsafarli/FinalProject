@@ -102,8 +102,7 @@ function DetailSec() {
       }
     } else {
       api.warning({
-        message: "Zəhmət olmasa daxil olun",
-        description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
+        message: "Please log in",
           showProgress: true,
       duration: 2,
         zIndex: 9999,

@@ -255,6 +255,13 @@
     "cancel":"Cancel",
     "edit":"Edit",
     "del":"Sil"
-  }
+  },
+  "el":{
+  "about":"About Us",
+  "contact":"Contact Us",
+  "product":"Product",
+  "shop":"shop",
+  "ab":"about"
+}
   
 }

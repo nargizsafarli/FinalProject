@@ -11,8 +11,7 @@ import { AiOutlineProduct } from "react-icons/ai";
 import { FaRegUser } from "react-icons/fa6";
 import { RiBloggerLine } from "react-icons/ri";
 import { FaRegFileAlt } from "react-icons/fa";
-import ChartView from "./ChartView";
-
+import { GoComment } from "react-icons/go";
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("product");
  
@@ -38,31 +37,31 @@ function Dashboard() {
           className={activeTab === "product" ? dash.active : dash.prof}
           onClick={() => setActiveTab("product")}
         >
-          <AiOutlineProduct /> Products
+          <AiOutlineProduct className={dash.ic}/> Products
         </p>
         <p
           className={activeTab === "profils" ? dash.active : dash.prof}
           onClick={() => setActiveTab("profils")}
         >
-          <FaRegUser /> Users
+          <FaRegUser className={dash.ic}/> Users
         </p>
          <p
           className={activeTab === "review" ? dash.active : dash.prof}
           onClick={() => setActiveTab("review")}
         >
-          <AiOutlineProduct /> Comment
+          <GoComment className={dash.ic}/> Comment
         </p>
         <p
           className={activeTab === "Blog" ? dash.active : dash.prof}
           onClick={() => setActiveTab("Blog")}
         >
-          <RiBloggerLine /> Blogs
+          <RiBloggerLine className={dash.ic}/> Blogs
         </p>
         <p
           className={activeTab === "faq" ? dash.active : dash.prof}
           onClick={() => setActiveTab("faq")}
         >
-          <FaRegFileAlt /> FAQ
+          <FaRegFileAlt className={dash.ic}/> FAQ
         </p>
       </div>
       {/* <div className={dash.rightContainer}>
