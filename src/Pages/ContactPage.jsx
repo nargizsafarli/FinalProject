@@ -11,7 +11,7 @@ function ContactPage() {
    
     <div>
         <Navbar/>
-          <Commom title={t("el.contact")} subtitle={"contact"}/>
+          <Commom title={t("el.contact")} subtitle={t("el.con")}/>
         <Contact/>
         <Footer/>
     </div>

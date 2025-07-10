@@ -1,4 +1,4 @@
-import React, { useTransition } from 'react'
+import React, { useEffect, useTransition } from 'react'
 import team from "./Team.module.css"
 import { FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
@@ -11,18 +11,25 @@ import { FaTwitter } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { useTranslation } from 'react-i18next';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 
 function OutTeam() {
     const {t}=useTranslation()
+    useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+      });
+    }, []);
   return (
     <div className={team.container}>
     <div className={team.text}>
-        <p className={team.teamTitle}>{t("about.team")}</p>
-        <span className={team.titleDet}>{t("about.meet")}</span>
+        <p className={team.teamTitle} data-aos="fade-up">{t("about.team")}</p>
+        <span className={team.titleDet} data-aos="fade-up">{t("about.meet")}</span>
     </div>
     <div className={team.cardCon}>
-        <div className={team.card}>
+        <div className={team.card} data-aos="zoom-in">
             <div className={team.personimg}>
              <div className={team.overLay}>
                 <FaFacebookF className={team.icon}/>
@@ -44,7 +51,7 @@ function OutTeam() {
                 </div>
             </div>
         </div>
-         <div className={team.card}>
+         <div className={team.card} data-aos="zoom-in">
             <div className={team.personimg}>
              <div className={team.overLay}>
                 <FaFacebookF className={team.icon}/>
@@ -66,7 +73,7 @@ function OutTeam() {
                 </div>
             </div>
         </div>
-         <div className={team.card}>
+         <div className={team.card} data-aos="zoom-in">
             <div className={team.personimg}>
              <div className={team.overLay}>
                 <FaFacebookF className={team.icon}/>
@@ -88,7 +95,7 @@ function OutTeam() {
                 </div>
             </div>
         </div>
-        <div className={team.card}>
+        <div className={team.card} data-aos="zoom-in">
             <div className={team.personimg}>
              <div className={team.overLay}>
                 <FaFacebookF className={team.icon}/>

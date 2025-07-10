@@ -12,7 +12,11 @@
   "wish": "İstək siyahısına əlavə edildi",
   "remWish": "İstək siyahısından çıxarıldı",
   "bask": "Səbətə əlavə edildi",
-  "remBask": "Səbətdən çıxarıldı"
+  "remBask": "Səbətdən çıxarıldı",
+   "shop":"Alış-veriş kartı",
+    "tot":"Yekun:",
+    "view":"Səbətə bax",
+    "check":"Yoxlanış"
 }
 ,
   "pages": {
@@ -268,8 +272,15 @@
   "about":"Haqqımızda",
   "contact":"Əlaqə",
   "product":"Məhsullar",
-  "shop":"mağaza",
-  "ab":"haqqımızda"
+  "shop":"Mağaza",
+  "ab":"Haqqımızda",
+  "con":"Əlaqə",
+   "acc":"Hesab Yaradın",
+   "reg":"Qeydiyyat",
+   "log":"Hesabınıza daxil olun",
+   "lo":"Daxil ol",
+   "bask":"Səbət",
+   "wish":"İstək siyahısı"
 }
 
 

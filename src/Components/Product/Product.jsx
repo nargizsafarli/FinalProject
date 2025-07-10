@@ -29,6 +29,8 @@ import {
   removeFromWishlist,
 } from "../../redux/features/auth/wishlistSlice";
 import { SpinnerDotted } from "spinners-react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 function Product() {
   const { t } = useTranslation();
@@ -229,6 +231,12 @@ function Product() {
     selectedCondition,
     selectedBrand,
   ]);
+  useEffect(() => {
+    Aos.init({
+      duration: 800, // animasiya müddəti (ms)
+      // once: true,    // animasiya 1 dəfə baş versin
+    });
+  }, []);
 
   useEffect(() => {
     const categoryFromURL = searchParams.get("category");
@@ -691,127 +699,132 @@ function Product() {
         </div>
 
         <div className={pro.productss}>
-          {currentProducts.map((product) => {
-            const { price, discount } = getDisplayPrice(product);
-            return (
-              <div
-                key={product.id}
-                className={`${pro.proCard} ${
-                  !product.isStock ? pro.outOfStock : ""
-                }`}
-              >
-                {/* {!product.isStock && (
-                  <>
-                    <div className={pro.stockOverlay}></div>
-                    <div className={pro.comingSoon}>{t("pro.outStock")}</div>
-                  </>
-                )} */}
-
-                {product.isStock && (
-                  <div className={pro.cardOverlay}>
-                    <div
-                      className={`${pro.overIcon} ${
-                        wishlist.some((item) => item.id === product.id)
-                          ? pro.active
-                          : ""
-                      }`}
-                      onClick={() => handleAddToWishlist(product)}
-                    >
-                      <FontAwesomeIcon icon={faHeart} />
-                    </div>
-                    <div
-                      className={pro.overIcon}
-                      onClick={() => handleAddToBasket(product)}
-                    >
-                      <img src={basket} className={pro.overImg} alt="Basket" />
-                    </div>
-                    <div
-                      className={pro.overIcon}
-                      onClick={() =>
-                        navigate(`/${currentLang}/shop/${product.id}`)
-                      }
-                    >
-                      <img src={det} className={pro.overImg} alt="Detail" />
-                    </div>
-                  </div>
-                )}
-                <ModalProduct
-                  isOpen={isModalOpen}
-                  onClose={() => setIsModalOpen(false)}
-                  // product={product}
-                  product={selectedProduct}
-                />
-                <div className={pro.cardImg}>
-                  <img
-                    src={product.img}
-                    alt={product.nameEn}
-                    className={`${pro.images} ${pro.mainImg}`}
-                  />
-                  <img
-                    src={product.thumnailImg}
-                    alt={product.nameEn}
-                    className={`${pro.images} ${pro.hoverImg}`}
-                  />
-                  {!product.isStock && (
-                    <>
-                      <div className={pro.stockOverlay}></div>
-                      <div className={pro.comingSoon}>{t("pro.stock")}</div>
-                    </>
-                  )}
-                </div>
-                <div className={pro.cardBody}>
-                  <p className={pro.name}>
-                    {currentLang === "az" ? product.nameAz : product.nameEn}
-                  </p>
-                  <div className={pro.rating}>
-                    {renderStars(product.rating)}
-                  </div>
-                  <div className={pro.price}>
-                    {discount ? (
-                      <div>
-                        <span className={pro.oldPrice}>${price}</span>
-                        <span className={pro.disPrice}>${discount}</span>
+          {currentProducts.length === 0 ? (
+            <p className={pro.noProductText}>Məhsul tapılmadı</p>
+          ) : (
+            currentProducts.map((product) => {
+              const { price, discount } = getDisplayPrice(product);
+              return (
+                <div
+                  data-aos="zoom-in"
+                  key={product.id}
+                  className={`${pro.proCard} ${
+                    !product.isStock ? pro.outOfStock : ""
+                  }`}
+                >
+                  {product.isStock && (
+                    <div className={pro.cardOverlay}>
+                      <div
+                        className={`${pro.overIcon} ${
+                          wishlist.some((item) => item.id === product.id)
+                            ? pro.active
+                            : ""
+                        }`}
+                        onClick={() => handleAddToWishlist(product)}
+                      >
+                        <FontAwesomeIcon icon={faHeart} />
                       </div>
-                    ) : (
-                      <span className={pro.pri}>${price}</span>
+                      <div
+                        className={pro.overIcon}
+                        onClick={() => handleAddToBasket(product)}
+                      >
+                        <img
+                          src={basket}
+                          className={pro.overImg}
+                          alt="Basket"
+                        />
+                      </div>
+                      <div
+                        className={pro.overIcon}
+                        onClick={() =>
+                          navigate(`/${currentLang}/shop/${product.id}`)
+                        }
+                      >
+                        <img src={det} className={pro.overImg} alt="Detail" />
+                      </div>
+                    </div>
+                  )}
+
+                  <ModalProduct
+                    isOpen={isModalOpen}
+                    onClose={() => setIsModalOpen(false)}
+                    product={selectedProduct}
+                  />
+
+                  <div className={pro.cardImg}>
+                    <img
+                      src={product.img}
+                      alt={product.nameEn}
+                      className={`${pro.images} ${pro.mainImg}`}
+                    />
+                    <img
+                      src={product.thumnailImg}
+                      alt={product.nameEn}
+                      className={`${pro.images} ${pro.hoverImg}`}
+                    />
+                    {!product.isStock && (
+                      <>
+                        <div className={pro.stockOverlay}></div>
+                        <div className={pro.comingSoon}>{t("pro.stock")}</div>
+                      </>
                     )}
                   </div>
+
+                  <div className={pro.cardBody}>
+                    <p className={pro.name}>
+                      {currentLang === "az" ? product.nameAz : product.nameEn}
+                    </p>
+                    <div className={pro.rating}>
+                      {renderStars(product.rating)}
+                    </div>
+                    <div className={pro.price}>
+                      {discount ? (
+                        <div>
+                          <span className={pro.oldPrice}>${price}</span>
+                          <span className={pro.disPrice}>${discount}</span>
+                        </div>
+                      ) : (
+                        <span className={pro.pri}>${price}</span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
 
-        <div className={pro.pagination}>
-          <button
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
-          </button>
-
-          {/* Page Numbers */}
-          {Array.from({ length: totalPages }, (_, index) => (
+        {currentProducts.length > 0 && (
+          <div className={pro.pagination}>
             <button
-              key={index + 1}
-              onClick={() => setCurrentPage(index + 1)}
-              className={`${pro.pageButton} ${
-                currentPage === index + 1 ? pro.activePage : ""
-              }`}
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
             >
-              {index + 1}
+              <FontAwesomeIcon icon={faArrowLeft} style={{ color: "white" }} />
             </button>
-          ))}
 
-          <button
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-          >
-            <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
-          </button>
-        </div>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button
+                key={index + 1}
+                onClick={() => setCurrentPage(index + 1)}
+                className={`${pro.pageButton} ${
+                  currentPage === index + 1 ? pro.activePage : ""
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+
+            <button
+              onClick={() =>
+                setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              <FontAwesomeIcon icon={faArrowRight} style={{ color: "white" }} />
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

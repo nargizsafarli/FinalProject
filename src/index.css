@@ -15,6 +15,7 @@
   --navbar-bg: #ffffff;
   --auth-bg: #ffffff;
   --footer-bg: rgb(247, 245, 245);
+  --baskOver-bg:#ffffff;
 }
 
 .dark-mode {
@@ -22,6 +23,7 @@
   --auth-bg: rgb(219, 216, 216);
   --bg-color: rgb(233, 232, 232);
   --footer-bg: rgb(219, 216, 216);
+  --baskOver-bg:rgb(219, 216, 216);
 }
 
 body {

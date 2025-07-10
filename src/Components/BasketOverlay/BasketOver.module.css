@@ -32,7 +32,7 @@
   width: 400px;
   max-width: 90%;
   height: 100%;
-  background: white;
+  background-color: var(--baskOver-bg);
   z-index: 20;
   padding: 20px;
   display: flex;

@@ -196,8 +196,21 @@ display: flex;
 
 .productss {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  justify-items: start; /* kartlar sola yapışsın */
   gap: 20px;
+  position: relative;
+}
+.noProductText{
+  /* width: 100%; */
+   /* grid-column: 100%; */
+  /* align-self: center; */
+  /* text-align: center; */
+  position: absolute;
+  font-size: 19px;
+  padding: 40px 0;
+  color: #999;
+  font-weight: 500;
 }
 .proCard{
     display: flex;
@@ -212,6 +225,7 @@ display: flex;
     padding:0 0 20px 0px;
     /* max-width: 290px; */
      /* width: 100%; */
+      width: 100%;
     max-width: 290px;
     /* Griddd */
      /* min-height: 360px;  */
@@ -230,6 +244,7 @@ display: flex;
     object-fit:cover;
     transition: all 0.3s ease;  
 } 
+
 
 .mainImg {
   transition: opacity 0.3s ease;
@@ -542,8 +557,10 @@ display: flex;
 }
 @media (max-width: 480px) {
   .productss {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 8px;
+    justify-content: center;
+    justify-items: center;
   }
  
   .name{

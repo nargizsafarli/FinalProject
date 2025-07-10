@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import foot from "./Footer.module.css";
 import fLogo from "./assets/logo (1).png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,14 +10,21 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import paymentImg from "./assets/payment-logo.png";
 import { useTranslation } from "react-i18next";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 function Footer() {
+  useEffect(() => {
+    Aos.init({
+      duration: 800,
+    });
+  }, []);
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   return (
     <div className={foot.container}>
       <div className={foot.sec1}>
-        <div className={foot.item}>
+        <div className={foot.item} data-aos="fade-up">
           <h4 className={foot.header}>{t("footer.contact")}</h4>
           <div className={foot.contactItem}>
             <p>{t("footer.area")}</p>
@@ -25,7 +32,7 @@ function Footer() {
             <span>{t("footer.call")}</span>
           </div>
         </div>
-        <div className={foot.item}>
+        <div className={foot.item} data-aos="fade-up">
           <img src={fLogo} className={foot.logo} />
           <p>{t("footer.welcome")}</p>
           <div className={foot.icons}>
@@ -63,21 +70,12 @@ function Footer() {
             </a>
           </div>
         </div>
-        <div className={foot.item}>
+        <div className={foot.item} data-aos="fade-up">
           <h4 className={foot.header}>{t("footer.seller")}</h4>
           <p>{t("footer.sub")}</p>
-          <img src={paymentImg} className={foot.img}/>
+          <img src={paymentImg} className={foot.img} />
         </div>
       </div>
-      {/* <div className={foot.sec2}>
-       <ul className={foot.nav}>
-        <li>{t("footer.li1")}</li>
-        <li>{t("footer.li2")}</li>
-        <li>{t("footer.li3")}</li>
-        <li>{t("footer.li4")}</li>
-        <li>{t("footer.li5")}</li>
-       </ul>
-      </div> */}
       <div className={foot.sec3}>
         <p>
           @{currentYear}

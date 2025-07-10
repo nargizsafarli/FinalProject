@@ -6,11 +6,14 @@ import { fetchBlogs } from "../../redux/features/auth/blogSlice";
 import i18n from "../../i18n/i18next";
 import { useTranslation } from "react-i18next";
 import { SpinnerDotted } from "spinners-react";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 function BlogDetail() {
   const { id } = useParams();
   const { t } = useTranslation();
   const currentLang = i18n.language;
+
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.blog);
   useEffect(() => {
@@ -18,6 +21,12 @@ function BlogDetail() {
       dispatch(fetchBlogs());
     }
   }, [dispatch, data]);
+
+  useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+      });
+    }, []);
 
    if (loading) {
       return (
@@ -33,7 +42,7 @@ function BlogDetail() {
   if (!blog) return <p>Blog tapılmadı</p>;
 
   return (
-    <div className={bdet.container}>
+    <div className={bdet.container} data-aos="zoom-in">
       <h1 className={bdet.title}>
         {currentLang === "en" ? blog.nameEn : blog.nameAz}
       </h1>

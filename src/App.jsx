@@ -24,7 +24,7 @@ import AccountPage from "./Pages/AccountPage";
 import { useSelector } from "react-redux";
 const App = () => {
   const [savedLang, setSavedLang] = useState(null);
-    const theme = useSelector((state) => state.theme.theme);
+  const theme = useSelector((state) => state.theme.theme);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -56,7 +56,6 @@ const App = () => {
     <div>
       <BrowserRouter>
         <ScrollTop />
-        {/* <Navbar /> */}
         <Routes>
           <Route path="/:lang" element={<HomePage />} />
           <Route path="/:lang/shop" element={<ShopPage />} />
@@ -100,8 +99,22 @@ const App = () => {
               </PrivateRouter>
             }
           />
-          <Route path="/:lang/thank" element={<ThanksPage />} />
-          <Route path="/:lang/account" element={<AccountPage/>}/>
+          <Route
+            path="/:lang/thank"
+            element={
+              <PrivateRouter>
+                <ThanksPage />
+              </PrivateRouter>
+            }
+          />
+          <Route
+            path="/:lang/account"
+            element={
+              <PrivateRouter>
+                <AccountPage />
+              </PrivateRouter>
+            }
+          />
           <Route path="/" element={<Navigate to={`/${savedLang}`} replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

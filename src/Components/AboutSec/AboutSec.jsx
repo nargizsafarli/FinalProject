@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import abSec from "./AboutSec.module.css";
 import leftImg from "./assets/cms-01.png";
 import img2 from "./assets/cms-02.jpg"
 import { useTranslation } from "react-i18next";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 
 function AboutSec() {
+  useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+      });
+    }, []);
   const {t}=useTranslation()
   return (
     <div className={abSec.container}>
-      <div className={abSec.left}>
-        <div className={abSec.imgCon}>
+      <div className={abSec.left} >
+        <div className={abSec.imgCon} data-aos="fade-right">
           <img src={leftImg} className={abSec.img} />
         </div>
-        <div className={abSec.leftText}>
+        <div className={abSec.leftText} data-aos="fade-left">
           <div className={abSec.textItem}>
             <div className={abSec.item}>
               <h3>{t("about.us")}</h3>
@@ -25,8 +32,8 @@ function AboutSec() {
           <div className={abSec.btn}> {t("about.shop")}</div>
         </div>
       </div>
-      <div className={abSec.right}>
-        <div className={abSec.rightText}>
+      <div className={abSec.right} >
+        <div className={abSec.rightText} data-aos="fade-right">
           <div className={abSec.rightTextItem}>
             <div className={abSec.item}>
               <h3>{t("about.meet2")}</h3>
@@ -39,7 +46,7 @@ function AboutSec() {
           </div>
             <div className={`${abSec.btn} ${abSec.BtnTwo}`}> {t("about.shop")}</div>
         </div>
-        <div className={abSec.imgConTwo}>
+        <div className={abSec.imgConTwo} data-aos="fade-left">
             <img src={img2} className={abSec.ImgTwo}/>
         </div>
       </div>

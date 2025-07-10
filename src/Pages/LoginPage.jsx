@@ -2,13 +2,16 @@ import React from "react";
 import Login from "../Components/Login/Login";
 import Navbar from "../Shared/Navbar/Navbar";
 import Footer from "../Shared/Footer/Footer";
-import AuthHeader from "../Components/AuthHeader/AuthHeader";
+
+import { useTranslation } from "react-i18next";
+import Commom from "../Shared/components/Commom/Commom";
 
 function LoginPage() {
+  const {t}=useTranslation()
   return (
     <div>
       <Navbar />
-      <AuthHeader title="Log in to your account" subtitle="Log in"/>
+      <Commom title={t("el.log")} subtitle={t("el.lo")}/>
       <Login />
       <Footer/>
     </div>

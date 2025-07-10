@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
@@ -11,13 +11,20 @@ import imgLogo3 from "./assets/download.jpeg"
 import { MdNavigateNext } from "react-icons/md";
 import { GrFormPrevious } from "react-icons/gr";
 import { useTranslation } from "react-i18next";
+import Aos from "aos";
+import 'aos/dist/aos.css';
 function Testimonial() {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const {t}=useTranslation()
+  useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+      });
+    }, []);
 
   return (
-    <div className={test.container}>
+    <div className={test.container} data-aos="fade-up">
       <div className={test.header}>
         <div className={test.navWrapper}>
           <div ref={prevRef} className={test.prev}><GrFormPrevious /></div>

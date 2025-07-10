@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { calculateTotal } from "../../redux/features/auth/basketSlice";
 import basket from "./BasketOver.module.css";
 import { getPrices } from "../../Utils/getprice";
+import i18n from "../../i18n/i18next";
+import { useTranslation } from "react-i18next";
 
 const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
   const basketItems = useSelector((state) => state.basket.items);
@@ -14,6 +16,8 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
   useEffect(() => {
     dispatch(calculateTotal());
   }, [basketItems, dispatch]);
+  const {t}=useTranslation()
+  // const currentLang=i18n.language
 
   return (
     <>
@@ -27,12 +31,12 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
           isOpen ? basket.basketSidebarOpen : ""
         }`}
       >
-        <h2 className={basket.text}>Shopping Cart</h2>
+        <h2 className={basket.text}>{t("notif.shop")}</h2>
         <hr className={basket.hrr} />
 
         <div className={basket.basketItemsWrapper}>
           {basketItems.length === 0 ? (
-            <p>Səbət boşdur</p>
+            <p>{t("notif.bas")}</p>
           ) : (
             basketItems.map((item) => {
               const { original, discount } = getPrices(item.product, item.size);
@@ -43,7 +47,9 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
                   <div className={basket.card}>
                     <img src={item.product.img} alt={item.product.name} />
                     <div className={basket.cardBody}>
-                      <p className={basket.name}>{item.product.nameEn}</p>
+                      <p className={basket.name}>
+                       {currentLang === "az" ? item.product.nameAz : item.product.nameEn}
+                      </p>
                       <p className={basket.size}>{item.size}</p>
                       <p className={basket.price}>
                         {item.quantity} ×{" "}
@@ -68,7 +74,7 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
         <hr className={basket.hrr} />
         <div className={basket.basketFooter}>
           <p className={basket.total}>
-            <span>Total:</span>
+            <span>{t("notif.tot")}</span>
             <span className={basket.totalPrice}>${total}</span>
           </p>
 
@@ -80,14 +86,14 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
                 onClose();
               }}
             >
-              View Cart
+             {t("notif.view")}
             </div>
             <div className={basket.cardButtonTwo}
              onClick={() => {
                 navigate(`/${currentLang}/check`);
                 onClose();
               }}
-            >Checkout</div>
+            >{t("notif.check")}</div>
           </div>
         </div>
       </div>

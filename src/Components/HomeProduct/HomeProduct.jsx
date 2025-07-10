@@ -29,6 +29,8 @@ import det from "./assets/download (6).svg";
 import { notification } from "antd";
 import { useTranslation } from "react-i18next";
 import { SpinnerDotted } from "spinners-react";
+import 'aos/dist/aos.css';
+import Aos from "aos";
 
 function HomeProduct() {
   const [api, contextHolder] = notification.useNotification();
@@ -39,7 +41,11 @@ function HomeProduct() {
   const { data, loading, error } = useSelector((state) => state.product);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-
+useEffect(() => {
+      Aos.init({
+        duration: 800, 
+      });
+    }, []);
   const user = useSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -150,7 +156,7 @@ function HomeProduct() {
   return (
     <div className={homepro.container}>
       {contextHolder}
-      <h2 className={homepro.title}>{t("pro.proName")}</h2>
+      <h2 className={homepro.title} data-aos="fade-up">{t("pro.proName")}</h2>
 
       <Swiper
         modules={[Navigation]}
@@ -171,7 +177,7 @@ function HomeProduct() {
           const { price, discount } = getDisplayPrice(product);
           return (
             <SwiperSlide key={product.id}>
-              <div
+              <div data-aos="zoom-in"
                 className={`${homepro.card} ${
                   !product.isStock ? homepro.outOfStock : ""
                 }`}
@@ -269,7 +275,7 @@ function HomeProduct() {
       </Swiper>
 
       <div className={homepro.moreBtnWrapper}>
-        <button
+        <button data-aos="zoom-in"
           className={homepro.moreBtn}
           onClick={() => navigate(`/${currentLang}/shop`)}
         >

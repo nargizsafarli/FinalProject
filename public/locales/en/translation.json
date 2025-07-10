@@ -12,7 +12,12 @@
     "wish":"Added to wishlist",
     "remWish":"Remove from wishlist",
     "bask":"Added to basket",
-    "remBask":"Remove from basket"
+    "remBask":"Remove from basket",
+    "shop":"Shopping Cart",
+    "tot":"Total:",
+    "bas":"Basket is empty",
+     "view":"View Cart",
+    "check":"Checkout"
   },
 
   "pages": {
@@ -269,8 +274,15 @@
   "about":"About Us",
   "contact":"Contact Us",
   "product":"Product",
-  "shop":"shop",
-  "ab":"about"
+  "shop":"Shop",
+  "ab":"About",
+   "con":"Contact",
+   "acc":"Create an Account",
+   "reg":"Register",
+   "log":"Log in to your account",
+   "lo":"Log in",
+   "bask":"Basket",
+   "wish":"Wishlist"
 }
   
 }

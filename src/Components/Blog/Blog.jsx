@@ -6,10 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import i18n from '../../i18n/i18next';
 import { SpinnerDotted } from 'spinners-react';
 import { useTranslation } from 'react-i18next';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 function Blog() {
   const dispatch = useDispatch();
-  const {t}=useTranslation()
+  const {t}=useTranslation();
+  useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+        once: true,
+      });
+    }, []);
   const { data, loading, error } = useSelector((state) => state.blog);
   const navigate = useNavigate();
   useEffect(() => {
@@ -30,7 +38,7 @@ function Blog() {
     <div className={blog.mainCon}>
     <div className={blog.container}>
       {data.map((item) => (
-        <div key={item.id} className={blog.card}>
+        <div key={item.id} className={blog.card} data-aos="zoom-in">
           <div className={blog.imgMain}><img src={item.img} alt={item.title} className={blog.image} /></div>
           <div className={blog.content}>
             <h3 className={blog.title}>{currentLang==="en"? item.nameEn : item.nameAz}</h3>

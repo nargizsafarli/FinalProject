@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import contact from './Contact.module.css';
 import Swal from 'sweetalert2';
 import { CiLocationOn } from "react-icons/ci";
@@ -6,6 +6,8 @@ import { IoCallOutline } from "react-icons/io5";
 import { AiOutlineMail } from "react-icons/ai";
 import { supabase } from '../../client';
 import { useTranslation } from 'react-i18next';
+import Aos from 'aos';
+import 'aos/dist/aos.css';
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -16,6 +18,11 @@ function Contact() {
     agree: false,
   });
   const {t}=useTranslation()
+  useEffect(() => {
+      Aos.init({
+        duration: 1000, 
+      });
+    }, []);
 
   const [errors, setErrors] = useState({});
 
@@ -65,7 +72,7 @@ function Contact() {
 
   return (
     <div className={contact.container}>
-      <div className={contact.infoBox}>
+      <div className={contact.infoBox} data-aos="fade-right">
         <h3>{t("contact.inf")}</h3>
         <div className={contact.infLeft}><p className={contact.icon}><CiLocationOn /></p> {t("contact.inf1")}<br />{t("contact.inf2")}<br />{t("contact.inf3")}</div>
         <hr />
@@ -74,7 +81,7 @@ function Contact() {
         <div className={contact.infLeft}><p className={contact.icon}><AiOutlineMail /></p> {t("contact.inf5")} <br /> demo@example.com</div>
       </div>
 
-      <form className={contact.formBox} onSubmit={handleSubmit}>
+      <form className={contact.formBox} onSubmit={handleSubmit} data-aos="fade-left">
       <div className={contact.formGr}>
         <div className={contact.formGroup}>
           <label className={contact.labels}>{t("contact.name")}</label>
