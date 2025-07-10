@@ -12,12 +12,15 @@ function HomeCollection() {
   useEffect(() => {
       Aos.init({
         duration: 1000, 
+         mirror: false,
       });
     }, []);
 
   return (
     <div className={collec.container}>
-      <div className={collec.item} data-aos="fade-right">
+      <div className={collec.item}
+       data-aos="fade-right"
+       >
         <div className={collec.imgWrapper}>
           <img src={img1} alt="Plant Port" />
         </div>
@@ -29,7 +32,9 @@ function HomeCollection() {
         </div>
       </div>
 
-      <div className={collec.item} data-aos="fade-left">
+      <div className={collec.item}
+       data-aos="fade-left"
+       >
         <div className={collec.imgWrapper}>
           <img src={img2} alt="Ceramic Pot" />
         </div>

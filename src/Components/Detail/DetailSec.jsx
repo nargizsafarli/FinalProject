@@ -15,7 +15,10 @@ import det from "./Detail.module.css";
 import { useTranslation } from "react-i18next";
 import { addToBasket } from "../../redux/features/auth/basketSlice";
 import { notification } from "antd";
-import { addToWishlist, removeFromWishlist } from "../../redux/features/auth/wishlistSlice";
+import {
+  addToWishlist,
+  removeFromWishlist,
+} from "../../redux/features/auth/wishlistSlice";
 import { SpinnerDotted } from "spinners-react";
 
 function DetailSec() {
@@ -61,8 +64,8 @@ function DetailSec() {
       api.success({
         message: "Added to Basket",
         placement: "topRight",
-         showProgress: true,
-      duration: 2,
+        showProgress: true,
+        duration: 2,
         zIndex: 10000,
       });
     } else {
@@ -70,7 +73,7 @@ function DetailSec() {
         message: "Zəhmət olmasa daxil olun",
         description: "Bu funksiyanı istifadə etmək üçün hesabınıza daxil olun.",
         duration: 3,
-         showProgress: true,
+        showProgress: true,
         zIndex: 9999,
       });
     }
@@ -85,9 +88,9 @@ function DetailSec() {
         api.info({
           message: "Removed from Wishlist",
           placement: "topRight",
-            showProgress: true,
-      duration: 2,
-          
+          showProgress: true,
+          duration: 2,
+
           zIndex: 10000,
         });
       } else {
@@ -96,15 +99,15 @@ function DetailSec() {
           message: "Added to Wishlist",
           placement: "topRight",
           duration: 2,
-            showProgress: true,
+          showProgress: true,
           zIndex: 10000,
         });
       }
     } else {
       api.warning({
         message: "Please log in",
-          showProgress: true,
-      duration: 2,
+        showProgress: true,
+        duration: 2,
         zIndex: 9999,
       });
     }
@@ -125,7 +128,14 @@ function DetailSec() {
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "50vh",
+        }}
+      >
         <SpinnerDotted size={70} thickness={100} speed={100} color="green" />
       </div>
     );
@@ -143,7 +153,9 @@ function DetailSec() {
               src={img}
               alt={`img-${index}`}
               onClick={() => setSelectedImage(img)}
-              className={`${det.thumb} ${selectedImage === img ? det.active : ""}`}
+              className={`${det.thumb} ${
+                selectedImage === img ? det.active : ""
+              }`}
             />
           ))}
         </div>
@@ -208,33 +220,55 @@ function DetailSec() {
           <p className={det.delivery}>{t("det.del")}</p>
         </div>
 
-        <button className={det.button} onClick={() => handleAddToBasket(product)}>
+        <button
+          className={det.button}
+          onClick={() => handleAddToBasket(product)}
+        >
           {t("det.add")}
         </button>
 
         <div className={det.infItem}>
           <div className={det.icon}>
-            <div className={det.ic} onClick={() => handleAddToWishlist(product)}>
+            <div
+              className={det.ic}
+              onClick={() => handleAddToWishlist(product)}
+            >
               <FontAwesomeIcon
                 icon={isInWishlist ? faHeartSolid : faHeartRegular}
                 className={det.heartIcon}
               />
-              {isInWishlist? t("det.addedWish"):t("det.addWish")}
+              {isInWishlist ? t("det.addedWish") : t("det.addWish")}
             </div>
           </div>
 
           <div className={det.instock}> {t("det.sto")}</div>
 
           <div className={det.social}>
-            <div className={`${det.socIcon} ${det.hoverSoc}`}>
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              className={`${det.socIcon} ${det.hoverSoc}`}
+              rel="noopener noreferrer"
+            >
               <FaFacebookF />
-            </div>
-            <div className={`${det.socIcon} ${det.hoverSocTwo}`}>
+            </a>
+            <a
+              className={`${det.socIcon} ${det.hoverSocTwo}`}
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FaXTwitter />
-            </div>
-            <div className={`${det.socIcon} ${det.hoverSocSec}`}>
+            </a>
+
+            <a
+              href="https://www.pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${det.socIcon} ${det.hoverSocSec}`}
+            >
               <FaPinterestP />
-            </div>
+            </a>
           </div>
 
           <div className={det.card}>
@@ -248,4 +282,3 @@ function DetailSec() {
 }
 
 export default DetailSec;
-

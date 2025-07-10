@@ -6,7 +6,9 @@
 }
 
 /* DARK MODE üçün */
-
+html, body {
+  overflow-x: hidden;
+}
 :root {
   --bg-color: #ffffff;
   --text-color: #000000;

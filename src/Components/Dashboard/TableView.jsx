@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Table, Button, Modal, Input } from "antd";
+import { Table, Button, Modal, Input, Tooltip } from "antd";
 import { supabase } from "../../client";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBin2Fill, RiEditFill } from "react-icons/ri";
@@ -222,21 +222,24 @@ const TableView = ({ activeTab }) => {
 
           if (text === null || text === "" || text === undefined) return "-";
           if (typeof text === "boolean") return text ? "true" : "-";
-          if (longKeys.includes(key)) {
-            return (
-              <div
-                style={{
-                  width: 300,
-                  height: 50,
-                  overflow: "auto",
-                  whiteSpace: "pre-wrap",
-                  wordBreak: "break-word",
-                }}
-              >
-                {text}
-              </div>
-            );
-          }
+       
+if (longKeys.includes(key)) {
+  return (
+    <Tooltip title={text} color="rgb(143, 142, 142)">
+      <div
+        style={{
+          maxWidth: 300,
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          cursor: "pointer",
+        }}
+      >
+        {text}
+      </div>
+    </Tooltip>
+  );
+}
           return text;
         },
       })),
@@ -259,15 +262,17 @@ const TableView = ({ activeTab }) => {
         const isEditing = editingId === record.id;
         return (
           <div style={{ display: "flex", gap: "6px" }}>
-            {isEditing ? (
-              <Button type="link" onClick={handleSave}>
-                <RiEditFill style={{ fontSize: "20px" }} />
-              </Button>
-            ) : (
-              <Button type="link" onClick={() => handleEditClick(record)}>
-                <FaEdit className={dash.actionBtn} />
-              </Button>
-            )}
+            {activeTab !== "review" &&
+              (isEditing ? (
+                <Button type="link" onClick={handleSave}>
+                  <RiEditFill style={{ fontSize: "20px" }} />
+                </Button>
+              ) : (
+                <Button type="link" onClick={() => handleEditClick(record)}>
+                  <FaEdit className={dash.actionBtn} />
+                </Button>
+              ))}
+
             <Button type="link" danger onClick={() => handleDelete(record.id)}>
               <RiDeleteBin2Fill className={dash.actionBtn} />
               {/* <p className={dash.actionBtn}>delete</p>  */}
@@ -280,7 +285,7 @@ const TableView = ({ activeTab }) => {
 
   return (
     <div style={{ overflowX: "auto", padding: "27px 35px" }}>
-      {activeTab !== "profils" && (
+      {activeTab !== "profils" && activeTab !== "review" && (
         <button onClick={handleAdd} className={dash.addBtn}>
           Add
         </button>

@@ -11,9 +11,8 @@ import { useTranslation } from "react-i18next";
 
 const { TextArea } = Input;
 
-
 function Review({ productId, userId }) {
-  const {t}=useTranslation()
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
@@ -73,11 +72,11 @@ function Review({ productId, userId }) {
     // setModalOpen(false);
     // fetchReviews();
     // setHasReviewed(true); // düyməni disable etmək üçün
-     setHasReviewed(true); // öncə disable et
-  setComment("");
-  setRating(0);
-  setModalOpen(false);
-  fetchReviews(); // sonra yenilə
+    setHasReviewed(true); // öncə disable et
+    setComment("");
+    setRating(0);
+    setModalOpen(false);
+    fetchReviews(); // sonra yenilə
   };
 
   return (
@@ -116,34 +115,39 @@ function Review({ productId, userId }) {
 
       <div className={rev.conBot}>
         <button
-           className={`${rev.addBtn} ${hasReviewed ? rev.disabledBtn : ""}`}
+          className={`${rev.addBtn} ${hasReviewed ? rev.disabledBtn : ""}`}
           onClick={() => setModalOpen(true)}
           disabled={hasReviewed}
         >
-        <FaRegCommentAlt />
-         {t("det.serh")}
+          <FaRegCommentAlt />
+          {t("det.serh")}
         </button>
       </div>
 
       <Modal
-        title="Şərh əlavə et"
+        title={t("notif.serh")}
         open={modalOpen}
         onOk={handleSubmit}
         onCancel={() => setModalOpen(false)}
-        okText="Göndər"
-        cancelText="Ləğv et"
-        okButtonProps={{ disabled: rating === 0 || comment.trim() === "" }}
+        okText={t("notif.gon")}
+        cancelText={t("notif.leg")}
+        // okButtonProps={{ disabled: rating === 0 || comment.trim() === "" }}
+        okButtonProps={{
+  disabled: rating === 0 || comment.trim() === "",
+  style: {
+    backgroundColor: "green",
+    borderColor: "green",
+    color: "white",
+  },
+}}
+
       >
         <div style={{ marginBottom: "1rem", textAlign: "center" }}>
-          <Rate
-            value={rating}
-            onChange={(val) => setRating(val)}
-            allowClear
-          />
+          <Rate value={rating} onChange={(val) => setRating(val)} allowClear />
         </div>
         <TextArea
           rows={4}
-          placeholder="Şərhinizi yazın..."
+          placeholder={t("notif.pla")}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />

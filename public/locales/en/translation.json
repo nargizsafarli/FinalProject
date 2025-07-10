@@ -17,7 +17,23 @@
     "tot":"Total:",
     "bas":"Basket is empty",
      "view":"View Cart",
-    "check":"Checkout"
+    "check":"Checkout",
+    "qey":"You have successfully registered",
+    "name":"Name required",
+    "sur":"Surname required",
+    "email":"Email must be in (@gmail.com) format!",
+    "sifr":"Password must contain at least 6 characters.",
+    "log":"Login is succesfully",
+     "pay":"Your order has been successfully completed",
+     "fillAllFields":"Please fill in all fields",
+     "addne":"Add new item",
+     "tes":"Confirm",
+     "gon":"Send",
+     "leg":"Cancel",
+     "serh":"Add Comment",
+     "pla":"Write your comment...",
+     "plant":"PLANT",
+     "hom":"HOME"
   },
 
   "pages": {

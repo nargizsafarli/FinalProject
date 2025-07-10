@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import i18n from "../../i18n/i18next";
 import { useDispatch } from "react-redux";
 import { clearBasket } from "../../redux/features/auth/basketSlice";
+import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 
 const PaymentModal = ({ open, onClose }) => {
   const [cardData, setCardData] = useState({
@@ -26,13 +28,31 @@ const currentLang=i18n.language
     setCardData({ ...cardData, focus: e.target.name });
   };
   const dispatch=useDispatch();
+  const {t}=useTranslation()
 
-  const handlePay = () => {
-     localStorage.setItem("thankAccess", "true");
-   navigate(`/${currentLang}/thank`)
-    dispatch(clearBasket())
-    onClose();
-  };
+
+const handlePay = () => {
+  const { number, name, expiry, cvc } = cardData;
+
+  if (!number || !name || !expiry || !cvc) {
+    Swal.fire({
+      icon: 'error',
+      text: t("notif.fillAllFields")
+    });
+    return;
+  }
+
+  Swal.fire({
+    icon: 'success',
+    title: t("notif.pay"),
+  }).then((result) => {
+    if (result.isConfirmed) {
+      navigate(`/${currentLang}/thank`);
+      dispatch(clearBasket());
+      onClose();
+    }
+  });
+};
 
   return (
     <Modal
@@ -44,7 +64,7 @@ const currentLang=i18n.language
           <span
             style={{ fontSize: "20px", fontWeight: "bold", color: "green" }}
           >
-            Add New Item
+           {t("notif.addne")}
           </span>
         }
       centered
@@ -97,10 +117,11 @@ const currentLang=i18n.language
             onChange={handleInputChange}
             onFocus={handleFocus}
             className={styles.input}
+            
           />
           </div>
           <button type="primary" className={styles.bbtn} block onClick={handlePay}>
-            Təsdiqlə
+            {t("notif.tes")}
           </button>
         </div>
       </div>

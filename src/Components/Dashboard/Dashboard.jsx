@@ -25,14 +25,6 @@ function Dashboard() {
          
           <p className={dash.adminGmail}>admin@gmail.com</p>
         </div>
-        {/* <hr className={dash.hrr} */}
-        {/* /> */}
-        {/* <p
-          className={activeTab === "chart" ? dash.active : dash.prof}
-          onClick={() => setActiveTab("chart")}
-        >
-          📊 Chart
-        </p> */}
         <p
           className={activeTab === "product" ? dash.active : dash.prof}
           onClick={() => setActiveTab("product")}

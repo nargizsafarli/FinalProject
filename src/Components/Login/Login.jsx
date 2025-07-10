@@ -22,20 +22,13 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!email || !password) {
-      alert("Email və şifrə mütləqdir.");
-      return;
-    }
-
     try {
       await dispatch(loginUser({ email, password })).unwrap();
       setEmail("");
       setPassword("");
       Swal.fire({
       icon: 'success',
-      title: 'Uğurlu giriş',
-      text: 'Sistəmə daxil oldunuz!',
+      title: t("notif.log"),
     });
     } catch (err) {
       console.log("Login error:", err);
@@ -55,6 +48,7 @@ function Login() {
             <span className={log.important}>*</span>
           </label>
           <input
+          required
             className={log.input}
             type="email"
             id="email"
@@ -70,6 +64,7 @@ function Login() {
             <span className={log.important}>*</span>
           </label>
           <input
+          required
             className={log.input}
             type={showPassword ? "text" : "password"}
             id="password"

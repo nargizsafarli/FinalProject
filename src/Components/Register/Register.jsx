@@ -23,12 +23,12 @@ function Register() {
   const currentLang = i18n.language;
   const validateForm = () => {
     let errors = {};
-    if (!name) errors.name = "Ad daxil edilməlidir.";
-    if (!surname) errors.surname = "Soyad daxil edilməlidir.";
+    if (!name) errors.name = t("notif.name");
+    if (!surname) errors.surname = t("notif.sur");
     if (!email || !/\S+@\S+\.\S+/.test(email))
-      errors.email = "Email (@gmail.com) formatında olmalıdır!";
+      errors.email = t("notif.email");
     if (!password || password.length < 6)
-      errors.password = "Şifrə ən azı 6 simvoldan ibarət olmalıdır.";
+      errors.password = t("notif.sifr");
     setFormErrors(errors);
     return Object.keys(errors).length === 0;
   };
@@ -43,8 +43,7 @@ function Register() {
       await dispatch(registerUser({ name, surname, email, password })).unwrap();
       Swal.fire({
            icon: 'success',
-           title: 'Uğurlu Qeydiyyat',
-           text: 'Sistəmə daxil oldunuz!',
+           title:t("notif.qey"),
       })
       navigate(`/${currentLang}/login`);
     } catch (err) {
