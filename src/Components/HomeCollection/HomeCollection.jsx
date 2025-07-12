@@ -19,7 +19,7 @@ function HomeCollection() {
   return (
     <div className={collec.container}>
       <div className={collec.item}
-       data-aos="fade-right"
+       data-aos="zoom-in"
        >
         <div className={collec.imgWrapper}>
           <img src={img1} alt="Plant Port" />
@@ -27,13 +27,12 @@ function HomeCollection() {
         <div className={collec.content}>
           <p>{t("collec.titleO")}</p>
           <h2>{t("collec.infO")}</h2>
-          {/* <button className={collec.button}>SHOP NOW</button> */}
           <Button/>
         </div>
       </div>
 
       <div className={collec.item}
-       data-aos="fade-left"
+       data-aos="zoom-in"
        >
         <div className={collec.imgWrapper}>
           <img src={img2} alt="Ceramic Pot" />

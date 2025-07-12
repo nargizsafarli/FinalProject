@@ -32,7 +32,10 @@
      "serh":"Şərh əlavə et",
      "pla":"Şərhinizi yazın...",
      "plant":"BITKI",
-     "hom":"EV"
+     "hom":"EV",
+      "small":"kiçik",
+     "medium":"orta",
+     "large":"böyük"
   },
   "pages": {
     "faq": "FAQ",

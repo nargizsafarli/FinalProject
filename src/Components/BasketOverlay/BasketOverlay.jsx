@@ -50,7 +50,9 @@ const BasketOverlay = ({ isOpen, onClose, currentLang }) => {
                       <p className={basket.name}>
                        {currentLang === "az" ? item.product.nameAz : item.product.nameEn}
                       </p>
-                      <p className={basket.size}>{item.size}</p>
+                      <p className={basket.size}>
+                       {t(`notif.${item.size}`)}
+                      </p>
                       <p className={basket.price}>
                         {item.quantity} ×{" "}
                         {discount ? (

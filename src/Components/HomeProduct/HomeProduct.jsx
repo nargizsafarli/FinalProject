@@ -194,7 +194,7 @@ useEffect(() => {
                     className={homepro.hoverImg}
                   />
 
-                  {/* OUT OF STOCK OVERLAY */}
+                 
                   {!product.isStock && (
                     <>
                       <div className={homepro.stockOverlay}></div>
@@ -202,7 +202,7 @@ useEffect(() => {
                     </>
                   )}
 
-                  {/* OVERLAY İCONS – ANCAQ STOKDADIRSA */}
+                 
                   {product.isStock && (
                     <div className={homepro.cardOverlay}>
                       <div
@@ -241,7 +241,7 @@ useEffect(() => {
                     </div>
                   )}
 
-                  {/* MODAL */}
+                
                   <ModalProduct
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
@@ -249,7 +249,7 @@ useEffect(() => {
                   />
                 </div>
 
-                {/* CARD INFO */}
+            
                 <div className={homepro.cardInfo}>
                   <p className={homepro.name}>
                     {currentLang === "az" ? product.nameAz : product.nameEn}

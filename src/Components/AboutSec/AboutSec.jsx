@@ -16,10 +16,10 @@ function AboutSec() {
   return (
     <div className={abSec.container}>
       <div className={abSec.left} >
-        <div className={abSec.imgCon} data-aos="fade-right">
+        <div className={abSec.imgCon} data-aos="zoom-in">
           <img src={leftImg} className={abSec.img} />
         </div>
-        <div className={abSec.leftText} data-aos="fade-left">
+        <div className={abSec.leftText} data-aos="zoom-in">
           <div className={abSec.textItem}>
             <div className={abSec.item}>
               <h3>{t("about.us")}</h3>
@@ -33,7 +33,7 @@ function AboutSec() {
         </div>
       </div>
       <div className={abSec.right} >
-        <div className={abSec.rightText} data-aos="fade-right">
+        <div className={abSec.rightText} data-aos="zoom-in">
           <div className={abSec.rightTextItem}>
             <div className={abSec.item}>
               <h3>{t("about.meet2")}</h3>
@@ -46,7 +46,7 @@ function AboutSec() {
           </div>
             <div className={`${abSec.btn} ${abSec.BtnTwo}`}> {t("about.shop")}</div>
         </div>
-        <div className={abSec.imgConTwo} data-aos="fade-left">
+        <div className={abSec.imgConTwo} data-aos="zoom-in">
             <img src={img2} className={abSec.ImgTwo}/>
         </div>
       </div>

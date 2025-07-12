@@ -87,7 +87,7 @@
 
 }
 
-/* Animasiya */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -99,7 +99,7 @@
   }
 }
 
-/* Swiper Pagination */
+
 :global(.swiper-pagination-bullet) {
   background: #4a773c;
   opacity: 0.7;
@@ -109,7 +109,7 @@
   opacity: 1;
 }
 
-/* Swiper Navigation Buttons */
+
 :global(.swiper-button-next),
 :global(.swiper-button-prev) {
   color: #000;

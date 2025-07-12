@@ -43,18 +43,6 @@ const navigate=useNavigate()
     return () => clearTimeout(timer);
   }, []);
   
-// useEffect(() => {
-//   const allowed = localStorage.getItem("thankAccess");
-
-//   if (allowed !== "true") {
-//     navigate("/" + i18n.language); 
-//   } else {
-//     localStorage.removeItem("thankAccess");
-//   }
-// }, []);
-
-
-
   return (
     <div className={thank.mainCon}>
     <div className={thank.container}>

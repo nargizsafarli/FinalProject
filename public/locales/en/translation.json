@@ -33,7 +33,10 @@
      "serh":"Add Comment",
      "pla":"Write your comment...",
      "plant":"PLANT",
-     "hom":"HOME"
+     "hom":"HOME",
+     "small":"small",
+     "medium":"medium",
+     "large":"large"
   },
 
   "pages": {

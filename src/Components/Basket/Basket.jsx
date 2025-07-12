@@ -105,7 +105,7 @@ function Basket() {
                         </h4>
                         <p>
                           {t("product.size")}{" "}
-                          <span className={basket.sizeSpan}>{size}</span>
+                          <span className={basket.sizeSpan}>{t(`notif.${size}`)}</span>
                         </p>
                         {discount ? (
                           <p>

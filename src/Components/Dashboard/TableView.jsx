@@ -202,7 +202,6 @@ const TableView = ({ activeTab }) => {
 
             if (isEditing) {
               if (key === "created_at") {
-                // Edit mümkün deyil, sadəcə göstər
                 return new Date(record[key]).toLocaleDateString("az-AZ");
               }
             }
@@ -317,8 +316,8 @@ if (longKeys.includes(key)) {
           className: dash.customOkBtn,
         }}
         bodyStyle={{
-          maxHeight: "400px", // maksimum hündürlük
-          overflowY: "auto", // scroll aktiv olsun
+          maxHeight: "400px", 
+          overflowY: "auto",
         }}
       >
         {Object.keys(newRowData).map((key) => {

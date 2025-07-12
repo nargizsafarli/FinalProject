@@ -52,111 +52,6 @@ function Product() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  //   const selectedFilters = [
-  //   ...selectedCategory.map((item) => ({ type: "category", value: item })),
-  //   ...selectedMaterial.map((item) => ({ type: "material", value: item })),
-  //   ...selectedCondition.map((item) => ({ type: "condition", value: item })),
-  //   ...(availabilityFilter ? [{ type: "availability", value: availabilityFilter }] : []),
-  //   ...selectedBrand.map((item) => ({ type: "brand", value: item })),
-  // ];
-
-  // const removeFilter = (filterType, value) => {
-  //   switch (filterType) {
-  //     case "category":
-  //       setSelectedCategory((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     case "material":
-  //       setSelectedMaterial((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     case "condition":
-  //       setSelectedCondition((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //     case "availability":
-  //       setAvailablityFilter(null);
-  //       break;
-  //     case "brand":
-  //       setSelectedBrand((prev) => prev.filter((item) => item !== value));
-  //       break;
-  //   }
-
-  //   // URL-dən də sil
-  //   setSearchParams((params) => {
-  //     const updated = selectedFilters.filter(
-  //       (f) => !(f.type === filterType && f.value === value)
-  //     );
-
-  //     const grouped = updated.reduce((acc, f) => {
-  //       acc[f.type] = acc[f.type] ? [...acc[f.type], f.value] : [f.value];
-  //       return acc;
-  //     }, {});
-
-  //     // param-ları yenilə
-  //     ["category", "material", "condition", "availability", "brand"].forEach((key) => {
-  //       if (grouped[key]) {
-  //         params.set(key, grouped[key].join("-"));
-  //       } else {
-  //         params.delete(key);
-  //       }
-  //     });
-
-  //     return params;
-  //   });
-  // };
-
-  // const clearAllFilters = () => {
-  //   setSelectedCategory([]);
-  //   setSelectedMaterial([]);
-  //   setSelectedCondition([]);
-  //   setSelectedBrand([]);
-  //   setAvailablityFilter(null);
-  //   setSearchParams({});
-  // };
-
-  // !Filter and url
-  // const handleFilterChange = (e, filterType) => {
-  //   const { value, checked } = e.target;
-
-  //   if (filterType === "category") {
-  //     setSelectedCategory((prev) => {
-  //       const updated = checked
-  //         ? [...prev, value]
-  //         : prev.filter((item) => item !== value);
-
-  //       setSearchParams((params) => {
-  //         if (updated.length > 0) {
-  //           params.set("category", updated.join("-"));
-  //         } else {
-  //           params.delete("category");
-  //         }
-  //         return params;
-  //       });
-
-  //       return updated;
-  //     });
-  //   }
-
-  //   if (filterType === "material") {
-  //     setSelectedMaterial((prev) => {
-  //       const updated = checked
-  //         ? [...prev, value]
-  //         : prev.filter((item) => item !== value);
-
-  //       setSearchParams((params) => {
-  //         if (updated.length > 0) {
-  //           params.set("material", updated.join("-"));
-  //         } else {
-  //           params.delete("material");
-  //         }
-  //         return params;
-  //       });
-
-  //       return updated;
-  //     });
-  //   }
-
-  //   // Burada gələcəkdə başqa filterləri də əlavə edə bilərsən
-  // };
-  // ! state icinde basqa bir state cagrildi kimi problem cixdi evvelki ile muqaise et oyren ferqi
   const handleFilterChange = (e, filterType) => {
     const { value, checked } = e.target;
 
@@ -233,7 +128,7 @@ function Product() {
   ]);
   useEffect(() => {
     Aos.init({
-      duration: 800, // animasiya müddəti (ms)
+      duration: 800, 
       // once: true,    // animasiya 1 dəfə baş versin
     });
   }, []);
@@ -257,7 +152,7 @@ function Product() {
       setSelectedCondition(conditionFromURL.split("-"));
     }
     if (availabilityFromURL) {
-      setAvailablityFilter(availabilityFromURL); // yeni hissə
+      setAvailablityFilter(availabilityFromURL); 
     }
     if (brandFromURL) {
       setSelectedBrand(brandFromURL.split("-"));
@@ -291,7 +186,7 @@ function Product() {
       selectedCategory.includes(product.category);
 
     const availabilityMatch =
-      availabilityFilter === null || // yəni istifadəçi heç bir checkbox seçməyibsə
+      availabilityFilter === null ||
       (availabilityFilter === "available" && product.isStock === true) ||
       (availabilityFilter === "not-available" && product.isStock === false);
 
@@ -306,9 +201,6 @@ function Product() {
     const brandMatch =
       selectedBrand.length === 0 || selectedBrand.includes(product.brand);
 
-    //  const brandMatch =
-    // selectedBrand.length === 0 ||
-    // selectedBrand.includes(product.brand);
     return (
       categoryMatch &&
       availabilityMatch &&
@@ -331,17 +223,17 @@ function Product() {
     // ! Sort---------------------
     switch (sortOption) {
       case "1":
-        return a[langKey].localeCompare(b[langKey]); // A to Z
+        return a[langKey].localeCompare(b[langKey]); 
       case "2":
-        return b[langKey].localeCompare(a[langKey]); // Z to A
+        return b[langKey].localeCompare(a[langKey]); 
       case "3":
-        return getDisplay(a) - getDisplay(b); // Price low to high
+        return getDisplay(a) - getDisplay(b); 
       case "4":
-        return getDisplay(b) - getDisplay(a); // Price high to low
+        return getDisplay(b) - getDisplay(a); 
       case "5":
-        return b.rating - a.rating; // Rating high to low
+        return b.rating - a.rating; 
       case "6":
-        return a.rating - b.rating; // Rating low to high
+        return a.rating - b.rating; 
       default:
         return 0;
     }
@@ -612,7 +504,6 @@ function Product() {
               placeholder="(no filter)"
               value={selectedBrand}
               onChange={handleBrandChange}
-              // onChange={(value) => setSelectedBrand(value)}
               style={{ width: "95%" }}
               suffixIcon={<FaCaretDown color="black" size={16} />}
               className={pro.customSelect}
@@ -676,7 +567,6 @@ function Product() {
                 className={pro.customSelectTwice}
                 optionFilterProp="label"
                 suffixIcon={<FaCaretDown color="black" size={16} />}
-                // onChange={(value) => setSortOption(value)}
                 onChange={handleSortChange}
                 options={[
                   { value: "1", label: t("pro.name") },
@@ -700,7 +590,7 @@ function Product() {
 
         <div className={pro.productss}>
           {currentProducts.length === 0 ? (
-            <p className={pro.noProductText}>Məhsul tapılmadı</p>
+            <p className={pro.noProductText}>No products matching the filter were found...</p>
           ) : (
             currentProducts.map((product) => {
               const { price, discount } = getDisplayPrice(product);

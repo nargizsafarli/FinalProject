@@ -14,6 +14,7 @@ function ModalProduct({ isOpen, onClose, product }) {
   const [currentPrice, setCurrentPrice] = useState(0);
   const [sizeError, setSizeError] = useState(false);
 
+
   useEffect(() => {
     if (!isOpen) {
       setSelectedSize(null);

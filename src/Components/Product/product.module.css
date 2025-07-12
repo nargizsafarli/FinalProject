@@ -17,6 +17,7 @@
    z-index: 99;
    align-self: flex-start;
    height: fit-content;
+   /* overflow-x: visible !important; */
 }
 .filterBy{
   display: flex;
